@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as categoriesAction from '../../store/actions/index';
 import styles from './Categories.module.css';
+import {NavLink} from 'react-router-dom';
 
 class Categories extends Component {
     render() {
@@ -12,7 +13,8 @@ class Categories extends Component {
             ctg.map(item => (
                 <p className={styles.CategoriesItems} 
                    key={item.id}
-                   onClick={() => this.props.onCategoryHandler(item.id)}>{item.title}</p>
+                   onClick={() => this.props.onCategoryHandler(item.id)}>{item.title}
+                </p>
             ))
         ) 
         : categories = <div>loading</div> ;

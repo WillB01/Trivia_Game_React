@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Layout from './hoc/Layout/Layout';
 import TriviaMain from './containers/TriviaMain/TriviaMain';
+import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
+import Categories from './containers/Categories/Categories';
+import SelectedCategory from './components/SelectedCategory/SelectedCategory';
 
 import './App.css';
 
@@ -9,7 +12,10 @@ class App extends Component {
     return (
       <div className="App">
         <Layout>
-          <TriviaMain />
+          <Switch>
+            <Route path="/selected-category" component={SelectedCategory} />
+            <Route path="/" exact component={TriviaMain} />
+          </Switch>
         </Layout>
       </div>
     );
