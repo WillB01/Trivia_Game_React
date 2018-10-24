@@ -1,16 +1,14 @@
 import * as actionTypes from '../actions/actionTypes';
-
+import {updateObject} from '../shared/utility';
 const initialState = {
     categories: null,
 };
 
-const setCategories = (state, action)  => {
-    initialState = {
-        ...state,
-        categories: action
 
-        
-    };
+const setCategories = (state, action)  => {
+    return updateObject(state, {
+        categories: action.categories
+    });
 };
 
 
