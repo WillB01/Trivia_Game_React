@@ -33,7 +33,7 @@ export const fetchSelectedCategory = (id) => {
     return dispatch => {
         axios.get(url)
         .then(res => {
-            console.log(res);
+            dispatch(setSelectedCategory(res.data));
         })
         .catch(err => (dispatch(setSelectedCategoryFail())));
     }
