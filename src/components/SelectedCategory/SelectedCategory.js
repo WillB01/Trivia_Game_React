@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import _ from 'lodash';
+import styles from './SelectedCategory.module.css';
 
 class SelectedCategory extends Component {
     randomNumberGenerator = (length, callback) => {
@@ -15,7 +16,12 @@ class SelectedCategory extends Component {
         this.randomNumberGenerator(selectedCategory.length, (res) => {
            num = res;
         });
-        return selectedCategory[num].question;
+        return (
+            <React.Fragment>
+                <h2 className={styles.Header}>{selectedCategory[0].category.title}</h2>
+                <p className={styles.Text}>{selectedCategory[0].question}</p>
+            </React.Fragment>
+        )
     }; // returns a question from the array.
 
 
@@ -27,8 +33,7 @@ class SelectedCategory extends Component {
         : questions = null;
         console.log(selectedCategory);
         return(
-            <div>
-                {/* {selectedCategory.title} */}
+            <div className={styles.Question}>
                 {questions}
             </div>
         );

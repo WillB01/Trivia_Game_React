@@ -11,10 +11,10 @@ class Categories extends Component {
         ctg 
         ? categories = (
             ctg.map(item => (
-                <p className={styles.CategoriesItems} 
+                <NavLink to="/selected-category" className={styles.CategoriesItems} 
                    key={item.id}
                    onClick={() => this.props.onCategoryHandler(item.id)}>{item.title}
-                </p>
+                </NavLink>
             ))
         ) 
         : categories = <div>loading</div> ;

@@ -1,0 +1,35 @@
+.Question {
+    margin: auto;
+    max-width: 380px;
+    min-height: 200px;
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #FFF;
+    box-shadow: 0 19px 48px rgba(0, 0, 0, 0.3), 0 15px 32px rgba(0, 0, 0, 0.22);
+   
+}
+
+.Question .Text {
+    height: 400px;
+    width: 90%;
+    margin: auto;
+    overflow-x: hidden;
+    /* padding: 20px 30px 30px 10px; */
+    padding: 20px;
+    position: relative;
+    background-color: #FAFAFA;
+    overflow-y: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+  }
+
+  .Question .Header {
+    height: 200px;
+    width: 100%;
+    background-color: #4426a8;
+    position: relative;
+    /* background-image:  */
+      
+  }
+
+
