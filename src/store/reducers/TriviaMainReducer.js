@@ -7,7 +7,7 @@ const initialState = {
    playerAnswer: ''
 };
 
-const setPlayerAnswer = (state, action) => updateObject(state, {playerAnswer: action.playerAnswer});
+const setPlayerAnswer = (state, action) => updateObject(state, {playerAnswer: action.playerAnswer, correctAnswer: action.correctAnswer});
 
 const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.GET_PLAYER_ANSWER) {

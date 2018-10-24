@@ -24,7 +24,7 @@ class SelectedCategory extends Component {
                 <p className={styles.Text}>{selectedCategory[0].question}</p>
                 <PossibleAnswers correctAnswer={selectedCategory[0].answer} 
                                  allAnswers={selectedCategory.map(item => item.answer)}
-                                 userAnswerClick={this.props.onAnswerClick}/>
+                                 userAnswerClick={(userAnswer) => this.props.onAnswerClick(userAnswer, selectedCategory[0].answer)}/>
             </React.Fragment>
         )
     }; // returns a question from the array.
@@ -54,7 +54,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAnswerClick: (userAnswer) => dispatch(actions.getPlayerAnswer(userAnswer))
+        onAnswerClick: (userAnswer, correctAnswer) => dispatch(actions.getPlayerAnswer(userAnswer, correctAnswer))
     };
 };
 
