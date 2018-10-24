@@ -1,22 +1,23 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as categoriesAction from '../../store/actions/index';
+import styles from './Categories.module.css';
 
 class Categories extends Component {
-
     render() {
         let categories = null;
         let ctg =  this.props.ctg.categories;
         ctg 
         ? categories = (
             ctg.map(item => (
-                <p key={item.id}>{item.title}</p>
+                <p className={styles.CategoriesItems} 
+                   key={item.id}
+                   onClick={() => this.props.onCategoryHandler(item.id)}>{item.title}</p>
             ))
         ) 
         : categories = <div>loading</div> ;
-        console.log(this.props.ctg.categories);
         return(
-            <div>
+            <div className={styles.Categories}>
               {categories}
             </div>
         );
@@ -25,13 +26,15 @@ class Categories extends Component {
 
 const mapStateToProps = state => {
     return {
-        ctg: state.categories
+        ctg: state.categories,
+        selectedCtg: state.sel
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onInitCategories: () => dispatch(categoriesAction.fetchCategories())
+        onCategoryHandler: (id) => dispatch(categoriesAction.fetchSelectedCategory(id))
+
     };
 };
 

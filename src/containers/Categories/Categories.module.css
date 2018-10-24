@@ -1,0 +1,27 @@
+.Categories {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background: rgb(252, 252, 252);
+    padding: 8px;
+    margin: auto;
+    grid-gap: 2px;
+    border-radius: 5px;
+    justify-items: stretch;
+    
+
+
+    
+}
+
+.CategoriesItems {
+    background:  rgb(230, 230, 230);
+    color: rgb(68, 70, 73);
+    border-radius: 4px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.CategoriesItems:hover {
+    background: rgb(236, 236, 236);
+}
+
