@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import PossibleAnswers from '../PossibleAnswers/PossibleAnswers';
 import _ from 'lodash';
 import styles from './SelectedCategory.module.css';
+import * as actions from '../../store/actions/index';
 
 class SelectedCategory extends Component {
     randomNumberGenerator = (length, callback) => {
@@ -22,7 +23,8 @@ class SelectedCategory extends Component {
                 <h2 className={styles.Header}>{selectedCategory[0].category.title}</h2>
                 <p className={styles.Text}>{selectedCategory[0].question}</p>
                 <PossibleAnswers correctAnswer={selectedCategory[0].answer} 
-                                 allAnswers={selectedCategory.map(item => item.answer)}/>
+                                 allAnswers={selectedCategory.map(item => item.answer)}
+                                 userAnswerClick={this.props.onAnswerClick}/>
             </React.Fragment>
         )
     }; // returns a question from the array.
@@ -36,7 +38,6 @@ class SelectedCategory extends Component {
             questions = this.questionsCreator(selectedCategory)
             console.log(selectedCategory);
         }
-        // console.log(selectedCategory[0].answer);
         return(
             <div className={styles.Question}>
                 {this.props.selectedCtg ? questions : <p>loading</p>}
@@ -51,4 +52,12 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(SelectedCategory);
+const mapDispatchToProps = dispatch => {
+    return {
+        onAnswerClick: (userAnswer) => dispatch(actions.getPlayerAnswer(userAnswer))
+    };
+};
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(SelectedCategory);
