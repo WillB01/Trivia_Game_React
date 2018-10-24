@@ -1,3 +1,3 @@
 export {
-    initIngredients,
+    fetchCategories,
 } from './CategoriesAction';

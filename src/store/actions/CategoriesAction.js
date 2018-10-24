@@ -10,21 +10,22 @@ export const setCategories = (categories) => {
 
 export const fetchCategoriesFail = () => {
     return {
-        type: actionTypes.SET_CATEGORIES_FAIL
+        type: actionTypes.FETCH_CATEGORIES_FAIL
     };
 };
 
 
 
-export const initIngredients = () => {
+export const fetchCategories = () => {
     const url = `http://jservice.io/api/categories?count=5`;
     return dispatch => {
         axios.get(url)
         .then(res => {
             console.log(res.data);
-            dispatch(setCategories(res));
+            dispatch(setCategories(res.data));
         })
         .catch(error => {
+            console.log(error);
             dispatch(fetchCategoriesFail());
         })
     }
