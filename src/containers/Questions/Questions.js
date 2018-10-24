@@ -8,14 +8,15 @@ class Questions extends Component {
             console.log('error');
         };
         callback(  _.random(0,length));
-    };
+    }; // returns a callback with a random number between 0 and length of api array.
+
     questionsCreator = (selectedCategory) => {
         let num;
         this.randomNumberGenerator(selectedCategory.length, (res) => {
            num = res;
         });
         return selectedCategory[num].question;
-    };
+    }; // returns a question from the array.
 
     render() {
         let selectedCategory = this.props.selectedCtg;
