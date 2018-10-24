@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
+import PossibleAnswers from '../PossibleAnswers/PossibleAnswers';
 import _ from 'lodash';
 import styles from './SelectedCategory.module.css';
 
@@ -20,6 +21,8 @@ class SelectedCategory extends Component {
             <React.Fragment>
                 <h2 className={styles.Header}>{selectedCategory[0].category.title}</h2>
                 <p className={styles.Text}>{selectedCategory[0].question}</p>
+                <PossibleAnswers correctAnswer={selectedCategory[0].answer} 
+                                 allAnswers={selectedCategory.map(item => item.answer)}/>
             </React.Fragment>
         )
     }; // returns a question from the array.
@@ -27,14 +30,16 @@ class SelectedCategory extends Component {
 
     render() {
         let selectedCategory = this.props.selectedCtg;
-        let questions = null;
-
-        selectedCategory ? questions = this.questionsCreator(selectedCategory)
-        : questions = null;
-        console.log(selectedCategory);
+        let questions = undefined;
+   
+        if (selectedCategory) {
+            questions = this.questionsCreator(selectedCategory)
+            console.log(selectedCategory);
+        }
+        // console.log(selectedCategory[0].answer);
         return(
             <div className={styles.Question}>
-                {questions}
+                {this.props.selectedCtg ? questions : <p>loading</p>}
             </div>
         );
     };

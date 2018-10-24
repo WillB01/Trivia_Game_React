@@ -20,7 +20,7 @@ class Categories extends Component {
         : categories = <div>loading</div> ;
         return(
             <div className={styles.Categories}>
-              {categories}
+              {this.props.ctg.categories ? categories : null}
             </div>
         );
     };
