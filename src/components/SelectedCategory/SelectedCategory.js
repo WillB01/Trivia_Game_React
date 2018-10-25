@@ -15,13 +15,14 @@ class SelectedCategory extends Component {
         if (this.props.triviaMainIsCorrect) {
             this.props.onNewQuestionCard();
             this.props.onNewCards();
-            this.props.onProgressProgressBar(20);
+            this.props.onProgressProgressBar(20); //must change arg
         }
     }
 
-     progressBar = () => {  
+     progressBar = () => { 
+         let background = this.props.progressBar ? '#018E5B' : 'white';
         return{
-                background: '#018E5B',
+                background,
                 height: '30px',
                 width: `${this.props.progressBar}%` 
         };
