@@ -4,31 +4,67 @@ import PossibleAnswers from '../PossibleAnswers/PossibleAnswers';
 import _ from 'lodash';
 import styles from './SelectedCategory.module.css';
 import * as actions from '../../store/actions/index';
+import Timer from '../UI/Timer/Timer';
 
 class SelectedCategory extends Component {
-    randomNumberGenerator = (length, callback) => {
-        if (length === null) {
-            console.log('error');
+    state = {
+        startCount: 0
+    };
+
+    componentDidUpdate() {
+        if (this.props.triviaMainIsCorrect) {
+            this.props.onNewQuestionCard();
         };
-        callback(  _.random(0,length));
-    }; // returns a callback with a random number between 0 and length of api array.
+    }
+ 
+    isNextQuestion = (length, callback) => {
+        callback(length);
+    };
+
+    // cardLayout = () => {
+    //     return(
+    //         <React.Fragment>
+    //             <h2 className={
+    //                 !this.props.triviaMainIsCorrect
+    //                 ? styles.Header : styles.HeaderSuccess}>
+    //                     {selectedCategory[0].category.title}
+    //             </h2>
+    //             <p className={styles.Text}>{selectedCategory[num].question}</p>
+    //             <PossibleAnswers correctAnswer={selectedCategory[num].answer} 
+    //                              allAnswers={selectedCategory.map(item => item.answer)}
+    //                              userAnswerClick={(userAnswer) => this.props.onAnswerClick(userAnswer, selectedCategory[0].answer)}/>
+    //         </React.Fragment>
+    //     );
+    // };
 
     questionsCreator = (selectedCategory) => {
-        let num;
-        this.randomNumberGenerator(selectedCategory.length, (res) => {
-           num = res;
+        let num = 0;
+        this.isNextQuestion(selectedCategory, (res) => {
+            console.log(this.state.startCount);
+            if (this.props.triviaMainIsCorrect) {
+                setTimeout(() => {
+                   
+                }, 1000);
+             }
+            console.log(res[num].question);
+           
         });
         return (
             <React.Fragment>
                 <h2 className={
                     !this.props.triviaMainIsCorrect
-                    ? styles.Header : styles.HeaderSuccess}>
-                        {selectedCategory[0].category.title}
+                    ? !this.props.triviaMainStartGame 
+                    ? styles.Header : styles.HeaderWrong
+                    : styles.HeaderSuccess}>
+                        {selectedCategory[num].category.title}
                 </h2>
-                <p className={styles.Text}>{selectedCategory[0].question}</p>
-                <PossibleAnswers correctAnswer={selectedCategory[0].answer} 
+                <p className={styles.Text}>
+                    {selectedCategory[num].question}
+                </p>
+                <PossibleAnswers correctAnswer={selectedCategory[num].answer} 
                                  allAnswers={selectedCategory.map(item => item.answer)}
-                                 userAnswerClick={(userAnswer) => this.props.onAnswerClick(userAnswer, selectedCategory[0].answer)}/>
+                                 userAnswerClick={(userAnswer) => this.props.onAnswerClick(userAnswer, selectedCategory[0].answer)}
+                                 gameStart={this.props.triviaMainStartGame}/>
             </React.Fragment>
         )
     }; // returns a question from the array.
@@ -40,14 +76,22 @@ class SelectedCategory extends Component {
    
         if (selectedCategory) {
             questions = this.questionsCreator(selectedCategory)
-            console.log(selectedCategory);
         }
+
+        let button = null;
+        if (!this.props.triviaMainStartGame) {
+            button = <button onClick={this.props.startGame}>
+                   START GAME
+                </button>  ;
+        }
+      
         return(
             <React.Fragment>
-                 <button onClick={this.props.startGame}>Start Game</button>  
+                {button}
                 <div className={styles.QuestionCard}>
                     {this.props.selectedCtg ? questions : <p>loading</p>}
                 </div>
+                <Timer startTimer={this.props.triviaMainStartGame} />
             </React.Fragment>
             
         );
@@ -57,14 +101,16 @@ class SelectedCategory extends Component {
 const mapStateToProps = state => {
     return {
         selectedCtg: state.categories.selectedCategory,
-        triviaMainIsCorrect: state.triviaMain.isCorrect
+        triviaMainIsCorrect: state.triviaMain.isCorrect,
+        triviaMainStartGame: state.triviaMain.startGame
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         onAnswerClick: (userAnswer, correctAnswer) => dispatch(actions.getPlayerAnswer(userAnswer, correctAnswer)),
-        startGame: () => dispatch(actions.startGame())
+        startGame: () => dispatch(actions.startGame()),
+        onNewQuestionCard: () => dispatch(() => actions.newQuestionCard())
     };
 };
 

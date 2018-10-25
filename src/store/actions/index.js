@@ -4,5 +4,7 @@ export {
 } from './CategoriesAction';
 export {
     getPlayerAnswer,
-    startGame
+    startGame,
+    resetGame,
+    newQuestionCard
 } from './TriviaMainAction'

@@ -13,3 +13,15 @@ export const startGame = () => {
         type: actionTypes.STATE_GAME
     }
 };
+
+export const resetGame = () => {
+    return {
+        type: actionTypes.RESET_GAME
+    };
+};
+
+export const newQuestionCard = () => {
+    return {
+        type: actionTypes.NEW_QUESTION_CARD
+    };
+};

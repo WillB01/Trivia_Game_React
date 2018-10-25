@@ -9,7 +9,9 @@ const possibleAnswers = (props) => {
     const otherShuffledAnswers = _.shuffle(props.allAnswers);
         return (
             <div>
-                {otherShuffledAnswers.map((item, index) => <button onClick={() => props.userAnswerClick(item)} key={index}>{item}</button>)}
+                {otherShuffledAnswers.map((item, index) => 
+                    <button disabled={!props.gameStart}
+                            onClick={() => props.userAnswerClick(item)} key={index}>{item}</button>)}
             </div>
         );
     };
