@@ -1,11 +1,13 @@
 import * as actionTypes from '../actions/actionTypes';
 import {updateObject} from '../shared/utility';
+import { startGame } from '../actions';
 const initialState = {
    score: '',
    isCorrect: false,
    correctAnswer: '',
    playerAnswer: '',
-   playerCount: 0
+   playerCount: 0,
+   startGame: false,
 };
 
 const compare = (a, b) => {
@@ -31,10 +33,17 @@ const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
     });
 }; // checks everything that has to do with the game
 
+const setStartGame = (state, action) => {
+    return updateObject(state, {startGame: true})
+};
+
 
 const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.GET_PLAYER_ANSWER) {
         return setPlayerAnswer(state, action);
+    }
+    if (action.type === actionTypes.STATE_GAME) {
+        return setStartGame(state, action);
     }
     return state;
 };

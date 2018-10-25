@@ -7,3 +7,9 @@ export const getPlayerAnswer= (playerAnswer, correctAnswer) => {
         correctAnswer
     };
 };
+
+export const startGame = () => {
+    return {
+        type: actionTypes.STATE_GAME
+    }
+};

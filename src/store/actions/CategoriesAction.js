@@ -49,13 +49,8 @@ export const fetchSelectedCategory = (id) => {
 }; // Gets the selected category wich the user picked
 
 
-export const fetchCategories = () => {
-    // let random = _.random(0, 100);
-    // let inBetweenNumbers = Array(random + 7 - random + 1)
-    //                         .fill()
-    //                         .map((_, idx) => random + idx); // gets 8 numbers inbetween the randomnumber
-    // console.log(inBetweenNumbers);
-    const url = `http://jservice.io/api/categories?count=${1}`;
+export const fetchCategories = (num) => {
+    const url = `http://jservice.io/api/categories?count=${32}&offset=${0}`;
     return dispatch => {
         axios.get(url)
         .then(res => {
@@ -67,3 +62,5 @@ export const fetchCategories = () => {
         })
     }
 }; // Gets all different categories from API
+
+

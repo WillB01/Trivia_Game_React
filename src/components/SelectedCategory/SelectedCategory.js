@@ -20,7 +20,11 @@ class SelectedCategory extends Component {
         });
         return (
             <React.Fragment>
-                <h2 className={styles.Header}>{selectedCategory[0].category.title}</h2>
+                <h2 className={
+                    !this.props.triviaMainIsCorrect
+                    ? styles.Header : styles.HeaderSuccess}>
+                        {selectedCategory[0].category.title}
+                </h2>
                 <p className={styles.Text}>{selectedCategory[0].question}</p>
                 <PossibleAnswers correctAnswer={selectedCategory[0].answer} 
                                  allAnswers={selectedCategory.map(item => item.answer)}
@@ -39,23 +43,28 @@ class SelectedCategory extends Component {
             console.log(selectedCategory);
         }
         return(
-            <div className={styles.Question}>
-                {this.props.selectedCtg ? questions : <p>loading</p>}
-                <button>more</button>
-            </div>
+            <React.Fragment>
+                 <button onClick={this.props.startGame}>Start Game</button>  
+                <div className={styles.QuestionCard}>
+                    {this.props.selectedCtg ? questions : <p>loading</p>}
+                </div>
+            </React.Fragment>
+            
         );
     };
 };
 
 const mapStateToProps = state => {
     return {
-        selectedCtg: state.categories.selectedCategory 
+        selectedCtg: state.categories.selectedCategory,
+        triviaMainIsCorrect: state.triviaMain.isCorrect
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAnswerClick: (userAnswer, correctAnswer) => dispatch(actions.getPlayerAnswer(userAnswer, correctAnswer))
+        onAnswerClick: (userAnswer, correctAnswer) => dispatch(actions.getPlayerAnswer(userAnswer, correctAnswer)),
+        startGame: () => dispatch(actions.startGame())
     };
 };
 

@@ -14,7 +14,7 @@ class TriviaMain extends Component {
         return (
             <React.Fragment>
                 <h1>Welcome</h1>
-                <Categories />     
+                <Categories isCorrect={this.props.triviaMainIsCorrect} />   
             </React.Fragment>         
         );
     };
@@ -22,7 +22,8 @@ class TriviaMain extends Component {
 
 const mapStateToProps = state => {
     return {
-        ctg: state.categories
+        ctg: state.categories,
+      
     };
 };
 

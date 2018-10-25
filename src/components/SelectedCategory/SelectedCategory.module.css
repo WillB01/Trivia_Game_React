@@ -1,4 +1,4 @@
-.Question {
+.QuestionCard {
     margin: auto;
     text-align: center;
     max-width: 380px;
@@ -11,7 +11,7 @@
    
 }
 
-.Question .Text {
+.QuestionCard .Text {
     min-height: 200px;
     width: 90%;
     margin: auto 0;
@@ -24,14 +24,31 @@
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
   }
 
-  .Question .Header {
+  .QuestionCard .Header {
     min-height: 100px;
     width: 100%;
-    background-color: #4426a8;
+    background: #4426a8;
     position: relative;
     margin: 0;
     /* background-image:  */
-      
+  }
+
+  .QuestionCard .HeaderSuccess {
+    min-height: 100px;
+    width: 100%;
+    background: #018E5B;
+    position: relative;
+    margin: 0;
+    
+  }
+
+  .QuestionCard .HeaderWrong {
+    min-height: 100px;
+    width: 100%;
+    background: #F25652;
+    position: relative;
+    margin: 0;
+    
   }
 
 

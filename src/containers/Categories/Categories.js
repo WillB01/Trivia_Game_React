@@ -5,6 +5,12 @@ import styles from './Categories.module.css';
 import {NavLink} from 'react-router-dom';
 
 class Categories extends Component {
+    state = {
+        pageCounter: 0
+    };
+    pageignationHandler = (e) => { //TODOOOOOO
+        this.props.fetchCategories(e.target.name);
+    };
     render() {
         let categories = null;
         let ctg =  this.props.ctg.categories;
@@ -21,8 +27,10 @@ class Categories extends Component {
         return(
             <div className={styles.Categories}>
               {this.props.ctg.categories ? categories : null}
-              <button>-</button>
-              <button>+</button>
+              <button name="less" 
+                      onClick={this.pageignationHandler}>-</button>
+              <button name="more"
+                      onClick={this.pageignationHandler}>+</button>
             </div>
         );
     };
@@ -31,14 +39,15 @@ class Categories extends Component {
 const mapStateToProps = state => {
     return {
         ctg: state.categories,
-        selectedCtg: state.sel
+        selectedCtg: state.sel,
+        triviaMainIsCorrect: state.triviaMain.isCorrect
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onCategoryHandler: (id) => dispatch(categoriesAction.fetchSelectedCategory(id))
-
+        onCategoryHandler: (id) => dispatch(categoriesAction.fetchSelectedCategory(id)),
+        fetchCategories: (num) => dispatch(categoriesAction.fetchCategories(num))
     };
 };
 
