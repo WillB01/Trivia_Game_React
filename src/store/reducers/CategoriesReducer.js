@@ -28,7 +28,8 @@ const setSelectedCategory = (state, action)  => {
     action.selectedCategory.map((item, index) => (arr.push(index)));
     return updateObject(state, {
         selectedCategory: action.selectedCategory,
-        amountOfCards: arr
+        amountOfCards: arr,
+        progressBar: null
     });
 };
 
