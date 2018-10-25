@@ -41,6 +41,7 @@ class SelectedCategory extends Component {
         return(
             <div className={styles.Question}>
                 {this.props.selectedCtg ? questions : <p>loading</p>}
+                <button>more</button>
             </div>
         );
     };

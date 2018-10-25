@@ -21,6 +21,8 @@ class Categories extends Component {
         return(
             <div className={styles.Categories}>
               {this.props.ctg.categories ? categories : null}
+              <button>-</button>
+              <button>+</button>
             </div>
         );
     };

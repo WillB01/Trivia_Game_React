@@ -1,12 +1,14 @@
 import * as actionTypes from './actionTypes';
+import _ from 'lodash';
 import axios from 'axios';
 
+//different action creators---------------------------------------
 export const setCategories = (categories) => {
     return {
         type: actionTypes.FETCH_CATEGORIES,
         categories
     };
-};
+}; 
 
 export const fetchCategoriesFail = () => {
     return {
@@ -27,6 +29,12 @@ export const setSelectedCategoryFail = () => {
     };
 };
 
+export const fetchMoreCategories = () => {
+    return {
+        type: actionTypes.FETCH_MORE_CATEGORIES
+    };
+};
+//---------------------------------------------------------------
 
 export const fetchSelectedCategory = (id) => {
     const url = `http://jservice.io/api/clues/?category=${id}`;
@@ -42,7 +50,12 @@ export const fetchSelectedCategory = (id) => {
 
 
 export const fetchCategories = () => {
-    const url = `http://jservice.io/api/categories?count=8`;
+    // let random = _.random(0, 100);
+    // let inBetweenNumbers = Array(random + 7 - random + 1)
+    //                         .fill()
+    //                         .map((_, idx) => random + idx); // gets 8 numbers inbetween the randomnumber
+    // console.log(inBetweenNumbers);
+    const url = `http://jservice.io/api/categories?count=${1}`;
     return dispatch => {
         axios.get(url)
         .then(res => {

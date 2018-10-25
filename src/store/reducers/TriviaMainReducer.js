@@ -4,10 +4,33 @@ const initialState = {
    score: '',
    isCorrect: false,
    correctAnswer: '',
-   playerAnswer: ''
+   playerAnswer: '',
+   playerCount: 0
 };
 
-const setPlayerAnswer = (state, action) => updateObject(state, {playerAnswer: action.playerAnswer, correctAnswer: action.correctAnswer});
+const compare = (a, b) => {
+    return (a === b ? true: false);
+}; // compares something
+
+const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
+    const playerAnswer = action.playerAnswer;
+    const correctAnswer = action.correctAnswer;
+
+    if (!compare(playerAnswer, correctAnswer)) {
+        return updateObject(state, {
+            isCorrect: false,
+            correctAnswer: correctAnswer,
+            playerAnswer: playerAnswer
+        });
+    };
+    
+    return updateObject(state, {
+        isCorrect: true,
+        correctAnswer: correctAnswer,
+        playerAnswer: playerAnswer
+    });
+}; // checks everything that has to do with the game
+
 
 const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.GET_PLAYER_ANSWER) {

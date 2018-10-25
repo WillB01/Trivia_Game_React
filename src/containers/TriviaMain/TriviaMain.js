@@ -28,7 +28,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onInitCategories: () => dispatch(actions.fetchCategories())
+        onInitCategories: () => dispatch(actions.fetchCategories()) //Gets the data from api
     };
 };
 
