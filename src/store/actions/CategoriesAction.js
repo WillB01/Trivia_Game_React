@@ -43,6 +43,13 @@ export const newQuestionCards = (cards) => {
     }
 }
 
+export const setProgressProgressBar = (progress) => {
+    return {
+        type: actionTypes.SET_PROGRESS_PROGRESSBAR,
+        progress
+    }
+};
+
 //---------------------------------------------------------------
 
 export const fetchSelectedCategory = (id) => {

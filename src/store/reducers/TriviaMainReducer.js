@@ -8,7 +8,8 @@ const initialState = {
    playerAnswer: '',
    playerCount: 0,
    startGame: false,
-   amountOfCards: []
+   amountOfCards: [],
+   progressBar: 0,
 };
 
 const compare = (a, b) => {
@@ -30,7 +31,7 @@ const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
     return updateObject(state, {
         isCorrect: true,
         correctAnswer: correctAnswer,
-        playerAnswer: playerAnswer
+        playerAnswer: playerAnswer 
     });
 }; // checks everything that has to do with the game
 

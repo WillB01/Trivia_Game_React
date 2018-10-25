@@ -9,31 +9,31 @@ import Timer from '../UI/Timer/Timer';
 class SelectedCategory extends Component {
     state = {
         startCount: 0,
-        amounthOfCard : []
-        
     };
 
     componentDidUpdate() {
         if (this.props.triviaMainIsCorrect) {
             this.props.onNewQuestionCard();
             this.props.onNewCards();
+            this.props.onProgressProgressBar(20);
         }
     }
 
-    AwaitGetLength = (length, callback) => {
-        callback(length);
+     progressBar = () => {  
+        return{
+                background: '#018E5B',
+                height: '30px',
+                width: `${this.props.progressBar}%` 
+        };
     };
-
+      
     
     questionsCreator = (selectedCategory, index, callback) => {
         callback((  <div key={index} className={styles.QuestionCard}>
-            <h2 className={
-                !this.props.triviaMainIsCorrect
-                ? !this.props.triviaMainStartGame 
-                ? styles.Header : styles.HeaderWrong
-                : styles.HeaderSuccess}>
+            <h2 className={styles.Header}>
                     {selectedCategory[index].category.title}
             </h2>
+            <div style={this.progressBar()}></div>
             <p className={styles.Text}>
                 {selectedCategory[index].question}
             </p>
@@ -45,12 +45,11 @@ class SelectedCategory extends Component {
            
     }; // returns a question from the array.
 
-
     render() {
         let selectedCategory = this.props.selectedCtg;
         let questions = [];
         
-        
+       
         if (selectedCategory) {
             selectedCategory.map((item, index) => {
                 this.questionsCreator(selectedCategory, index, (res) => {
@@ -65,14 +64,13 @@ class SelectedCategory extends Component {
                    START GAME
                 </button>  ;
         }
-        console.log(this.props.cards.length)
-      
         return(
             <React.Fragment>
                 {button}
                 <div className={styles.QuestionCard}>
                     {this.props.selectedCtg ? questions[this.props.cards[0]] : <p>loading</p>}
                 </div>
+               
                 
             </React.Fragment>
             
@@ -85,7 +83,8 @@ const mapStateToProps = state => {
         selectedCtg: state.categories.selectedCategory,
         triviaMainIsCorrect: state.triviaMain.isCorrect,
         triviaMainStartGame: state.triviaMain.startGame,
-        cards: state.categories.amountOfCards
+        cards: state.categories.amountOfCards,
+        progressBar: state.categories.progressBar
     };
 };
 
@@ -94,7 +93,8 @@ const mapDispatchToProps = dispatch => {
         onAnswerClick: (userAnswer, correctAnswer) => dispatch(actions.getPlayerAnswer(userAnswer, correctAnswer)),
         startGame: () => dispatch(actions.startGame()),
         onNewQuestionCard: () => dispatch(actions.newQuestionCard()),
-        onNewCards: (cards) => dispatch(actions.newQuestionCards(cards))
+        onNewCards: (cards) => dispatch(actions.newQuestionCards(cards)),
+        onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress))
     };
 };
 

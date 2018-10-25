@@ -3,4 +3,4 @@ export const updateObject = (oldObject, updatedProperties) => {
         ...oldObject,
         ...updatedProperties
     };
-};
+}; // Helper method to update state.

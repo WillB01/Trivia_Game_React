@@ -51,4 +51,10 @@
     
   }
 
+  .QuestionCard .ProgressBar {
+    background: #018E5B;
+    height: 30px;
+    width: 20%;
+  }
+
 

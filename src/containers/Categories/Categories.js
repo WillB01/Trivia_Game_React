@@ -40,7 +40,7 @@ const mapStateToProps = state => {
     return {
         ctg: state.categories,
         selectedCtg: state.sel,
-        triviaMainIsCorrect: state.triviaMain.isCorrect
+        
     };
 };
 
