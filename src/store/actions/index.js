@@ -1,10 +1,11 @@
 export {
     fetchCategories,
-    fetchSelectedCategory
+    fetchSelectedCategory,
+    newQuestionCards
 } from './CategoriesAction';
 export {
     getPlayerAnswer,
     startGame,
     resetGame,
-    newQuestionCard
+    newQuestionCard,
 } from './TriviaMainAction'

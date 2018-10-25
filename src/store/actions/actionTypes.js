@@ -8,6 +8,10 @@ export const GET_PLAYER_ANSWER = 'GET_PLAYER_ANSWER';
 
 export const STATE_GAME = 'START_GAME';
 export const RESET_GAME = 'RESET_GAME';
+
 export const NEW_QUESTION_CARD = 'NEW_QUESTION_CARD';
+export const SET_NEW_QUESTION_CARDS = 'SET_NEW_QUESTION_CARDS';
+
+
 
 

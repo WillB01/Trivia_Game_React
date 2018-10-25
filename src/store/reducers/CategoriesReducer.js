@@ -5,7 +5,8 @@ import {updateObject} from '../shared/utility';
 const initialState = {
     categories: null,
     selectedCategory: null,
-    error: false
+    error: false,
+    amountOfCards: []
 };
 
 
@@ -22,9 +23,21 @@ const fetchCategoriesFail = (state, action) => {
 };
 
 const setSelectedCategory = (state, action)  => {
+    let arr = [];
+    action.selectedCategory.map((item, index) => (arr.push(index)));
     return updateObject(state, {
         selectedCategory: action.selectedCategory,
+        amountOfCards: arr
     });
+};
+
+const setNewQuestionCards = (state, action) => {
+    const newCards = [...state.amountOfCards];
+    newCards.shift();
+    return updateObject(state, {
+        amountOfCards: newCards
+    });
+
 };
 
 const fetchSelectedCategoryFail = (state, action) => {
@@ -45,6 +58,9 @@ const reducer = (state = initialState, action) => {
     }
     if (action.type === actionTypes.FETCH_SELECTED_CATEGORY_FAIL) {
         return fetchSelectedCategoryFail(state, action);
+    }
+    if (action.type === actionTypes.SET_NEW_QUESTION_CARDS) {
+        return setNewQuestionCards(state, action);
     }
  
     return state;

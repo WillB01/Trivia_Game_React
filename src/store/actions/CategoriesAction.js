@@ -34,6 +34,15 @@ export const fetchMoreCategories = () => {
         type: actionTypes.FETCH_MORE_CATEGORIES
     };
 };
+
+export const newQuestionCards = (cards) => {
+    return {
+        type: actionTypes.SET_NEW_QUESTION_CARDS,
+        cards
+
+    }
+}
+
 //---------------------------------------------------------------
 
 export const fetchSelectedCategory = (id) => {

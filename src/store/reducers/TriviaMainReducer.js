@@ -8,6 +8,7 @@ const initialState = {
    playerAnswer: '',
    playerCount: 0,
    startGame: false,
+   amountOfCards: []
 };
 
 const compare = (a, b) => {
@@ -34,11 +35,8 @@ const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
 }; // checks everything that has to do with the game
 
 const setStartGame = (state, action) => {
-   
     return updateObject(state, {startGame: true})
-};
-
-
+}; // Starts a game
 
 const setResetGame = (state, action) => {
     const oldState = {
@@ -50,9 +48,9 @@ const setResetGame = (state, action) => {
         startGame: false,
     };
     return updateObject(state, oldState);
-};
+}; //resets state
 
-const SetNewQuestionCard = (state, action) => {
+const setNewQuestionCard = (state, action) => {
     return updateObject(state, {
         isCorrect: false,
         correctAnswer: '',
@@ -61,7 +59,6 @@ const SetNewQuestionCard = (state, action) => {
 
     });
 };
-
 
 const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.GET_PLAYER_ANSWER) {
@@ -73,9 +70,10 @@ const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.RESET_GAME) {
         return setResetGame(state, action);
     }
-    if (action.tyoe === actionTypes.NEW_QUESTION_CARD) {
-            return SetNewQuestionCard(state, action);
+    if (action.type === actionTypes.NEW_QUESTION_CARD) {
+            return setNewQuestionCard(state, action);
     }
+  
     return state;
 };
 
