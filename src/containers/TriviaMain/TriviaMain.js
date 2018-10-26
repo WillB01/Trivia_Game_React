@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Categories from '../Categories/Categories';
 import * as actions from '../../store/actions/index';
+import PlayerInfo from '../../components/UI/PlayerInfo/PlayerInfo';
 
 class TriviaMain extends Component {
     componentDidMount() {
@@ -11,8 +12,9 @@ class TriviaMain extends Component {
         return (
             <React.Fragment>
                 <h1>Welcome</h1>
-                
+              
                 <Categories />   
+               
             </React.Fragment>         
         );
     };

@@ -7,10 +7,10 @@ const initialState = {
    playerAnswer: '',
    startGame: false,
    player: {
-    name: '',
+    name: 'Willy',
     score: {
-        totalScore: {},
-        scoreSelectedCategory: ''
+        total: 0,
+        selectedCategory: 0
     },
 
 
@@ -21,22 +21,52 @@ const compare = (a, b) => {
     return (a === b ? true: false);
 }; // compares something
 
+const updateObjectInArray = (array, action) => {
+    return array.map((item, index) => {
+      if (index !== action.index) {
+        return item
+      }
+      return {
+        ...item,
+        ...action.item
+      }
+    });
+  };
+
+
+
 const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
     const playerAnswer = action.playerAnswer;
     const correctAnswer = action.correctAnswer;
+    
+   
+    console.log(state.player);
+
+    // let b = updateObjectInArray(...)
+
+    // let test = updateObjectInArray(oldPlayer, )
 
     if (!compare(playerAnswer, correctAnswer)) {
         return updateObject(state, {
             isCorrect: false,
             correctAnswer: correctAnswer,
-            playerAnswer: playerAnswer
+            playerAnswer: playerAnswer,
         });
     };
-    
+
+
     return updateObject(state, {
         isCorrect: true,
         correctAnswer: correctAnswer,
-        playerAnswer: playerAnswer 
+        playerAnswer: playerAnswer,
+        player: {
+            ...state.player,
+            score: {
+                ...state.player.score,
+                selectedCategory: state.player.score.selectedCategory += 5
+
+            }
+        }    
     });
 }; // checks everything that has to do with the game
 
