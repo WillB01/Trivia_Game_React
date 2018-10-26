@@ -9,25 +9,32 @@ import Timer from '../UI/Timer/Timer';
 class SelectedCategory extends Component {
     state = {
         startCount: 0,
-    };
 
+    };
+    
+   
     componentDidUpdate() {
+        const percentage = this.percentageCalculator(1, this.props.selectedCtg.length); 
+
         if (this.props.triviaMainIsCorrect) {
             this.props.onNewQuestionCard();
             this.props.onNewCards();
-            this.props.onProgressProgressBar(20); //must change arg
+            
+            // if (this.props.cards.length === prevProps)
+            this.props.onProgressProgressBar(percentage); //must change arg
         }
-    }
+    };
 
-     progressBar = () => { 
-         let background = this.props.progressBar ? '#018E5B' : 'white';
-        return{
-                background,
-                height: '30px',
-                width: `${this.props.progressBar}%` 
+    percentageCalculator = (a, b) => (a / b) * 100; // calculate the precentage for the status bar.
+    
+    progressBar = () => {
+        let background = this.props.progressBar ? '#018E5B' : 'white';
+        return {
+            background,
+            height: '30px',
+            width: `${this.props.progressBar}%`
         };
     };
-      
     
     questionsCreator = (selectedCategory, index, callback) => {
         callback((  <div key={index} className={styles.QuestionCard}>
