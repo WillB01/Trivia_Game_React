@@ -6,6 +6,15 @@ const initialState = {
    correctAnswer: '',
    playerAnswer: '',
    startGame: false,
+   player: {
+    name: '',
+    score: {
+        totalScore: {},
+        scoreSelectedCategory: ''
+    },
+
+
+   }
 };
 
 const compare = (a, b) => {

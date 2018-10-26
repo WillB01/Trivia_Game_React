@@ -1,9 +1,11 @@
 export {
     fetchCategories,
+} from './CategoriesAction';
+export {
     fetchSelectedCategory,
     newQuestionCards,
     setProgressProgressBar
-} from './CategoriesAction';
+} from './SelectedCategoryAction'
 export {
     getPlayerAnswer,
     startGame,

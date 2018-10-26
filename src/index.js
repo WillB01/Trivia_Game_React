@@ -12,13 +12,15 @@ import thunk from 'redux-thunk';
 
 import TriviaMainReducer from './store/reducers/TriviaMainReducer';
 import CategoriesReducer from './store/reducers/CategoriesReducer';
+import SelectedCategoryReducer from './store/reducers/SelectedCategoryReducer';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' 
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null|| compose;
 
 const rootReducer = combineReducers({
     triviaMain: TriviaMainReducer,
-    categories: CategoriesReducer
+    categories: CategoriesReducer,
+    selectedCategory: SelectedCategoryReducer
 });
 
 const store = createStore(rootReducer, 

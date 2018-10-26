@@ -80,11 +80,11 @@ class SelectedCategory extends Component {
 
 const mapStateToProps = state => {
     return {
-        selectedCtg: state.categories.selectedCategory,
+        selectedCtg: state.selectedCategory.selectedCategory,
         triviaMainIsCorrect: state.triviaMain.isCorrect,
         triviaMainStartGame: state.triviaMain.startGame,
-        cards: state.categories.amountOfCards,
-        progressBar: state.categories.progressBar
+        cards: state.selectedCategory.amountOfCards,
+        progressBar: state.selectedCategory.progressBar
     };
 };
 
