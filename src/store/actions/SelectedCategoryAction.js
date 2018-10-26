@@ -20,15 +20,23 @@ export const newQuestionCards = (cards) => {
         type: actionTypes.SET_NEW_QUESTION_CARDS,
         cards
 
-    }
-}
+    };
+};
 
 export const setProgressProgressBar = (progress) => {
     return {
         type: actionTypes.SET_PROGRESS_PROGRESSBAR,
         progress
-    }
+    };
 };
+
+export const selectedCategoryCompleted = () => {
+    return {
+        type: actionTypes.SELECTED_CATEGORY_COMPLETED
+    };
+};
+
+
 
 
 export const fetchSelectedCategory = (id) => {

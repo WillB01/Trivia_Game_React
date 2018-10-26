@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import {updateObject} from '../shared/utility';
-import { startGame } from '../actions';
+import { startGame, addTotalScore } from '../actions';
 const initialState = {
    isCorrect: false,
    correctAnswer: '',
@@ -21,31 +21,11 @@ const compare = (a, b) => {
     return (a === b ? true: false);
 }; // compares something
 
-const updateObjectInArray = (array, action) => {
-    return array.map((item, index) => {
-      if (index !== action.index) {
-        return item
-      }
-      return {
-        ...item,
-        ...action.item
-      }
-    });
-  };
-
-
 
 const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
     const playerAnswer = action.playerAnswer;
     const correctAnswer = action.correctAnswer;
     
-   
-    console.log(state.player);
-
-    // let b = updateObjectInArray(...)
-
-    // let test = updateObjectInArray(oldPlayer, )
-
     if (!compare(playerAnswer, correctAnswer)) {
         return updateObject(state, {
             isCorrect: false,
@@ -55,7 +35,7 @@ const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
     };
 
 
-    return updateObject(state, {
+    return updateObject(state, { 
         isCorrect: true,
         correctAnswer: correctAnswer,
         playerAnswer: playerAnswer,
@@ -68,7 +48,7 @@ const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
             }
         }    
     });
-}; // checks everything that has to do with the game
+}; // checks everything that has to do with the game adds SCORE!!!!!!!!
 
 const setStartGame = (state, action) => {
     return updateObject(state, {startGame: true})
@@ -94,6 +74,19 @@ const setNewQuestionCard = (state, action) => {
     });
 };
 
+const setAddTotalScore = (state, action) => {
+    return {
+        player: {
+            ...state.player,
+            score: {
+                ...state.player.score,
+                total: state.player.score.total += 1
+
+            }
+        }    
+    }
+};      
+
 const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.GET_PLAYER_ANSWER) {
         return setPlayerAnswer(state, action);
@@ -106,6 +99,9 @@ const reducer = (state = initialState, action) => {
     }
     if (action.type === actionTypes.NEW_QUESTION_CARD) {
             return setNewQuestionCard(state, action);
+    }
+    if (action.type === actionTypes.ADD_TOTAL_SCORE) {
+        return setAddTotalScore(state, action);
     }
   
     return state;

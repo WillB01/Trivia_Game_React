@@ -4,7 +4,8 @@ import {updateObject} from '../shared/utility';
 const initialState = {
     selectedCategory: null,
     amountOfCards: [],
-    progressBar: null
+    progressBar: null,
+    selectedCategoryCompleted: false,
 };
 
 
@@ -14,7 +15,8 @@ const setSelectedCategory = (state, action)  => {
     return updateObject(state, {
         selectedCategory: action.selectedCategory,
         amountOfCards: arr,
-        progressBar: null
+        progressBar: null,
+        selectedCategoryCompleted: false
     });
 };
 
@@ -41,6 +43,12 @@ const setUpdateProgressBar = (state, action) => {
     });
 };
 
+const selectedCategoryCompleted = (state, action) => {
+    return updateObject(state, {
+        selectedCategoryCompleted: true,
+    });
+};
+
 const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.FETCH_SELECTED_CATEGORY) {
         return setSelectedCategory(state, action);
@@ -53,6 +61,9 @@ const reducer = (state = initialState, action) => {
     }
     if (action.type === actionTypes.SET_PROGRESS_PROGRESSBAR) {
         return setUpdateProgressBar(state, action);
+    }
+    if (action.type === actionTypes.SELECTED_CATEGORY_COMPLETED) {
+        return selectedCategoryCompleted(state, action);
     }
     return state;
 };

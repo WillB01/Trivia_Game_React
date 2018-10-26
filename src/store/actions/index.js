@@ -4,11 +4,13 @@ export {
 export {
     fetchSelectedCategory,
     newQuestionCards,
-    setProgressProgressBar
+    setProgressProgressBar,
+    selectedCategoryCompleted
 } from './SelectedCategoryAction'
 export {
     getPlayerAnswer,
     startGame,
     resetGame,
     newQuestionCard,
+    addTotalScore,
 } from './TriviaMainAction'

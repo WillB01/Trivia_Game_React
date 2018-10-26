@@ -12,18 +12,24 @@ class SelectedCategory extends Component {
         startCount: 0,
 
     };
-    
-   
+
     componentDidUpdate() {
         const percentage = this.percentageCalculator(1, this.props.selectedCtg.length); 
         if (this.props.triviaMainIsCorrect) {
             this.props.onNewQuestionCard();
             this.props.onNewCards();
-            
-            // if (this.props.cards.length === prevProps)
-            this.props.onProgressProgressBar(percentage); //must change arg
+            this.props.onProgressProgressBar(percentage);    
+            this.playerCompletedCategory();  
         }
     };
+
+    playerCompletedCategory = () => {
+        if (this.props.cards.length === 1) {
+            this.props.onSelectedCategoryCompleted();
+            this.props.addTotalScore();
+        }
+    }; // checks if player has completed all cards if true it means category completed
+
 
     percentageCalculator = (a, b) => (a / b) * 100; // calculate the precentage for the status bar.
     
@@ -94,7 +100,9 @@ const mapDispatchToProps = dispatch => {
         startGame: () => dispatch(actions.startGame()),
         onNewQuestionCard: () => dispatch(actions.newQuestionCard()),
         onNewCards: (cards) => dispatch(actions.newQuestionCards(cards)),
-        onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress))
+        onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress)),
+        onSelectedCategoryCompleted: () => dispatch(actions.selectedCategoryCompleted()),
+        addTotalScore: () => dispatch(actions.addTotalScore())
     };
 };
 
