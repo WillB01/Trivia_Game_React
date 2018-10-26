@@ -22,11 +22,11 @@ class Timer extends Component {
           time: Date.now() - this.state.start
         }), 1);
       }
-      stopTimer() {
+      stopTimer = () => {
         this.setState({isOn: false})
         clearInterval(this.timer)
       }
-      resetTimer() {
+      resetTimer = () => {
         this.setState({time: 0, isOn: false})
       }
       render() {

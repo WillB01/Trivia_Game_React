@@ -6,6 +6,7 @@ import Categories from './containers/Categories/Categories';
 import SelectedCategory from './components/SelectedCategory/SelectedCategory';
 
 import './App.css';
+import Timer from './components/UI/Timer/Timer';
 
 class App extends Component {
   render() {

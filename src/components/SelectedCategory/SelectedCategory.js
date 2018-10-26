@@ -5,6 +5,7 @@ import _ from 'lodash';
 import styles from './SelectedCategory.module.css';
 import * as actions from '../../store/actions/index';
 import Timer from '../UI/Timer/Timer';
+import ProgressBar from '../UI/ProgressBar/ProgressBar';
 
 class SelectedCategory extends Component {
     state = {
@@ -15,7 +16,6 @@ class SelectedCategory extends Component {
    
     componentDidUpdate() {
         const percentage = this.percentageCalculator(1, this.props.selectedCtg.length); 
-
         if (this.props.triviaMainIsCorrect) {
             this.props.onNewQuestionCard();
             this.props.onNewCards();
@@ -27,21 +27,12 @@ class SelectedCategory extends Component {
 
     percentageCalculator = (a, b) => (a / b) * 100; // calculate the precentage for the status bar.
     
-    progressBar = () => {
-        let background = this.props.progressBar ? '#018E5B' : 'white';
-        return {
-            background,
-            height: '30px',
-            width: `${this.props.progressBar}%`
-        };
-    };
-    
     questionsCreator = (selectedCategory, index, callback) => {
         callback((  <div key={index} className={styles.QuestionCard}>
             <h2 className={styles.Header}>
                     {selectedCategory[index].category.title}
             </h2>
-            <div style={this.progressBar()}></div>
+            <ProgressBar progressBar={this.props.progressBar} />
             <p className={styles.Text}>
                 {selectedCategory[index].question}
             </p>
@@ -78,6 +69,7 @@ class SelectedCategory extends Component {
                 <div className={styles.QuestionCard}>
                     {this.props.selectedCtg ? questions[this.props.cards[0]] : <p>loading</p>}
                 </div>
+         
                
                 
             </React.Fragment>

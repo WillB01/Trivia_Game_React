@@ -2,14 +2,10 @@ import * as actionTypes from '../actions/actionTypes';
 import {updateObject} from '../shared/utility';
 import { startGame } from '../actions';
 const initialState = {
-   score: '',
    isCorrect: false,
    correctAnswer: '',
    playerAnswer: '',
-   playerCount: 0,
    startGame: false,
-   amountOfCards: [],
-   progressBar: 0,
 };
 
 const compare = (a, b) => {
@@ -41,11 +37,9 @@ const setStartGame = (state, action) => {
 
 const setResetGame = (state, action) => {
     const oldState = {
-        score: '',
         isCorrect: false,
         correctAnswer: '',
         playerAnswer: '',
-        playerCount: 0,
         startGame: false,
     };
     return updateObject(state, oldState);
