@@ -5,10 +5,34 @@ import * as actions from '../../store/actions/index';
 import PlayerInfo from '../../components/UI/PlayerInfo/PlayerInfo';
 
 class TriviaMain extends Component {
+    state = {
+        completedCategories: []
+    };
     componentDidMount() {
         this.props.onInitCategories();
+        // this.checkIfCategorieHasCompleted(this.props.ctg.categories);
     };
+
+    // checkIfCategorieHasCompleted = (categories) => {
+    //     let cat = [];
+    //     if (categories) {
+    //         categories.forEach(element => {
+    //             if (element.id === this.props.selectedCtg.selectedCategoryCompletedId) 
+    //                cat.push(element.id);
+    //         });
+            
+    //     };
+
+    //     return cat;
+       
+    // };
+
     render() {
+        // let ctg = this.props.ctg.categories;
+        // if(ctg) {
+        //   this.checkIfCategorieHasCompleted(ctg);
+   
+        // }
         return (
             <React.Fragment>
                 <h1>Welcome</h1>
@@ -23,6 +47,7 @@ class TriviaMain extends Component {
 const mapStateToProps = state => {
     return {
         ctg: state.categories,
+        selectedCtg: state.selectedCategory,
       
     };
 };
@@ -30,7 +55,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onInitCategories: () => dispatch(actions.fetchCategories()), //Gets the data from api
-        onResetGame: () => dispatch(actions.resetGame())
+        onResetGame: () => dispatch(actions.resetGame()),
     };
 };
 

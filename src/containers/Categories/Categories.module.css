@@ -21,6 +21,10 @@
     cursor: pointer;
 }
 
+.CategoriesCompleted {
+    background: #018E5B;
+}
+
 .CategoriesItems:hover {
     background: rgb(236, 236, 236);
 }

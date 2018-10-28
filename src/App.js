@@ -14,7 +14,7 @@ class App extends Component {
       <div className="App">
         <Layout>
           <Switch>
-            <Route path="/selected-category" component={SelectedCategory} />
+            <Route path="/selected-category" search="id" component={SelectedCategory} />
             <Route path="/" exact component={TriviaMain} />
           </Switch>
         </Layout>

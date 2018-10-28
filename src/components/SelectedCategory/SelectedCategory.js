@@ -25,7 +25,7 @@ class SelectedCategory extends Component {
 
     playerCompletedCategory = () => {
         if (this.props.cards.length === 1) {
-            this.props.onSelectedCategoryCompleted();
+            this.props.onSelectedCategoryCompleted(this.props.location.state.id);
             this.props.addTotalScore();
         }
     }; // checks if player has completed all cards if true it means category completed
@@ -75,9 +75,6 @@ class SelectedCategory extends Component {
                 <div className={styles.QuestionCard}>
                     {this.props.selectedCtg ? questions[this.props.cards[0]] : <p>loading</p>}
                 </div>
-         
-               
-                
             </React.Fragment>
             
         );
@@ -101,7 +98,7 @@ const mapDispatchToProps = dispatch => {
         onNewQuestionCard: () => dispatch(actions.newQuestionCard()),
         onNewCards: (cards) => dispatch(actions.newQuestionCards(cards)),
         onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress)),
-        onSelectedCategoryCompleted: () => dispatch(actions.selectedCategoryCompleted()),
+        onSelectedCategoryCompleted: (id) => dispatch(actions.selectedCategoryCompleted(id)),
         addTotalScore: () => dispatch(actions.addTotalScore())
     };
 };

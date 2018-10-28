@@ -29,7 +29,7 @@ export const newQuestionCard = () => {
 export const addTotalScore = () => {
     return {
         type: actionTypes.ADD_TOTAL_SCORE
-    }
-}
+    };
+};
 
 

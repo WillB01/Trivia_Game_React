@@ -43,7 +43,7 @@ const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
             ...state.player,
             score: {
                 ...state.player.score,
-                selectedCategory: state.player.score.selectedCategory += 5
+                selectedCategory: state.player.score.selectedCategory += 1
 
             }
         }    

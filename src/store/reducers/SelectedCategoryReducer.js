@@ -6,10 +6,12 @@ const initialState = {
     amountOfCards: [],
     progressBar: null,
     selectedCategoryCompleted: false,
+    selectedCategoryCompletedId: []
 };
 
 
 const setSelectedCategory = (state, action)  => {
+
     let arr = [];
     action.selectedCategory.map((item, index) => (arr.push(index)));
     return updateObject(state, {
@@ -21,6 +23,7 @@ const setSelectedCategory = (state, action)  => {
 };
 
 const fetchSelectedCategoryFail = (state, action) => {
+   
     return updateObject(state, {
         error: true
     });
@@ -37,15 +40,18 @@ const setNewQuestionCards = (state, action) => {
 
 const setUpdateProgressBar = (state, action) => {
     const progress = state.progressBar;
-    console.log(action.progress);
     return updateObject(state, {
         progressBar: progress + action.progress
     });
 };
 
 const selectedCategoryCompleted = (state, action) => {
+    let ids = state.selectedCategoryCompletedId;
+    ids.push(action.id)
+    console.log(ids);
     return updateObject(state, {
         selectedCategoryCompleted: true,
+        selectedCategoryCompletedId: ids
     });
 };
 
