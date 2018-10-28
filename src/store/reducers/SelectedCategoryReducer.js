@@ -11,14 +11,13 @@ const initialState = {
 
 
 const setSelectedCategory = (state, action)  => {
-
     let arr = [];
     action.selectedCategory.map((item, index) => (arr.push(index)));
     return updateObject(state, {
         selectedCategory: action.selectedCategory,
         amountOfCards: arr,
         progressBar: null,
-        selectedCategoryCompleted: false
+        selectedCategoryCompleted: false,
     });
 };
 
@@ -48,10 +47,9 @@ const setUpdateProgressBar = (state, action) => {
 const selectedCategoryCompleted = (state, action) => {
     let ids = state.selectedCategoryCompletedId;
     ids.push(action.id)
-    console.log(ids);
     return updateObject(state, {
         selectedCategoryCompleted: true,
-        selectedCategoryCompletedId: ids
+        selectedCategoryCompletedId: ids,
     });
 };
 

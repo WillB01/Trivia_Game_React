@@ -10,7 +10,7 @@ const initialState = {
     name: 'Willy',
     score: {
         total: 0,
-        selectedCategory: 0
+        selectedCategory: 0,
     },
 
 
@@ -31,6 +31,13 @@ const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
             isCorrect: false,
             correctAnswer: correctAnswer,
             playerAnswer: playerAnswer,
+            player: {
+                ...state.player,
+                score: {
+                    ...state.player.score,
+                    selectedCategory: state.player.score.selectedCategory === 0 ? 0 : state.player.score.selectedCategory -= 1
+                }
+            }
         });
     };
 
@@ -60,6 +67,15 @@ const setResetGame = (state, action) => {
         correctAnswer: '',
         playerAnswer: '',
         startGame: false,
+        player: {
+            ...state.player,
+            score: {
+                ...state.player.score,
+                selectedCategory: 0
+            }
+           
+
+        }
     };
     return updateObject(state, oldState);
 }; //resets state
@@ -69,7 +85,7 @@ const setNewQuestionCard = (state, action) => {
         isCorrect: false,
         correctAnswer: '',
         playerAnswer: '',
-        startGame: true
+        startGame: true,
 
     });
 };

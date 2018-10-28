@@ -10,7 +10,7 @@ class TriviaMain extends Component {
     };
     componentDidMount() {
         this.props.onInitCategories();
-        // this.checkIfCategorieHasCompleted(this.props.ctg.categories);
+        this.props.onResetGame();
     };
 
     // checkIfCategorieHasCompleted = (categories) => {
@@ -56,6 +56,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onInitCategories: () => dispatch(actions.fetchCategories()), //Gets the data from api
         onResetGame: () => dispatch(actions.resetGame()),
+        
     };
 };
 

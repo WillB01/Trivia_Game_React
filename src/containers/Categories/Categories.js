@@ -9,11 +9,6 @@ class Categories extends Component {
     state = {
         pageCounter: 0
     };
-
-    componentDidMount() {
-        console.log(this.props.completed);
-    };
-
     pageignationHandler = (e) => { //TODOOOOOO
         this.props.fetchCategories(e.target.name);
     };
@@ -33,13 +28,9 @@ class Categories extends Component {
     
     render() {
         let categories = null;
-        let t = null;
         const completed = this.props.selectedCtg.selectedCategoryCompletedId;
         const ctg =  this.props.ctg.categories;
         const test = this.giveCompletedCategoryCssClass(completed, ctg);
-        
-
-        console.log(test);
 
         ctg 
         ? categories = (
@@ -65,9 +56,6 @@ class Categories extends Component {
                       onClick={this.pageignationHandler}>-</button>
               <button name="more"
                       onClick={this.pageignationHandler}>+</button>
-                
-                {t}
-
             </div>
         );
     };

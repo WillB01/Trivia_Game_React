@@ -30,7 +30,6 @@ class SelectedCategory extends Component {
         }
     }; // checks if player has completed all cards if true it means category completed
 
-
     percentageCalculator = (a, b) => (a / b) * 100; // calculate the precentage for the status bar.
     
     questionsCreator = (selectedCategory, index, callback) => {
@@ -38,7 +37,11 @@ class SelectedCategory extends Component {
             <h2 className={styles.Header}>
                     {selectedCategory[index].category.title}
             </h2>
-            <ProgressBar progressBar={this.props.progressBar} />
+            <ProgressBar progressBar={this.props.progressBar}
+                         playerAnswer={this.props.playerAnswer}
+                         correctAnswer={this.props.correctAnswer}
+                         start={this.props.triviaMainStartGame} 
+                         />
             <p className={styles.Text}>
                 {selectedCategory[index].question}
             </p>
@@ -87,7 +90,9 @@ const mapStateToProps = state => {
         triviaMainIsCorrect: state.triviaMain.isCorrect,
         triviaMainStartGame: state.triviaMain.startGame,
         cards: state.selectedCategory.amountOfCards,
-        progressBar: state.selectedCategory.progressBar
+        progressBar: state.selectedCategory.progressBar,
+        playerAnswer: state.triviaMain.playerAnswer,
+        correctAnswer: state.triviaMain.correctAnswer
     };
 };
 
@@ -99,7 +104,8 @@ const mapDispatchToProps = dispatch => {
         onNewCards: (cards) => dispatch(actions.newQuestionCards(cards)),
         onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress)),
         onSelectedCategoryCompleted: (id) => dispatch(actions.selectedCategoryCompleted(id)),
-        addTotalScore: () => dispatch(actions.addTotalScore())
+        addTotalScore: () => dispatch(actions.addTotalScore()),
+       
     };
 };
 

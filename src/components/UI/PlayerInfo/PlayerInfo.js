@@ -3,13 +3,11 @@ import {connect} from 'react-redux';
 
 class PlayerInfo extends Component {
     render() {
-    console.log(this.props.triviaMain.name)
-
         return(
             <div>
                 <h3>name: {this.props.triviaMain.name}</h3>
                 <h3>completed categories: {this.props.triviaMain.score.total} </h3>
-                {this.props.selectedCategory ? <h3>score selected category: {`${this.props.triviaMain.score.selectedCategory} / ${this.props.cards.length}`}</h3> : null}
+                {this.props.cards ? <h3>score selected category: {`${this.props.triviaMain.score.selectedCategory} / ${this.props.cards.length}`}</h3> : null}
             </div>
         );
     };
