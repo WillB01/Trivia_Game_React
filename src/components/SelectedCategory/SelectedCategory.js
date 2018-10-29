@@ -16,10 +16,6 @@ class SelectedCategory extends Component {
 
     };
 
-    componentDidMount() {
-       
-    }
-
     componentDidUpdate() {
         const percentage = this.percentageCalculator(1, this.props.selectedCtg.length); 
         if (this.props.triviaMainIsCorrect) {
@@ -27,8 +23,8 @@ class SelectedCategory extends Component {
             this.props.onNewCards();
             this.props.onProgressProgressBar(percentage);    
             this.playerCompletedCategory();  
-            console.log(this.props.selectedCtg)
         }
+        
     };
 
 
@@ -37,7 +33,6 @@ class SelectedCategory extends Component {
         if (this.props.cards.length === 1) {
             this.props.onSelectedCategoryCompleted(this.props.location.state.id);
             this.props.addTotalScore();
-            console.log(this.props.selectedCtg);
         }
     }; // checks if player has completed all cards if true it means category completed
 
@@ -79,20 +74,32 @@ class SelectedCategory extends Component {
                    START GAME
                 </button>  ;
         }
+
+        let selected = null;
+        
+        if (this.props.selectedCtg) {
+            selected = (
+                <React.Fragment>
+                { this.props.completeCtg ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null}
+               {button}
+               <div className={styles.QuestionCard}>
+                   {this.props.selectedCtg ? questions[this.props.cards[0]] : <p>loading</p>}
+                  
+                   
+               </div>
+               <Timer click={this.props.startGame} />
+               <WrongAnswer playerAnswer={this.props.playerAnswer}
+                            correctAnswer={this.props.correctAnswer}
+                            start={this.props.triviaMainStartGame} />
+                     
+                </React.Fragment>
+            )
+        }
+
         return(
-            <React.Fragment>
-                {button}
-                <div className={styles.QuestionCard}>
-                    {this.props.selectedCtg ? questions[this.props.cards[0]] : <p>loading</p>}
-                    { this.props.completeCtg ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null}
-                    
-                </div>
-                <Timer click={this.props.startGame} />
-                <WrongAnswer playerAnswer={this.props.playerAnswer}
-                             correctAnswer={this.props.correctAnswer}
-                             start={this.props.triviaMainStartGame} />
-                      
-            </React.Fragment>
+            <div>
+                {selected}
+            </div>
             
             
         );

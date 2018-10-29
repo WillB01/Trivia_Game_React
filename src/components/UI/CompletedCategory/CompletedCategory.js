@@ -4,7 +4,8 @@ import styles from './CompletedCategory.module.css';
 
 const completedCategory = (props) => {
     return(
-        <div>
+        
+        <div className={`${styles.CompletedCategory} animated slideInLeft `}>
           <FaCheck />
            <div>{props.title}</div>
         </div>
