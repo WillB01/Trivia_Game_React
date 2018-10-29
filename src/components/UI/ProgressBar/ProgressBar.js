@@ -8,15 +8,8 @@ class ProgressBar extends Component {
     };
    
     render() {
+            const background = this.props.progressBar ? '#018E5B' : 'white';
         
-        const isCorrect = this.props.playerAnswer === this.props.correctAnswer ? true : false;
-        console.log(this.props.start);
-        let background = 'white'
-        if (this.props.start) {
-            console.log(this.props.playerAnswer);
-            background = this.props.progressBar && isCorrect ? '#018E5B' : 'white' || this.props.playerAnswer !== '' || !isCorrect ? 'red': 'white';
-
-        }
         
         const progressBar = {
         background,

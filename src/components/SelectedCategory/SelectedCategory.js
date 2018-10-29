@@ -7,6 +7,7 @@ import * as actions from '../../store/actions/index';
 import Timer from '../UI/Timer/Timer';
 import ProgressBar from '../UI/ProgressBar/ProgressBar';
 import { Redirect } from 'react-router-dom'
+import WrongAnswer from '../UI/WrongAnswer/WrongAnswer';
 
 class SelectedCategory extends Component {
     state = {
@@ -44,11 +45,7 @@ class SelectedCategory extends Component {
             <h2 className={styles.Header}>
                     {selectedCategory[index].category.title}
             </h2>
-            <ProgressBar progressBar={this.props.progressBar}
-                         playerAnswer={this.props.playerAnswer}
-                         correctAnswer={this.props.correctAnswer}
-                         start={this.props.triviaMainStartGame} 
-                         />
+            <ProgressBar progressBar={this.props.progressBar} />
             <p className={styles.Text}>
                 {selectedCategory[index].question}
             </p>
@@ -85,10 +82,14 @@ class SelectedCategory extends Component {
                 <div className={styles.QuestionCard}>
                     {this.props.selectedCtg ? questions[this.props.cards[0]] : <p>loading</p>}
                     { this.props.completeCtg ? <Redirect to={'/'} /> : null}
-                     
-
+                    
                 </div>
+                <WrongAnswer playerAnswer={this.props.playerAnswer}
+                             correctAnswer={this.props.correctAnswer}
+                             start={this.props.triviaMainStartGame} />
+                      
             </React.Fragment>
+            
             
         );
     };
