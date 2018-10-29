@@ -30,10 +30,11 @@ export const setProgressProgressBar = (progress) => {
     };
 };
 
-export const selectedCategoryCompleted = (id) => {
+export const selectedCategoryCompleted = (id, score) => {
     return {
         type: actionTypes.SELECTED_CATEGORY_COMPLETED,
-        id
+        id,
+        score
     };
 };
 

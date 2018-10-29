@@ -35,6 +35,7 @@ class Categories extends Component {
         const completed = this.props.selectedCtg.selectedCategoryCompletedId;
         const ctg =  this.props.ctg.categories;
         const test = this.giveCompletedCategoryCssClass(completed, ctg);
+        console.log(completed);
 
         ctg 
         ? categories = (

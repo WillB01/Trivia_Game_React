@@ -18,33 +18,26 @@ class SelectedCategory extends Component {
 
     componentDidUpdate() {
         const percentage = this.percentageCalculator(1, this.props.selectedCtg.length); 
+        this.props.onSelectedCategoryCompleted(this.props.location.state.id, this.props.playerScoreSctg);
         if (this.props.triviaMainIsCorrect) {
             this.props.onNewQuestionCard();
-            this.props.onProgressProgressBar(percentage);    
-            this.playerCompletedCategory();
+            this.props.onProgressProgressBar(percentage); 
         }
-        // this.props.onNewQuestionCard(this.props.triviaMainIsCorrect);
-     
-        // if (this.props.triviaMainIsCorrect) {
-           
-        //     this.props.onProgressProgressBar(percentage);    
-        //     this.playerCompletedCategory();  
-        // }
     };
-    playerCompletedCategory = () => {
-        if (this.props.cards.length === 1) {
-            this.props.onSelectedCategoryCompleted(this.props.location.state.id);
-            this.props.addTotalScore();
-        }
+
+    getScore = (score, callback) => {
+        
+    };
+    playerCompletedCategory = (id, score) => {
+        
+            
+            // this.props.addTotalScore();
+        
     }; // checks if player has completed all cards if true it means category completed
 
-    testing = (user, selected) => {
+    testing = (user, selected) => {  
         this.props.onAnswerClick(user, selected);
-      
         this.props.onNewCards(this.props.triviaMainIsCorrect);
-        this.playerCompletedCategory();
-        
-       
     };
 
     percentageCalculator = (a, b) => (a / b) * 100; // calculate the precentage for the status bar.
@@ -67,6 +60,7 @@ class SelectedCategory extends Component {
     }; // returns a question from the array.
 
     render() {
+        
         let selectedCategory = this.props.selectedCtg;
         let questions = [];
         
@@ -126,7 +120,8 @@ const mapStateToProps = state => {
         cards: state.selectedCategory.amountOfCards,
         progressBar: state.selectedCategory.progressBar,
         playerAnswer: state.triviaMain.playerAnswer,
-        correctAnswer: state.triviaMain.correctAnswer
+        correctAnswer: state.triviaMain.correctAnswer,
+        playerScoreSctg: state.triviaMain.player.score.selectedCategory
     };
 };
 
@@ -137,7 +132,7 @@ const mapDispatchToProps = dispatch => {
         onNewQuestionCard: () => dispatch(actions.newQuestionCard()),
         onNewCards: (cards) => dispatch(actions.newQuestionCards(cards)),
         onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress)),
-        onSelectedCategoryCompleted: (id) => dispatch(actions.selectedCategoryCompleted(id)),
+        onSelectedCategoryCompleted: (id, score) => dispatch(actions.selectedCategoryCompleted(id, score)),
         addTotalScore: () => dispatch(actions.addTotalScore()),
        
     };

@@ -1,11 +1,13 @@
 import * as actionTypes from '../actions/actionTypes';
 import {updateObject} from '../shared/utility';
+import _ from 'lodash';
 
 const initialState = {
     selectedCategory: null,
     amountOfCards: [],
     amountOfCardsPlayed: '',
     progressBar: null,
+    scoreToCompleteSelectedCategory: 0,
     selectedCategoryCompleted: false,
     selectedCategoryCompletedId: []
 };
@@ -19,11 +21,11 @@ const setSelectedCategory = (state, action)  => {
         amountOfCards: arr,
         progressBar: null,
         selectedCategoryCompleted: false,
+        scoreToCompleteSelectedCategory: arr.length
     });
 };
 
 const fetchSelectedCategoryFail = (state, action) => {
-   
     return updateObject(state, {
         error: true
     });
@@ -31,7 +33,6 @@ const fetchSelectedCategoryFail = (state, action) => {
 
 
 const setNewQuestionCards = (state, action) => {
-    console.log(action.cards);
     const newCards = [...state.amountOfCards];
     newCards.shift();
     return updateObject(state, {
@@ -49,10 +50,17 @@ const setUpdateProgressBar = (state, action) => {
 
 const selectedCategoryCompleted = (state, action) => {
     let ids = state.selectedCategoryCompletedId;
-    ids.push(action.id)
+    if (action.score === state.scoreToCompleteSelectedCategory && state.scoreToCompleteSelectedCategory) {
+        ids.push(action.id)
+        let noDuplicates = _.uniq(ids)
+        return updateObject(state, {
+            selectedCategoryCompleted: true,
+            selectedCategoryCompletedId: noDuplicates,
+            
+        });
+    } 
     return updateObject(state, {
-        selectedCategoryCompleted: true,
-        selectedCategoryCompletedId: ids,
+        selectedCategoryCompleted: false,        
     });
 };
 
@@ -62,7 +70,8 @@ const setResetSelectedCategory = (state, action) => {
         amountOfCards: [],
         progressBar: null,
         selectedCategoryCompleted: false,
-        amountOfCardsPlayed: ''
+        amountOfCardsPlayed: '',
+        scoreToCompleteSelectedCategory: null
     });
 };
 
