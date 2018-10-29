@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Categories from '../Categories/Categories';
 import * as actions from '../../store/actions/index';
 import PlayerInfo from '../../components/UI/PlayerInfo/PlayerInfo';
+import nounProject from '../../icon/nounProject'
 
 class TriviaMain extends Component {
     state = {
@@ -12,6 +13,7 @@ class TriviaMain extends Component {
         this.props.onInitCategories();
         this.props.onResetGame();
         this.props.onResetSelectCategory();
+        
     };
 
     // checkIfCategorieHasCompleted = (categories) => {
