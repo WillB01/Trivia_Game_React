@@ -35,16 +35,17 @@
   .QuestionCard .Header {
     min-height: 100px;
     width: 100%;
-    background: #4426a8;
+    background: #4A6572;
     position: relative;
     margin: 0;
+    color: white;
     /* background-image:  */
   }
 
   .QuestionCard .HeaderSuccess {
     min-height: 100px;
     width: 100%;
-    background: #4A6572B;
+    background: #4A6572;
     position: relative;
     margin: 0;
     

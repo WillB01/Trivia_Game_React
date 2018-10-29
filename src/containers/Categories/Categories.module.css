@@ -8,14 +8,11 @@
     border-radius: 5px;
     justify-items: stretch;
     max-width: 600px;
-    
-
-
-    
 }
 
 .CategoriesItems {
     background:  #355C7D;
+    /* border-image: ('https://unsplash.imgix.net/photo-1419064642531-e575728395f2?q=75&fm=jpg&s=490dffe2e11f468947891ab40651e176'); */
     color: rgb(255, 255, 255);
     border-radius: 4px;
     padding: 2px;

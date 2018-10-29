@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Categories from '../Categories/Categories';
-import * as actions from '../../store/actions/index';
-import PlayerInfo from '../../components/UI/PlayerInfo/PlayerInfo';
-import nounProject from '../../icon/nounProject'
+import * as actions from '../../store/actions/index'
+import axios from 'axios';
 
 class TriviaMain extends Component {
     state = {
@@ -13,8 +12,21 @@ class TriviaMain extends Component {
         this.props.onInitCategories();
         this.props.onResetGame();
         this.props.onResetSelectCategory();
+        // this.img();
         
     };
+
+
+    // img = () => {
+    //     axios.get('https://picsum.photos/200/300/?random')
+    //     .then(res => {
+    //        console.log(res);
+    //     })
+    //     .catch(error => {
+    //         console.log(error);
+        
+    //     })
+    // };
 
     // checkIfCategorieHasCompleted = (categories) => {
     //     let cat = [];

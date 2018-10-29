@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import NavBar from '../../components/UI/Navbar';
+import NavBar from '../../components/UI/Navbar/Navbar';
 import PlayerInfo from '../../components/UI/PlayerInfo/PlayerInfo';
 
 class Layout extends Component {

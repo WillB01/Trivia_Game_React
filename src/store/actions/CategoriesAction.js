@@ -16,6 +16,7 @@ export const fetchCategoriesFail = () => {
     };
 };
 
+
 export const fetchCategories = (num) => {
     const url = `http://jservice.io/api/categories?count=${32}&offset=${0}`;
     return dispatch => {
