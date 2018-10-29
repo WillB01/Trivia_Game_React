@@ -4,6 +4,7 @@ import {updateObject} from '../shared/utility';
 const initialState = {
     selectedCategory: null,
     amountOfCards: [],
+    amountOfCardsPlayed: '',
     progressBar: null,
     selectedCategoryCompleted: false,
     selectedCategoryCompletedId: []
@@ -30,10 +31,12 @@ const fetchSelectedCategoryFail = (state, action) => {
 
 
 const setNewQuestionCards = (state, action) => {
+    console.log(action.cards);
     const newCards = [...state.amountOfCards];
     newCards.shift();
     return updateObject(state, {
         amountOfCards: newCards,
+        amountOfCardsPlayed: state.amountOfCardsPlayed += 1
     });
 };
 
@@ -59,6 +62,7 @@ const setResetSelectedCategory = (state, action) => {
         amountOfCards: [],
         progressBar: null,
         selectedCategoryCompleted: false,
+        amountOfCardsPlayed: ''
     });
 };
 

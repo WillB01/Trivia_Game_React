@@ -1,7 +1,7 @@
 .PlayerInfoContainer {
-    position: absolute;
+    position: sticky;
     top: 0;
-    right: 4px;
+    float: right;
     width: 100px;
     height: 100px;
     padding: 10px;
@@ -27,9 +27,10 @@
 
   .Stats {
     margin: 0 auto;
-    transition: all .4s ease-in-out;
-
-   
+    transition: all .1s ease-in-out;
+    animation-duration: 1s;
+    animation-delay: 0s;
+  
   }
   .Stats .Box {
     box-shadow: 0 1px 3px rgba(179, 179, 179, 0.12), 0 1px 2px rgba(230, 224, 224, 0.24);
@@ -48,7 +49,25 @@
     cursor: pointer;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }
-  .Stats .Box:nth-child(2) {
+  .Stats .Box {
     margin: 1px 0;
   }
+
+  @media screen and (max-width: 600px) {
+    .PlayerInfoContainer {
+      background: red;
+      margin: 0 auto;
+      width: 100%;
+      border-radius: 0;
+      position: relative;
+    }
+
+  .Stats .Box {
+    margin: 0 auto ;
+    width: 80%;
+  
+  }
+  }
+
+
 

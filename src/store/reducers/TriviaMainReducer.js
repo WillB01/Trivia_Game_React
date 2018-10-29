@@ -14,7 +14,7 @@ const initialState = {
     },
     completedCategories: {
         'title': ''
-    }
+    },
 
 
    }
@@ -38,7 +38,7 @@ const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
                 ...state.player,
                 score: {
                     ...state.player.score,
-                    selectedCategory: state.player.score.selectedCategory === 0 ? 0 : state.player.score.selectedCategory -= 1
+                    selectedCategory: state.player.score.selectedCategory === 0 ? 0 : state.player.score.selectedCategory -= 5
                 }
             }
         });
@@ -53,7 +53,7 @@ const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
             ...state.player,
             score: {
                 ...state.player.score,
-                selectedCategory: state.player.score.selectedCategory += 1
+                selectedCategory: state.player.score.selectedCategory += 10
 
             }
         }    
@@ -74,7 +74,7 @@ const setResetGame = (state, action) => {
             ...state.player,
             score: {
                 ...state.player.score,
-                selectedCategory: 0
+               
             }
            
 

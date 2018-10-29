@@ -20,21 +20,32 @@ class SelectedCategory extends Component {
         const percentage = this.percentageCalculator(1, this.props.selectedCtg.length); 
         if (this.props.triviaMainIsCorrect) {
             this.props.onNewQuestionCard();
-            this.props.onNewCards();
             this.props.onProgressProgressBar(percentage);    
-            this.playerCompletedCategory();  
+            this.playerCompletedCategory();
         }
-        
+        // this.props.onNewQuestionCard(this.props.triviaMainIsCorrect);
+     
+        // if (this.props.triviaMainIsCorrect) {
+           
+        //     this.props.onProgressProgressBar(percentage);    
+        //     this.playerCompletedCategory();  
+        // }
     };
-
-
-
     playerCompletedCategory = () => {
         if (this.props.cards.length === 1) {
             this.props.onSelectedCategoryCompleted(this.props.location.state.id);
             this.props.addTotalScore();
         }
     }; // checks if player has completed all cards if true it means category completed
+
+    testing = (user, selected) => {
+        this.props.onAnswerClick(user, selected);
+      
+        this.props.onNewCards(this.props.triviaMainIsCorrect);
+        this.playerCompletedCategory();
+        
+       
+    };
 
     percentageCalculator = (a, b) => (a / b) * 100; // calculate the precentage for the status bar.
     
@@ -49,7 +60,7 @@ class SelectedCategory extends Component {
             </p>
             <PossibleAnswers correctAnswer={selectedCategory[index].answer} 
                              allAnswers={selectedCategory.map(item => item.answer)}
-                             userAnswerClick={(userAnswer) => this.props.onAnswerClick(userAnswer, selectedCategory[index].answer)}
+                             userAnswerClick={(userAnswer) => this.testing(userAnswer, selectedCategory[index].answer)}
                              gameStart={this.props.triviaMainStartGame}/>
         </div>)) 
            

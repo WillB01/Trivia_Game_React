@@ -7,7 +7,7 @@ const completedCategory = (props) => {
         
         <div className={`${styles.CompletedCategory} animated slideInLeft `}>
           <FaCheck />
-           <div>{props.title}</div>
+           <div>Congrats! You completed {props.title}</div>
         </div>
        
     );
