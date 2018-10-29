@@ -12,6 +12,9 @@ const initialState = {
         total: 0,
         selectedCategory: 0,
     },
+    completedCategories: {
+        'title': ''
+    }
 
 
    }
@@ -96,12 +99,14 @@ const setAddTotalScore = (state, action) => {
             ...state.player,
             score: {
                 ...state.player.score,
-                total: state.player.score.total += 1
+                total: state.player.score.total += 1,
+                completedCategories: []
 
-            }
+            },
+          
         }    
     }
-};      
+};  // if player completed a whole category!
 
 const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.GET_PLAYER_ANSWER) {

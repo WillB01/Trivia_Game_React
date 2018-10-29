@@ -12,6 +12,11 @@ class Timer extends Component {
         this.stopTimer = this.stopTimer.bind(this)
         this.resetTimer = this.resetTimer.bind(this)
       }
+
+      startGame = () => {
+        this.startTimer();
+        this.props.click();
+      }
       startTimer() {
         this.setState({
           isOn: true,
@@ -32,7 +37,7 @@ class Timer extends Component {
       render() {
         let seconds = Math.ceil(this.state.time);
         let start = (this.state.time == 0) ?
-          <button onClick={this.startTimer}>start</button> :
+          <button onClick={this.startGame}>start</button> :
           null
         let stop = (this.state.time == 0 || !this.state.isOn) ?
           null :

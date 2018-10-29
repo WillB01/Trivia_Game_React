@@ -1,4 +1,7 @@
 .PlayerInfoContainer {
+    position: absolute;
+    top: 0;
+    right: 4px;
     width: 100px;
     height: 100px;
     padding: 10px;
@@ -12,7 +15,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transition: all .10s ease-in-out;
-    float: right;
+
 
   }
 
@@ -47,3 +50,4 @@
   .Stats .Box:nth-child(2) {
     margin: 1px 0;
   }
+

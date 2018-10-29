@@ -1,5 +1,6 @@
 .Categories {
     display: grid;
+    box-sizing: border-box;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     background: rgb(252, 252, 252);
     padding: 8px;
@@ -7,7 +8,7 @@
     grid-gap: 2px;
     border-radius: 5px;
     justify-items: stretch;
-    max-width: 600px;
+    
 }
 
 .CategoriesItems {
@@ -43,3 +44,10 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
+@media screen and (max-width: 600px) {
+    .Categories {
+        grid-template-columns: 1fr 1fr;
+   
+        
+    }
+}

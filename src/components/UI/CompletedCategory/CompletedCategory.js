@@ -1,8 +1,14 @@
-import React from 'react'
+import React from 'react';
+import {FaCheck} from 'react-icons/fa';
+import styles from './CompletedCategory.module.css';
 
-const completedCategory = () => {
+const completedCategory = (props) => {
     return(
-        <div>CONGRAAATS</div>
+        <div>
+          <FaCheck />
+           <div>{props.title}</div>
+        </div>
+       
     );
     
 };

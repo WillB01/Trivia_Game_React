@@ -8,6 +8,7 @@ import Timer from '../UI/Timer/Timer';
 import ProgressBar from '../UI/ProgressBar/ProgressBar';
 import { Redirect } from 'react-router-dom'
 import WrongAnswer from '../UI/WrongAnswer/WrongAnswer';
+import CompletedCategory from '../../components/UI/CompletedCategory/CompletedCategory';
 
 class SelectedCategory extends Component {
     state = {
@@ -26,6 +27,7 @@ class SelectedCategory extends Component {
             this.props.onNewCards();
             this.props.onProgressProgressBar(percentage);    
             this.playerCompletedCategory();  
+            console.log(this.props.selectedCtg)
         }
     };
 
@@ -35,6 +37,7 @@ class SelectedCategory extends Component {
         if (this.props.cards.length === 1) {
             this.props.onSelectedCategoryCompleted(this.props.location.state.id);
             this.props.addTotalScore();
+            console.log(this.props.selectedCtg);
         }
     }; // checks if player has completed all cards if true it means category completed
 
@@ -81,9 +84,10 @@ class SelectedCategory extends Component {
                 {button}
                 <div className={styles.QuestionCard}>
                     {this.props.selectedCtg ? questions[this.props.cards[0]] : <p>loading</p>}
-                    { this.props.completeCtg ? <Redirect to={'/'} /> : null}
+                    { this.props.completeCtg ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null}
                     
                 </div>
+                <Timer click={this.props.startGame} />
                 <WrongAnswer playerAnswer={this.props.playerAnswer}
                              correctAnswer={this.props.correctAnswer}
                              start={this.props.triviaMainStartGame} />

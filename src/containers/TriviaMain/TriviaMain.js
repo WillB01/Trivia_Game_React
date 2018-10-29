@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Categories from '../Categories/Categories';
 import * as actions from '../../store/actions/index'
+import styles from './TriviaMain.module.css';
 import axios from 'axios';
 
 class TriviaMain extends Component {
@@ -50,8 +51,7 @@ class TriviaMain extends Component {
         // }
         return (
             <React.Fragment>
-                <h1>Welcome</h1>
-              
+       
                 <Categories /> 
                
                
