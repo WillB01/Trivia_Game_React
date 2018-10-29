@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import styles from './PlayerInfo.module.css';
 
 class PlayerInfo extends Component {
     render() {
         return(
-            <div>
-                <h3>name: {this.props.triviaMain.name}</h3>
-                <h3>completed categories: {this.props.triviaMain.score.total} </h3>
-                {this.props.cards ? <h3>score selected category: {`${this.props.triviaMain.score.selectedCategory} / ${this.props.cards.length}`}</h3> : null}
+            <div className={styles.PlayerInfoContainer}>
+                <div className={styles.Stats}>
+                <h3 className={styles.Box}>{this.props.triviaMain.name}</h3>
+                <h3 className={styles.Box}>{this.props.triviaMain.score.total} </h3>
+                {this.props.cards ? <h3 className={styles.Box}>{`${this.props.triviaMain.score.selectedCategory} / ${this.props.cards.length}`}</h3> : null}
+                </div>
+              
             </div>
         );
     };

@@ -6,12 +6,17 @@ import styles from './SelectedCategory.module.css';
 import * as actions from '../../store/actions/index';
 import Timer from '../UI/Timer/Timer';
 import ProgressBar from '../UI/ProgressBar/ProgressBar';
+import { Redirect } from 'react-router-dom'
 
 class SelectedCategory extends Component {
     state = {
         startCount: 0,
 
     };
+
+    componentDidMount() {
+       
+    }
 
     componentDidUpdate() {
         const percentage = this.percentageCalculator(1, this.props.selectedCtg.length); 
@@ -22,6 +27,8 @@ class SelectedCategory extends Component {
             this.playerCompletedCategory();  
         }
     };
+
+
 
     playerCompletedCategory = () => {
         if (this.props.cards.length === 1) {
@@ -77,6 +84,9 @@ class SelectedCategory extends Component {
                 {button}
                 <div className={styles.QuestionCard}>
                     {this.props.selectedCtg ? questions[this.props.cards[0]] : <p>loading</p>}
+                    { this.props.completeCtg ? <Redirect to={'/'} /> : null}
+                     
+
                 </div>
             </React.Fragment>
             
@@ -87,6 +97,7 @@ class SelectedCategory extends Component {
 const mapStateToProps = state => {
     return {
         selectedCtg: state.selectedCategory.selectedCategory,
+        completeCtg: state.selectedCategory.selectedCategoryCompleted,
         triviaMainIsCorrect: state.triviaMain.isCorrect,
         triviaMainStartGame: state.triviaMain.startGame,
         cards: state.selectedCategory.amountOfCards,

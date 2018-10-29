@@ -1,0 +1,49 @@
+.PlayerInfoContainer {
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5000px;
+    box-shadow: 0 1px 3px rgba(219, 219, 219, 0.12), 0 1px 2px rgba(202, 202, 202, 0.24);
+    background: #CA7C4E;
+    background: linear-gradient(to top right, rgb(47, 77, 121) 0%, rgb(85, 106, 139) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#EEBE6C', endColorstr='#CA7C4E',GradientType=1 );
+    color: #ffffff;
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: all .10s ease-in-out;
+    float: right;
+
+  }
+
+ .PlayerInfoContainer:hover .Stats  {
+        display: block;
+        transition: all .10s ease-in-out;
+  }
+
+  .Stats {
+    margin: 0 auto;
+    transition: all .4s ease-in-out;
+
+   
+  }
+  .Stats .Box {
+    box-shadow: 0 1px 3px rgba(179, 179, 179, 0.12), 0 1px 2px rgba(230, 224, 224, 0.24);
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin: 0 auto;
+    height: 60px;
+    background-color: #ffd54f;
+    text-align: center;
+    padding-top: 15px;
+    transition: all .4s ease-in-out;
+    
+  }
+  .Stats .Box:hover {
+    background: rgb(136, 136, 136);
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  }
+  .Stats .Box:nth-child(2) {
+    margin: 1px 0;
+  }

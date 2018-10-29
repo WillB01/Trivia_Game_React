@@ -37,7 +37,8 @@ class TriviaMain extends Component {
             <React.Fragment>
                 <h1>Welcome</h1>
               
-                <Categories />   
+                <Categories /> 
+               
                
             </React.Fragment>         
         );
