@@ -11,6 +11,7 @@ class TriviaMain extends Component {
     componentDidMount() {
         this.props.onInitCategories();
         this.props.onResetGame();
+        this.props.onResetSelectCategory();
     };
 
     // checkIfCategorieHasCompleted = (categories) => {
@@ -57,6 +58,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onInitCategories: () => dispatch(actions.fetchCategories()), //Gets the data from api
         onResetGame: () => dispatch(actions.resetGame()),
+        onResetSelectCategory: () => (dispatch(actions.resetSelectCategory()))
         
     };
 };

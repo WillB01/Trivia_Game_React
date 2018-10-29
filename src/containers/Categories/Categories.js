@@ -9,6 +9,10 @@ class Categories extends Component {
     state = {
         pageCounter: 0
     };
+
+    componentDidMount() {
+        this.props.onResetGame();
+    }
     pageignationHandler = (e) => { //TODOOOOOO
         this.props.fetchCategories(e.target.name);
     };
@@ -72,7 +76,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onCategoryHandler: (id) => dispatch(categoriesAction.fetchSelectedCategory(id)),
-        fetchCategories: (num) => dispatch(categoriesAction.fetchCategories(num))
+        fetchCategories: (num) => dispatch(categoriesAction.fetchCategories(num)),
+        onResetGame: () => dispatch(categoriesAction.resetGame())
     };
 };
 

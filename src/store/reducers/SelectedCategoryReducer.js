@@ -53,6 +53,15 @@ const selectedCategoryCompleted = (state, action) => {
     });
 };
 
+const setResetSelectedCategory = (state, action) => {
+    return updateObject(state, {
+        selectedCategory: null,
+        amountOfCards: [],
+        progressBar: null,
+        selectedCategoryCompleted: false,
+    });
+};
+
 const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.FETCH_SELECTED_CATEGORY) {
         return setSelectedCategory(state, action);
@@ -68,6 +77,9 @@ const reducer = (state = initialState, action) => {
     }
     if (action.type === actionTypes.SELECTED_CATEGORY_COMPLETED) {
         return selectedCategoryCompleted(state, action);
+    }
+    if (action.type === actionTypes.RESET_SELECTED_CATEGORY) {
+        return setResetSelectedCategory(state, action);
     }
     return state;
 };

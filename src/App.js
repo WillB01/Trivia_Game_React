@@ -4,6 +4,7 @@ import TriviaMain from './containers/TriviaMain/TriviaMain';
 import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
 import Categories from './containers/Categories/Categories';
 import SelectedCategory from './components/SelectedCategory/SelectedCategory';
+import CompletedCategory from './components/UI/CompletedCategory/CompletedCategory';
 
 import './App.css';
 import Timer from './components/UI/Timer/Timer';
@@ -15,6 +16,7 @@ class App extends Component {
         <Layout>
           <Switch>
             <Route path="/selected-category" search="id" component={SelectedCategory} />
+            <Route path="/completed" component={CompletedCategory} />
             <Route path="/" exact component={TriviaMain} />
           </Switch>
         </Layout>

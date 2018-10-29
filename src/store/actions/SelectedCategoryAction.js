@@ -37,6 +37,12 @@ export const selectedCategoryCompleted = (id) => {
     };
 };
 
+export const resetSelectCategory = () => {
+    return {
+        type: actionTypes.RESET_SELECTED_CATEGORY
+    };
+};
+
 
 
 
