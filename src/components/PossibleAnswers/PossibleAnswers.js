@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
+import Button from '../UI/Button/Button';
 
 // const shuffleAnswers = (correctAnswer) => _.shuffle(['korv', 'kewl', 'nej', 'Stockholm', 'Writing', 'Nice', correctAnswer]);
 
@@ -10,8 +11,11 @@ const possibleAnswers = (props) => {
         return (
             <div>
                 {otherShuffledAnswers.map((item, index) => 
-                    <button disabled={!props.gameStart}
-                            onClick={() => props.userAnswerClick(item)} key={index}>{item}</button>)}
+                  <Button btnType={'Card'}
+                          disabled={!props.gameStart} 
+                          click={() => props.userAnswerClick(item)}
+                          key={index}>{item}</Button>)}
+                
             </div>
         );
     };

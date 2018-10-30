@@ -6,10 +6,10 @@ import styles from './SelectedCategory.module.css';
 import * as actions from '../../store/actions/index';
 import Timer from '../UI/Timer/Timer';
 import ProgressBar from '../UI/ProgressBar/ProgressBar';
-import { Redirect } from 'react-router-dom'
 import WrongAnswer from '../UI/WrongAnswer/WrongAnswer';
 import CompletedCategory from '../UI/CompletedCategory/CompletedCategory';
 import IncompleteCategory from '../UI/IncompleteCategory/IncompleteCategory';
+import Button from '../UI/Button/Button';
 
 class SelectedCategory extends Component {
     state = {
@@ -67,9 +67,7 @@ class SelectedCategory extends Component {
 
         let button = null;
         if (!this.props.triviaMainStartGame) {
-            button = <button onClick={this.props.startGame}>
-                   START GAME
-                </button>  ;
+            button = <Button btnType={'Regular'} click={this.props.startGame}>Start Game</Button> 
         }
 
         let selected = null;
@@ -77,12 +75,13 @@ class SelectedCategory extends Component {
         if (this.props.selectedCtg) {
             selected = (
                 <React.Fragment>
-                { this.props.completeCtg ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null}}
+                { this.props.completeCtg ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null}
                
                  {!this.props.completeCtg && this.props.cards.length === 0 ? <IncompleteCategory title={this.props.selectedCtg[0].category.title} /> : null}
                 
                 {/* { this.props.completeCtg ? <Redirect to="/completed"/> : null}
                 {!this.props.completeCtg && this.props.cards.length === 0 ? <Redirect to="/gameover" /> : null} */}
+
                {button}
                <div className={styles.QuestionCard}>
                    {this.props.selectedCtg ? questions[this.props.cards[0]] : <p>loading</p>}
@@ -101,9 +100,7 @@ class SelectedCategory extends Component {
         return(
             <div>
                 {selected}
-                
-               
-            </div>
+         </div>
             
             
         );
