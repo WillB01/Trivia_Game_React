@@ -10,6 +10,7 @@ import WrongAnswer from '../UI/WrongAnswer/WrongAnswer';
 import CompletedCategory from '../UI/CompletedCategory/CompletedCategory';
 import IncompleteCategory from '../UI/IncompleteCategory/IncompleteCategory';
 import Button from '../UI/Button/Button';
+import {Redirect, withRouter} from 'react-router-dom';
 
 class SelectedCategory extends Component {
     state = {
@@ -17,9 +18,23 @@ class SelectedCategory extends Component {
 
     };
 
+    //  musDo = () => {
+    //     console.log(this.props.completeCtg )
+    //     if(this.props.completeCtg && this.props.cards.length === 0 ) {
+    //         this.props.history.push('/completed');
+
+    //     }
+    //     if(!this.props.completeCtg && this.props.cards.length === 0 ) {
+    //         this.props.history.push('/gameover');
+
+    //     }
+    // }
+
+
     componentDidUpdate(prevProps) {
         const percentage = this.percentageCalculator(1, this.props.selectedCtg.length); 
         this.props.onSelectedCategoryCompleted(this.props.location.state.id, this.props.playerScoreSctg);
+       
         if (this.props.triviaMainIsCorrect) {
             this.props.onNewQuestionCard();
             this.props.onProgressProgressBar(percentage);        
@@ -29,6 +44,7 @@ class SelectedCategory extends Component {
     testing = (user, selected) => {  
         this.props.onAnswerClick(user, selected);
         this.props.onNewCards(this.props.triviaMainIsCorrect);
+        
     };
 
     percentageCalculator = (a, b) => (a / b) * 100; // calculate the precentage for the status bar.
@@ -67,20 +83,20 @@ class SelectedCategory extends Component {
 
         let button = null;
         if (!this.props.triviaMainStartGame) {
-            button = <Button btnType={'Regular'} click={this.props.startGame}>Start Game</Button> 
+            button = <Button btnType={'Regular'} 
+            click={this.props.startGame}>Start Game</Button> 
         }
 
         let selected = null;
         
         if (this.props.selectedCtg) {
+            
             selected = (
                 <React.Fragment>
-                { this.props.completeCtg ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null}
-               
+                 { this.props.completeCtg ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null}
                  {!this.props.completeCtg && this.props.cards.length === 0 ? <IncompleteCategory title={this.props.selectedCtg[0].category.title} /> : null}
                 
-                {/* { this.props.completeCtg ? <Redirect to="/completed"/> : null}
-                {!this.props.completeCtg && this.props.cards.length === 0 ? <Redirect to="/gameover" /> : null} */}
+                
 
                {button}
                <div className={styles.QuestionCard}>
@@ -99,7 +115,11 @@ class SelectedCategory extends Component {
 
         return(
             <div>
+                {/* {!this.props.completeCtg && this.props.cards.length === 0 ? <Redirect to="/gameover" /> : null}
+                {this.props.completeCtg && this.props.cards.length === 0 ? <Redirect to="/completed"/> : null} */}
+                
                 {selected}
+                
          </div>
             
             
@@ -137,4 +157,4 @@ const mapDispatchToProps = dispatch => {
 
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(SelectedCategory);
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(SelectedCategory));
