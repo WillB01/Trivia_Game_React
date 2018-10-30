@@ -11,27 +11,15 @@ import CompletedCategory from '../UI/CompletedCategory/CompletedCategory';
 import IncompleteCategory from '../UI/IncompleteCategory/IncompleteCategory';
 import Button from '../UI/Button/Button';
 import {Redirect, withRouter} from 'react-router-dom';
+import Cards from '../UI/Cards/Cards';
 
 class SelectedCategory extends Component {
     state = {
         startCount: 0,
 
     };
-
-    //  musDo = () => {
-    //     console.log(this.props.completeCtg )
-    //     if(this.props.completeCtg && this.props.cards.length === 0 ) {
-    //         this.props.history.push('/completed');
-
-    //     }
-    //     if(!this.props.completeCtg && this.props.cards.length === 0 ) {
-    //         this.props.history.push('/gameover');
-
-    //     }
-    // }
-
-
-    componentDidUpdate(prevProps) {
+    
+    componentDidUpdate() {
         const percentage = this.percentageCalculator(1, this.props.selectedCtg.length); 
         this.props.onSelectedCategoryCompleted(this.props.location.state.id, this.props.playerScoreSctg);
        
@@ -41,42 +29,50 @@ class SelectedCategory extends Component {
         }
     };
 
-    testing = (user, selected) => {  
+    playerAnswerClickHandler = (user, selected) => {  
         this.props.onAnswerClick(user, selected);
         this.props.onNewCards(this.props.triviaMainIsCorrect);
         
     };
 
-    percentageCalculator = (a, b) => (a / b) * 100; // calculate the precentage for the status bar.
+    percentageCalculator = (a, b) => (a / b) * 100; // calculate the precentage for the progressbar.
     
     questionsCreator = (selectedCategory, index, callback) => {
-        callback((  <div key={index} className={styles.QuestionCard}>
-            <h2 className={styles.Header}>
-                    {selectedCategory[index].category.title}
-            </h2>
-            <ProgressBar progressBar={this.props.progressBar} />
-            <p className={styles.Text}>
-                {selectedCategory[index].question}
-            </p>
-            <PossibleAnswers correctAnswer={selectedCategory[index].answer} 
-                             allAnswers={selectedCategory.map(item => item.answer)}
-                             userAnswerClick={(userAnswer) => this.testing(userAnswer, selectedCategory[index].answer)}
-                             gameStart={this.props.triviaMainStartGame}/>
-        </div>)) 
+        callback((  
+        < Cards selectedCategory={selectedCategory}
+                index={index}  
+                progressBar={this.props.progressBar}
+                triviaMainStartGame={this.props.triviaMainStartGame}
+                playerAnswerClickHandler={(userAnswer, answer) => this.playerAnswerClickHandler(userAnswer, answer)}
+                />
+        // <div key={index} className={styles.QuestionCard}>
+        //     <h2 className={styles.Header}>
+        //             {selectedCategory[index].category.title}
+        //     </h2>
+        //     <ProgressBar progressBar={this.props.progressBar} />
+        //     <p className={styles.Text}>
+        //         {selectedCategory[index].question}
+        //     </p>
+        //     <PossibleAnswers correctAnswer={selectedCategory[index].answer} 
+        //                      allAnswers={selectedCategory.map(item => item.answer)}
+        //                      userAnswerClick={(userAnswer) => this.playerAnswerClickHandler(userAnswer, selectedCategory[index].answer)}
+        //                      gameStart={this.props.triviaMainStartGame}/>
+        // </div>
+        
+        )) 
            
     }; // returns a question from the array.
 
     render() {
         
         let selectedCategory = this.props.selectedCtg;
-        let questions = [];
-        console.log(this.props.selectedCtg);
-        
-       
+        let questions = [];        
+  
         if (selectedCategory) {
+            
             selectedCategory.map((item, index) => {
                 this.questionsCreator(selectedCategory, index, (res) => {
-                    questions.push(res);
+                    questions.push(res);;
                 });
             });
         }
@@ -90,39 +86,26 @@ class SelectedCategory extends Component {
         let selected = null;
         
         if (this.props.selectedCtg) {
-            
             selected = (
                 <React.Fragment>
                  { this.props.completeCtg ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null}
                  {!this.props.completeCtg && this.props.cards.length === 0 ? <IncompleteCategory title={this.props.selectedCtg[0].category.title} /> : null}
-                
-                
-
-               {button}
-               <div className={styles.QuestionCard}>
-                   {this.props.selectedCtg ? questions[this.props.cards[0]] : <p>loading</p>}
-                  
-                   
-               </div>
-               <Timer click={this.props.startGame} />
-               <WrongAnswer playerAnswer={this.props.playerAnswer}
-                            correctAnswer={this.props.correctAnswer}
-                            start={this.props.triviaMainStartGame} />
-                     
+                 {button}
+                 <div className={styles.QuestionCard}>
+                    {this.props.selectedCtg ? questions[this.props.cards[0]] : <p>loading</p>}
+                 </div>
+                 <Timer click={this.props.startGame} />
+                 <WrongAnswer playerAnswer={this.props.playerAnswer}
+                              correctAnswer={this.props.correctAnswer}
+                              start={this.props.triviaMainStartGame} />
                 </React.Fragment>
             )
         }
 
         return(
             <div>
-                {/* {!this.props.completeCtg && this.props.cards.length === 0 ? <Redirect to="/gameover" /> : null}
-                {this.props.completeCtg && this.props.cards.length === 0 ? <Redirect to="/completed"/> : null} */}
-                
                 {selected}
-                
-         </div>
-            
-            
+            </div>
         );
     };
 };
@@ -150,8 +133,6 @@ const mapDispatchToProps = dispatch => {
         onNewCards: (cards) => dispatch(actions.newQuestionCards(cards)),
         onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress)),
         onSelectedCategoryCompleted: (id, score) => dispatch(actions.selectedCategoryCompleted(id, score)),
-        addTotalScore: () => dispatch(actions.addTotalScore()),
-       
     };
 };
 
