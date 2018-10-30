@@ -35,8 +35,6 @@ class Categories extends Component {
         const completed = this.props.selectedCtg.selectedCategoryCompletedId;
         const ctg =  this.props.ctg.categories;
         const test = this.giveCompletedCategoryCssClass(completed, ctg);
-        console.log(completed);
-
         ctg 
         ? categories = (
             ctg.map((item, index) => (
@@ -78,7 +76,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onCategoryHandler: (id) => dispatch(categoriesAction.fetchSelectedCategory(id)),
         fetchCategories: (num) => dispatch(categoriesAction.fetchCategories(num)),
-        onResetGame: () => dispatch(categoriesAction.resetGame())
+        onResetGame: () => dispatch(categoriesAction.resetGame()),
     };
 };
 

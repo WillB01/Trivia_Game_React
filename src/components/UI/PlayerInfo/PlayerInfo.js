@@ -8,7 +8,11 @@ class PlayerInfo extends Component {
             <div className={styles.PlayerInfoContainer}>
                 <div className={`${styles.Stats} bounce `}>
                 <h3 className={styles.Box}>{this.props.triviaMain.name}</h3>
-                <h3 className={styles.Box}>{this.props.triviaMain.score.total} </h3>
+                <div className={styles.Box}>
+                    Completed: {this.props.triviaMain.score.total} <br></br> 
+                    Points: {this.props.triviaMain.score.completedQuestionsBonus}
+                </div>
+                {this.props.hasRank ? <h3 className={styles.Box}>{this.props.triviaMain.rank}</h3> : null}
                 {this.props.cards ? <h3 className={styles.Box}>{this.props.triviaMain.score.selectedCategory} </h3> : null}
                 {this.props.cards ? <h3 className={styles.Box}>{`${this.props.cardsLeft.length} / ${this.props.cards.length}`}</h3> : null}
                 </div>
@@ -24,7 +28,9 @@ const mapStateToProps = (state) => {
         triviaMain: state.triviaMain.player,
         selectedCategory: state.selectedCategory.selectedCategory,
         cards: state.selectedCategory.selectedCategory,
-        cardsLeft: state.selectedCategory.amountOfCardsPlayed
+        cardsLeft: state.selectedCategory.amountOfCardsPlayed,
+        hasRank: state.triviaMain.player.hasRank
+
     };
 };
 

@@ -49,15 +49,19 @@ const setUpdateProgressBar = (state, action) => {
 };
 
 const selectedCategoryCompleted = (state, action) => {
+    const score =  (state.scoreToCompleteSelectedCategory / 2) + 1;
     let ids = state.selectedCategoryCompletedId;
-    if (action.score === state.scoreToCompleteSelectedCategory && state.scoreToCompleteSelectedCategory) {
+    if (action.score >= score
+    && state.scoreToCompleteSelectedCategory 
+    && state.amountOfCards.length === 0) {
         ids.push(action.id)
+        console.log(state.scoreToCompleteSelectedCategory)
         let noDuplicates = _.uniq(ids)
         return updateObject(state, {
             selectedCategoryCompleted: true,
             selectedCategoryCompletedId: noDuplicates,
             
-        });
+        }); // checks if the player has completed the category or not.
     } 
     return updateObject(state, {
         selectedCategoryCompleted: false,        
@@ -73,7 +77,7 @@ const setResetSelectedCategory = (state, action) => {
         amountOfCardsPlayed: '',
         scoreToCompleteSelectedCategory: null
     });
-};
+}; // Resets everything in selected
 
 const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.FETCH_SELECTED_CATEGORY) {

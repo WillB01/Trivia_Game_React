@@ -8,7 +8,8 @@ import Timer from '../UI/Timer/Timer';
 import ProgressBar from '../UI/ProgressBar/ProgressBar';
 import { Redirect } from 'react-router-dom'
 import WrongAnswer from '../UI/WrongAnswer/WrongAnswer';
-import CompletedCategory from '../../components/UI/CompletedCategory/CompletedCategory';
+import CompletedCategory from '../UI/CompletedCategory/CompletedCategory';
+import IncompleteCategory from '../UI/IncompleteCategory/IncompleteCategory';
 
 class SelectedCategory extends Component {
     state = {
@@ -16,24 +17,14 @@ class SelectedCategory extends Component {
 
     };
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         const percentage = this.percentageCalculator(1, this.props.selectedCtg.length); 
         this.props.onSelectedCategoryCompleted(this.props.location.state.id, this.props.playerScoreSctg);
         if (this.props.triviaMainIsCorrect) {
             this.props.onNewQuestionCard();
-            this.props.onProgressProgressBar(percentage); 
+            this.props.onProgressProgressBar(percentage);        
         }
     };
-
-    getScore = (score, callback) => {
-        
-    };
-    playerCompletedCategory = (id, score) => {
-        
-            
-            // this.props.addTotalScore();
-        
-    }; // checks if player has completed all cards if true it means category completed
 
     testing = (user, selected) => {  
         this.props.onAnswerClick(user, selected);
@@ -63,6 +54,7 @@ class SelectedCategory extends Component {
         
         let selectedCategory = this.props.selectedCtg;
         let questions = [];
+        console.log(this.props.selectedCtg);
         
        
         if (selectedCategory) {
@@ -85,7 +77,12 @@ class SelectedCategory extends Component {
         if (this.props.selectedCtg) {
             selected = (
                 <React.Fragment>
-                { this.props.completeCtg ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null}
+                { this.props.completeCtg ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null}}
+               
+                 {!this.props.completeCtg && this.props.cards.length === 0 ? <IncompleteCategory title={this.props.selectedCtg[0].category.title} /> : null}
+                
+                {/* { this.props.completeCtg ? <Redirect to="/completed"/> : null}
+                {!this.props.completeCtg && this.props.cards.length === 0 ? <Redirect to="/gameover" /> : null} */}
                {button}
                <div className={styles.QuestionCard}>
                    {this.props.selectedCtg ? questions[this.props.cards[0]] : <p>loading</p>}
@@ -104,6 +101,8 @@ class SelectedCategory extends Component {
         return(
             <div>
                 {selected}
+                
+               
             </div>
             
             
@@ -121,7 +120,8 @@ const mapStateToProps = state => {
         progressBar: state.selectedCategory.progressBar,
         playerAnswer: state.triviaMain.playerAnswer,
         correctAnswer: state.triviaMain.correctAnswer,
-        playerScoreSctg: state.triviaMain.player.score.selectedCategory
+        playerScoreSctg: state.triviaMain.player.score.selectedCategory,
+        totalScore: state.triviaMain.player.score.total
     };
 };
 

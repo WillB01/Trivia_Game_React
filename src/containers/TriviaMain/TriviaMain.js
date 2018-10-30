@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Categories from '../Categories/Categories';
 import * as actions from '../../store/actions/index'
-import styles from './TriviaMain.module.css';
-import axios from 'axios';
 
 class TriviaMain extends Component {
     state = {
@@ -13,6 +11,10 @@ class TriviaMain extends Component {
         this.props.onInitCategories();
         this.props.onResetGame();
         this.props.onResetSelectCategory();
+        if (this.props.selectedCtg.selectedCategoryCompleted) {
+            this.props.addTotalScore();
+        }
+       
         // this.img();
         
     };
@@ -72,7 +74,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onInitCategories: () => dispatch(actions.fetchCategories()), //Gets the data from api
         onResetGame: () => dispatch(actions.resetGame()),
-        onResetSelectCategory: () => (dispatch(actions.resetSelectCategory()))
+        onResetSelectCategory: () => (dispatch(actions.resetSelectCategory())),
+        addTotalScore: () => dispatch(actions.addTotalScore()),
         
     };
 };
