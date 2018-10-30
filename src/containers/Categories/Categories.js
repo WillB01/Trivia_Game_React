@@ -8,6 +8,9 @@ import Button from '../../components/UI/Button/Button';
 import _ from 'lodash';
 import * as Scroll from 'react-scroll';
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import { FaSuitcaseRolling } from 'react-icons/fa';
+import {FaPlus, FaMinus} from 'react-icons/fa';
+
 
 class Categories extends Component {
    
@@ -43,7 +46,7 @@ class Categories extends Component {
 
             scroller.scrollTo('scroll-container', {
                 duration: 800,
-                delay: 0,
+                delay: 200,
                 smooth: 'easeInOutQuart'
             });
 
@@ -66,11 +69,11 @@ class Categories extends Component {
     
     pageignationHandler = (btnClick) => { 
         this.props.fetchCategories(btnClick, this.props.ctg.categories);
-        scroll.scrollToBottom({ 
-            delay: 200,  
-            smooth: 'easeInOutQuart',
-            
-        });
+        if (btnClick === 'more' ) {
+            scroll.scrollToBottom({ 
+                delay: 200,  
+                smooth: 'easeInOutQuart'});
+        }
     };
 
     giveCompletedCategoryCssClass = (completed, ctg) => {
@@ -110,7 +113,6 @@ class Categories extends Component {
                 }} className={test[index].length !== 0 ? styles.CategoriesCompleted : styles.CategoriesItems } 
                    key={item.id}
                    onClick={() => this.props.onCategoryHandler(item.id)}>{item.title}
-                   {/* <div>{this.props.selectedCtg.selectedCategoryCompletedId[index]} {index}</div> */}
                 </NavLink>
                 
             ))
@@ -119,9 +121,9 @@ class Categories extends Component {
         return(
             <React.Fragment>
                     <Button click={() => this.pageignationHandler('less')}
-                            btnType={'Pagination'}>Less</Button>
+                            btnType={'Pagination'}><FaMinus /></Button>
                     <Button click={() => this.pageignationHandler('more')}
-                            btnType={'Pagination'}>MORE</Button>
+                            btnType={'Pagination'}><FaPlus /></Button>
                 <div className={styles.Categories}>
                     {categories}
                 </div>

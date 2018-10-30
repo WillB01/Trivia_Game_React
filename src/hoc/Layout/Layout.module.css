@@ -13,6 +13,12 @@
     display: none;
 }
 
+.Main {
+    margin: 0 auto;
+    width: 80%;
+    padding: 10px;
+}
+
 @media screen and (max-width: 600px) {
     .Header {
        display: none;

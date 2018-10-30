@@ -8,10 +8,11 @@ class Layout extends Component {
         return (
             <div className={styles.Layout}>
                 <NavBar className={styles.Navbar} />
+              
+                <main className={styles.Main}>
                 <div className={styles.Header} >HEADER</div>
                 <PlayerInfo className={styles.PlayerInfo} />
                 
-                <main className={styles.Main}>
                     {this.props.children}
                 </main>
             </div>
