@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import PossibleAnswers from '../PossibleAnswers/PossibleAnswers';
 import _ from 'lodash';
 import styles from './SelectedCategory.module.css';
 import * as actions from '../../store/actions/index';
 import Timer from '../UI/Timer/Timer';
-import ProgressBar from '../UI/ProgressBar/ProgressBar';
 import WrongAnswer from '../UI/WrongAnswer/WrongAnswer';
 import CompletedCategory from '../UI/CompletedCategory/CompletedCategory';
 import IncompleteCategory from '../UI/IncompleteCategory/IncompleteCategory';
 import Button from '../UI/Button/Button';
-import {Redirect, withRouter} from 'react-router-dom';
 import Cards from '../UI/Cards/Cards';
+import Spinner from '../UI/Spinner/Spinner';
 
 class SelectedCategory extends Component {
     state = {
@@ -54,7 +52,7 @@ class SelectedCategory extends Component {
         const selectedCategory = this.props.selectedCtg;
         const isCompleted = this.props.completeCtg; 
         const startGame = this.props.startGame; 
-        let selected = <div>loading</div>;
+        let selected = < Spinner /> ;
         let questions = [];    
         let button = null;    
   
@@ -64,7 +62,7 @@ class SelectedCategory extends Component {
                     questions.push(res);;
                 });
             });
-
+            console.log(selectedCategory);
             selected = (
                 <React.Fragment>
                  { isCompleted ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null}
@@ -88,6 +86,7 @@ class SelectedCategory extends Component {
 
         return(
             <div>
+                {button}
                 {selected}
             </div>
         );
@@ -122,4 +121,4 @@ const mapDispatchToProps = dispatch => {
 
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(withRouter(SelectedCategory));
+export default connect(mapStateToProps,mapDispatchToProps)(SelectedCategory);

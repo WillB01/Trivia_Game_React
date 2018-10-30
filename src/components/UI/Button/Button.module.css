@@ -9,3 +9,13 @@
 .Button:hover {
     background: rgb(90, 194, 125);
 }
+
+.Button:focus {outline:0;}
+
+.Pagination {
+    position: sticky;
+    top: 100px;
+    float: left;
+    
+
+}

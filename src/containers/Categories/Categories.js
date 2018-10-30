@@ -3,18 +3,74 @@ import {connect} from 'react-redux';
 import * as categoriesAction from '../../store/actions/index';
 import styles from './Categories.module.css';
 import {NavLink} from 'react-router-dom';
-import SelectedCategory from '../../components/SelectedCategory/SelectedCategory';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import Button from '../../components/UI/Button/Button';
+import _ from 'lodash';
+import * as Scroll from 'react-scroll';
+import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 class Categories extends Component {
-    state = {
-        pageCounter: 0
-    };
-
+   
     componentDidMount() {
         this.props.onResetGame();
+        Events.scrollEvent.register('begin', function () {
+            console.log("begin", arguments);
+        });
+
+        Events.scrollEvent.register('end', function () {
+            console.log("end", arguments);
+        });
+
+    };
+    scrollToTop() {
+        scroll.scrollToTop();
     }
-    pageignationHandler = (e) => { //TODOOOOOO
-        this.props.fetchCategories(e.target.name);
+    scrollTo() {
+        scroller.scrollTo('scroll-to-element', {
+            duration: 800,
+            delay: 0,
+            smooth: 'easeInOutQuart'
+        })
+    }
+    scrollToWithContainer() {
+
+        let goToContainer = new Promise((resolve, reject) => {
+
+            Events.scrollEvent.register('end', () => {
+                resolve();
+                Events.scrollEvent.remove('end');
+            });
+
+            scroller.scrollTo('scroll-container', {
+                duration: 800,
+                delay: 0,
+                smooth: 'easeInOutQuart'
+            });
+
+        });
+
+        goToContainer.then(() =>
+            scroller.scrollTo('scroll-container-second-element', {
+                duration: 800,
+                delay: 0,
+                smooth: 'easeInOutQuart',
+                containerId: 'scroll-container'
+            }));
+    }
+
+    componentWillUnmount() {
+        Events.scrollEvent.remove('begin');
+        Events.scrollEvent.remove('end');
+    };
+
+    
+    pageignationHandler = (btnClick) => { 
+        this.props.fetchCategories(btnClick, this.props.ctg.categories);
+        scroll.scrollToBottom({ 
+            delay: 200,  
+            smooth: 'easeInOutQuart',
+            
+        });
     };
 
     giveCompletedCategoryCssClass = (completed, ctg) => {
@@ -29,9 +85,17 @@ class Categories extends Component {
         }
         
     };
+
+    List = ({ list }) =>
+  <div className="list">
+    {list.map(item => <div className="list-row" key={item.objectID}>
+      <a href={item.url}>{item.title}</a>
+    </div>)}
+  </div>
     
     render() {
-        let categories = null;
+        
+        let categories = < Spinner /> ;
         const completed = this.props.selectedCtg.selectedCategoryCompletedId;
         const ctg =  this.props.ctg.categories;
         const test = this.giveCompletedCategoryCssClass(completed, ctg);
@@ -51,15 +115,18 @@ class Categories extends Component {
                 
             ))
         ) 
-        : categories = <div>loading</div> ;
+        : categories = < Spinner /> ;
         return(
-            <div className={styles.Categories}>
-              {this.props.ctg.categories ? categories : null}
-              <button name="less" 
-                      onClick={this.pageignationHandler}>-</button>
-              <button name="more"
-                      onClick={this.pageignationHandler}>+</button>
-            </div>
+            <React.Fragment>
+                    <Button click={() => this.pageignationHandler('less')}
+                            btnType={'Pagination'}>Less</Button>
+                    <Button click={() => this.pageignationHandler('more')}
+                            btnType={'Pagination'}>MORE</Button>
+                <div className={styles.Categories}>
+                    {categories}
+                </div>
+            </React.Fragment>
+          
         );
     };
 };
@@ -75,7 +142,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onCategoryHandler: (id) => dispatch(categoriesAction.fetchSelectedCategory(id)),
-        fetchCategories: (num) => dispatch(categoriesAction.fetchCategories(num)),
+        fetchCategories: (btnClick) => dispatch(categoriesAction.fetchCategories(btnClick)),
         onResetGame: () => dispatch(categoriesAction.resetGame()),
     };
 };
