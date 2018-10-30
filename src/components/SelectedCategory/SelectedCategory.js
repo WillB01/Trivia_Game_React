@@ -45,61 +45,45 @@ class SelectedCategory extends Component {
                 triviaMainStartGame={this.props.triviaMainStartGame}
                 playerAnswerClickHandler={(userAnswer, answer) => this.playerAnswerClickHandler(userAnswer, answer)}
                 />
-        // <div key={index} className={styles.QuestionCard}>
-        //     <h2 className={styles.Header}>
-        //             {selectedCategory[index].category.title}
-        //     </h2>
-        //     <ProgressBar progressBar={this.props.progressBar} />
-        //     <p className={styles.Text}>
-        //         {selectedCategory[index].question}
-        //     </p>
-        //     <PossibleAnswers correctAnswer={selectedCategory[index].answer} 
-        //                      allAnswers={selectedCategory.map(item => item.answer)}
-        //                      userAnswerClick={(userAnswer) => this.playerAnswerClickHandler(userAnswer, selectedCategory[index].answer)}
-        //                      gameStart={this.props.triviaMainStartGame}/>
-        // </div>
-        
         )) 
            
     }; // returns a question from the array.
 
     render() {
         
-        let selectedCategory = this.props.selectedCtg;
-        let questions = [];        
+        const selectedCategory = this.props.selectedCtg;
+        const isCompleted = this.props.completeCtg; 
+        const startGame = this.props.startGame; 
+        let selected = <div>loading</div>;
+        let questions = [];    
+        let button = null;    
   
         if (selectedCategory) {
-            
             selectedCategory.map((item, index) => {
                 this.questionsCreator(selectedCategory, index, (res) => {
                     questions.push(res);;
                 });
             });
-        }
 
-        let button = null;
-        if (!this.props.triviaMainStartGame) {
-            button = <Button btnType={'Regular'} 
-            click={this.props.startGame}>Start Game</Button> 
-        }
-
-        let selected = null;
-        
-        if (this.props.selectedCtg) {
             selected = (
                 <React.Fragment>
-                 { this.props.completeCtg ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null}
-                 {!this.props.completeCtg && this.props.cards.length === 0 ? <IncompleteCategory title={this.props.selectedCtg[0].category.title} /> : null}
+                 { isCompleted ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null}
+                 {!isCompleted && this.props.cards.length === 0 ? <IncompleteCategory title={this.props.selectedCtg[0].category.title} /> : null}
                  {button}
                  <div className={styles.QuestionCard}>
-                    {this.props.selectedCtg ? questions[this.props.cards[0]] : <p>loading</p>}
+                    {selectedCategory ? questions[this.props.cards[0]] : <p>loading</p>}
                  </div>
-                 <Timer click={this.props.startGame} />
+                 <Timer click={startGame} />
                  <WrongAnswer playerAnswer={this.props.playerAnswer}
                               correctAnswer={this.props.correctAnswer}
                               start={this.props.triviaMainStartGame} />
                 </React.Fragment>
             )
+        }
+
+        if (!this.props.triviaMainStartGame) {
+            button = <Button btnType={'Regular'} 
+            click={this.props.startGame}>Start Game</Button> 
         }
 
         return(
