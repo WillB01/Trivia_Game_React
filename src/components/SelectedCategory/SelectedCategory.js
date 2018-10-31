@@ -77,7 +77,7 @@ class SelectedCategory extends Component {
                 </React.Fragment>
             )
         }
-
+    
         if (!this.props.triviaMainStartGame) {
             button = <Button btnType={'Regular'} 
             click={this.props.startGame}>Start Game</Button> 
