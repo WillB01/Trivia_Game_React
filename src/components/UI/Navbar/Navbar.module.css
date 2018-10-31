@@ -14,5 +14,6 @@
 .Navbar a {
     color: white;
     text-transform: uppercase;
+    margin: 10px 10px 1px 10px;
     
 }

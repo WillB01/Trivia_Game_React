@@ -9,6 +9,8 @@
 # production
 /build
 
+k.js
+
 # misc
 .DS_Store
 .env.local

@@ -13,6 +13,7 @@ import thunk from 'redux-thunk';
 import TriviaMainReducer from './store/reducers/TriviaMainReducer';
 import CategoriesReducer from './store/reducers/CategoriesReducer';
 import SelectedCategoryReducer from './store/reducers/SelectedCategoryReducer';
+import AuthReducer from './store/reducers/AuthReducer';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' 
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null|| compose;
@@ -20,7 +21,8 @@ const composeEnhancers = process.env.NODE_ENV === 'development'
 const rootReducer = combineReducers({
     triviaMain: TriviaMainReducer,
     categories: CategoriesReducer,
-    selectedCategory: SelectedCategoryReducer
+    selectedCategory: SelectedCategoryReducer,
+    auth: AuthReducer
 });
 
 const store = createStore(rootReducer, 

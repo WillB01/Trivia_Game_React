@@ -140,6 +140,7 @@ const mapStateToProps = state => {
         ctg: state.categories,
         selectedCtg: state.selectedCategory,
         
+        
     };
 };
 
@@ -148,6 +149,7 @@ const mapDispatchToProps = dispatch => {
         onCategoryHandler: (id) => dispatch(categoriesAction.fetchSelectedCategory(id)),
         fetchCategories: (btnClick) => dispatch(categoriesAction.fetchCategories(btnClick)),
         onResetGame: () => dispatch(categoriesAction.resetGame()),
+        logout: () => dispatch(categoriesAction.logout())
     };
 };
 

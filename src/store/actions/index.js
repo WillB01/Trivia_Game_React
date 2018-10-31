@@ -15,3 +15,9 @@ export {
     newQuestionCard,
     addTotalScore,
 } from './TriviaMainAction'
+export {
+    auth,
+    logout,
+    setAuthRedirectPath,
+    authCheckState
+} from './AuthAction';
