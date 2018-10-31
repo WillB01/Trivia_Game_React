@@ -67,14 +67,13 @@ class SelectedCategory extends Component {
                 <React.Fragment>
                  { isCompleted ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null}
                  {!isCompleted && this.props.cards.length === 0 ? <IncompleteCategory title={this.props.selectedCtg[0].category.title} /> : null}
-                 {button}
+                
                  <div className={styles.QuestionCard}>
-                    {selectedCategory ? questions[this.props.cards[0]] : <p>loading</p>}
+                    {selectedCategory? questions[this.props.cards[0]] : <p>loading</p>}
+                   
                  </div>
-                 <Timer click={startGame} />
-                 <WrongAnswer playerAnswer={this.props.playerAnswer}
-                              correctAnswer={this.props.correctAnswer}
-                              start={this.props.triviaMainStartGame} />
+                 {/* <Timer click={startGame} /> */}
+               
                 </React.Fragment>
             )
         }
@@ -85,9 +84,15 @@ class SelectedCategory extends Component {
         }
 
         return(
-            <div>
+            <div className={styles.SelectedCategory}>
                 {button}
+               
+             
                 {selected}
+                <WrongAnswer playerAnswer={this.props.playerAnswer}
+                              correctAnswer={this.props.correctAnswer}
+                              start={this.props.triviaMainStartGame} />
+                
             </div>
         );
     };

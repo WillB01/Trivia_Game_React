@@ -6,8 +6,10 @@
     background: #018E5B;
     font-size: 60px;
     width: 100%;
-    bottom: 0;
     top: 70px;
+    right: 0;
+    left: 0;
+    bottom: 0;
     border: 2px solid #018E5B;
     z-index: 1;
     animation-duration: 1s;

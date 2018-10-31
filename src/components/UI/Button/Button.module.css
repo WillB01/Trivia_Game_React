@@ -4,6 +4,8 @@
     margin: 1px;
     cursor: pointer;
     border-radius: 5px;
+    background: #23A6D5;
+    color: white;
 }
 
 .Button:hover {
@@ -12,12 +14,19 @@
 
 .Button:focus {outline:0;}
 
-.Pagination {
-    position: sticky;
-    left: 4px;
-    margin: 2px;
-    top: 80px;
-    float: left;
-    
+.Regular {
+    font-size: 20px;
+    background: #23A6D5;
+    color: white;
+}
 
+@media screen and (max-width: 600px) {
+    .Pagination {
+     
+  
+        
+ 
+        
+    
+    }
 }

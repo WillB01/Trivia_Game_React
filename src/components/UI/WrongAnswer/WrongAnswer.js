@@ -1,20 +1,18 @@
 import React from 'react'
-import { getPlayerAnswer } from '../../../store/actions';
+import styles from './WrongAnswer.module.css';
 
 const wrongAnswer = (props) => {
     const isCorrect = props.playerAnswer === props.correctAnswer ? true : false;
-    let background = 'white'
+    let background = 'none'
     if (props.start) {
-        background = isCorrect ? 'white' : 'white' || props.playerAnswer !== '' || !isCorrect ? 'red': 'white';
+        background = isCorrect ? 'none' : 'none' || props.playerAnswer !== '' || !isCorrect ? 'red': 'none';
     }
     const progressBar = {
-    background,
-    height: '10px',
-    width: `100px%`,
+    background
     };
    
 
-return(<div style={progressBar}></div>);
+return(<div className={styles.WrongAnswer} style={progressBar}></div>);
 };
 
 export default wrongAnswer;

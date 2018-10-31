@@ -120,10 +120,12 @@ class Categories extends Component {
         : categories = < Spinner /> ;
         return(
             <React.Fragment>
+                <div className={styles.Pagination}>
                     <Button click={() => this.pageignationHandler('less')}
                             btnType={'Pagination'}><FaMinus /></Button>
                     <Button click={() => this.pageignationHandler('more')}
                             btnType={'Pagination'}><FaPlus /></Button>
+                </div>
                 <div className={styles.Categories}>
                     {categories}
                 </div>
