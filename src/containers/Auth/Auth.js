@@ -41,9 +41,9 @@ class Auth extends Component {
     };
 
     componentDidMount() {
-        // if (this.props.authRedirect !== '/') {
-        //     this.props.onSetAuthRedirect();
-        // };
+        if (this.props.authRedirect !== '/') {
+            this.props.onSetAuthRedirect();
+        };
     }
 
     checkIfValid = (value, validation) => {
@@ -98,11 +98,10 @@ class Auth extends Component {
 
     render() {
         let authRedirect = null;
-        console.log(this.props.isAuthenticated)
         if (this.props.isAuthenticated) {
             authRedirect = <Redirect to={'/'} /> ;
         };
-        console.log(this.state.controls);
+
         const formArray = [];
         for (const item in this.state.controls) {
             formArray.push({id: item, config: this.state.controls[item]});

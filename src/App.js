@@ -16,22 +16,24 @@ import Timer from './components/UI/Timer/Timer';
 class App extends Component {
   componentDidMount() {
     this.props.onTryAutoSignup();
+    console.log('AAAAAAAAAAAAAppppppppp')
   };
   
   render() {
     let routes = (
       <Switch>
-      <Route path="/auth" component={Auth} />
-      <Redirect to="/" />
+        <Route path="/logout" component={Logout} />
+        <Route path="/auth" component={Auth} />
+        <Route path="/" exact component={Auth} />
 
     </Switch>
     );
     if (this.props.isAuthenticated) {
       routes = (<Switch>
+        <Route path="/logout" component={Logout} />
         <Route path="/selected-category" search="id" component={SelectedCategory} />
         <Route path="/completed" component={CompletedCategory} />
         <Route path="/gameover" component={IncompleteCategory} />
-        <Route path="/logout" component={Logout} />
         <Route path="/auth" component={Auth} />
         <Route path="/" exact component={TriviaMain} />
         <Redirect to="/" />

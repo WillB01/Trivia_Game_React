@@ -9,13 +9,13 @@ export class Logout extends Component {
     };
 
   render() {
-    return <Redirect to="/auth" /> ;
+   return  <Redirect to="/auth" /> ;
   };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogout: () => dispatch(actions.logout())
+        onLogout: () => dispatch(actions.logout()),
     };
 };
 

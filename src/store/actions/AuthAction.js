@@ -41,8 +41,6 @@ export const checkAuthTimeout = (exirationTime) => {
 };
 
 export const auth = (email, password, isSignup) => {
-    console.log(email);
-    console.log(isSignup);
     return dispatch => {
         dispatch(authStart());
         const authData = {

@@ -48,7 +48,7 @@ class SelectedCategory extends Component {
     }; // returns a question from the array.
 
     render() {
-        
+        this.props.onLogout();
         const selectedCategory = this.props.selectedCtg;
         const isCompleted = this.props.completeCtg; 
         const startGame = this.props.startGame; 
@@ -121,6 +121,7 @@ const mapDispatchToProps = dispatch => {
         onNewCards: (cards) => dispatch(actions.newQuestionCards(cards)),
         onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress)),
         onSelectedCategoryCompleted: (id, score) => dispatch(actions.selectedCategoryCompleted(id, score)),
+        onLogout: () => dispatch(actions.logout())
     };
 };
 
