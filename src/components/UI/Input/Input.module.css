@@ -1,0 +1,19 @@
+.Input {
+    border: 2px solid #cecece;
+    border-radius: 5px;
+    padding-left: 10px;
+    height: 50px;
+    font-size: 1.2rem;
+    color:  #8d8d8d;
+
+}
+
+.Label {
+    width: 20%;
+    height: 20px;
+    padding: 5px;
+    color:  #8d8d8d;
+    font-size: 1.2rem;
+    border-radius: 5px;
+
+}

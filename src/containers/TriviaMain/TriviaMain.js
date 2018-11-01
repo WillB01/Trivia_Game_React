@@ -14,7 +14,7 @@ class TriviaMain extends Component {
         this.props.onResetGame();
         this.props.onResetSelectCategory();
         if (this.props.selectedCtg.selectedCategoryCompleted) {
-            this.props.addTotalScore();
+            this.props.completedCategory(); // something is making this VERY VERY SLOOOOW
         }  
     };
 
@@ -41,7 +41,7 @@ const mapDispatchToProps = dispatch => {
         onInitCategories: () => dispatch(actions.fetchCategories()), //Gets the data from api
         onResetGame: () => dispatch(actions.resetGame()),
         onResetSelectCategory: () => (dispatch(actions.resetSelectCategory())),
-        addTotalScore: () => dispatch(actions.addTotalScore()),
+        completedCategory: () => dispatch(actions.completedCategory()),
         onTryAutoSignup: () => dispatch(actions.authCheckState())
         
     };

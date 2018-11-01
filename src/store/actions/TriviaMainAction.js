@@ -26,9 +26,9 @@ export const newQuestionCard = () => {
     };
 };
 
-export const addTotalScore = () => {
+export const completedCategory = () => {
     return {
-        type: actionTypes.ADD_TOTAL_SCORE
+        type: actionTypes.COMPLETED_CATEGORY
     };
 };
 

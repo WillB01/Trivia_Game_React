@@ -35,7 +35,7 @@ class SelectedCategory extends Component {
 
     percentageCalculator = (a, b) => (a / b) * 100; // calculate the precentage for the progressbar.
     
-    questionsCreator = (selectedCategory, index, callback) => {
+    QuestionCardsCreator = (selectedCategory, index, callback) => {
         callback((  
         < Cards selectedCategory={selectedCategory}
                 index={index}  
@@ -48,18 +48,17 @@ class SelectedCategory extends Component {
     }; // returns a question from the array.
 
     render() {
-        this.props.onLogout();
         const selectedCategory = this.props.selectedCtg;
         const isCompleted = this.props.completeCtg; 
         const startGame = this.props.startGame; 
         let selected = < Spinner /> ;
-        let questions = [];    
+        let questionsCards = [];    
         let button = null;    
   
         if (selectedCategory) {
             selectedCategory.map((item, index) => {
-                this.questionsCreator(selectedCategory, index, (res) => {
-                    questions.push(res);;
+                this.QuestionCardsCreator(selectedCategory, index, (res) => {
+                    questionsCards.push(res);;
                 });
             });
             console.log(selectedCategory);
@@ -69,7 +68,7 @@ class SelectedCategory extends Component {
                  {!isCompleted && this.props.cards.length === 0 ? <IncompleteCategory title={this.props.selectedCtg[0].category.title} /> : null}
                 
                  <div className={styles.QuestionCard}>
-                    {selectedCategory? questions[this.props.cards[0]] : <p>loading</p>}
+                    {questionsCards[this.props.cards[0]]}
                    
                  </div>
                  {/* <Timer click={startGame} /> */}
@@ -121,7 +120,6 @@ const mapDispatchToProps = dispatch => {
         onNewCards: (cards) => dispatch(actions.newQuestionCards(cards)),
         onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress)),
         onSelectedCategoryCompleted: (id, score) => dispatch(actions.selectedCategoryCompleted(id, score)),
-        onLogout: () => dispatch(actions.logout())
     };
 };
 

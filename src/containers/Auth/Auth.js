@@ -105,7 +105,8 @@ class Auth extends Component {
                     elementType={element.config.elementType} 
                     placeholder={element.config.placeholder}
                     value={element.config.value}
-                    changed={(event) => this.inputChangeHandler(event, element.id)} />
+                    changed={(event) => this.inputChangeHandler(event, element.id)}
+                    label={element.id} />
         ));
 
         

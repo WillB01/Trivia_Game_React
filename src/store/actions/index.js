@@ -13,7 +13,7 @@ export {
     startGame,
     resetGame,
     newQuestionCard,
-    addTotalScore,
+    completedCategory,
 } from './TriviaMainAction'
 export {
     auth,

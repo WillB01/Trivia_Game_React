@@ -114,9 +114,10 @@ const setNewQuestionCard = (state, action) => {
     });
 };
 
-const setAddTotalScore = (state, action) => {
+const completedCategory = (state, action) => {
     const rank = giveRank(state, action);
     const add = 1;
+    
     
     return {
         rankSystem: RANKSYSTEM,
@@ -158,7 +159,7 @@ const giveRank = (state) => {
     };
 
     return {hasRank: state.player.hasRank, rank: state.player.rank};
-}; //  gets called at setAddTotalScore(). gives a rank based on questionScore
+}; //  gets called at completedCategory(). gives a rank based on questionScore
 
 const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.GET_PLAYER_ANSWER) {
@@ -173,8 +174,8 @@ const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.NEW_QUESTION_CARD) {
             return setNewQuestionCard(state, action);
     }
-    if (action.type === actionTypes.ADD_TOTAL_SCORE) {
-        return setAddTotalScore(state, action);
+    if (action.type === actionTypes.COMPLETED_CATEGORY) {
+        return completedCategory(state, action);
     }
     return state;
 };
