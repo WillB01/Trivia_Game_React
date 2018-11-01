@@ -20,6 +20,7 @@ class SelectedCategory extends Component {
     componentDidUpdate() {
         const percentage = this.percentageCalculator(1, this.props.selectedCtg.length); 
         this.props.onSelectedCategoryCompleted(this.props.location.state.id, this.props.playerScoreSctg);
+        
        
         if (this.props.triviaMainIsCorrect) {
             this.props.onNewQuestionCard();

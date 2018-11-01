@@ -4,7 +4,6 @@ import axios from 'axios';
 
 //different action creators---------------------------------------
 export const setCategories = (categories, btnClick) => {
-    console.log(btnClick);
     return {
         type: actionTypes.FETCH_CATEGORIES,
         categories
@@ -34,7 +33,6 @@ export const pageination = (btnClick) => {
 
 export const fetchCategories = (btnClick) => {
     pageination(btnClick);
-    console.log(offsetStart);
     const url = `http://jservice.io/api/categories?count=${offsetStart}&offset=${0}`;
     return dispatch => {
         axios.get(url)

@@ -23,7 +23,8 @@ export const authFail = (error) => {
     };
 };
 
-export const logout = () => {
+export const logout = (triviaMain) => {
+    console.log(triviaMain);
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
     localStorage.removeItem('userId');
@@ -68,15 +69,15 @@ export const auth = (email, password, isSignup) => {
             });
     };
 };
-export const authCheckState = () => {
+export const authCheckState = (triviaMain) => {
     return dispatch => {
         const token = localStorage.getItem('token'); 
         if (!token) {
-            dispatch(logout());
+            dispatch(logout(triviaMain));
         } else {
             const expirationDate = new Date(localStorage.getItem('expirationDate'));
             if (expirationDate <= new Date()) {
-                dispatch(logout());
+                dispatch(logout(triviaMain));
             } else {
                 const userId = localStorage.getItem('userId');
                 dispatch(authSuccess(token, userId));
@@ -86,3 +87,34 @@ export const authCheckState = () => {
         }
     };  
 };
+
+
+export const postPlayerInfoSuccess = () => {
+    return {
+        type: actionTypes.POST_PLAYER_SUCCESS
+    };
+};
+
+export const postPlayerInfoFail = (error) => {
+    return {
+        type: actionTypes.POST_PLAYER_FAIL
+    };
+};
+
+export const postPlayerInfo = () => {
+    const test = {
+        'test': 'kewl'
+    }
+    return dispatch => {
+        axios.post(k.url,test)
+            .then(res => {
+                console.log(res.data);
+                dispatch(postPlayerInfoSuccess())
+            })
+            .catch(err => {
+                dispatch(postPlayerInfoFail(err));
+            });
+    };
+};
+
+

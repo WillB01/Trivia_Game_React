@@ -18,6 +18,6 @@ export {
 export {
     auth,
     logout,
-    // setAuthRedirectPath,
+    postPlayerInfo,
     authCheckState
 } from './AuthAction';

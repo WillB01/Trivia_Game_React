@@ -9,10 +9,12 @@ class TriviaMain extends Component {
         completedCategories: []
     };
     componentDidMount() {
+       
         if (this.props.selectedCtg.selectedCategoryCompleted) {
             this.props.completedCategory();
         }  
-        this.props.onTryAutoSignup();
+       
+        this.props.onTryAutoSignup(this.props.triviaMain);
         this.props.onInitCategories();
         this.props.onResetGame();
         this.props.onResetSelectCategory();
@@ -32,19 +34,20 @@ const mapStateToProps = state => {
     return {
         ctg: state.categories,
         selectedCtg: state.selectedCategory,
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        triviaMain: state.triviaMain
+
       
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onInitCategories: () => dispatch(actions.fetchCategories()), //Gets the data from api
+        onInitCategories: () => dispatch(actions.fetchCategories()), //Gets the categories data from api,
         onResetGame: () => dispatch(actions.resetGame()),
         onResetSelectCategory: () => (dispatch(actions.resetSelectCategory())),
         completedCategory: () => dispatch(actions.completedCategory()),
-        onTryAutoSignup: () => dispatch(actions.authCheckState())
-        
+        onTryAutoSignup: (triviaMain) => dispatch(actions.authCheckState(triviaMain)),
     };
 };
 

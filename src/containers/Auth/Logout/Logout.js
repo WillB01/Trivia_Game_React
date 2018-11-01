@@ -5,7 +5,7 @@ import { Redirect} from 'react-router-dom';
 
 export class Logout extends Component {
     componentDidMount() {
-        this.props.onLogout();
+        this.props.onLogout(this.props.triviaMain);
     };
 
   render() {
@@ -13,11 +13,17 @@ export class Logout extends Component {
   };
 };
 
+const mapStateToProps = (state) => {
+    return {
+        triviaMain: state.triviaMain
+    }
+};
+
 const mapDispatchToProps = dispatch => {
     return {
-        onLogout: () => dispatch(actions.logout()),
+        onLogout: (triviaMain) => dispatch(actions.logout(triviaMain)),
     };
 };
 
 
-export default connect(null, mapDispatchToProps)(Logout);
+export default connect(mapStateToProps, mapDispatchToProps)(Logout);
