@@ -14,10 +14,10 @@ export {
     resetGame,
     newQuestionCard,
     completedCategory,
+   
 } from './TriviaMainAction'
 export {
     auth,
     logout,
-    postPlayerInfo,
-    authCheckState
+    authCheckState,
 } from './AuthAction';

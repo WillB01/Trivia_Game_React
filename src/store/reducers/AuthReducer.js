@@ -34,7 +34,6 @@ const authLogout = (state, action) => {
         userId: null
     });
 
-    
 }; // if token is null then the player will not be authenticated
 
 const reducer = (state = initialState, action) => {

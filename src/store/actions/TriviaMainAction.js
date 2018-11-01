@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
-import * as kau from '../../k';
+import * as k from '../../k';
 export const getPlayerAnswer= (playerAnswer, correctAnswer) => {
     return {
         type: actionTypes.GET_PLAYER_ANSWER,
@@ -33,33 +33,6 @@ export const completedCategory = () => {
     };
 };
 
-export const postPlayerSuccess = () => {
-    return {
-        type: actionTypes.POST_PLAYER_SUCCESS
-    };
-};
 
-export const postPlayerFail = (error) => {
-    return {
-        type: actionTypes.POST_PLAYER_FAIL
-    };
-};
-
-
-export const postPlayerInfo = () => {
-    const test = {
-        'test': 'kewl'
-    }
-    return dispatch => {
-        axios.post(kau.url,test)
-            .then(res => {
-                console.log(res.data);
-                dispatch(postPlayerSuccess())
-            })
-            .catch(err => {
-                dispatch(postPlayerFail(err));
-            });
-    };
-};
 
 

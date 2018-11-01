@@ -16,7 +16,7 @@ const initialState = {
    rankSystem: RANKSYSTEM,
    
    player: {
-    name: 'Willy',
+    name: 'Bengt',
     hasRank: false,
     rank: '',
     score: {

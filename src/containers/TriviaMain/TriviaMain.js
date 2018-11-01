@@ -9,7 +9,6 @@ class TriviaMain extends Component {
         completedCategories: []
     };
     componentDidMount() {
-       
         if (this.props.selectedCtg.selectedCategoryCompleted) {
             this.props.completedCategory();
         }  
