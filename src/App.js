@@ -11,12 +11,11 @@ import * as actions from './store/actions/index';
 import {connect} from 'react-redux';
 
 import './App.css';
-import Timer from './components/UI/Timer/Timer';
+
 
 class App extends Component {
   componentDidMount() {
     this.props.onTryAutoSignup();
-    console.log('AAAAAAAAAAAAAppppppppp')
   };
   
   render() {

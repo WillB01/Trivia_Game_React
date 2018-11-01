@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as categoriesAction from '../../store/actions/index';
 import styles from './Categories.module.css';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Button from '../../components/UI/Button/Button';
 import _ from 'lodash';
@@ -12,10 +12,10 @@ import { FaSuitcaseRolling } from 'react-icons/fa';
 import {FaPlus, FaMinus} from 'react-icons/fa';
 
 
+
 class Categories extends Component {
    
     componentDidMount() {
-        this.props.authCheckState();
         this.props.onResetGame();
         Events.scrollEvent.register('begin', function () {
             console.log("begin", arguments);
@@ -120,8 +120,10 @@ class Categories extends Component {
             ))
         ) 
         : categories = < Spinner /> ;
+    
         return(
             <React.Fragment>
+                {!this.props.isAuthenticated ? <Redirect to="/" /> : null }
                 <div className={styles.Pagination}>
                     <Button click={() => this.pageignationHandler('less')}
                             btnType={'Pagination'}><FaMinus /></Button>
@@ -141,6 +143,7 @@ const mapStateToProps = state => {
     return {
         ctg: state.categories,
         selectedCtg: state.selectedCategory,
+        isAuthenticated: state.auth.token !== null
         
         
     };
@@ -151,9 +154,6 @@ const mapDispatchToProps = dispatch => {
         onCategoryHandler: (id) => dispatch(categoriesAction.fetchSelectedCategory(id)),
         fetchCategories: (btnClick) => dispatch(categoriesAction.fetchCategories(btnClick)),
         onResetGame: () => dispatch(categoriesAction.resetGame()),
-        logout: () => dispatch(categoriesAction.logout()),
-        authCheckState: () => dispatch(categoriesAction.authCheckState()),
-        
     };
 };
 

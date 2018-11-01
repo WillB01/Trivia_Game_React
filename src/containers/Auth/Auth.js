@@ -40,14 +40,7 @@ class Auth extends Component {
             
     };
 
-    componentDidMount() {
-        if (this.props.authRedirect !== '/') {
-            this.props.onSetAuthRedirect();
-        };
-    }
-
     checkIfValid = (value, validation) => {
-        console.log(validation);
         let isValid = true;
         if (validation.isRequired) {
             isValid = value.trim() !== '' && isValid;
@@ -62,7 +55,6 @@ class Auth extends Component {
     };
 
     inputChangeHandler = (e, id) => {
-        console.log(e.target.value);
         const updatedForm = updateObject(this.state.controls, {
             [id]: {
                 ...this.state.controls[id],
@@ -136,14 +128,14 @@ const mapStateToProps = state => {
         error: state.auth.error,
         isAuthenticated: state.auth.token !== null,
         // buildingBurger: state.brg.building,
-        authRedirectPath: state.auth.authRedirectPath
+        // authRedirectPath: state.auth.authRedirectPath
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSignup) => dispatch(action.auth(email, password, isSignup)),
-        onSetAuthRedirect: () => dispatch(action.setAuthRedirectPath('/'))
+        // onSetAuthRedirect: () => dispatch(action.setAuthRedirectPath('/'))
     };
 };
 

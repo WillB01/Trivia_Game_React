@@ -30,7 +30,7 @@ export const logout = () => {
     return {
         type: actionTypes.AUTH_INITIATE_LOGOUT
     };
-};
+}; // romeves the nessecary data to be loged in.
 
 export const checkAuthTimeout = (exirationTime) => {
     return dispatch => {
@@ -38,7 +38,7 @@ export const checkAuthTimeout = (exirationTime) => {
             dispatch(logout());
         },exirationTime * 1000);
     };
-};
+}; //checks 
 
 export const auth = (email, password, isSignup) => {
     return dispatch => {
@@ -68,14 +68,6 @@ export const auth = (email, password, isSignup) => {
             });
     };
 };
-
-export const setAuthRedirectPath = (path) => {
-    return {
-        type: actionTypes.SET_AUTH_REDIRECT_PATH,
-        path: path
-    };
-};
-
 export const authCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token'); 
