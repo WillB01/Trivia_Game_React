@@ -23,15 +23,55 @@ export const authFail = (error) => {
     };
 };
 
+export const mock = () => {
+    return {
+        type: actionTypes.MOCK
+    }
+};
+
 export const logout = (triviaMain) => {
-    console.log(triviaMain);
+    const token = localStorage.getItem('token');
+    const url = k.url(token);
+    // console.log(triviaMain.player);
+    const data = {
+        id: token,
+        name: triviaMain.player.name,
+        rank: triviaMain.player.rank,
+        score: {
+            total: triviaMain.player.score.total,
+            completedQuestionsBonus: triviaMain.player.score.completedQuestionsBonus
+        }
+
+    };
+
+    // console.log(url);
+    // const test = {
+    //     'test': 'nice'
+    // }
+    // return dispatch => {
+    //     dispatch(mock());
+    // }
+    return dispatch => {
+        axios.post(url,data)
+            .then(res => {
+                console.log(res.data);
+                dispatch(postPlayerInfo())
+            })
+            .catch(err => {
+                dispatch(postPlayerInfoFail(err));
+            });
+    };
+}; // post the core before logout!
+
+export const postPlayerInfo = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
     localStorage.removeItem('userId');
     return {
         type: actionTypes.AUTH_INITIATE_LOGOUT
     };
-}; // romeves the nessecary data to be loged in.
+};  // romeves the nessecary data to be loged in.
+
 
 export const checkAuthTimeout = (exirationTime) => {
     return dispatch => {
@@ -101,20 +141,5 @@ export const postPlayerInfoFail = (error) => {
     };
 };
 
-export const postPlayerInfo = () => {
-    const test = {
-        'test': 'kewl'
-    }
-    return dispatch => {
-        axios.post(k.url,test)
-            .then(res => {
-                console.log(res.data);
-                dispatch(postPlayerInfoSuccess())
-            })
-            .catch(err => {
-                dispatch(postPlayerInfoFail(err));
-            });
-    };
-};
 
 
