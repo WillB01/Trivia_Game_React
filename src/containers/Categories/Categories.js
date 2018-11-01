@@ -17,6 +17,7 @@ class Categories extends Component {
    
     componentDidMount() {
         // this.props.onResetGame();
+      
         Events.scrollEvent.register('begin', function () {
             console.log("begin", arguments);
         });
