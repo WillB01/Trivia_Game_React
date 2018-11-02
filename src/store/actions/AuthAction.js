@@ -30,6 +30,7 @@ export const mock = () => {
 };
 
 export const logout = (triviaMain) => {
+    console.log(triviaMain);
     const userId = localStorage.getItem('userId');
     const token = localStorage.getItem('token')
     const url = k.url(token);
@@ -37,11 +38,13 @@ export const logout = (triviaMain) => {
     const data = {
         [userId]: {
             name: triviaMain.player.name,
+            hasRank: triviaMain.player.hasRank,
             rank: triviaMain.player.rank,
             id: userId,
             score: {
                 total: triviaMain.player.score.total,
-                completedQuestionsBonus: triviaMain.player.score.completedQuestionsBonus
+                completedQuestionsBonus: triviaMain.player.score.completedQuestionsBonus,
+                selectedCategoryCompletedId: triviaMain.player.score.selectedCategoryCompletedId
             }
         }
        
@@ -59,7 +62,9 @@ export const logout = (triviaMain) => {
         axios.patch(url,data)
             .then(res => {
                 console.log(res.data);
+                dispatch(clearStateToTrivia())
                 dispatch(loggingOut())
+
             })
             .catch(err => {
                 dispatch(postPlayerInfoFail(err));
@@ -76,6 +81,12 @@ export const loggingOut = () => {
     };
 };  // removes the nessecary data to be loged in.
 
+export const clearStateToTrivia = () => {
+    return {
+        type: actionTypes.AUTH_CLEAR_STATE_TO_TRIVIA
+    }
+}
+
 
 export const checkAuthTimeout = (exirationTime) => {
     return dispatch => {
@@ -87,21 +98,32 @@ export const checkAuthTimeout = (exirationTime) => {
 
 
 export const fetchLoggedInPlayer = (token, id) => {
+    // console.log(id);
     const url = k.urlWithQuery(token, id);
     return dispatch => {
         axios.get(url)
             .then(res => {
                 console.log(res);
-                dispatch(test(res))
+                dispatch(fetchLoggedInPlayerSuccess(res.data))
             })
-            .catch(err => console.log(err));
+            .catch(err =>dispatch(fetchLoggedInPlayerFail(err)));
+
     };
 };
 
-//TODO
-const test = (res) => {
-    return {
 
+const fetchLoggedInPlayerSuccess = (res) => {
+    return {
+        type: actionTypes.FETCH_LOGGED_IN_PLAYER_SUCCESS_FROM_AUTH,
+        playerData: res
+    }
+};
+
+const fetchLoggedInPlayerFail = (err) => {
+    console.log(err);
+    return {
+        type: actionTypes.FETCH_LOGGED_IN_PLAYER_FAIL,
+        error: err
     }
 };
 
@@ -127,9 +149,10 @@ export const auth = (email, password, isSignup) => {
                 localStorage.setItem('userId', response.data.localId);
                 // console.log(response.data.idToken);
                 // console.log( response.data.localId);
-                dispatch(fetchLoggedInPlayer(response.data.idToken, response.data.localId));
+              
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
                 dispatch(checkAuthTimeout(response.data.expiresIn));
+                dispatch(fetchLoggedInPlayer(response.data.idToken, response.data.localId));
                
        
             })

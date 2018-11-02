@@ -16,13 +16,15 @@ const initialState = {
    rankSystem: RANKSYSTEM,
    
    player: {
-    name: 'Bengt',
+    name: '',
+    id: '',
     hasRank: false,
     rank: '',
     score: {
         total: 0,
         completedQuestionsBonus: 0,
         selectedCategory: 0,
+        selectedCategoryCompletedId: []
     },
     completedCategories: {
         'title': ''
@@ -135,7 +137,56 @@ const completedCategory = (state, action) => {
           
         }    
     }
-};  // if player completed a whole category! gives RANK and TOTAL.  updates on trivia componentDidMounth
+};  // if player completed a whole category! gives RANK and TOTAL.  updates on trivia componentDidMounth.
+
+const setLoggedInPlayerData = (state, action) => {
+    console.log('[inside setloggedInPlayer]');
+    const nameOfObject = Object.keys(action.playerData)[0];
+    const player = (action.playerData[nameOfObject]);
+  
+    // console.log(action);
+    return updateObject(state, {
+        player: {
+            ...state.player,
+            id: player.id,
+            name: player.name,
+            hasRank: player.hasRank,
+            rank: player.rank,
+            score: {
+                ...state.score,
+                total: player.score.total,
+                completedQuestionsBonus: player.score.completedQuestionsBonus,
+                selectedCategoryCompletedId: player.score.selectedCategoryCompletedId
+            }
+        }
+    });
+};
+
+const clearStateToLoggout = (state, action) => {
+    return {
+        isCorrect: false,
+        correctAnswer: '',
+        playerAnswer: '',
+        startGame: false,
+        rankSystem: RANKSYSTEM,
+        
+        player: {
+         name: '',
+         id: '',
+         hasRank: false,
+         rank: '',
+         score: {
+             total: 0,
+             completedQuestionsBonus: 0,
+             selectedCategory: 0,
+             selectedCategoryCompletedId: []
+         },
+         completedCategories: {
+             'title': ''
+         },
+    }
+    }
+};
 
 const giveRank = (state) => {
     const playerBS = state.player.score.completedQuestionsBonus;
@@ -154,7 +205,6 @@ const giveRank = (state) => {
         return {hasRank: true, rank: ranksSystem.gold[0]};
     };
     if (playerBS >= ranksSystem.dimond[1]) { // dimond
-        alert(playerBS + ' ' +  ranksSystem.dimond[1])
         return {hasRank: true, rank: ranksSystem.dimond[0]};
     };
 
@@ -176,6 +226,12 @@ const reducer = (state = initialState, action) => {
     }
     if (action.type === actionTypes.COMPLETED_CATEGORY) {
         return completedCategory(state, action);
+    }
+    if (action.type === actionTypes.FETCH_LOGGED_IN_PLAYER_SUCCESS_FROM_AUTH) {
+        return setLoggedInPlayerData(state, action);
+    }
+    if (action.type === actionTypes.AUTH_CLEAR_STATE_TO_TRIVIA) {
+        return clearStateToLoggout(state, action);
     }
     return state;
 };
