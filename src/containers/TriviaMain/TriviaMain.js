@@ -9,9 +9,13 @@ class TriviaMain extends Component {
         completedCategories: []
     };
     componentDidMount() {
-        if (this.props.selectedCtg.selectedCategoryCompleted) {
-            this.props.completedCategory();
-        }  
+        // if (this.props.selectedCtg.selectedCategoryCompleted) {
+        //     this.props.completedCategory(
+        //         this.props.selectedCtg.scoreToCompleteSelectedCategory, 
+        //         this.props.selectedCtg.selectedCategoryCompletedId,
+        //         this.props.selectedCtg.amountOfCards,
+        //         this.props.selectedCtg.id);
+        // }  
        
         this.props.onTryAutoSignup(this.props.triviaMain);
         this.props.onInitCategories();

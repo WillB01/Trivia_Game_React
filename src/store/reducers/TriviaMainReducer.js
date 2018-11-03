@@ -1,5 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import {updateObject} from '../shared/utility';
+import _ from 'lodash';
 const RANKSYSTEM = {
     'noob': ['noob', 5],
     'bronze': ['bronze', 20],
@@ -14,6 +15,7 @@ const initialState = {
    playerAnswer: '',
    startGame: false,
    rankSystem: RANKSYSTEM,
+   selectedCategoryCompleted: false,
    
    player: {
     name: '',
@@ -24,7 +26,8 @@ const initialState = {
         total: 0,
         completedQuestionsBonus: 0,
         selectedCategory: 0,
-        selectedCategoryCompletedId: []
+        selectedCategoryCompletedId: [],
+        
     },
     completedCategories: {
         'title': ''
@@ -117,12 +120,21 @@ const setNewQuestionCard = (state, action) => {
 };
 
 const completedCategory = (state, action) => {
-    const rank = giveRank(state, action);
+    const rank = giveRank(state.player, action);
     const add = 1;
+    const score =  (action.scoreToCompleteSelectedCategory / 2) + 1;
+    console.log(state);
+    const ids = state.player.score.selectedCategoryCompletedId;
+    // let ids = action.selectedCategoryCompletedId;
     
-    
-    return {
-        rankSystem: RANKSYSTEM,
+    if (state.player.score.selectedCategory >= score
+        && action.scoreToCompleteSelectedCategory 
+        && action.amountOfCards.length === 0) {
+        ids.push(action.id)
+        let noDuplicates = _.uniq(ids)
+        return updateObject(state, {
+            rankSystem: RANKSYSTEM,
+            selectedCategoryCompleted: true,
         player: {
             ...state.player,
             hasRank: rank.hasRank,
@@ -130,37 +142,52 @@ const completedCategory = (state, action) => {
             score: {
                 ...state.player.score,
                 total: state.player.score.total += add,
-                completedCategories: []
-
+                selectedCategoryCompletedId: noDuplicates,
 
             },
           
-        }    
-    }
+        }}); // checks if the player has completed the category or not.
+    } 
+    return updateObject(state, {
+        selectedCategoryCompleted: false,  
+    });
+    
 };  // if player completed a whole category! gives RANK and TOTAL.  updates on trivia componentDidMounth.
+
+
+
 
 const setLoggedInPlayerData = (state, action) => {
     console.log('[inside setloggedInPlayer]');
     const nameOfObject = Object.keys(action.playerData)[0];
     const player = (action.playerData[nameOfObject]);
-  
-    // console.log(action);
-    return updateObject(state, {
+    const rank = giveRank(player, action);
+    console.log(player.score.selectedCategoryCompletedId !== null);
+    const newPlayer = {
         player: {
             ...state.player,
             id: player.id,
-            name: player.name,
-            hasRank: player.hasRank,
-            rank: player.rank,
+            name: player.name ? player.name : 'unknown',
+            hasRank: rank.hasRank,
+            rank: rank.rank,
             score: {
                 ...state.score,
-                total: player.score.total,
-                completedQuestionsBonus: player.score.completedQuestionsBonus,
-                selectedCategoryCompletedId: player.score.selectedCategoryCompletedId
+                total: Number(player.score.total),
+                selectedCategory: 0,
+                completedQuestionsBonus: Number(player.score.completedQuestionsBonus),
+                selectedCategoryCompletedId: player.score.selectedCategoryCompletedId === null ? [] : player.score.selectedCategoryCompletedId
             }
         }
+
+    };
+  
+    // console.log(action);
+    return updateObject(state, {
+       ...newPlayer
     });
 };
+
+
 
 const clearStateToLoggout = (state, action) => {
     return {
@@ -169,6 +196,7 @@ const clearStateToLoggout = (state, action) => {
         playerAnswer: '',
         startGame: false,
         rankSystem: RANKSYSTEM,
+        selectedCategoryCompleted: false,
         
         player: {
          name: '',
@@ -179,7 +207,8 @@ const clearStateToLoggout = (state, action) => {
              total: 0,
              completedQuestionsBonus: 0,
              selectedCategory: 0,
-             selectedCategoryCompletedId: []
+             selectedCategoryCompletedId: [],
+           
          },
          completedCategories: {
              'title': ''
@@ -188,11 +217,12 @@ const clearStateToLoggout = (state, action) => {
     }
 };
 
-const giveRank = (state) => {
-    const playerBS = state.player.score.completedQuestionsBonus;
-    const ranksSystem = state.rankSystem;
-    
+const giveRank = (player) => {
+    const playerBS = player.score.completedQuestionsBonus;
+    const ranksSystem = RANKSYSTEM;
+
     if (playerBS >= ranksSystem.noob[1] && playerBS < ranksSystem.bronze[1]) { // noob
+        
         return {hasRank: true, rank: ranksSystem.noob[0]};
     };
     if (playerBS >= ranksSystem.bronze[1] && playerBS < ranksSystem.silver[1]) { // bronze 
@@ -208,7 +238,7 @@ const giveRank = (state) => {
         return {hasRank: true, rank: ranksSystem.dimond[0]};
     };
 
-    return {hasRank: state.player.hasRank, rank: state.player.rank};
+    return {hasRank: false, rank: ''};
 }; //  gets called at completedCategory(). gives a rank based on questionScore
 
 const reducer = (state = initialState, action) => {
@@ -233,7 +263,10 @@ const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.AUTH_CLEAR_STATE_TO_TRIVIA) {
         return clearStateToLoggout(state, action);
     }
-    return state;
+    if (action.type === actionTypes.TRIVIA_SELECTED_CATEGORY_COMPLETED) {
+        return completedCategory(state, action);
+    };
+     return state;
 };
 
 export default reducer;

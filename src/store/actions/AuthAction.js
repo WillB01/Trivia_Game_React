@@ -34,7 +34,7 @@ export const logout = (triviaMain) => {
     const userId = localStorage.getItem('userId');
     const token = localStorage.getItem('token')
     const url = k.url(token);
-    // console.log(triviaMain.player);
+    console.log(triviaMain.player.score.selectedCategoryCompletedId.length);
     const data = {
         [userId]: {
             name: triviaMain.player.name,
@@ -44,7 +44,7 @@ export const logout = (triviaMain) => {
             score: {
                 total: triviaMain.player.score.total,
                 completedQuestionsBonus: triviaMain.player.score.completedQuestionsBonus,
-                selectedCategoryCompletedId: triviaMain.player.score.selectedCategoryCompletedId
+                selectedCategoryCompletedId: triviaMain.player.score.selectedCategoryCompletedId.length === 0 ? ['none'] :  triviaMain.player.score.selectedCategoryCompletedId
             }
         }
        
