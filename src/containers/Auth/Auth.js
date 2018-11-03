@@ -4,7 +4,7 @@ import Input from '../../components/UI/Input/Input';
 import {updateObject} from '../../store/shared/utility';
 import Button from '../../components/UI/Button/Button';
 import {connect} from 'react-redux';
-import * as action from '../../store/actions/index';
+import * as actions from '../../store/actions/index';
 import {Redirect} from 'react-router-dom';
 
 
@@ -39,6 +39,7 @@ class Auth extends Component {
             isSignup: true
             
     };
+
 
     checkIfValid = (value, validation) => {
         let isValid = true;
@@ -128,14 +129,14 @@ const mapStateToProps = state => {
         loading: state.auth.loading,
         error: state.auth.error,
         isAuthenticated: state.auth.token !== null,
-        // buildingBurger: state.brg.building,
-        // authRedirectPath: state.auth.authRedirectPath
+        triviaMain: state.triviaMain
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password, isSignup) => dispatch(action.auth(email, password, isSignup)),
+        onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup)),
+        onTryAutoSignup: (triviaMain) => dispatch(actions.authCheckState(triviaMain)),
         // onSetAuthRedirect: () => dispatch(action.setAuthRedirectPath('/'))
     };
 };

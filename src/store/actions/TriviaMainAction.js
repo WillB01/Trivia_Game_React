@@ -1,6 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios';
-import * as k from '../../k';
+
 export const getPlayerAnswer= (playerAnswer, correctAnswer) => {
     return {
         type: actionTypes.GET_PLAYER_ANSWER,
@@ -27,19 +26,7 @@ export const newQuestionCard = () => {
     };
 };
 
-// scoreToCompleteSelectedCategory
-// selectedCategoryCompletedId
-// score
-// scoreToCompleteSelectedCategory
-// amountOfCards
-// id
-// scoreToCompleteSelectedCategory
-
 export const completedCategory = (scoreToCompleteSelectedCategory, selectedCategoryCompletedId, amountOfCards, id) => {
-    console.log(scoreToCompleteSelectedCategory);
-    console.log(selectedCategoryCompletedId);
-    console.log(amountOfCards);
-    console.log(id);
     return {
         type: actionTypes.COMPLETED_CATEGORY,
         scoreToCompleteSelectedCategory,

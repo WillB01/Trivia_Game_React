@@ -123,7 +123,6 @@ const completedCategory = (state, action) => {
     const rank = giveRank(state.player, action);
     const add = 1;
     const score =  (action.scoreToCompleteSelectedCategory / 2) + 1;
-    console.log(state);
     const ids = state.player.score.selectedCategoryCompletedId;
     // let ids = action.selectedCategoryCompletedId;
     
@@ -158,11 +157,9 @@ const completedCategory = (state, action) => {
 
 
 const setLoggedInPlayerData = (state, action) => {
-    console.log('[inside setloggedInPlayer]');
     const nameOfObject = Object.keys(action.playerData)[0];
     const player = (action.playerData[nameOfObject]);
     const rank = giveRank(player, action);
-    console.log(player.score.selectedCategoryCompletedId !== null);
     const newPlayer = {
         player: {
             ...state.player,

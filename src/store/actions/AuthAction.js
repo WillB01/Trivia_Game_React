@@ -30,11 +30,9 @@ export const mock = () => {
 };
 
 export const logout = (triviaMain) => {
-    console.log(triviaMain);
     const userId = localStorage.getItem('userId');
     const token = localStorage.getItem('token')
     const url = k.url(token);
-    console.log(triviaMain.player.score.selectedCategoryCompletedId.length);
     const data = {
         [userId]: {
             name: triviaMain.player.name,
@@ -97,17 +95,27 @@ export const checkAuthTimeout = (exirationTime) => {
 }; //checks 
 
 
-export const fetchLoggedInPlayer = (token, id) => {
-    // console.log(id);
-    const url = k.urlWithQuery(token, id);
-    return dispatch => {
-        axios.get(url)
-            .then(res => {
-                console.log(res);
-                dispatch(fetchLoggedInPlayerSuccess(res.data))
-            })
-            .catch(err =>dispatch(fetchLoggedInPlayerFail(err)));
+export const fetchLoggedInPlayer = (token, id, isSignup) => {
+   
+        const url = k.urlWithQuery(token, id);
+        return dispatch => {
+            if (!isSignup) {
+                axios.get(url)
+                .then(res => {
+                        dispatch(fetchLoggedInPlayerSuccess(res.data))           
+                })
+                .catch(err =>dispatch(fetchLoggedInPlayerFail(err)));
+            } else {
+                dispatch(newPlayer())
+            }
+           
 
+        };
+};
+
+const newPlayer = () => {
+    return {
+        type: actionTypes.AUTH_NEW_PLAYER
     };
 };
 
@@ -140,6 +148,7 @@ export const auth = (email, password, isSignup) => {
         if(!isSignup) {
             url = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${k.key}`;
         }
+       
         axios.post(url, authData)
             .then(response => {
                 console.log(response);
@@ -149,10 +158,10 @@ export const auth = (email, password, isSignup) => {
                 localStorage.setItem('userId', response.data.localId);
                 // console.log(response.data.idToken);
                 // console.log( response.data.localId);
-              
+               
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
                 dispatch(checkAuthTimeout(response.data.expiresIn));
-                dispatch(fetchLoggedInPlayer(response.data.idToken, response.data.localId));
+                dispatch(fetchLoggedInPlayer(response.data.idToken, response.data.localId, isSignup));
                
        
             })

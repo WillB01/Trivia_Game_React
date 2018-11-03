@@ -26,6 +26,17 @@ class SelectedCategory extends Component {
     componentDidUpdate(prevProps) {
         const percentage = this.percentageCalculator(1, this.props.selectedCtg.length); 
         // this.props.onSelectedCategoryCompleted(this.props.location.state.id, this.props.playerScoreSctg);
+        console.log(prevProps.cards.length);
+        console.log(this.props.cards.length);
+        console.log(this.props.completeCtg);
+        console.log('END');
+        if (prevProps.cards.length === 0 && prevProps.cards.length === this.props.cards.length) {
+            this.props.completedCategory(
+                this.props.selectedCategory.scoreToCompleteSelectedCategory,
+                this.props.selectedCategory.selectedCategoryCompletedId,
+                this.props.selectedCategory.amountOfCards,
+                this.props.location.state.id);
+        }
        if (this.props.completeCtg) {
             this.props.history.push(`/completed`);
        }
@@ -34,11 +45,7 @@ class SelectedCategory extends Component {
         this.props.onNewQuestionCard();
         this.props.onProgressProgressBar(percentage);        
         }
-        this.props.completedCategory(
-            this.props.selectedCategory.scoreToCompleteSelectedCategory,
-            this.props.selectedCategory.selectedCategoryCompletedId,
-            this.props.selectedCategory.amountOfCards,
-            this.props.location.state.id);
+       
       
     };
 
@@ -65,7 +72,6 @@ class SelectedCategory extends Component {
     render() {
         const selectedCategory = this.props.selectedCtg;
         const isCompleted = this.props.completeCtg; 
-        console.log(isCompleted);
         const startGame = this.props.startGame; 
         let selected = < Spinner /> ;
         let questionsCards = [];    
@@ -80,7 +86,7 @@ class SelectedCategory extends Component {
             console.log(selectedCategory);
             selected = (
                 <React.Fragment>
-                 {isCompleted ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null}
+                 {/* {isCompleted ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null} */}
                  {!isCompleted && this.props.cards.length === 0 ? <IncompleteCategory title={this.props.selectedCtg[0].category.title} /> : null}
                 
                  <div className={styles.QuestionCard}>
