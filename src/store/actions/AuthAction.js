@@ -128,12 +128,13 @@ const fetchLoggedInPlayerFail = (err) => {
 };
 
 
-export const auth = (email, password, isSignup) => {
+export const auth = (email, password, isSignup, name) => {
     return dispatch => {
         dispatch(authStart());
         const authData = {
             email: email,
             password: password,
+            name: name,
             returnSecureToken: true
         };
         let url = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${k.key}`

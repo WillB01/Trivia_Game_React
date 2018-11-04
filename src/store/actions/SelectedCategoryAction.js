@@ -29,13 +29,13 @@ export const setProgressProgressBar = (progress) => {
     };
 };
 
-export const selectedCategoryCompleted = (id, score) => {
-    return {
-        type: actionTypes.SELECTED_CATEGORY_COMPLETED,
-        id,
-        score
-    };
-};
+// export const selectedCategoryCompleted = (id, score) => {
+//     return {
+//         type: actionTypes.SELECTED_CATEGORY_COMPLETED,
+//         id,
+//         score
+//     };
+// };
 
 export const resetSelectCategory = () => {
     return {

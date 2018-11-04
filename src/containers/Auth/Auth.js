@@ -11,6 +11,19 @@ import {Redirect} from 'react-router-dom';
 class Auth extends Component {
     state = {
         controls: {
+            name: {
+                type: 'text',
+                elementType: 'input',
+                value: '',
+                placeholder: 'name',
+                validation: {
+                    isRequired: false,
+                    maxLength: 100, 
+                    isSignup: true,
+                    isLogin: false,
+                },
+                valid: false,
+            },
                 email: {
                     type: 'email',
                     elementType: 'input',
@@ -19,7 +32,9 @@ class Auth extends Component {
                     validation: {
                         isRequired: true,
                         isEmail: true,
-                        maxLength: 100
+                        maxLength: 100,
+                        isSignup: true,
+                        isLogin: true,
                     },
                     valid: false,
                 },
@@ -30,7 +45,9 @@ class Auth extends Component {
                     placeholder: 'password',
                     validation: {
                         isRequired: true,
-                        minLength: 6
+                        minLength: 6,
+                        isSignup: true,
+                        isLogin: true,
                     },
                     valid: false,
                 }
@@ -56,6 +73,9 @@ class Auth extends Component {
     };
 
     inputChangeHandler = (e, id) => {
+        if (id === 'name') {
+            // this.props.onGetName() TODOOO
+        }
         const updatedForm = updateObject(this.state.controls, {
             [id]: {
                 ...this.state.controls[id],
@@ -82,7 +102,8 @@ class Auth extends Component {
                 wantsLogin);
     };
 
-    switchAuthModeHandler = () => {
+    switchAuthModeHandler = (e) => {
+        e.preventDefault();
         this.setState(prevState => {
             return {isSignup: !prevState.isSignup};
         });
@@ -91,6 +112,7 @@ class Auth extends Component {
 
     render() {
         let authRedirect = null;
+    
         if (this.props.isAuthenticated) {
             authRedirect = <Redirect to={'/'} /> ;
         };
@@ -99,26 +121,40 @@ class Auth extends Component {
         for (const item in this.state.controls) {
             formArray.push({id: item, config: this.state.controls[item]});
         }
+        let forms = this.state.isSignup 
+        ?  formArray.map(element => {
+            if (element.config.validation.isSignup) {
+                return( < Input key={element.id}
+                 type={element.id}
+                 elementType={element.config.elementType} 
+                 placeholder={element.config.placeholder}
+                 value={element.config.value}
+                 changed={(event) => this.inputChangeHandler(event, element.id)}
+                 label={element.id}
+                 isLogin={element.config.validation.isLogin} />);
+            }
+         })
+         : formArray.map(element => {
+            if (element.config.validation.isLogin) {
+                return( < Input key={element.id}
+                 type={element.id}
+                 elementType={element.config.elementType} 
+                 placeholder={element.config.placeholder}
+                 value={element.config.value}
+                 changed={(event) => this.inputChangeHandler(event, element.id)}
+                 label={element.id}
+                 isLogin={element.config.validation.isLogin} />);
+            }
+         });
 
-        const form = formArray.map(element => (
-            < Input key={element.id}
-                    type={element.id}
-                    elementType={element.config.elementType} 
-                    placeholder={element.config.placeholder}
-                    value={element.config.value}
-                    changed={(event) => this.inputChangeHandler(event, element.id)}
-                    label={element.id} />
-        ));
-
-        
-       
-
+    
         return(
            <form className={styles.Auth}>
                 {authRedirect}
-                   {form}
-                   <Button click={this.submitHandler}>Submit</Button>
-                   <Button click={(event) => this.submitHandler(event, 'login')}>Login</Button>
+                   {forms}
+                   {this.state.isSignup ?  <Button click={this.submitHandler}>Submit</Button> : null}
+                   {this.state.isSignup ?  <Button click={this.switchAuthModeHandler}>got an account?</Button> : <Button click={(event) => this.submitHandler(event, 'login')}>Login</Button>}
+                   {!this.state.isSignup ?  <Button click={this.switchAuthModeHandler}>create new?</Button> : null}
            </form>
         );
     }

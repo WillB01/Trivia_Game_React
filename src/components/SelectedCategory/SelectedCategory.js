@@ -9,17 +9,8 @@ import Cards from '../UI/Cards/Cards';
 import Spinner from '../UI/Spinner/Spinner';
 
 class SelectedCategory extends Component {
-    componentDidMount() {
-        console.log('[ID MOUNTH]');
-    };
-
-
-    componentDidUpdate(prevProps) {
-        const percentage = this.percentageCalculator(1, this.props.selectedCtg.length); 
-        // this.props.onSelectedCategoryCompleted(this.props.location.state.id, this.props.playerScoreSctg);
-        console.log(this.props.completeCtg);
-        console.log(this.props.cards.length);
-        console.log(this.props.playerScoreSctg);
+    componentDidUpdate() {
+        const percentage = this.percentageCalculator(1, this.props.selectedCtg.length);
             this.props.completedCategory(
                 this.props.selectedCategory.scoreToCompleteSelectedCategory,
                 this.props.selectedCategory.selectedCategoryCompletedId,
@@ -35,8 +26,6 @@ class SelectedCategory extends Component {
         this.props.onNewQuestionCard();
         this.props.onProgressProgressBar(percentage);        
         }
-       
-        console.log('END');
     };
 
     playerAnswerClickHandler = (user, selected) => {  
@@ -62,7 +51,6 @@ class SelectedCategory extends Component {
     render() {
         const selectedCategory = this.props.selectedCtg;
         const isCompleted = this.props.completeCtg; 
-        const startGame = this.props.startGame; 
         let selected = < Spinner /> ;
         let questionsCards = [];    
         let button = null;    
@@ -76,24 +64,17 @@ class SelectedCategory extends Component {
             console.log(selectedCategory);
             selected = (
                 <React.Fragment>
-                 {/* {isCompleted ? <CompletedCategory title={this.props.selectedCtg[0].category.title}/> : null} */}
-                 {!isCompleted && this.props.cards.length === 0 ? <IncompleteCategory title={this.props.selectedCtg[0].category.title} /> : null}
-                
+                 {!isCompleted && this.props.cards.length === 0 ? <IncompleteCategory title={this.props.selectedCtg[0].category.title} /> : null}       
                  <div className={styles.QuestionCard}>
-                    {questionsCards[this.props.cards[0]]}
-                   
+                    {questionsCards[this.props.cards[0]]}          
                  </div>
-                 {/* <Timer click={startGame} /> */}
-               
                 </React.Fragment>
             )
         }
-    
         if (!this.props.triviaMainStartGame) {
             button = <Button btnType={'Regular'} 
             click={this.props.startGame}>Start Game</Button> 
         }
-
         return(
             <div className={styles.SelectedCategory}>
                 {button}
@@ -132,16 +113,9 @@ const mapDispatchToProps = dispatch => {
         onNewQuestionCard: () => dispatch(actions.newQuestionCard()),
         onNewCards: (cards) => dispatch(actions.newQuestionCards(cards)),
         onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress)),
-        onSelectedCategoryCompleted: (id, score) => dispatch(actions.selectedCategoryCompleted(id, score)),
         completedCategory: (scoreToCompleteSelectedCategory, selectedCategoryCompletedId, amountOfCards, id ) => dispatch(actions.completedCategory(scoreToCompleteSelectedCategory, selectedCategoryCompletedId, amountOfCards, id)),
         onResetSelectCategory: () => dispatch(actions.resetSelectCategory())
         
     };
 };
-
-   // scoreToCompleteSelectedCategory,
-    // selectedCategoryCompletedId,
-    // amountOfCards,
-    // id
-
 export default connect(mapStateToProps,mapDispatchToProps)(SelectedCategory);

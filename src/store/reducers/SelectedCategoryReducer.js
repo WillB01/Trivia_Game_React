@@ -1,6 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
 import {updateObject} from '../shared/utility';
-import _ from 'lodash';
 
 const initialState = {
     selectedCategory: null,
@@ -47,25 +46,25 @@ const setUpdateProgressBar = (state, action) => {
     });
 };
 
-const selectedCategoryCompleted = (state, action) => {
-    const score =  (state.scoreToCompleteSelectedCategory / 2) + 1;
-    let ids = state.selectedCategoryCompletedId;
-    if (action.score >= score
-        && state.scoreToCompleteSelectedCategory 
-        && state.amountOfCards.length === 0) {
-            ids.push(action.id)
-            console.log(state.scoreToCompleteSelectedCategory)
-            let noDuplicates = _.uniq(ids)
-            return updateObject(state, {
-                selectedCategoryCompleted: true,
-                selectedCategoryCompletedId: noDuplicates,
+// const selectedCategoryCompleted = (state, action) => {
+//     const score =  (state.scoreToCompleteSelectedCategory / 2) + 1;
+//     let ids = state.selectedCategoryCompletedId;
+//     if (action.score >= score
+//         && state.scoreToCompleteSelectedCategory 
+//         && state.amountOfCards.length === 0) {
+//             ids.push(action.id)
+//             console.log(state.scoreToCompleteSelectedCategory)
+//             let noDuplicates = _.uniq(ids)
+//             return updateObject(state, {
+//                 selectedCategoryCompleted: true,
+//                 selectedCategoryCompletedId: noDuplicates,
                 
-            }); // checks if the player has completed the category or not.
-    } 
-    return updateObject(state, {
-        selectedCategoryCompleted: false,        
-    });
-};
+//             }); // checks if the player has completed the category or not.
+//     } 
+//     return updateObject(state, {
+//         selectedCategoryCompleted: false,        
+//     });
+// };
 
 const setResetSelectedCategory = (state, action) => {
     return updateObject(state, {
@@ -91,9 +90,9 @@ const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.SELECTED_CATEGORY_SET_PROGRESS_PROGRESSBAR) {
         return setUpdateProgressBar(state, action);
     }
-    if (action.type === actionTypes.SELECTED_CATEGORY_COMPLETED) {
-        return selectedCategoryCompleted(state, action);
-    }
+    // if (action.type === actionTypes.SELECTED_CATEGORY_COMPLETED) {
+    //     return selectedCategoryCompleted(state, action);
+    // }
     if (action.type === actionTypes.RESET_SELECTED_CATEGORY) {
         return setResetSelectedCategory(state, action);
     }
