@@ -12,22 +12,22 @@ class SelectedCategory extends Component {
     componentDidMount() {
         console.log('[ID MOUNTH]');
     };
+
+
     componentDidUpdate(prevProps) {
         const percentage = this.percentageCalculator(1, this.props.selectedCtg.length); 
         // this.props.onSelectedCategoryCompleted(this.props.location.state.id, this.props.playerScoreSctg);
-        console.log(prevProps.cards.length);
+        console.log(this.props.completeCtg);
         console.log(this.props.cards.length);
         console.log(this.props.playerScoreSctg);
-        console.log(this.props.completeCtg);
-        console.log('END');
-        if (prevProps.cards.length === 0 && prevProps.cards.length === this.props.cards.length) {
             this.props.completedCategory(
                 this.props.selectedCategory.scoreToCompleteSelectedCategory,
                 this.props.selectedCategory.selectedCategoryCompletedId,
                 this.props.selectedCategory.amountOfCards,
                 this.props.location.state.id);
-        }
+
        if (this.props.completeCtg) {
+            this.props.onResetSelectCategory();
             this.props.history.push(`/completed`);
        }
         
@@ -36,7 +36,7 @@ class SelectedCategory extends Component {
         this.props.onProgressProgressBar(percentage);        
         }
        
-      
+        console.log('END');
     };
 
     playerAnswerClickHandler = (user, selected) => {  
@@ -133,7 +133,8 @@ const mapDispatchToProps = dispatch => {
         onNewCards: (cards) => dispatch(actions.newQuestionCards(cards)),
         onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress)),
         onSelectedCategoryCompleted: (id, score) => dispatch(actions.selectedCategoryCompleted(id, score)),
-        completedCategory: (scoreToCompleteSelectedCategory, selectedCategoryCompletedId, amountOfCards, id ) => dispatch(actions.completedCategory(scoreToCompleteSelectedCategory, selectedCategoryCompletedId, amountOfCards, id))
+        completedCategory: (scoreToCompleteSelectedCategory, selectedCategoryCompletedId, amountOfCards, id ) => dispatch(actions.completedCategory(scoreToCompleteSelectedCategory, selectedCategoryCompletedId, amountOfCards, id)),
+        onResetSelectCategory: () => dispatch(actions.resetSelectCategory())
         
     };
 };

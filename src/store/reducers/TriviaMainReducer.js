@@ -156,15 +156,15 @@ const setNewQuestionCard = (state, action) => {
 };
 
 const completedCategory = (state, action) => {
+    console.log(state.selectedCategoryCompleted);
     const rank = giveRank(state.player, action);
     const add = 1;
     const score =  (action.scoreToCompleteSelectedCategory / 2) + 1;
     const ids = state.player.score.selectedCategoryCompletedId;
-    // let ids = action.selectedCategoryCompletedId;
     
     if (state.player.score.selectedCategory >= score
         && action.scoreToCompleteSelectedCategory 
-        && action.amountOfCards.length === 0) {
+        && action.amountOfCards.length === 0 && !state.selectedCategoryCompleted) {
         ids.push(action.id)
         let noDuplicates = _.uniq(ids)
         return updateObject(state, {
@@ -188,6 +188,8 @@ const completedCategory = (state, action) => {
     });
     
 };  // if player completed a whole category! gives RANK and TOTAL.  updates on trivia componentDidMounth.
+
+
 
 const setLoggedInPlayerData = (state, action) => {
     const nameOfObject = Object.keys(action.playerData)[0];
