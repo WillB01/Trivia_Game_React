@@ -31,7 +31,6 @@ const fetchSelectedCategoryFail = (state, action) => {
     });
 };
 
-
 const setNewQuestionCards = (state, action) => {
     const newCards = [...state.amountOfCards];
     newCards.shift();
@@ -52,16 +51,16 @@ const selectedCategoryCompleted = (state, action) => {
     const score =  (state.scoreToCompleteSelectedCategory / 2) + 1;
     let ids = state.selectedCategoryCompletedId;
     if (action.score >= score
-    && state.scoreToCompleteSelectedCategory 
-    && state.amountOfCards.length === 0) {
-        ids.push(action.id)
-        console.log(state.scoreToCompleteSelectedCategory)
-        let noDuplicates = _.uniq(ids)
-        return updateObject(state, {
-            selectedCategoryCompleted: true,
-            selectedCategoryCompletedId: noDuplicates,
-            
-        }); // checks if the player has completed the category or not.
+        && state.scoreToCompleteSelectedCategory 
+        && state.amountOfCards.length === 0) {
+            ids.push(action.id)
+            console.log(state.scoreToCompleteSelectedCategory)
+            let noDuplicates = _.uniq(ids)
+            return updateObject(state, {
+                selectedCategoryCompleted: true,
+                selectedCategoryCompletedId: noDuplicates,
+                
+            }); // checks if the player has completed the category or not.
     } 
     return updateObject(state, {
         selectedCategoryCompleted: false,        
@@ -89,7 +88,7 @@ const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.SET_NEW_QUESTION_CARDS) {
         return setNewQuestionCards(state, action);
     }
-    if (action.type === actionTypes.SET_PROGRESS_PROGRESSBAR) {
+    if (action.type === actionTypes.SELECTED_CATEGORY_SET_PROGRESS_PROGRESSBAR) {
         return setUpdateProgressBar(state, action);
     }
     if (action.type === actionTypes.SELECTED_CATEGORY_COMPLETED) {

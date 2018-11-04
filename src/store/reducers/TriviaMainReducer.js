@@ -1,6 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 import {updateObject} from '../shared/utility';
 import _ from 'lodash';
+import { updateDb } from '../actions';
 const RANKSYSTEM = {
     'noob': ['noob', 5],
     'bronze': ['bronze', 20],
@@ -8,6 +9,33 @@ const RANKSYSTEM = {
     'gold': ['gold', 50],
     'dimond': ['dimond', 100],
 }; //rank system points will be compared with completedQuestionsBonus.
+const STARTSTATE = {
+    isCorrect: false,
+    correctAnswer: '',
+    playerAnswer: '',
+    startGame: false,
+    rankSystem: RANKSYSTEM,
+    selectedCategoryCompleted: false,
+    
+    player: {
+     name: '',
+     id: '',
+     hasRank: false,
+     rank: '',
+     score: {
+         total: 0,
+         completedQuestionsBonus: 0,
+         selectedCategory: 0,
+         selectedCategoryCompletedId: [],
+         
+     },
+     completedCategories: {
+         'title': ''
+     },
+ 
+ 
+    }
+};
 
 const initialState = {
    isCorrect: false,
@@ -42,32 +70,7 @@ const compare = (a, b) => {
     return (a === b ? true: false);
 }; // compares something
 
-
-const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
-    const playerAnswer = action.playerAnswer;
-    const correctAnswer = action.correctAnswer;
-    const remove = 10;
-    const add = 1;
-    const addToPoints = 5;
-
-    
-    if (!compare(playerAnswer, correctAnswer)) {
-        return updateObject(state, {
-            isCorrect: false,
-            correctAnswer: correctAnswer,
-            playerAnswer: playerAnswer,
-            player: {
-                ...state.player,
-                score: {
-                    ...state.player.score,
-                    completedQuestionsBonus: state.player.score.completedQuestionsBonus - remove,
-
-                }
-            }
-        });
-    }; // checks if player answer is correct. if incorrect returns FALSE
-
-
+const correctAnswerSelectedCategory = (state,playerAnswer, correctAnswer, add, addToPoints) => {
     return updateObject(state, { 
         isCorrect: true,
         correctAnswer: correctAnswer,
@@ -83,7 +86,39 @@ const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
             }
         }    
     });
+}; // runs on every answer click. adds to player points
+
+const wrongAnswerSelectedCategory = (state, playerAnswer, correctAnswer, remove) => {
+         return updateObject(state, {
+            isCorrect: false,
+            correctAnswer: correctAnswer,
+            playerAnswer: playerAnswer,
+            player: {
+                ...state.player,
+                score: {
+                    ...state.player.score,
+                    completedQuestionsBonus: state.player.score.completedQuestionsBonus - remove,
+
+                }
+            }
+        });
+};  // runs on every answer click. removes to player points
+
+
+const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
+    const playerAnswer = action.playerAnswer;
+    const correctAnswer = action.correctAnswer;
+    const remove = 10;
+    const add = 1;
+    const addToPoints = 5;
+
+    return !compare(playerAnswer, correctAnswer) 
+        ? wrongAnswerSelectedCategory(state, playerAnswer, correctAnswer, remove) 
+        : correctAnswerSelectedCategory(state, playerAnswer, correctAnswer, add, addToPoints);
+   
 }; // checks everything that has to do with the game adds SCORE!!!!!!!!
+
+
 
 const setStartGame = (state, action) => {
     return updateObject(state, {startGame: true})
@@ -95,6 +130,7 @@ const setResetGame = (state, action) => {
         correctAnswer: '',
         playerAnswer: '',
         startGame: false,
+        selectedCategoryCompleted: false,
         player: {
             ...state.player,
             score: {
@@ -153,9 +189,6 @@ const completedCategory = (state, action) => {
     
 };  // if player completed a whole category! gives RANK and TOTAL.  updates on trivia componentDidMounth.
 
-
-
-
 const setLoggedInPlayerData = (state, action) => {
     const nameOfObject = Object.keys(action.playerData)[0];
     const player = (action.playerData[nameOfObject]);
@@ -177,40 +210,23 @@ const setLoggedInPlayerData = (state, action) => {
         }
 
     };
-  
-    // console.log(action);
     return updateObject(state, {
        ...newPlayer
     });
+};
+
+const startUpdateDb = (state, action) => {
+    console.log('[update db]')
+    return {
+        ...state
+    }
 };
 
 
 
 const clearStateToLoggout = (state, action) => {
     return {
-        isCorrect: false,
-        correctAnswer: '',
-        playerAnswer: '',
-        startGame: false,
-        rankSystem: RANKSYSTEM,
-        selectedCategoryCompleted: false,
-        
-        player: {
-         name: '',
-         id: '',
-         hasRank: false,
-         rank: '',
-         score: {
-             total: 0,
-             completedQuestionsBonus: 0,
-             selectedCategory: 0,
-             selectedCategoryCompletedId: [],
-           
-         },
-         completedCategories: {
-             'title': ''
-         },
-    }
+        STARTSTATE
     }
 };
 
@@ -239,7 +255,7 @@ const giveRank = (player) => {
 }; //  gets called at completedCategory(). gives a rank based on questionScore
 
 const reducer = (state = initialState, action) => {
-    if (action.type === actionTypes.GET_PLAYER_ANSWER) {
+    if (action.type === actionTypes.TRIVIA_MAIN_GET_PLAYER_ANSWER) {
         return setPlayerAnswer(state, action);
     }
     if (action.type === actionTypes.STATE_GAME) {
@@ -251,7 +267,7 @@ const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.NEW_QUESTION_CARD) {
             return setNewQuestionCard(state, action);
     }
-    if (action.type === actionTypes.COMPLETED_CATEGORY) {
+    if (action.type === actionTypes.TRIVIA_MAIN_COMPLETED_CATEGORY) {
         return completedCategory(state, action);
     }
     if (action.type === actionTypes.FETCH_LOGGED_IN_PLAYER_SUCCESS_FROM_AUTH) {
@@ -262,7 +278,10 @@ const reducer = (state = initialState, action) => {
     }
     if (action.type === actionTypes.TRIVIA_SELECTED_CATEGORY_COMPLETED) {
         return completedCategory(state, action);
-    };
+    }
+    if (action.type === actionTypes.TRIVIA_MAIN_INIT_PATCH_DB_SUCCESS) {
+        return startUpdateDb(state, action);
+    }
      return state;
 };
 

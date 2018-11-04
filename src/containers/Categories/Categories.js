@@ -5,10 +5,7 @@ import styles from './Categories.module.css';
 import {NavLink, Redirect} from 'react-router-dom';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Button from '../../components/UI/Button/Button';
-import _ from 'lodash';
-import * as Scroll from 'react-scroll';
-import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
-import { FaSuitcaseRolling } from 'react-icons/fa';
+import {Events, animateScroll as scroll} from 'react-scroll'
 import {FaPlus, FaMinus} from 'react-icons/fa';
 
 
@@ -16,7 +13,7 @@ import {FaPlus, FaMinus} from 'react-icons/fa';
 class Categories extends Component {
    
     componentDidMount() {
-        // this.props.onResetGame();
+        this.props.onResetGame();
       
         Events.scrollEvent.register('begin', function () {
             console.log("begin", arguments);

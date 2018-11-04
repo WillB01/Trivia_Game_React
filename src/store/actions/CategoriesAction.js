@@ -1,5 +1,4 @@
 import * as actionTypes from './actionTypes';
-import _ from 'lodash';
 import axios from 'axios';
 
 //different action creators---------------------------------------

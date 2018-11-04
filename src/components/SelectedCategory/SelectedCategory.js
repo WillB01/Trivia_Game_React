@@ -1,33 +1,23 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import _ from 'lodash';
 import styles from './SelectedCategory.module.css';
 import * as actions from '../../store/actions/index';
-import Timer from '../UI/Timer/Timer';
 import WrongAnswer from '../UI/WrongAnswer/WrongAnswer';
-import CompletedCategory from '../UI/CompletedCategory/CompletedCategory';
 import IncompleteCategory from '../UI/IncompleteCategory/IncompleteCategory';
 import Button from '../UI/Button/Button';
 import Cards from '../UI/Cards/Cards';
 import Spinner from '../UI/Spinner/Spinner';
 
 class SelectedCategory extends Component {
-    state = {
-        startCount: 0,
-
-    };
-
     componentDidMount() {
-       
+        console.log('[ID MOUNTH]');
     };
-
- 
-    
     componentDidUpdate(prevProps) {
         const percentage = this.percentageCalculator(1, this.props.selectedCtg.length); 
         // this.props.onSelectedCategoryCompleted(this.props.location.state.id, this.props.playerScoreSctg);
         console.log(prevProps.cards.length);
         console.log(this.props.cards.length);
+        console.log(this.props.playerScoreSctg);
         console.log(this.props.completeCtg);
         console.log('END');
         if (prevProps.cards.length === 0 && prevProps.cards.length === this.props.cards.length) {

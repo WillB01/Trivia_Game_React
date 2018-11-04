@@ -1,5 +1,4 @@
 import * as actionTypes from './actionTypes';
-import _ from 'lodash';
 import axios from 'axios';
 
 export const setSelectedCategory = (selectedCategory) => {
@@ -25,7 +24,7 @@ export const newQuestionCards = (cards) => {
 
 export const setProgressProgressBar = (progress) => {
     return {
-        type: actionTypes.SET_PROGRESS_PROGRESSBAR,
+        type: actionTypes.SELECTED_CATEGORY_SET_PROGRESS_PROGRESSBAR,
         progress
     };
 };

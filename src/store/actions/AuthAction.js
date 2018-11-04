@@ -29,48 +29,41 @@ export const mock = () => {
     }
 };
 
-export const logout = (triviaMain) => {
-    const userId = localStorage.getItem('userId');
-    const token = localStorage.getItem('token')
-    const url = k.url(token);
-    const data = {
-        [userId]: {
-            name: triviaMain.player.name,
-            hasRank: triviaMain.player.hasRank,
-            rank: triviaMain.player.rank,
-            id: userId,
-            score: {
-                total: triviaMain.player.score.total,
-                completedQuestionsBonus: triviaMain.player.score.completedQuestionsBonus,
-                selectedCategoryCompletedId: triviaMain.player.score.selectedCategoryCompletedId.length === 0 ? ['none'] :  triviaMain.player.score.selectedCategoryCompletedId
-            }
-        }
+// export const logout = (triviaMain) => {
+//     const userId = localStorage.getItem('userId');
+//     const token = localStorage.getItem('token')
+//     const url = k.url(token);
+//     const data = {
+//         [userId]: {
+//             name: triviaMain.player.name,
+//             hasRank: triviaMain.player.hasRank,
+//             rank: triviaMain.player.rank,
+//             id: userId,
+//             score: {
+//                 total: triviaMain.player.score.total,
+//                 completedQuestionsBonus: triviaMain.player.score.completedQuestionsBonus,
+//                 selectedCategoryCompletedId: triviaMain.player.score.selectedCategoryCompletedId.length === 0 ? ['none'] :  triviaMain.player.score.selectedCategoryCompletedId
+//             }
+//         }
        
 
-    };
+//     };
+    
+//     return dispatch => {
+//         axios.patch(url,data)
+//             .then(res => {
+//                 console.log(res.data);
+//                 // dispatch(clearStateToTrivia())
+//                 dispatch(loggingOut())
 
-    // console.log(url);
-    // const test = {
-    //     'test': 'nice'
-    // }
-    // return dispatch => {
-    //     dispatch(mock());
-    // }
-    return dispatch => {
-        axios.patch(url,data)
-            .then(res => {
-                console.log(res.data);
-                dispatch(clearStateToTrivia())
-                dispatch(loggingOut())
+//             })
+//             .catch(err => {
+//                 dispatch(postPlayerInfoFail(err));
+//             });
+//     };
+// }; // post the core before logout!
 
-            })
-            .catch(err => {
-                dispatch(postPlayerInfoFail(err));
-            });
-    };
-}; // post the core before logout!
-
-export const loggingOut = () => {
+export const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
     localStorage.removeItem('userId');
@@ -96,7 +89,6 @@ export const checkAuthTimeout = (exirationTime) => {
 
 
 export const fetchLoggedInPlayer = (token, id, isSignup) => {
-   
         const url = k.urlWithQuery(token, id);
         return dispatch => {
             if (!isSignup) {
@@ -130,7 +122,7 @@ const fetchLoggedInPlayerSuccess = (res) => {
 const fetchLoggedInPlayerFail = (err) => {
     console.log(err);
     return {
-        type: actionTypes.FETCH_LOGGED_IN_PLAYER_FAIL,
+        type: actionTypes.AUTH_FETCH_LOGGED_IN_PLAYER_FAIL,
         error: err
     }
 };
@@ -156,9 +148,7 @@ export const auth = (email, password, isSignup) => {
                 localStorage.setItem('token', response.data.idToken);
                 localStorage.setItem('expirationDate', expirationDate);
                 localStorage.setItem('userId', response.data.localId);
-                // console.log(response.data.idToken);
-                // console.log( response.data.localId);
-               
+
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
                 dispatch(checkAuthTimeout(response.data.expiresIn));
                 dispatch(fetchLoggedInPlayer(response.data.idToken, response.data.localId, isSignup));
@@ -193,13 +183,13 @@ export const authCheckState = (triviaMain) => {
 
 export const postPlayerInfoSuccess = () => {
     return {
-        type: actionTypes.POST_PLAYER_SUCCESS
+        type: actionTypes.TRIVIA_MAIN_POST_PLAYER_SUCCESS
     };
 };
 
 export const postPlayerInfoFail = (error) => {
     return {
-        type: actionTypes.POST_PLAYER_FAIL
+        type: actionTypes.TRIVIA_MAIN_POST_PLAYER_FAIL
     };
 };
 

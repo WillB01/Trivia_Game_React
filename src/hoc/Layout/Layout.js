@@ -3,7 +3,6 @@ import NavBar from '../../components/UI/Navbar/Navbar';
 import PlayerInfo from '../../components/UI/PlayerInfo/PlayerInfo';
 import styles from './Layout.module.css';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
 
 class Layout extends Component {
     render() {

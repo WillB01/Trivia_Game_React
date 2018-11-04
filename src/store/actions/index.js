@@ -14,6 +14,7 @@ export {
     resetGame,
     newQuestionCard,
     completedCategory,
+    initPatchdDb
    
 } from './TriviaMainAction'
 export {

@@ -2,12 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Categories from '../Categories/Categories';
 import * as actions from '../../store/actions/index'
-import {Redirect} from 'react-router-dom';
 
 class TriviaMain extends Component {
-    state = {
-        completedCategories: []
-    };
     componentDidMount() {
         // if (this.props.selectedCtg.selectedCategoryCompleted) {
         //     this.props.completedCategory(
@@ -16,7 +12,7 @@ class TriviaMain extends Component {
         //         this.props.selectedCtg.amountOfCards,
         //         this.props.selectedCtg.id);
         // }  
-       
+        this.props.inInitPatchdDb(this.props.triviaMain);
         this.props.onTryAutoSignup(this.props.triviaMain);
         this.props.onInitCategories();
         this.props.onResetGame();
@@ -51,6 +47,7 @@ const mapDispatchToProps = dispatch => {
         onResetSelectCategory: () => (dispatch(actions.resetSelectCategory())),
         completedCategory: () => dispatch(actions.completedCategory()),
         onTryAutoSignup: (triviaMain) => dispatch(actions.authCheckState(triviaMain)),
+        inInitPatchdDb: (triviaMain) => dispatch(actions.initPatchdDb(triviaMain)) 
     };
 };
 
