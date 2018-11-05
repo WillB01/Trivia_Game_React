@@ -5,7 +5,6 @@ export {
     fetchSelectedCategory,
     newQuestionCards,
     setProgressProgressBar,
-    // selectedCategoryCompleted,
     resetSelectCategory
 } from './SelectedCategoryAction'
 export {

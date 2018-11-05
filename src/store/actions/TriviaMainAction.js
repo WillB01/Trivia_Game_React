@@ -2,31 +2,22 @@ import * as actionTypes from './actionTypes';
 import * as k from '../../k';
 import axios from 'axios';
 
-
-
 export const startGame = () =>  ({type: actionTypes.STATE_GAME}); // user presses btn in selectedCategory.
 export const resetGame = () =>  ({type: actionTypes.RESET_GAME});
-export const newQuestionCard = () => {return {type: actionTypes.NEW_QUESTION_CARD};};
-export const initPatchDbSuccess = () => {return {type: actionTypes.TRIVIA_MAIN_INIT_PATCH_DB_SUCCESS};};
-export const initPatchDbFail = () => {return {type: actionTypes.TRIVIA_MAIN_INIT_PATCH_DB_FAIL};};
-export const dontInitPatchDbSuccess = () => {return { type: actionTypes.TRIVIA_MAIN_DONT_INIT_PATCH_SUCCESS };};
-const categoryGameOver = () => {return {type: actionTypes.CATEGORY_GMAEOVER_TRIVIA_MAIN};};
-const continueGame = () => {return {type: actionTypes.CATEGORY_CONTINUE_TRIVIA_MAIN};};
-const categoryCompletedSuccess = (id) => {
-    return {
-        type: actionTypes.CATEGORY_COMPLETED_SUCCESS_TRIVIA_MAIN,
-        id
-    };
-};
-export const getPlayerAnswer= (playerAnswer, correctAnswer) => {
-    return {
-        type: actionTypes.TRIVIA_MAIN_GET_PLAYER_ANSWER,
-        playerAnswer,
-        correctAnswer
-    };
-};
-
-
+export const newQuestionCard = () => ({type: actionTypes.NEW_QUESTION_CARD});
+export const initPatchDbSuccess = () => ({type: actionTypes.TRIVIA_MAIN_INIT_PATCH_DB_SUCCESS});
+export const initPatchDbFail = () =>  ({type: actionTypes.TRIVIA_MAIN_INIT_PATCH_DB_FAIL});
+export const dontInitPatchDbSuccess = () => ({ type: actionTypes.TRIVIA_MAIN_DONT_INIT_PATCH_SUCCESS });
+const categoryGameOver = () => ({type: actionTypes.CATEGORY_GAMEOVER_TRIVIA_MAIN});
+const continueGame = () => ({type: actionTypes.CATEGORY_CONTINUE_TRIVIA_MAIN});
+const categoryCompletedSuccess = (id) => ({
+    type: actionTypes.CATEGORY_COMPLETED_SUCCESS_TRIVIA_MAIN, 
+    id});
+export const getPlayerAnswer= (playerAnswer, correctAnswer) => ({
+    type: actionTypes.TRIVIA_MAIN_GET_PLAYER_ANSWER,
+    playerAnswer,
+    correctAnswer
+});
 
 export const checkIfCategoryCompleted =  (scoreToCompleteSelectedCategory, selectedCategoryCompletedId, cards, id, playerScore, completeCtg) => {
         const score =  (scoreToCompleteSelectedCategory / 2) + 1;
@@ -50,9 +41,7 @@ export const checkIfCategoryCompleted =  (scoreToCompleteSelectedCategory, selec
        
 };
 
-
 export const initPatchdDb = (triviaMain) => {
-    // console.log(triviaMain.firstLoggin);
     const userId = localStorage.getItem('userId');
     const token = localStorage.getItem('token')
     const url = k.url(token);
@@ -85,8 +74,6 @@ export const initPatchdDb = (triviaMain) => {
     return dispatch => {
         dispatch(dontInitPatchDbSuccess());
     };
-   
-
 };
 
 

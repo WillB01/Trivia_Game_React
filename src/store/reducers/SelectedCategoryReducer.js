@@ -45,7 +45,7 @@ const setUpdateProgressBar = (state, action) => {
         progressBar: progress + action.progress
     });
 };
-//testing
+
 
 const setResetSelectedCategory = (state, action) => {
     return updateObject(state, {

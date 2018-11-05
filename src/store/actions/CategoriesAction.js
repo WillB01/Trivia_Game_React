@@ -2,24 +2,12 @@ import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
 //different action creators---------------------------------------
-export const fetchCategoriesSuccess = (categories, btnClick) => {
-    return {
-        type: actionTypes.FETCH_CATEGORIES,
-        categories
-    };
-}; 
-
-export const fetchCategoriesFail = () => {
-    return {
-        type: actionTypes.FETCH_CATEGORIES_FAIL
-    };
-};
+export const fetchCategoriesSuccess = (categories) => ({type: actionTypes.FETCH_CATEGORIES, categories}); 
+export const fetchCategoriesFail = () => ({type: actionTypes.FETCH_CATEGORIES_FAIL});
 //---------------------------------------------------------------
-
 
 let offsetStart = 12;
 const visibleCategories = 12;
-
 export const pageination = (btnClick) => {
     if (btnClick === 'more') {
         offsetStart += visibleCategories;

@@ -1,13 +1,13 @@
 import * as actionTypes from '../actions/actionTypes';
 import {updateObject} from '../shared/utility';
 import _ from 'lodash';
-import { updateDb } from '../actions';
 const RANKSYSTEM = {
-    'noob': ['noob', 5],
-    'bronze': ['bronze', 20],
-    'silver': ['silver', 35],
-    'gold': ['gold', 50],
-    'dimond': ['dimond', 100],
+    'tenderfoot': ['tenderfoot', 10],
+    'noob': ['noob', 50],
+    'bronze': ['bronze', 80],
+    'silver': ['silver', 120],
+    'gold': ['gold', 200],
+    'diamond': ['diamond', 300],
 }; //rank system points will be compared with completedQuestionsBonus.
 const RESETSTATE = {
     isCorrect: false,
@@ -112,7 +112,7 @@ const wrongAnswerSelectedCategory = (state, playerAnswer, correctAnswer, remove)
 const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
     const playerAnswer = action.playerAnswer;
     const correctAnswer = action.correctAnswer;
-    const remove = 10;
+    const remove = 2;
     const add = 1;
     const addToPoints = 5;
 
@@ -190,10 +190,15 @@ const setLoggedInPlayerData = (state, action) => {
 };
 
 const newPlayer = (state, action) => {
+    const rank = giveRank(state.player, action);
     return updateObject(state, {
+        firstLoggin: true,
         player: {
            ...state.player,
-           name: action.name
+           name: action.name,
+           hasRank: rank.hasRank,
+           rank: rank.rank,
+
         }
     })
 }
@@ -242,6 +247,9 @@ const clearStateToLoggout = (state, action) => {
 const giveRank = (player) => {
     const playerBS = player.score.completedQuestionsBonus;
     const ranksSystem = RANKSYSTEM;
+    if (playerBS >= ranksSystem.tenderfoot[1] && playerBS < ranksSystem.tenderfoot[1]) { // tenderfoot
+        return {hasRank: true, rank: ranksSystem.tenderfoot[0]};
+    }
     if (playerBS >= ranksSystem.noob[1] && playerBS < ranksSystem.bronze[1]) { // noob
         return {hasRank: true, rank: ranksSystem.noob[0]};
     };
@@ -254,8 +262,8 @@ const giveRank = (player) => {
     if (playerBS >= ranksSystem.gold[1]  && playerBS < ranksSystem.dimond[1]) { // gold
         return {hasRank: true, rank: ranksSystem.gold[0]};
     };
-    if (playerBS >= ranksSystem.dimond[1]) { // dimond
-        return {hasRank: true, rank: ranksSystem.dimond[0]};
+    if (playerBS >= ranksSystem.diamond[1]) { // diamond
+        return {hasRank: true, rank: ranksSystem.diamond[0]};
     };
 
     return {hasRank: false, rank: ''};
@@ -271,7 +279,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.AUTH_CLEAR_STATE_TO_TRIVIA: return clearStateToLoggout(state, action);
         case actionTypes.TRIVIA_MAIN_INIT_PATCH_DB_SUCCESS: return startUpdateDb(state, action);
         case actionTypes.CATEGORY_COMPLETED_SUCCESS_TRIVIA_MAIN: return categoryCompletedSuccess(state, action);
-        case actionTypes.CATEGORY_GMAEOVER_TRIVIA_MAIN: return categoryGameOver(state, action); 
+        case actionTypes.CATEGORY_GAMEOVER_TRIVIA_MAIN: return categoryGameOver(state, action); 
         case actionTypes.AUTH_INITIATE_LOGOUT: return clearStateToLoggout(state, action);
         case actionTypes.AUTH_NEW_PLAYER: return newPlayer(state, action);
         default: return state;

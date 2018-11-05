@@ -89,9 +89,6 @@ class Auth extends Component {
     submitHandler = (e, login) => {
         e.preventDefault();
         let wantsLogin = login === 'login' ? false : true;
-        // if(login === 'login') {
-        //     wantsLogin = false
-        // }
         this.props.onAuth(this.state.controls.email.value, 
             this.state.controls.password.value,
                 wantsLogin, this.state.controls.name.value);
