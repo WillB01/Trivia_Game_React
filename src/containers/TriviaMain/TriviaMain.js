@@ -6,7 +6,6 @@ import * as actions from '../../store/actions/index'
 class TriviaMain extends Component {
     componentDidMount() {
         this.props.onInitPatchdDb(this.props.triviaMain);
-        // this.props.onTryAutoSignup(this.props.triviaMain);
         this.props.onInitCategories();
         this.props.onResetGame();
         this.props.onResetSelectCategory();
@@ -23,9 +22,6 @@ class TriviaMain extends Component {
 
 const mapStateToProps = state => {
     return {
-        ctg: state.categories,
-        selectedCtg: state.selectedCategory,
-        isAuthenticated: state.auth.token !== null,
         triviaMain: state.triviaMain
     };
 };
@@ -35,8 +31,6 @@ const mapDispatchToProps = dispatch => {
         onInitCategories: () => dispatch(actions.fetchCategories()), //Gets the categories data from api,
         onResetGame: () => dispatch(actions.resetGame()),
         onResetSelectCategory: () => (dispatch(actions.resetSelectCategory())),
-        completedCategory: () => dispatch(actions.completedCategory()),
-        onTryAutoSignup: (triviaMain) => dispatch(actions.authCheckState(triviaMain)),
         onInitPatchdDb: (triviaMain) => dispatch(actions.initPatchdDb(triviaMain)) 
     };
 };

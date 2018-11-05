@@ -13,11 +13,7 @@ export {
     startGame,
     resetGame,
     newQuestionCard,
-
-    completedCategory,
-
     initPatchdDb,
-
     checkIfCategoryCompleted
     
    

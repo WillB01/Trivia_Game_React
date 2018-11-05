@@ -11,7 +11,6 @@ import {FaPlus, FaMinus} from 'react-icons/fa';
 
 
 class Categories extends Component {
-   
     componentDidMount() {
         this.props.onResetGame();
       

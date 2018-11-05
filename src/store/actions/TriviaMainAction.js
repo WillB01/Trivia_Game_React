@@ -29,18 +29,6 @@ export const newQuestionCard = () => {
     };
 };
 
-export const completedCategory = (scoreToCompleteSelectedCategory, selectedCategoryCompletedId, amountOfCards, id) => {
-    return {
-        type: actionTypes.TRIVIA_MAIN_COMPLETED_CATEGORY,
-        scoreToCompleteSelectedCategory,
-        selectedCategoryCompletedId,
-        amountOfCards,
-        id
-    };
-};
-
-
-
 const categoryCompletedSuccess = (id) => {
     return {
         type: actionTypes.CATEGORY_COMPLETED_SUCCESS_TRIVIA_MAIN,

@@ -154,59 +154,13 @@ const setResetGame = (state, action) => {
 }; //resets state
 
 const setNewQuestionCard = (state, action) => {
-
     return updateObject(state, {
         isCorrect: false,
         correctAnswer: '',
         playerAnswer: '',
         startGame: true,
-
     });
-};
-
-// const isCategoryCompleted = (state, action) => {
-//     const score =  (action.scoreToCompleteSelectedCategory / 2) + 1;
-//     if (state.player.score.selectedCategory >= score
-//         && action.scoreToCompleteSelectedCategory 
-//         && action.amountOfCards.length === 0 && !state.selectedCategoryCompleted) { 
-//             return true;
-//     }
-// };
-
-// const completedCategory = (state, action) => {
-//     const rank = giveRank(state.player, action);
-//     const add = 1;
-  
-//     const ids = state.player.score.selectedCategoryCompletedId;
-    
-//     if (state.player.score.selectedCategory >= score
-//         && action.scoreToCompleteSelectedCategory 
-//         && action.amountOfCards.length === 0 && !state.selectedCategoryCompleted) {
-//         ids.push(action.id)
-//         let noDuplicates = _.uniq(ids)
-//         return updateObject(state, {
-//             rankSystem: RANKSYSTEM,
-//             selectedCategoryCompleted: true,
-//         player: {
-//             ...state.player,
-//             hasRank: rank.hasRank,
-//             rank: rank.rank,
-//             score: {
-//                 ...state.player.score,
-//                 total: state.player.score.total += add,
-//                 selectedCategoryCompletedId: noDuplicates,
-
-//             },
-          
-//         }}); // checks if the player has completed the category or not.
-//     } 
-//     return updateObject(state, {
-//         selectedCategoryCompleted: false,  
-//     });
-    
-// };  // if player completed a whole category! gives RANK and TOTAL.  updates on trivia componentDidMounth.
-
-
+}; // resets
 
 const setLoggedInPlayerData = (state, action) => {
     const nameOfObject = Object.keys(action.playerData)[0];
@@ -279,9 +233,7 @@ const clearStateToLoggout = (state, action) => {
 const giveRank = (player) => {
     const playerBS = player.score.completedQuestionsBonus;
     const ranksSystem = RANKSYSTEM;
-
     if (playerBS >= ranksSystem.noob[1] && playerBS < ranksSystem.bronze[1]) { // noob
-        
         return {hasRank: true, rank: ranksSystem.noob[0]};
     };
     if (playerBS >= ranksSystem.bronze[1] && playerBS < ranksSystem.silver[1]) { // bronze 
@@ -301,40 +253,18 @@ const giveRank = (player) => {
 }; //  gets called at completedCategory(). gives a rank based on questionScore
 
 const reducer = (state = initialState, action) => {
-    if (action.type === actionTypes.TRIVIA_MAIN_GET_PLAYER_ANSWER) {
-        return setPlayerAnswer(state, action);
+    switch(action.type) {
+        case actionTypes.TRIVIA_MAIN_GET_PLAYER_ANSWER: return setPlayerAnswer(state, action);
+        case actionTypes.STATE_GAME: return setStartGame(state, action);
+        case actionTypes.RESET_GAME: return setResetGame(state, action);
+        case actionTypes.NEW_QUESTION_CARD:  return setNewQuestionCard(state, action);
+        case actionTypes.FETCH_LOGGED_IN_PLAYER_SUCCESS_FROM_AUTH: return setLoggedInPlayerData(state, action);
+        case actionTypes.AUTH_CLEAR_STATE_TO_TRIVIA: return clearStateToLoggout(state, action);
+        case actionTypes.TRIVIA_MAIN_INIT_PATCH_DB_SUCCESS: return startUpdateDb(state, action);
+        case actionTypes.CATEGORY_COMPLETED_SUCCESS_TRIVIA_MAIN: return categoryCompletedSuccess(state, action);
+        case actionTypes.CATEGORY_GMAEOVER_TRIVIA_MAIN: return categoryGameOver(state, action); 
+        default: return state;
     }
-    if (action.type === actionTypes.STATE_GAME) {
-        return setStartGame(state, action);
-    }
-    if (action.type === actionTypes.RESET_GAME) {
-        return setResetGame(state, action);
-    }
-    if (action.type === actionTypes.NEW_QUESTION_CARD) {
-            return setNewQuestionCard(state, action);
-    }
-    // if (action.type === actionTypes.TRIVIA_MAIN_COMPLETED_CATEGORY) {
-    //     return completedCategory(state, action);
-    // }
-    if (action.type === actionTypes.FETCH_LOGGED_IN_PLAYER_SUCCESS_FROM_AUTH) {
-        return setLoggedInPlayerData(state, action);
-    }
-    if (action.type === actionTypes.AUTH_CLEAR_STATE_TO_TRIVIA) {
-        return clearStateToLoggout(state, action);
-    }
-    // if (action.type === actionTypes.TRIVIA_SELECTED_CATEGORY_COMPLETED) {
-    //     return completedCategory(state, action);
-    // }
-    if (action.type === actionTypes.TRIVIA_MAIN_INIT_PATCH_DB_SUCCESS) {
-        return startUpdateDb(state, action);
-    }
-    if (action.type === actionTypes.CATEGORY_COMPLETED_SUCCESS_TRIVIA_MAIN) {
-        return categoryCompletedSuccess(state, action);
-    }
-    if (action.type === actionTypes.CATEGORY_GMAEOVER_TRIVIA_MAIN) {
-        return categoryGameOver(state, action);
-    };
-     return state;
 };
 
 export default reducer;
