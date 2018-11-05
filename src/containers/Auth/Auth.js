@@ -53,8 +53,7 @@ class Auth extends Component {
                 }
 
             },
-            isSignup: true
-            
+            isSignup: true     
     };
 
 
@@ -89,7 +88,7 @@ class Auth extends Component {
 
     submitHandler = (e, login) => {
         e.preventDefault();
-        let wantsLogin = login === '!login' ? true : false;
+        let wantsLogin = login === 'login' ? false : true;
         // if(login === 'login') {
         //     wantsLogin = false
         // }
@@ -167,7 +166,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup)),
+        onAuth: (email, password, isSignup, name) => dispatch(actions.auth(email, password, isSignup, name)),
         onTryAutoSignup: (triviaMain) => dispatch(actions.authCheckState(triviaMain)),
         // onSetAuthRedirect: () => dispatch(action.setAuthRedirectPath('/'))
     };

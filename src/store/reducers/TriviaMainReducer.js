@@ -171,7 +171,7 @@ const setLoggedInPlayerData = (state, action) => {
         player: {
             ...state.player,
             id: player.id,
-            name: player.name ? player.name : 'unknown',
+            name: player.name,
             hasRank: rank.hasRank,
             rank: rank.rank,
             score: {
@@ -188,6 +188,15 @@ const setLoggedInPlayerData = (state, action) => {
        ...newPlayer
     });
 };
+
+const newPlayer = (state, action) => {
+    return updateObject(state, {
+        player: {
+           ...state.player,
+           name: action.name
+        }
+    })
+}
 
 const categoryCompletedSuccess = (state, action) => {
     const rank = giveRank(state.player, action);
@@ -264,6 +273,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.CATEGORY_COMPLETED_SUCCESS_TRIVIA_MAIN: return categoryCompletedSuccess(state, action);
         case actionTypes.CATEGORY_GMAEOVER_TRIVIA_MAIN: return categoryGameOver(state, action); 
         case actionTypes.AUTH_INITIATE_LOGOUT: return clearStateToLoggout(state, action);
+        case actionTypes.AUTH_NEW_PLAYER: return newPlayer(state, action);
         default: return state;
     }
 };

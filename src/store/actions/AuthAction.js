@@ -30,9 +30,11 @@ export const mock = () => {
 };
 
 
-const newPlayer = () => {
+const newPlayer = (name) => {
+    console.log(name);
     return {
-        type: actionTypes.AUTH_NEW_PLAYER
+        type: actionTypes.AUTH_NEW_PLAYER,
+        name
     };
 };
 
@@ -132,7 +134,7 @@ export const fetchLoggedInPlayer = (token, id, isSignup) => {
         };
 }; //gets the loggedin player data.
 
-export const auth = (email, password, isSignup) => {
+export const auth = (email, password, isSignup, name) => {
     console.log(isSignup);
     return dispatch => {
         dispatch(authStart());
@@ -155,7 +157,7 @@ export const auth = (email, password, isSignup) => {
                 localStorage.setItem('userId', response.data.localId);
 
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
-                !isSignup ?  dispatch(fetchLoggedInPlayer(response.data.idToken, response.data.localId, isSignup)) : dispatch(newPlayer()) ;
+                !isSignup ?  dispatch(fetchLoggedInPlayer(response.data.idToken, response.data.localId, isSignup)) : dispatch(newPlayer(name)) ;
                
             })
             .catch(err => {
