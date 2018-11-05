@@ -9,7 +9,8 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 
 class SelectedCategory extends Component {
     componentDidUpdate() {
-       const percentage = this.percentageCalculator(1, this.props.selectedCtg.length);
+       const cards = this.props.selectedCtg ? this.props.selectedCtg.length  : 0;
+       const percentage = this.percentageCalculator(1, cards);
  
        if (this.props.triviaMainIsCorrect) { // resets triviaMain state for user answer and correct answer. adds to progressBar
             this.props.onNewQuestionCard();

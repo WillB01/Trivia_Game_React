@@ -247,7 +247,7 @@ const clearStateToLoggout = (state, action) => {
 const giveRank = (player) => {
     const playerBS = player.score.completedQuestionsBonus;
     const ranksSystem = RANKSYSTEM;
-    if (playerBS >= ranksSystem.tenderfoot[1] && playerBS < ranksSystem.tenderfoot[1]) { // tenderfoot
+    if (playerBS >= ranksSystem.tenderfoot[1] && playerBS < ranksSystem.noob[1]) { // tenderfoot
         return {hasRank: true, rank: ranksSystem.tenderfoot[0]};
     }
     if (playerBS >= ranksSystem.noob[1] && playerBS < ranksSystem.bronze[1]) { // noob

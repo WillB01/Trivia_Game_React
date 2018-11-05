@@ -90,7 +90,7 @@ export const authCheckState = (triviaMain) => {
         } else {
                 const userId = localStorage.getItem('userId');
                 dispatch(authSuccess(token, userId));
-                dispatch(fetchLoggedInPlayer(token, userId));
+                dispatch(fetchLoggedInPlayer(token, userId, false));
             }
            
         }
