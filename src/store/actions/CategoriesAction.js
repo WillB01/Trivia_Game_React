@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
 //different action creators---------------------------------------
-export const setCategories = (categories, btnClick) => {
+export const fetchCategoriesSuccess = (categories, btnClick) => {
     return {
         type: actionTypes.FETCH_CATEGORIES,
         categories
@@ -36,7 +36,7 @@ export const fetchCategories = (btnClick) => {
     return dispatch => {
         axios.get(url)
         .then(res => {       
-            dispatch(setCategories(res.data, btnClick));
+            dispatch(fetchCategoriesSuccess(res.data, btnClick));
         })
         .catch(error => {
             console.log(error);

@@ -69,13 +69,10 @@ class Auth extends Component {
         if (validation.maxLength) {
             isValid = value.length <= validation.maxLength && isValid;
         }
-        return isValid;
-    };
+         return isValid;
+    }; // checks validation för the input fields.
 
     inputChangeHandler = (e, id) => {
-        if (id === 'name') {
-            // this.props.onGetName() TODOOO
-        }
         const updatedForm = updateObject(this.state.controls, {
             [id]: {
                 ...this.state.controls[id],
@@ -88,8 +85,7 @@ class Auth extends Component {
         });
 
         this.setState({controls: updatedForm});
-
-    };
+    }; // gets the input value.
 
     submitHandler = (e, login) => {
         e.preventDefault();
@@ -109,7 +105,7 @@ class Auth extends Component {
         });
     };
 
-
+    
     render() {
         let authRedirect = null;
     

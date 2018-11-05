@@ -9,31 +9,33 @@ const RANKSYSTEM = {
     'gold': ['gold', 50],
     'dimond': ['dimond', 100],
 }; //rank system points will be compared with completedQuestionsBonus.
-const STARTSTATE = {
+const RESETSTATE = {
     isCorrect: false,
     correctAnswer: '',
     playerAnswer: '',
     startGame: false,
     rankSystem: RANKSYSTEM,
     selectedCategoryCompleted: false,
-    
+    selectedCategoryGameover: false,
+    firstLoggin: true,
+
     player: {
-     name: '',
-     id: '',
-     hasRank: false,
-     rank: '',
-     score: {
-         total: 0,
-         completedQuestionsBonus: 0,
-         selectedCategory: 0,
-         selectedCategoryCompletedId: [],
-         
-     },
-     completedCategories: {
-         'title': ''
-     },
- 
- 
+        name: '',
+        id: '',
+        hasRank: false,
+        rank: '',
+        score: {
+            total: 0,
+            completedQuestionsBonus: 0,
+            selectedCategory: 0,
+            selectedCategoryCompletedId: [],
+
+        },
+        completedCategories: {
+            'title': ''
+        },
+
+
     }
 };
 
@@ -44,6 +46,8 @@ const initialState = {
    startGame: false,
    rankSystem: RANKSYSTEM,
    selectedCategoryCompleted: false,
+   selectedCategoryGameover: false,
+   firstLoggin: true,
    
    player: {
     name: '',
@@ -121,7 +125,10 @@ const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
 
 
 const setStartGame = (state, action) => {
-    return updateObject(state, {startGame: true})
+    return updateObject(state, {
+        startGame: true,
+        firstLoggin: false
+    });
 }; // Starts a game
 
 const setResetGame = (state, action) => {
@@ -131,6 +138,7 @@ const setResetGame = (state, action) => {
         playerAnswer: '',
         startGame: false,
         selectedCategoryCompleted: false,
+        selectedCategoryGameover: false,
         player: {
             ...state.player,
             score: {
@@ -146,6 +154,7 @@ const setResetGame = (state, action) => {
 }; //resets state
 
 const setNewQuestionCard = (state, action) => {
+
     return updateObject(state, {
         isCorrect: false,
         correctAnswer: '',
@@ -155,39 +164,47 @@ const setNewQuestionCard = (state, action) => {
     });
 };
 
-const completedCategory = (state, action) => {
-    console.log(state.selectedCategoryCompleted);
-    const rank = giveRank(state.player, action);
-    const add = 1;
-    const score =  (action.scoreToCompleteSelectedCategory / 2) + 1;
-    const ids = state.player.score.selectedCategoryCompletedId;
-    
-    if (state.player.score.selectedCategory >= score
-        && action.scoreToCompleteSelectedCategory 
-        && action.amountOfCards.length === 0 && !state.selectedCategoryCompleted) {
-        ids.push(action.id)
-        let noDuplicates = _.uniq(ids)
-        return updateObject(state, {
-            rankSystem: RANKSYSTEM,
-            selectedCategoryCompleted: true,
-        player: {
-            ...state.player,
-            hasRank: rank.hasRank,
-            rank: rank.rank,
-            score: {
-                ...state.player.score,
-                total: state.player.score.total += add,
-                selectedCategoryCompletedId: noDuplicates,
+// const isCategoryCompleted = (state, action) => {
+//     const score =  (action.scoreToCompleteSelectedCategory / 2) + 1;
+//     if (state.player.score.selectedCategory >= score
+//         && action.scoreToCompleteSelectedCategory 
+//         && action.amountOfCards.length === 0 && !state.selectedCategoryCompleted) { 
+//             return true;
+//     }
+// };
 
-            },
-          
-        }}); // checks if the player has completed the category or not.
-    } 
-    return updateObject(state, {
-        selectedCategoryCompleted: false,  
-    });
+// const completedCategory = (state, action) => {
+//     const rank = giveRank(state.player, action);
+//     const add = 1;
+  
+//     const ids = state.player.score.selectedCategoryCompletedId;
     
-};  // if player completed a whole category! gives RANK and TOTAL.  updates on trivia componentDidMounth.
+//     if (state.player.score.selectedCategory >= score
+//         && action.scoreToCompleteSelectedCategory 
+//         && action.amountOfCards.length === 0 && !state.selectedCategoryCompleted) {
+//         ids.push(action.id)
+//         let noDuplicates = _.uniq(ids)
+//         return updateObject(state, {
+//             rankSystem: RANKSYSTEM,
+//             selectedCategoryCompleted: true,
+//         player: {
+//             ...state.player,
+//             hasRank: rank.hasRank,
+//             rank: rank.rank,
+//             score: {
+//                 ...state.player.score,
+//                 total: state.player.score.total += add,
+//                 selectedCategoryCompletedId: noDuplicates,
+
+//             },
+          
+//         }}); // checks if the player has completed the category or not.
+//     } 
+//     return updateObject(state, {
+//         selectedCategoryCompleted: false,  
+//     });
+    
+// };  // if player completed a whole category! gives RANK and TOTAL.  updates on trivia componentDidMounth.
 
 
 
@@ -196,6 +213,7 @@ const setLoggedInPlayerData = (state, action) => {
     const player = (action.playerData[nameOfObject]);
     const rank = giveRank(player, action);
     const newPlayer = {
+        firstLoggin: true,
         player: {
             ...state.player,
             id: player.id,
@@ -217,18 +235,44 @@ const setLoggedInPlayerData = (state, action) => {
     });
 };
 
+const categoryCompletedSuccess = (state, action) => {
+    const rank = giveRank(state.player, action);
+    const add = 1;
+    const ids = state.player.score.selectedCategoryCompletedId;
+    ids.push(action.id)
+    let noDuplicates = _.uniq(ids)
+    return updateObject(state, {
+                    rankSystem: RANKSYSTEM,
+                    selectedCategoryCompleted: true,
+                player: {
+                    ...state.player,
+                    hasRank: rank.hasRank,
+                    rank: rank.rank,
+                    score: {
+                        ...state.player.score,
+                        total: state.player.score.total += add,
+                        selectedCategoryCompletedId: noDuplicates,
+                    }
+                }
+    });
+};
+
+const categoryGameOver = (state, action) => {
+    return updateObject(state, { 
+        selectedCategoryCompleted: false,
+        selectedCategoryGameover: true,
+    });
+};
+
 const startUpdateDb = (state, action) => {
-    console.log('[update db]')
     return {
         ...state
     }
 };
 
-
-
 const clearStateToLoggout = (state, action) => {
     return {
-        STARTSTATE
+        RESETSTATE
     }
 };
 
@@ -269,21 +313,27 @@ const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.NEW_QUESTION_CARD) {
             return setNewQuestionCard(state, action);
     }
-    if (action.type === actionTypes.TRIVIA_MAIN_COMPLETED_CATEGORY) {
-        return completedCategory(state, action);
-    }
+    // if (action.type === actionTypes.TRIVIA_MAIN_COMPLETED_CATEGORY) {
+    //     return completedCategory(state, action);
+    // }
     if (action.type === actionTypes.FETCH_LOGGED_IN_PLAYER_SUCCESS_FROM_AUTH) {
         return setLoggedInPlayerData(state, action);
     }
     if (action.type === actionTypes.AUTH_CLEAR_STATE_TO_TRIVIA) {
         return clearStateToLoggout(state, action);
     }
-    if (action.type === actionTypes.TRIVIA_SELECTED_CATEGORY_COMPLETED) {
-        return completedCategory(state, action);
-    }
+    // if (action.type === actionTypes.TRIVIA_SELECTED_CATEGORY_COMPLETED) {
+    //     return completedCategory(state, action);
+    // }
     if (action.type === actionTypes.TRIVIA_MAIN_INIT_PATCH_DB_SUCCESS) {
         return startUpdateDb(state, action);
     }
+    if (action.type === actionTypes.CATEGORY_COMPLETED_SUCCESS_TRIVIA_MAIN) {
+        return categoryCompletedSuccess(state, action);
+    }
+    if (action.type === actionTypes.CATEGORY_GMAEOVER_TRIVIA_MAIN) {
+        return categoryGameOver(state, action);
+    };
      return state;
 };
 

@@ -29,6 +29,48 @@ export const mock = () => {
     }
 };
 
+
+const newPlayer = () => {
+    return {
+        type: actionTypes.AUTH_NEW_PLAYER
+    };
+};
+
+
+const fetchLoggedInPlayerSuccess = (res) => {
+    return {
+        type: actionTypes.FETCH_LOGGED_IN_PLAYER_SUCCESS_FROM_AUTH,
+        playerData: res
+    }
+};
+
+const fetchLoggedInPlayerFail = (err) => {
+    console.log(err);
+    return {
+        type: actionTypes.AUTH_FETCH_LOGGED_IN_PLAYER_FAIL,
+        error: err
+    }
+};
+
+
+export const postPlayerInfoSuccess = () => {
+    return {
+        type: actionTypes.TRIVIA_MAIN_POST_PLAYER_SUCCESS
+    };
+};
+
+export const postPlayerInfoFail = (error) => {
+    return {
+        type: actionTypes.TRIVIA_MAIN_POST_PLAYER_FAIL
+    };
+};
+
+export const clearStateToTrivia = () => {
+    return {
+        type: actionTypes.AUTH_CLEAR_STATE_TO_TRIVIA
+    }
+};
+
 // export const logout = (triviaMain) => {
 //     const userId = localStorage.getItem('userId');
 //     const token = localStorage.getItem('token')
@@ -72,21 +114,6 @@ export const logout = () => {
     };
 };  // removes the nessecary data to be loged in.
 
-export const clearStateToTrivia = () => {
-    return {
-        type: actionTypes.AUTH_CLEAR_STATE_TO_TRIVIA
-    }
-}
-
-
-export const checkAuthTimeout = (exirationTime) => {
-    return dispatch => {
-        setTimeout(() => {
-            dispatch(logout());
-        },exirationTime * 1000);
-    };
-}; //checks 
-
 
 export const fetchLoggedInPlayer = (token, id, isSignup) => {
         const url = k.urlWithQuery(token, id);
@@ -103,38 +130,14 @@ export const fetchLoggedInPlayer = (token, id, isSignup) => {
            
 
         };
-};
+}; //gets the loggedin player data.
 
-const newPlayer = () => {
-    return {
-        type: actionTypes.AUTH_NEW_PLAYER
-    };
-};
-
-
-const fetchLoggedInPlayerSuccess = (res) => {
-    return {
-        type: actionTypes.FETCH_LOGGED_IN_PLAYER_SUCCESS_FROM_AUTH,
-        playerData: res
-    }
-};
-
-const fetchLoggedInPlayerFail = (err) => {
-    console.log(err);
-    return {
-        type: actionTypes.AUTH_FETCH_LOGGED_IN_PLAYER_FAIL,
-        error: err
-    }
-};
-
-
-export const auth = (email, password, isSignup, name) => {
+export const auth = (email, password, isSignup) => {
     return dispatch => {
         dispatch(authStart());
         const authData = {
             email: email,
             password: password,
-            name: name,
             returnSecureToken: true
         };
         let url = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${k.key}`
@@ -151,48 +154,28 @@ export const auth = (email, password, isSignup, name) => {
                 localStorage.setItem('userId', response.data.localId);
 
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
-                dispatch(checkAuthTimeout(response.data.expiresIn));
                 dispatch(fetchLoggedInPlayer(response.data.idToken, response.data.localId, isSignup));
-               
-       
             })
             .catch(err => {
                 console.log(err);
                 dispatch(authFail(err.response.data.error));
             });
     };
-};
+}; // checks if new player or logged in player.
+
 export const authCheckState = (triviaMain) => {
     return dispatch => {
         const token = localStorage.getItem('token'); 
         if (!token) {
             dispatch(logout(triviaMain));
         } else {
-            const expirationDate = new Date(localStorage.getItem('expirationDate'));
-            if (expirationDate <= new Date()) {
-                dispatch(logout(triviaMain));
-            } else {
                 const userId = localStorage.getItem('userId');
                 dispatch(authSuccess(token, userId));
-                dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000)); 
+                dispatch(fetchLoggedInPlayer(token, userId));
             }
            
         }
-    };  
-};
-
-
-export const postPlayerInfoSuccess = () => {
-    return {
-        type: actionTypes.TRIVIA_MAIN_POST_PLAYER_SUCCESS
-    };
-};
-
-export const postPlayerInfoFail = (error) => {
-    return {
-        type: actionTypes.TRIVIA_MAIN_POST_PLAYER_FAIL
-    };
-};
+}; //checks if player has a token on localstorage and if true player gets logged in.
 
 
 

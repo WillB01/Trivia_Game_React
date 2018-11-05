@@ -2,29 +2,60 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import styles from './SelectedCategory.module.css';
 import * as actions from '../../store/actions/index';
-import WrongAnswer from '../UI/WrongAnswer/WrongAnswer';
-import IncompleteCategory from '../UI/IncompleteCategory/IncompleteCategory';
-import Button from '../UI/Button/Button';
-import Cards from '../UI/Cards/Cards';
-import Spinner from '../UI/Spinner/Spinner';
+import WrongAnswer from '../../components/UI/WrongAnswer/WrongAnswer';
+import IncompleteCategory from '../../components/UI/IncompleteCategory/IncompleteCategory';
+import Button from '../../components/UI/Button/Button';
+import Cards from '../../components/UI/Cards/Cards';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import CompletedCategory from '../../components/UI/CompletedCategory/CompletedCategory';
 
 class SelectedCategory extends Component {
+    // componentWillUnmount() {
+    //     console.log('[unmount]')
+    //     if (this.props.cards.length === 0) {
+    //         this.props.completedCategory(
+    //             this.props.selectedCategory.scoreToCompleteSelectedCategory,
+    //             this.props.selectedCategory.selectedCategoryCompletedId,
+    //             this.props.selectedCategory.amountOfCards,
+    //             this.props.location.state.id);
+    //             this.props.history.push(`/completed`);
+           
+    
+    //         if (this.props.cards.length === 0 && !this.props.completeCtg) {
+    //             this.props.onResetSelectCategory();
+    //             this.props.history.push(`/gameover`);
+    //         }
+    //     };
+      
+    // }
+    compnentDidMount() {
+        console.log('[didMount]');
+    };
     componentDidUpdate() {
+        console.log(this.props.completeCtg);
+        console.log(this.props.cards.length);
+        console.log(this.props.selectCtgScore);
         const percentage = this.percentageCalculator(1, this.props.selectedCtg.length);
-            this.props.completedCategory(
-                this.props.selectedCategory.scoreToCompleteSelectedCategory,
-                this.props.selectedCategory.selectedCategoryCompletedId,
-                this.props.selectedCategory.amountOfCards,
-                this.props.location.state.id);
-
-       if (this.props.completeCtg) {
-            this.props.onResetSelectCategory();
-            this.props.history.push(`/completed`);
-       }
-        
+ 
        if (this.props.triviaMainIsCorrect) {
         this.props.onNewQuestionCard();
-        this.props.onProgressProgressBar(percentage);        
+        this.props.onProgressProgressBar(percentage);   
+        }
+        this.props.onCheckIfCategoryCompleted( 
+            this.props.selectedCategory.scoreToCompleteSelectedCategory,
+            this.props.selectedCategory.selectedCategoryCompletedId,
+            this.props.selectedCategory.amountOfCards,
+            this.props.location.state.id,
+            this.props.selectCtgScore,
+            this.props.completeCtg
+        );
+        if (this.props.completeCtg) {
+            this.props.onResetSelectCategory();
+            this.props.history.push(`/completed`);
+        }
+        if (this.props.isGameOver) {
+            this.props.onResetSelectCategory();
+            this.props.history.push(`/gameover`);
         }
     };
 
@@ -64,7 +95,8 @@ class SelectedCategory extends Component {
             console.log(selectedCategory);
             selected = (
                 <React.Fragment>
-                 {!isCompleted && this.props.cards.length === 0 ? <IncompleteCategory title={this.props.selectedCtg[0].category.title} /> : null}       
+                     {/* {isCompleted && this.props.cards.length === 0 ? <CompletedCategory title={this.props.selectedCtg[0].category.title} /> : null}  
+                 {!isCompleted && this.props.cards.length === 0 ? <IncompleteCategory title={this.props.selectedCtg[0].category.title} /> : null}        */}
                  <div className={styles.QuestionCard}>
                     {questionsCards[this.props.cards[0]]}          
                  </div>
@@ -78,8 +110,6 @@ class SelectedCategory extends Component {
         return(
             <div className={styles.SelectedCategory}>
                 {button}
-               
-             
                 {selected}
                 <WrongAnswer playerAnswer={this.props.playerAnswer}
                               correctAnswer={this.props.correctAnswer}
@@ -93,16 +123,16 @@ class SelectedCategory extends Component {
 const mapStateToProps = state => {
     return {
         selectedCtg: state.selectedCategory.selectedCategory,
+        cards: state.selectedCategory.amountOfCards,
+        progressBar: state.selectedCategory.progressBar,
+        selectedCategory: state.selectedCategory,
+        playerAnswer: state.triviaMain.playerAnswer,
+        correctAnswer: state.triviaMain.correctAnswer,
         completeCtg: state.triviaMain.selectedCategoryCompleted,
         triviaMainIsCorrect: state.triviaMain.isCorrect,
         triviaMainStartGame: state.triviaMain.startGame,
-        cards: state.selectedCategory.amountOfCards,
-        progressBar: state.selectedCategory.progressBar,
-        playerAnswer: state.triviaMain.playerAnswer,
-        correctAnswer: state.triviaMain.correctAnswer,
-        playerScoreSctg: state.triviaMain.player.score.selectedCategory,
-        totalScore: state.triviaMain.player.score.total,
-        selectedCategory: state.selectedCategory
+        selectCtgScore: state.triviaMain.player.score.selectedCategory,
+        isGameOver: state.triviaMain.selectedCategoryGameover
     };
 };
 
@@ -114,8 +144,15 @@ const mapDispatchToProps = dispatch => {
         onNewCards: (cards) => dispatch(actions.newQuestionCards(cards)),
         onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress)),
         completedCategory: (scoreToCompleteSelectedCategory, selectedCategoryCompletedId, amountOfCards, id ) => dispatch(actions.completedCategory(scoreToCompleteSelectedCategory, selectedCategoryCompletedId, amountOfCards, id)),
-        onResetSelectCategory: () => dispatch(actions.resetSelectCategory())
+        onResetSelectCategory: () => dispatch(actions.resetSelectCategory()),
+        onCheckIfCategoryCompleted: (scoreToComplete, selCtgId, cards, id, score, isCompleteCtg) => dispatch(actions.checkIfCategoryCompleted(scoreToComplete, selCtgId, cards, id, score, isCompleteCtg))
         
     };
 };
 export default connect(mapStateToProps,mapDispatchToProps)(SelectedCategory);
+
+// this.props.selectedCategory.scoreToCompleteSelectedCategory,
+// this.props.selectedCategory.selectedCategoryCompletedId,
+// this.props.selectedCategory.amountOfCards,
+// this.props.location.state.id,
+// this.props.selectCtgScore

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Layout from './hoc/Layout/Layout';
 import TriviaMain from './containers/TriviaMain/TriviaMain';
 import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
-import SelectedCategory from './components/SelectedCategory/SelectedCategory';
+import SelectedCategory from './containers/SelectedCategory/SelectedCategory';
 import CompletedCategory from './components/UI/CompletedCategory/CompletedCategory';
 import IncompleteCategory from './components/UI/IncompleteCategory/IncompleteCategory';
 import Logout from './containers/Auth/Logout/Logout';
@@ -13,11 +13,10 @@ import {connect} from 'react-redux';
 import './App.css';
 
 
-class App extends Component {
+class App extends Component {  
   componentDidMount() {
-    // this.props.onTryAutoSignup();
-  };
-  
+    this.props.onTryAutoSignup(this.props.triviaMain);
+  }
   render() {
     let routes = (
       <Switch>
@@ -50,13 +49,14 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null,
+    triviaMain: state.triviaMain
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTryAutoSignup: () => dispatch(actions.authCheckState())
+    onTryAutoSignup: (triviaMain) => dispatch(actions.authCheckState(triviaMain)),
   }
 };
 
