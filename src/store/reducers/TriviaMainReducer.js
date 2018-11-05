@@ -18,24 +18,24 @@ const RESETSTATE = {
     selectedCategoryCompleted: false,
     selectedCategoryGameover: false,
     firstLoggin: true,
-
+    
     player: {
-        name: '',
-        id: '',
-        hasRank: false,
-        rank: '',
-        score: {
-            total: 0,
-            completedQuestionsBonus: 0,
-            selectedCategory: 0,
-            selectedCategoryCompletedId: [],
-
-        },
-        completedCategories: {
-            'title': ''
-        },
-
-
+     name: '',
+     id: '',
+     hasRank: false,
+     rank: '',
+     score: {
+         total: 0,
+         completedQuestionsBonus: 0,
+         selectedCategory: 0,
+         selectedCategoryCompletedId: [],
+         
+     },
+     completedCategories: {
+         'title': ''
+     },
+ 
+ 
     }
 };
 
@@ -226,7 +226,7 @@ const startUpdateDb = (state, action) => {
 
 const clearStateToLoggout = (state, action) => {
     return {
-        RESETSTATE
+        ...RESETSTATE
     }
 };
 
@@ -263,6 +263,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.TRIVIA_MAIN_INIT_PATCH_DB_SUCCESS: return startUpdateDb(state, action);
         case actionTypes.CATEGORY_COMPLETED_SUCCESS_TRIVIA_MAIN: return categoryCompletedSuccess(state, action);
         case actionTypes.CATEGORY_GMAEOVER_TRIVIA_MAIN: return categoryGameOver(state, action); 
+        case actionTypes.AUTH_INITIATE_LOGOUT: return clearStateToLoggout(state, action);
         default: return state;
     }
 };

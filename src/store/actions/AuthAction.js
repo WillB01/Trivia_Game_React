@@ -133,6 +133,7 @@ export const fetchLoggedInPlayer = (token, id, isSignup) => {
 }; //gets the loggedin player data.
 
 export const auth = (email, password, isSignup) => {
+    console.log(isSignup);
     return dispatch => {
         dispatch(authStart());
         const authData = {
@@ -154,7 +155,8 @@ export const auth = (email, password, isSignup) => {
                 localStorage.setItem('userId', response.data.localId);
 
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
-                dispatch(fetchLoggedInPlayer(response.data.idToken, response.data.localId, isSignup));
+                !isSignup ?  dispatch(fetchLoggedInPlayer(response.data.idToken, response.data.localId, isSignup)) : dispatch(newPlayer()) ;
+               
             })
             .catch(err => {
                 console.log(err);
