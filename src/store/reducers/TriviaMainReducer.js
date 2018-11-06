@@ -29,7 +29,6 @@ const RESETSTATE = {
          completedQuestionsBonus: 0,
          selectedCategory: 0,
          selectedCategoryCompletedId: [],
-         
      },
      completedCategories: {
          'title': ''
@@ -59,7 +58,6 @@ const initialState = {
         completedQuestionsBonus: 0,
         selectedCategory: 0,
         selectedCategoryCompletedId: [],
-        
     },
     completedCategories: {
         'title': ''

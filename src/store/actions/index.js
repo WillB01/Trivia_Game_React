@@ -1,5 +1,6 @@
 export {
     fetchCategories,
+    fetchImagesForCategories
 } from './CategoriesAction';
 export {
     fetchSelectedCategory,

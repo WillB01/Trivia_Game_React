@@ -8,7 +8,6 @@ import * as actions from '../../store/actions/index';
 import {Redirect} from 'react-router-dom';
 import UserInputHelper from '../../components/UI/UserInputHelper/UserInputHelper';
 import AuthWelcomeMessage from '../../components/UI/AuthWelcomeMessage/AuthWelcomeMessage';
-import InformationCard from '../../components/UI/InformationCard/InformationCard';
 import {authControls} from './authControls'; //different input elements and config
 
 
@@ -129,7 +128,6 @@ class Auth extends Component {
         }))};
     
     render() {
-        console.log(this.state.controls);
         const authRedirect = this.props.isAuthenticated ? <Redirect to={'/'} />  : null;
         const welcomeMsg = this.state.isSignup ? '  Create an account to play the most awsome game ever!' : 'Welcome Back'
         const formArray = this.formArrayCreator(this.state.controls);
@@ -140,7 +138,6 @@ class Auth extends Component {
         return(
             // focus={formArray.filter((el, index) => {return el.config.focus === true})}
             <React.Fragment>
-                {/* <InformationCard /> */}
             <form className={styles.Auth}>
                 <AuthWelcomeMessage />
                     {authRedirect}

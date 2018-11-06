@@ -10,8 +10,8 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 class SelectedCategory extends Component {
     componentDidUpdate() {
        const cards = this.props.selectedCtg ? this.props.selectedCtg.length  : 0;
+    //    const title =  this.props.selectedCtg[0].category.title? this.props.selectedCtg[0].category.title  : '';
        const percentage = this.percentageCalculator(1, cards);
- 
        if (this.props.triviaMainIsCorrect) { // resets triviaMain state for user answer and correct answer. adds to progressBar
             this.props.onNewQuestionCard();
             this.props.onProgressProgressBar(percentage);   
@@ -23,7 +23,9 @@ class SelectedCategory extends Component {
             this.props.selectedCategory.amountOfCards,
             this.props.location.state.id,
             this.props.selectCtgScore,
-            this.props.completeCtg
+            this.props.completeCtg,
+            // title
+           
         );
 
         if (this.props.completeCtg) {
@@ -106,7 +108,7 @@ const mapStateToProps = state => {
         triviaMainIsCorrect: state.triviaMain.isCorrect,
         triviaMainStartGame: state.triviaMain.startGame,
         selectCtgScore: state.triviaMain.player.score.selectedCategory,
-        isGameOver: state.triviaMain.selectedCategoryGameover
+        isGameOver: state.triviaMain.selectedCategoryGameover,
     };
 };
 
@@ -118,7 +120,7 @@ const mapDispatchToProps = dispatch => {
         onNewCards: (cards) => dispatch(actions.newQuestionCards(cards)),
         onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress)),
         onResetSelectCategory: () => dispatch(actions.resetSelectCategory()),
-        onCheckIfCategoryCompleted: (scoreToComplete, selCtgId, cards, id, score, isCompleteCtg) => dispatch(actions.checkIfCategoryCompleted(scoreToComplete, selCtgId, cards, id, score, isCompleteCtg))
+        onCheckIfCategoryCompleted: (scoreToComplete, selCtgId, cards, id, score, isCompleteCtg, title) => dispatch(actions.checkIfCategoryCompleted(scoreToComplete, selCtgId, cards, id, score, isCompleteCtg, title))
         
     };
 };

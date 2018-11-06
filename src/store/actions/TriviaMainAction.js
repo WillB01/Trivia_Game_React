@@ -10,22 +10,24 @@ export const initPatchDbFail = () =>  ({type: actionTypes.TRIVIA_MAIN_INIT_PATCH
 export const dontInitPatchDbSuccess = () => ({ type: actionTypes.TRIVIA_MAIN_DONT_INIT_PATCH_SUCCESS });
 const categoryGameOver = () => ({type: actionTypes.CATEGORY_GAMEOVER_TRIVIA_MAIN});
 const continueGame = () => ({type: actionTypes.CATEGORY_CONTINUE_TRIVIA_MAIN});
-const categoryCompletedSuccess = (id) => ({
+const categoryCompletedSuccess = (id, title) => ({
     type: actionTypes.CATEGORY_COMPLETED_SUCCESS_TRIVIA_MAIN, 
-    id});
+    id,
+    title
+});
 export const getPlayerAnswer= (playerAnswer, correctAnswer) => ({
     type: actionTypes.TRIVIA_MAIN_GET_PLAYER_ANSWER,
     playerAnswer,
     correctAnswer
 });
 
-export const checkIfCategoryCompleted =  (scoreToCompleteSelectedCategory, selectedCategoryCompletedId, cards, id, playerScore, completeCtg) => {
+export const checkIfCategoryCompleted =  (scoreToCompleteSelectedCategory, selectedCategoryCompletedId, cards, id, playerScore, completeCtg, title) => {
         const score =  (scoreToCompleteSelectedCategory / 2) + 1;
         if (playerScore >= score
             && scoreToCompleteSelectedCategory 
             && cards.length === 0 && !completeCtg) { 
               return dispatch => {
-                    dispatch(categoryCompletedSuccess(id));
+                    dispatch(categoryCompletedSuccess(id, title));
                 };
         }
         if (playerScore <= score

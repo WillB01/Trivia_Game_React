@@ -5,8 +5,10 @@ import * as actions from '../../store/actions/index'
 
 class TriviaMain extends Component {
     componentDidMount() {
+        // const str = this.props.triviaMain.player.score.categoryTitle;
         this.props.onInitPatchdDb(this.props.triviaMain);
         this.props.onInitCategories();
+        // this.props.onFetchImg(str);
         this.props.onResetGame();
         this.props.onResetSelectCategory();
     };
@@ -31,7 +33,10 @@ const mapDispatchToProps = dispatch => {
         onInitCategories: () => dispatch(actions.fetchCategories()), //Gets the categories data from api,
         onResetGame: () => dispatch(actions.resetGame()),
         onResetSelectCategory: () => (dispatch(actions.resetSelectCategory())),
-        onInitPatchdDb: (triviaMain) => dispatch(actions.initPatchdDb(triviaMain)) 
+        onInitPatchdDb: (triviaMain) => dispatch(actions.initPatchdDb(triviaMain)),
+        // onFetchImg: (name) => dispatch(actions.fetchImagesForCategories(name))
+       
+       
     };
 };
 

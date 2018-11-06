@@ -11,9 +11,8 @@ import {FaPlus, FaMinus} from 'react-icons/fa';
 
 
 class Categories extends Component {
-    componentDidMount() {
+     componentDidMount() {
         this.props.onResetGame();
-      
         Events.scrollEvent.register('begin', function () {
             console.log("begin", arguments);
         });
@@ -21,12 +20,12 @@ class Categories extends Component {
         Events.scrollEvent.register('end', function () {
             console.log("end", arguments);
         });
-
     };
 
     componentWillUnmount() {
         Events.scrollEvent.remove('begin');
         Events.scrollEvent.remove('end');
+        
     };
 
     
@@ -116,6 +115,9 @@ const mapDispatchToProps = dispatch => {
         onCategoryHandler: (id) => dispatch(categoriesAction.fetchSelectedCategory(id)),
         fetchCategories: (btnClick) => dispatch(categoriesAction.fetchCategories(btnClick)),
         onResetGame: () => dispatch(categoriesAction.resetGame()),
+      
+       
+      
     };
 };
 
