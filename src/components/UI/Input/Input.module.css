@@ -6,6 +6,7 @@
     font-size: 1.2rem;
     color:  #8d8d8d;
     box-sizing: border-box;
+    width: 100%;
     
     
 }
@@ -19,14 +20,22 @@
    
 }
 
-.Label {
+.Label:nth-child(1) {
     width: 20%;
-    height: 20px;
-    padding: 5px;
+    height: 50px;
+    text-align: center;
+    padding: 2px;
+    position: absolute;
+    top:  2px;
+    left: 50%;
+    right: 50%;
     color:  #8d8d8d;
     font-size: 1.2rem;
-    border-radius: 5px;
+    border-radius: 5000px;
+    background: red;
+    box-sizing: border-box;
 
+    
 }
 
 .Valid {

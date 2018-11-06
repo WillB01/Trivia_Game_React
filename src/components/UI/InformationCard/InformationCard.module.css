@@ -1,0 +1,13 @@
+.InformationCardContainer {
+
+    width: 80%;
+    height: 400px;
+    margin: 0 auto;
+    background: #272727;
+    border-radius: 5px;
+    color: #d8d8d8;
+    padding: 10px;
+    font-size: 2vh;
+    box-sizing: border-box;
+    text-align: center;
+}

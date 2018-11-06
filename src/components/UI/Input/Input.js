@@ -4,7 +4,7 @@ import styles from './Input.module.css';
 const input = (props) => {
     return (
         <React.Fragment>
-            <label className={styles.Label}>{props.id}</label>
+            {/* <label className={styles.Label}>{props.id}</label> */}
             <input className={[styles.Input, styles[props.btnType]].join(' ')} type={props.type} 
                    placeholder={props.placeholder} 
                    value={props.value || ''} 

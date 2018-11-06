@@ -6,13 +6,16 @@ import {connect} from 'react-redux';
 
 class Layout extends Component {
     render() {
+
    
         return (
             
             <div className={styles.Layout}>
+              
                 {this.props.isAuthenticated 
                 ? <NavBar className={styles.Navbar} 
                           isAuthenticated={this.props.isAuthenticated} /> : null }
+                         
 
                        
                 {this.props.isAuthenticated ? <PlayerInfo className={styles.PlayerInfo} /> : null}

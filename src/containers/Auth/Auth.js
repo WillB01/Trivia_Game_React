@@ -7,6 +7,8 @@ import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import {Redirect} from 'react-router-dom';
 import UserInputHelper from '../../components/UI/UserInputHelper/UserInputHelper';
+import AuthWelcomeMessage from '../../components/UI/AuthWelcomeMessage/AuthWelcomeMessage';
+import InformationCard from '../../components/UI/InformationCard/InformationCard';
 import {authControls} from './authControls'; //different input elements and config
 
 
@@ -129,6 +131,7 @@ class Auth extends Component {
     render() {
         console.log(this.state.controls);
         const authRedirect = this.props.isAuthenticated ? <Redirect to={'/'} />  : null;
+        const welcomeMsg = this.state.isSignup ? '  Create an account to play the most awsome game ever!' : 'Welcome Back'
         const formArray = this.formArrayCreator(this.state.controls);
         const forms = this.state.isSignup 
         ? formArray.map(element => (element.config.validation.isSignup ? this.formJsx(element) : null))
@@ -136,17 +139,30 @@ class Auth extends Component {
 
         return(
             // focus={formArray.filter((el, index) => {return el.config.focus === true})}
-           <form className={styles.Auth}>
-                {authRedirect}
-                   {forms}
-                    {this.props.error ? < UserInputHelper error={this.props.error} 
-                                                          /> : null }
-                   {this.state.isSignup ?  <Button click={this.submitHandler}
-                                                   btnType={!this.checkIfSubmit(this.state.newUserInputFields) ? 'disabled': null }>Submit</Button>: null}
-                   {this.state.isSignup ?  <Button click={this.switchAuthModeHandler}>got an account?</Button> : <Button click={(event) => 
-                    this.submitHandler(event, 'login')}  btnType={!this.checkIfSubmit(this.state.loginInputFields) ? 'disabled': null}>Login</Button>}
-                   {!this.state.isSignup ?  <Button click={this.switchAuthModeHandler}>create new?</Button> : null}
-           </form>
+            <React.Fragment>
+                {/* <InformationCard /> */}
+            <form className={styles.Auth}>
+                <AuthWelcomeMessage />
+                    {authRedirect}
+                        <div>
+                            <p>
+                            {welcomeMsg}
+                            </p>
+                        </div>
+                    {forms}
+                        {this.props.error ? < UserInputHelper error={this.props.error} 
+                                                            /> : null }
+                    
+                    <div className={styles.ButtonContainer}>
+                        {this.state.isSignup ?  <Button click={this.submitHandler}
+                                                        btnType={!this.checkIfSubmit(this.state.newUserInputFields) ? 'disabled': null }>Submit</Button>: null}
+                        {this.state.isSignup ?  <Button click={this.switchAuthModeHandler}>got an account?</Button> : <Button click={(event) => 
+                            this.submitHandler(event, 'login')}  btnType={!this.checkIfSubmit(this.state.loginInputFields) ? 'disabled': null}>Login</Button>}
+                        {!this.state.isSignup ?  <Button click={this.switchAuthModeHandler}>create new?</Button> : null}
+                    </div>
+                    
+            </form>
+           </React.Fragment>
         );
     }
 };
