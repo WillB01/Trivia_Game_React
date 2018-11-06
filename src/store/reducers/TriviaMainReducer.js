@@ -5,9 +5,9 @@ const RANKSYSTEM = {
     'tenderfoot': ['tenderfoot', 10],
     'noob': ['noob', 50],
     'bronze': ['bronze', 80],
-    'silver': ['silver', 120],
-    'gold': ['gold', 200],
-    'diamond': ['diamond', 300],
+    'silver': ['silver', 200],
+    'gold': ['gold', 300],
+    'diamond': ['diamond', 400],
 }; //rank system points will be compared with completedQuestionsBonus.
 const RESETSTATE = {
     isCorrect: false,
@@ -223,14 +223,21 @@ const categoryCompletedSuccess = (state, action) => {
                     }
                 }
     });
-};
+}; //when player has completed a category.
 
 const categoryGameOver = (state, action) => {
+    const rank = giveRank(state.player, action);
     return updateObject(state, { 
         selectedCategoryCompleted: false,
         selectedCategoryGameover: true,
+        player: {
+            ...state.player,
+            hasRank: rank.hasRank,
+            rank: rank.rank,
+
+        }
     });
-};
+}; 
 
 const startUpdateDb = (state, action) => {
     return {
@@ -267,7 +274,7 @@ const giveRank = (player) => {
     };
 
     return {hasRank: false, rank: ''};
-}; //  gets called at completedCategory(). gives a rank based on questionScore
+}; // gives a rank based on questionScore
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
