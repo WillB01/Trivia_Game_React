@@ -20,6 +20,14 @@
     color: white;
 }
 
+.disabled {
+    background: #cecece;
+}
+
+.disabled:hover {
+    background: #cecece;
+}
+
 @media screen and (max-width: 600px) {
     .Pagination {
      

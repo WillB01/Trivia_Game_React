@@ -3,15 +3,19 @@ import axios from 'axios';
 import * as k from '../../k';
 
 export const authStart = () => ({type: actionTypes.AUTH_START});
+export const authFail = (error) => ({type: actionTypes.AUTH_FAIL, error: error});
+export const mock = () => ({type: actionTypes.MOCK});
+const newPlayer = (name) => ({type: actionTypes.AUTH_NEW_PLAYER, name});
+const fetchLoggedInPlayerSuccess = (res) => ({type: actionTypes.FETCH_LOGGED_IN_PLAYER_SUCCESS_FROM_AUTH, playerData: res});
+export const postPlayerInfoSuccess = () => ({type: actionTypes.TRIVIA_MAIN_POST_PLAYER_SUCCESS});
+export const postPlayerInfoFail = (error) => ({type: actionTypes.TRIVIA_MAIN_POST_PLAYER_FAIL});
+export const clearStateToTrivia = () => ({type: actionTypes.AUTH_CLEAR_STATE_TO_TRIVIA});
+
 export const authSuccess = (token, userId) => ({
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
     userId: userId
 });
-export const authFail = (error) => ({type: actionTypes.AUTH_FAIL, error: error});
-export const mock = () => ({type: actionTypes.MOCK});
-const newPlayer = (name) => ({type: actionTypes.AUTH_NEW_PLAYER, name});
-const fetchLoggedInPlayerSuccess = (res) => ({type: actionTypes.FETCH_LOGGED_IN_PLAYER_SUCCESS_FROM_AUTH, playerData: res});
 const fetchLoggedInPlayerFail = (err) => {
     console.log(err);
     return {
@@ -19,9 +23,6 @@ const fetchLoggedInPlayerFail = (err) => {
         error: err
     }
 };
-export const postPlayerInfoSuccess = () => ({type: actionTypes.TRIVIA_MAIN_POST_PLAYER_SUCCESS});
-export const postPlayerInfoFail = (error) => ({type: actionTypes.TRIVIA_MAIN_POST_PLAYER_FAIL});
-export const clearStateToTrivia = () => ({type: actionTypes.AUTH_CLEAR_STATE_TO_TRIVIA});
 export const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
@@ -50,7 +51,6 @@ export const fetchLoggedInPlayer = (token, id, isSignup) => {
 }; //gets the loggedin player data.
 
 export const auth = (email, password, isSignup, name) => {
-    console.log(isSignup);
     return dispatch => {
         dispatch(authStart());
         const authData = {
