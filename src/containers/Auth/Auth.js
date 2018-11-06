@@ -27,8 +27,22 @@ class Auth extends Component {
         id={element.id}
         isLogin={element.config.validation.isLogin} 
         touch={element.config.focus}
-        error={this.props.error}/>
+        error={this.props.error}
+        btnType={this.inputCssClass(element.id)} />
     );
+
+    inputCssClass = (id) => {
+        const isInputNameValid = this.controlsValidArray()[0].name;
+        const isInputEmailValid =  this.controlsValidArray()[1].email;
+        const isInputPasswordValid =  this.controlsValidArray()[2].password;
+        if (id === 'name' && isInputNameValid || id === 'email' && isInputEmailValid || id === 'password' && isInputPasswordValid){
+            return 'Valid';
+        }
+
+        return '';
+      
+        
+    };
 
     formArrayCreator = (controls) => {
         const formArray = []; 
@@ -42,7 +56,10 @@ class Auth extends Component {
         const formArray =  this.formArrayCreator(this.state.controls);
         let validArray = [];
         formArray.forEach((element) => {
-            validArray.push({'bool': element.config.valid});
+            validArray.push({
+                'bool': element.config.valid,
+                [element.id]: element.config.valid
+        });
         });
         return validArray;
     }; // creates an array of obj with the specific valid value from state.authControls/ controls
@@ -59,8 +76,12 @@ class Auth extends Component {
         if (validation.maxLength) {
             isValid = value.length <= validation.maxLength && isValid;
         }
+        if (validation.isEmailValid) {
+            isValid = validation.isEmailValid.test((String(value).toLowerCase())) && isValid;
+        }
+        
          return isValid;
-    }; // checks validation för the input fields.
+    }; // checks validation for the input fields.
 
     checkIfSubmit = (inputFields) => {
         const amountOfRequiredFields = inputFields ? inputFields : 3;
@@ -103,7 +124,7 @@ class Auth extends Component {
         this.setState(prevState => ({isSignup: !prevState.isSignup}))};
     
     render() {
-        console.log(this.state.controls)
+        console.log(this.state.controls);
         const authRedirect = this.props.isAuthenticated ? <Redirect to={'/'} />  : null;
         const formArray = this.formArrayCreator(this.state.controls);
         const forms = this.state.isSignup 
