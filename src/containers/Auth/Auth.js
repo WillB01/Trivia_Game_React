@@ -7,58 +7,14 @@ import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import {Redirect} from 'react-router-dom';
 import UserInputHelper from '../../components/UI/UserInputHelper/UserInputHelper';
+import {authControls} from './authControls'; //different input elements and config
 
 
 class Auth extends Component {
     state = {
-        controls: {
-            name: {
-                type: 'text',
-                elementType: 'input',
-                value: '',
-                placeholder: 'name',
-                focus: false,
-                validation: {
-                    isRequired: true,
-                    maxLength: 100, 
-                    isSignup: true,
-                    isLogin: false,
-                    minLength: 3
-                },
-                valid: false,
-            },
-                email: {
-                    type: 'email',
-                    elementType: 'input',
-                    value: '',
-                    placeholder: 'email',
-                    focus: false,
-                    validation: {
-                        isRequired: true,
-                        isEmail: true,
-                        maxLength: 100,
-                        isSignup: true,
-                        isLogin: true,
-                    },
-                    valid: false,
-                },
-                password: {
-                    type: 'password',
-                    elementType: 'input',
-                    value: '',
-                    placeholder: 'password',
-                    focus: false,
-                    validation: {
-                        isRequired: true,
-                        minLength: 6,
-                        isSignup: true,
-                        isLogin: true,
-                    },
-                    valid: false,
-                }
-
-            },
-            isSignup: true     
+       ...authControls, //imported 
+       loginInputFields: 2,
+       newUserInputFields: 3
     };
 
     formJsx = (element) => (
@@ -80,21 +36,18 @@ class Auth extends Component {
             formArray.push({id: item, config: controls[item]});
         }
         return formArray;
-    };
+    }; // creates an array of objects from the controls
 
-    onFocusHandler = (id) => {
-        // if (this.props.error) {
-        //     const updatedForm = updateObject(this.state.controls, {
-        //         [id]: {
-        //             ...this.state.controls[id],
-        //             focus: !this.state.controls[id].focus,
-        //         }
-        //     });
-        //     this.setState({controls: updatedForm});
-        // }
-    };
+    controlsValidArray = () => {
+        const formArray =  this.formArrayCreator(this.state.controls);
+        let validArray = [];
+        formArray.forEach((element) => {
+            validArray.push({'bool': element.config.valid});
+        });
+        return validArray;
+    }; // creates an array of obj with the specific valid value from state.authControls/ controls
 
-
+   
     checkIfValid = (value, validation) => {
         let isValid = true;
         if (validation.isRequired) {
@@ -111,13 +64,7 @@ class Auth extends Component {
 
     checkIfSubmit = (inputFields) => {
         const amountOfRequiredFields = inputFields ? inputFields : 3;
-        const formArray =  this.formArrayCreator(this.state.controls);
-        let validArray = [];
-        formArray.forEach((element) => {
-            validArray.push({'bool': element.config.valid});
-        });
-        validArray = [...validArray.filter(item => item.bool === true)];
-        
+        const validArray = [...this.controlsValidArray().filter(item => item.bool === true)];
         return validArray.length === amountOfRequiredFields;
     } //checks that everything is valid of the fieldinputs
 
@@ -140,8 +87,11 @@ class Auth extends Component {
 
     submitHandler = (e, login) => {
         e.preventDefault();   
+        const loginFields = this.state.loginInputFields;
+        const newPlayerFields = this.state.newUserInputFields;
         const wantsLogin = login === 'login' ? false : true;
-        if (this.checkIfSubmit()) {
+        const amountOfFields = login === 'login' ? loginFields : newPlayerFields;
+        if (this.checkIfSubmit(amountOfFields)) {
             this.props.onAuth(this.state.controls.email.value, 
                 this.state.controls.password.value,
                 wantsLogin, this.state.controls.name.value)
@@ -153,6 +103,7 @@ class Auth extends Component {
         this.setState(prevState => ({isSignup: !prevState.isSignup}))};
     
     render() {
+        console.log(this.state.controls)
         const authRedirect = this.props.isAuthenticated ? <Redirect to={'/'} />  : null;
         const formArray = this.formArrayCreator(this.state.controls);
         const forms = this.state.isSignup 
@@ -167,9 +118,9 @@ class Auth extends Component {
                     {this.props.error ? < UserInputHelper error={this.props.error} 
                                                           /> : null }
                    {this.state.isSignup ?  <Button click={this.submitHandler}
-                                                   btnType={!this.checkIfSubmit(3) ? 'disabled': null }>Submit</Button>: null}
+                                                   btnType={!this.checkIfSubmit(this.state.newUserInputFields) ? 'disabled': null }>Submit</Button>: null}
                    {this.state.isSignup ?  <Button click={this.switchAuthModeHandler}>got an account?</Button> : <Button click={(event) => 
-                    this.submitHandler(event, 'login')}  btnType={!this.checkIfSubmit(2) ? 'disabled': null}>Login</Button>}
+                    this.submitHandler(event, 'login')}  btnType={!this.checkIfSubmit(this.state.loginInputFields) ? 'disabled': null}>Login</Button>}
                    {!this.state.isSignup ?  <Button click={this.switchAuthModeHandler}>create new?</Button> : null}
            </form>
         );

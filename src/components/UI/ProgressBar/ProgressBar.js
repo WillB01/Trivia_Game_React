@@ -23,8 +23,6 @@ class ProgressBar extends Component {
     };
 }
     
-
-
 const mapStateToProps = state => {
     return {
         selectedCtg: state.selectedCategory.selectedCategory,
