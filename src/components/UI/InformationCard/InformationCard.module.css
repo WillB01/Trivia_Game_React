@@ -1,6 +1,6 @@
 .InformationCardContainer {
-
-    max-width: 100%;
+    display: grid;
+    max-width:30%;
     height: 400px;
     left: 0; 
     right: 0; 
@@ -52,19 +52,22 @@
   transform: rotate(5deg);    
 }
 
-.InformationCardContainer h1 {
-  position: fixed;
+.InformationCardContainer div {
+  position: relative;
   box-sizing: border-box;
-  top: -2px;
-  left: 0; 
-  right: 0;
+  margin: 0 auto;
+  /* top: -2px; */
+ 
+  width: 100%;
 };
 
 
 
-@media screen and (max-width: 600px)  {
+@media screen and (max-width: 646px)  {
     .InformationCardContainer {
      display: none;
+     bottom: 0;
+     margin-top: 100%;
    
         
     }
@@ -76,5 +79,10 @@
 .InformationCardContainer::after {
   display: none;   
 }
+
+.InformationCardContainer div {
+  display: none;
+
+};
 }
 

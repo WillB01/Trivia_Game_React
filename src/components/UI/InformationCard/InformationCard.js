@@ -4,8 +4,10 @@ import styles from './InformationCard.module.css';
 const informationCard = (props) => {
     return(
         <div className={styles.InformationCardContainer}>
-     
-          <h1>QUIZ GAME</h1>
+            <div>
+                <h1>QUIZ GAME</h1>
+            </div>
+        
         </div>
     )
 };

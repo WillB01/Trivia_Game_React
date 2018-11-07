@@ -5,15 +5,42 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 50px;
+    height: 60px;
     margin-bottom: 10px;
 
     
 }
 
-.Navbar a {
+.Navbar .NavbarItems {
+  
+  
+ 
+    display: inline-block;
+    
+}
+
+.Navbar .NavbarItems a {
     color: white;
     text-transform: uppercase;
-    margin: 10px 10px 1px 10px;
+    margin: 20px 10px 1px 10px;
+    display: inline-block;
     
+}
+
+.Navbar .NavbarItems :hover {
+    color: white;
+    text-transform: uppercase;
+    margin: 20px 10px 1px 10px;
+    display: inline-block;
+    border-bottom: 0.3px solid white;
+    transition: ease-in-out 0.3s;
+    
+}
+
+@media screen and (max-width: 600px) {
+    .Navbar {
+        bottom: 0;
+        margin-top: 100%;
+    }
+
 }

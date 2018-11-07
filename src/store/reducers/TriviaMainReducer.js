@@ -264,7 +264,7 @@ const giveRank = (player) => {
     if (playerBS >= ranksSystem.silver[1]  && playerBS < ranksSystem.gold[1]) { // silver
         return {hasRank: true, rank: ranksSystem.silver[0]};
     };
-    if (playerBS >= ranksSystem.gold[1]  && playerBS < ranksSystem.dimond[1]) { // gold
+    if (playerBS >= ranksSystem.gold[1]  && playerBS < ranksSystem.diamond[1]) { // gold
         return {hasRank: true, rank: ranksSystem.gold[0]};
     };
     if (playerBS >= ranksSystem.diamond[1]) { // diamond

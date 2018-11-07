@@ -8,6 +8,7 @@
     grid-gap: 2px;
     border-radius: 5px;
     justify-items: stretch;
+    max-width: 800px;
     
 }
 
