@@ -9,7 +9,7 @@
     border-radius: 5px;
     justify-items: stretch;
     max-width: 800px;
-    
+   
 }
 
 .CategoriesItems {
@@ -34,9 +34,9 @@
     padding: 2px;
     cursor: pointer;
     font-size: 1.3em;
-    
     letter-spacing: 0.02em;
     text-align: center;
+   
 }
 
 .CategoriesItems:hover {
@@ -46,14 +46,21 @@
 }
 
 .Pagination {
-    position: fixed;
-    left: 50px;
+   position: fixed;
+   bottom: 2px;
 }
 
 @media screen and (max-width: 600px) {
     .Categories {
         grid-template-columns: 1fr 1fr;
    
-        
     }
+
+    /* .Pagination {
+        position: fixed;
+        top: 0;
+        right: 0;
+        margin-right: 0;
+    } */
+    
 }

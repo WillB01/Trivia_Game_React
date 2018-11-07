@@ -6,13 +6,35 @@
     background: #018E5B; /*WIERD */
     font-size: 60px;
     width: 100%;
-    top: 70px;
+    top: 0;
     right: 0;
     left: 0;
     bottom: 0;
     border: 2px solid #018E5B;
     z-index: 1;
     animation-duration: 1s;
+    animation-iteration-count: forwards;
+
+}
+
+.Links {
+    color: white;
+    animation-delay: 1s;
+    animation-duration: 2s;
+    animation-iteration-count: forwards;
+}
+
+.Links a {
+    color: orange;
+    animation-delay: 1s;
+    animation-duration: 2s;
+    animation-iteration-count: forwards;
+}
+
+.Links a:hover {
+    border-bottom: 4px solid orange;
+    animation-delay: 1s;
+    animation-duration: 2s;
     animation-iteration-count: forwards;
 }
 

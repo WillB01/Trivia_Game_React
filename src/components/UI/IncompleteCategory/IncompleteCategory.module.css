@@ -8,9 +8,30 @@
     right: 0;
     left: 0;
     bottom: 0;
-    top: 70px;
+    top: 0;
     border: 2px solid #F25652;
     z-index: 1;
     animation-duration: 1s;
+    animation-iteration-count: forwards;
+}
+
+.Links {
+    color: white;
+    animation-delay: 1s;
+    animation-duration: 2s;
+    animation-iteration-count: forwards;
+}
+
+.Links a {
+    color: orange;
+    animation-delay: 1s;
+    animation-duration: 2s;
+    animation-iteration-count: forwards;
+}
+
+.Links a:hover {
+    border-bottom: 4px solid orange;
+    animation-delay: 1s;
+    animation-duration: 2s;
     animation-iteration-count: forwards;
 }

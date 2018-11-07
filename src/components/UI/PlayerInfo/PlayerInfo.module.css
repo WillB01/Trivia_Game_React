@@ -1,3 +1,8 @@
+/* .PlayerInfoContainer {
+  background: #efefef;
+  padding: 10px;
+} */
+
 .PlayerInfoContainer {
     position: sticky;
     float: right;
@@ -36,11 +41,11 @@
     box-shadow: 0 1px 3px rgba(179, 179, 179, 0.12), 0 1px 2px rgba(230, 224, 224, 0.24);
     box-sizing: border-box;
     border-radius: 5px;
-    margin: 0 auto;
-    height: 60px;
+    min-height: 50px;
+    margin: 1px 0;
     background-color: #ffd54f;
     text-align: center;
-    padding-top: 15px;
+    padding: 4px;
     transition: all .4s ease-in-out;
     
   }
@@ -48,9 +53,6 @@
     background: rgb(136, 136, 136);
     cursor: pointer;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  }
-  .Stats .Box {
-    margin: 1px 0;
   }
 
   @media screen and (max-width: 600px) {

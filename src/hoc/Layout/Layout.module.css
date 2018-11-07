@@ -16,9 +16,17 @@
 }
 
 .Main {
-    margin: 100px auto;
+    margin: 50px auto;
+    display: grid;
     width: 80%;
-    padding: 10px;
+   
+}
+
+.Banner {
+    max-width: 2000px;
+    margin: 0 auto;
+    height: 400px;
+    background: red;
 }
 
 @media screen and (max-width: 600px) {

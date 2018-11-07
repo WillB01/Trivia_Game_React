@@ -84,13 +84,14 @@ class Categories extends Component {
         return(
             <React.Fragment>
                 {!this.props.isAuthenticated ? <Redirect to="/" /> : null }
+              
+                <div className={styles.Categories}>
                 <div className={styles.Pagination}>
                     <Button click={() => this.pageignationHandler('less')}
                             btnType={'Pagination'}><FaMinus /></Button>
                     <Button click={() => this.pageignationHandler('more')}
                             btnType={'Pagination'}><FaPlus /></Button>
                 </div>
-                <div className={styles.Categories}>
                     {categories}
                 </div>
             </React.Fragment>

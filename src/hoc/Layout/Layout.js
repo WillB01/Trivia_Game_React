@@ -3,23 +3,25 @@ import NavBar from '../../components/UI/Navbar/Navbar';
 import PlayerInfo from '../../components/UI/PlayerInfo/PlayerInfo';
 import styles from './Layout.module.css';
 import {connect} from 'react-redux';
-import InformationCard from '../../components/UI/InformationCard/InformationCard';
 
 
 class Layout extends Component {
     render() {
 
-        return (   
+        return (
+            <React.Fragment>
             <div className={styles.Layout}>
                 {this.props.isAuthenticated ? <NavBar className={styles.Navbar} isAuthenticated={this.props.isAuthenticated} /> : null }
-                {this.props.isAuthenticated ? <PlayerInfo className={styles.PlayerInfo} /> : null}
-                <InformationCard />
+               
+               
                 
                 <main className={styles.Main}>
-                {/* <div className={styles.Header} >HEADER</div> */}
+                {/* <div className={styles.Banner} >Banner</div> */}
+                {/* {this.props.isAuthenticated ? <PlayerInfo className={styles.PlayerInfo} /> : null} */}
                     {this.props.children}
                 </main>
             </div>
+            </React.Fragment>   
 
         )
     };

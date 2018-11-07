@@ -86,7 +86,7 @@ class SelectedCategory extends Component {
         return(
             <div className={styles.SelectedCategory}>
                 {button}
-                {selected}
+                {this.props.triviaMainStartGame ? selected : <div className={styles.CardBlocker}>k</div>}
                 <WrongAnswer playerAnswer={this.props.playerAnswer}
                               correctAnswer={this.props.correctAnswer}
                               start={this.props.triviaMainStartGame} />

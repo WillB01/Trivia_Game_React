@@ -1,7 +1,10 @@
 .SelectedCategory {
   padding: 10px;
   width: 100%;
- 
+}
 
-
+.CardBlocker {
+  width: 400px;
+  height: 400px;
+  background: red;
 }
