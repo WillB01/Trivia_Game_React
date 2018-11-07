@@ -1,7 +1,7 @@
 .InformationCardContainer {
     display: grid;
     justify-content: center;
-    max-width:30%;
+    width: 400px;
     height: 400px;
     left: 0;
     right: 0;
@@ -14,7 +14,6 @@
     box-sizing: border-box;
     position: fixed;
     z-index: 10;
-    width: 400px;
     height: 60px;
     border: 1px solid #8a1;
     background: #9b2;
