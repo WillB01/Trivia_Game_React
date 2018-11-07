@@ -3,8 +3,26 @@
   width: 100%;
 }
 
-.CardBlocker {
-  width: 400px;
-  height: 400px;
-  background: red;
+.QuestionCard {
+
+  animation-duration: 1s;
+  animation-iteration-count: forwards;
 }
+
+.CardBlocker {
+  margin: auto;
+  text-align: center;
+  max-width: 380px;
+  min-height: 200px;
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #FFF;
+  box-shadow: 0 19px 48px rgba(0, 0, 0, 0.3), 0 15px 32px rgba(0, 0, 0, 0.22);
+  /* animation: slideDown 1s ease-in-out 3ms forwards; */
+  overflow-y: hidden;
+  border-radius: 5px;
+  animation-duration: 2s;
+  animation-iteration-count: forwards;
+}
+

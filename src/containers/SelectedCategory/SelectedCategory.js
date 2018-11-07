@@ -73,7 +73,7 @@ class SelectedCategory extends Component {
             console.log(selectedCategory);
             selected = (
                 <React.Fragment>
-                 <div className={styles.QuestionCard}>
+                 <div className={`${styles.QuestionCard } fadeInDownBig`}>
                     {questionsCards[this.props.cards[0]]}          
                  </div>
                 </React.Fragment>
@@ -85,8 +85,8 @@ class SelectedCategory extends Component {
         }
         return(
             <div className={styles.SelectedCategory}>
-                {button}
-                {this.props.triviaMainStartGame ? selected : <div className={styles.CardBlocker}>k</div>}
+
+                {this.props.triviaMainStartGame ? selected : <div className={`${styles.CardBlocker } flipInY`}>{button}</div>}
                 <WrongAnswer playerAnswer={this.props.playerAnswer}
                               correctAnswer={this.props.correctAnswer}
                               start={this.props.triviaMainStartGame} />
