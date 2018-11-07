@@ -9,6 +9,7 @@ class TriviaMain extends Component {
         this.props.onInitPatchdDb(this.props.triviaMain);
         this.props.onInitCategories();
         // this.props.onFetchImg(str);
+        this.props.onInitHighScore();
         this.props.onResetGame();
         this.props.onResetSelectCategory();
     };
@@ -34,6 +35,7 @@ const mapDispatchToProps = dispatch => {
         onResetGame: () => dispatch(actions.resetGame()),
         onResetSelectCategory: () => (dispatch(actions.resetSelectCategory())),
         onInitPatchdDb: (triviaMain) => dispatch(actions.initPatchdDb(triviaMain)),
+        onInitHighScore: () => dispatch(actions.fetchHighScore())
         // onFetchImg: (name) => dispatch(actions.fetchImagesForCategories(name))
        
        

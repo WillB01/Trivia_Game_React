@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom';
 import styles from './Navbar.module.css';
 import InformationCard from '../InformationCard/InformationCard';
 import PlayerInfo from '../PlayerInfo/PlayerInfo';
+import {FaHome} from 'react-icons/fa';
 
 
 const Navbar = (props) => {
@@ -13,7 +14,7 @@ const Navbar = (props) => {
             </div>
            
         <div className={styles.NavbarItems}>
-            <NavLink className={styles.NavItem} to="/">Home</NavLink>
+            <NavLink className={styles.NavItem} to="/"><FaHome className={styles.FaBomb} /></NavLink>
             {!props.isAuthenticated 
             ? <NavLink className={styles.NavItem} to="/auth">Authenticate</NavLink>
             : <NavLink className={styles.NavItem} to="/logout">Logout</NavLink> }

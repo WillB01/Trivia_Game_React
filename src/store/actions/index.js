@@ -19,7 +19,11 @@ export {
    
 } from './TriviaMainAction'
 export {
+    fetchHighScore
+} from './HighScoreAction'
+export {
     auth,
     logout,
     authCheckState,
 } from './AuthAction';
+

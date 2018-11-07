@@ -12,7 +12,7 @@ const wrongAnswer = (props) => {
     };
    
 
-return(<div className={styles.WrongAnswer} style={progressBar}></div>);
+return(<div className={`${styles.WrongAnswer}`} style={progressBar}></div>);
 };
 
 export default wrongAnswer;
