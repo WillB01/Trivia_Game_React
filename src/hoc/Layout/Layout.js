@@ -13,7 +13,7 @@ class Layout extends Component {
             <React.Fragment>
             <div className={styles.Layout}>
                 {this.props.isAuthenticated ? <NavBar className={styles.Navbar} isAuthenticated={this.props.isAuthenticated} /> : null }
-                <Instructions />
+                {/* <Instructions /> */}
                 {!this.props.sctg.selectedCategory && this.props.isAuthenticated ?<div className={styles.HighScoreContainer}><HighScoreContainer/> </div> : null }
 
                 <main className={styles.Main}>

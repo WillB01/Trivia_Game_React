@@ -55,7 +55,7 @@
 
 .Pagination {
    position: fixed;
-   margin-top: -40px;
+   margin-top: -60px;
 }
 
 @media screen and (max-width: 600px) {

@@ -7,11 +7,11 @@ class PlayerInfo extends Component {
         return(
             <div className={styles.PlayerInfoContainer}>
                 <div className={`${styles.Stats} bounce `}>
-                    <div className={styles.Box}>{this.props.triviaMain.name}</div>
-                        <div className={styles.Box}>
+                    <div className={styles.Box}><h3>{this.props.triviaMain.name}</h3></div>
+                        {/* <div className={styles.Box}>
                             Completed: {this.props.triviaMain.score.total} <br></br> 
                             Points: {this.props.triviaMain.score.completedQuestionsBonus}
-                        </div>
+                        </div> */}
                     {this.props.hasRank ? <h3 className={styles.Box}>{this.props.triviaMain.rank}</h3> : null}
                     {this.props.cards ? <h3 className={styles.Box}>{this.props.triviaMain.score.selectedCategory} </h3> : null}
                     {this.props.cards ? <h3 className={styles.Box}>{`${this.props.cardsLeft.length} / ${this.props.cards.length}`}</h3> : null}

@@ -38,7 +38,7 @@ class HighScore extends Component {
         <React.Fragment>
         <div className={styles.ScoreContainer}>
             <div className={styles.HighScoreContainer}>
-                <div className={styles.Header} onClick={() => this.showHighScore('highscore')}>Top Playes</div>
+                <div className={styles.Header} onClick={() => this.showHighScore('highscore')}>Top 10 World Players</div>
                 {this.state.showHighScore ? printHighscore : null}
              </div>
         <div className={styles.HighScoreContainer}>
