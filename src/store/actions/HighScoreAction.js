@@ -8,7 +8,7 @@ const fetchHighScoreFail = (error) => ({type: actionTypes.FETCH_HIGHSCORES_FAIL,
 export const fetchHighScore = () => {
     const token = localStorage.getItem('token');
     const url =  k.urlGetHighScore(token); 
-    return dispatch => axios.get(url)
+    return dispatch => axios.get()
         .then(res => {
             console.log(res);
             dispatch(fetchHighScoreSuccess(res.data))

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './InformationCard.module.css';
+import styles from './Ribbon.module.css';
 
 
 const informationCard = (props) => {

@@ -31,10 +31,18 @@ class HighScore extends Component {
    render() {
         const printHighscore = this.props.highscore ? this.highscoreJsx(this.props.highscore) : <Spinner />;
     return(
+        <React.Fragment>
+        <div className={styles.ScoreContainer}>
+            <div className={styles.HighScoreContainer}>
+                <div className={styles.Header} onClick={this.showHighScore}>Top Playes</div>
+                {this.state.showHighScore ? printHighscore : null}
+             </div>
         <div className={styles.HighScoreContainer}>
-            <div className={styles.Header} onClick={this.showHighScore}>Top Playes</div>
-            {this.state.showHighScore ? printHighscore : null}
+                <div className={styles.Header} onClick={this.showHighScore}>Top Playes</div>
+                {this.state.showHighScore ? printHighscore : null}
+                </div>
         </div>
+        </React.Fragment>
     )
    };
 };

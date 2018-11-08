@@ -1,7 +1,7 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom';
 import styles from './Navbar.module.css';
-import InformationCard from '../InformationCard/InformationCard';
+import Ribbon from '../Ribbon/Ribbon';
 import PlayerInfo from '../PlayerInfo/PlayerInfo';
 import {FaHome} from 'react-icons/fa';
 
@@ -10,7 +10,7 @@ const Navbar = (props) => {
     return(
         <nav className={styles.Navbar}>
             <div className={styles.Logo}>
-                <InformationCard />
+                <Ribbon />
             </div>
            
         <div className={styles.NavbarItems}>
