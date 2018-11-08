@@ -3,6 +3,7 @@ import NavBar from '../../components/UI/Navbar/Navbar';
 import HighScoreContainer from '../../containers/HighScore/HighScore';
 import styles from './Layout.module.css';
 import {connect} from 'react-redux';
+import PlayerInfo from '../../components/UI/PlayerInfo/PlayerInfo';
 
 
 class Layout extends Component {
@@ -12,14 +13,14 @@ class Layout extends Component {
             <React.Fragment>
             <div className={styles.Layout}>
                 {this.props.isAuthenticated ? <NavBar className={styles.Navbar} isAuthenticated={this.props.isAuthenticated} /> : null }
-               {!this.props.sctg.selectedCategory && this.props.isAuthenticated ? <HighScoreContainer /> : null }
                
-                
+                {!this.props.sctg.selectedCategory && this.props.isAuthenticated ?<div className={styles.HighScoreContainer}><HighScoreContainer/> </div> : null }
                 <main className={styles.Main}>
                 {/* <div className={styles.Banner} >Banner</div> */}
                 {/* {this.props.isAuthenticated ? <PlayerInfo className={styles.PlayerInfo} /> : null} */}
-    
-                    {this.props.children}
+
+                    {/* // <PlayerInfo /> */}
+                    <div className={styles.Children}>{this.props.children}</div>
                 </main>
             </div>
             </React.Fragment>   

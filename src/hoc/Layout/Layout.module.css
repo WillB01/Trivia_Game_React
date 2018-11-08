@@ -19,8 +19,14 @@
     margin: 50px auto;
     display: grid;
     width: 80%;
+    /* grid-template-areas: "highscore ctg ctg"; */
+    /* grid-template-columns: 1fr 1fr; */
    
 }
+
+/* .Children {
+    grid-area: ctg;
+} */
 
 .Banner {
     max-width: 2000px;
@@ -29,12 +35,35 @@
     background: red;
 }
 
+.HighScoreContainer {
+    margin-top: 60px;
+    padding: 10px;
+    box-sizing: border-box;
+    background: #ebe9e818;
+    border-radius: 5px;
+    grid-area: highscore;
+    margin: 0 auto;
+    max-width: 400px;
+    color: white;
+    
+}
+
 @media screen and (max-width: 600px) {
     .Header {
        display: none;
-   
-        
     }
+    .Main {
+        margin: 50px auto;
+        display: grid;
+        width: 80%;
+        grid-template-areas: "highscore" "ctg";
+
+    }
+    .HighScoreContainer {
+        background: white;
+        width: 90%;
+    }
+
 }
 
 
