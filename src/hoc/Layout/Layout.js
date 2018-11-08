@@ -14,9 +14,9 @@ class Layout extends Component {
             <div className={styles.Layout}>
                 {this.props.isAuthenticated ? <NavBar className={styles.Navbar} isAuthenticated={this.props.isAuthenticated} /> : null }
                 <Instructions />
+                {!this.props.sctg.selectedCategory && this.props.isAuthenticated ?<div className={styles.HighScoreContainer}><HighScoreContainer/> </div> : null }
 
                 <main className={styles.Main}>
-                    {!this.props.sctg.selectedCategory && this.props.isAuthenticated ?<div className={styles.HighScoreContainer}><HighScoreContainer/> </div> : null }
                     <div className={styles.Children}>{this.props.children}</div>
                 </main>
             </div>

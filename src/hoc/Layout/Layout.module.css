@@ -7,14 +7,19 @@
     margin: 50px auto;
     display: grid;
     width: 90%;
-    grid-template-areas: "ctg ctg score";
+    grid-template-areas: "ctg";
     /* grid-template-columns: 1fr 1fr 1fr; */
    
 }
 
-.ScoreContainer {
-    grid-area: score;
-    width: 100%;
+.HighScoreContainer {
+   
+    max-width: 400px;
+    margin: 0 auto;
+    background: none;
+    border-radius: 5px;
+
+   
 
 }
 
@@ -43,13 +48,14 @@
         margin: 50px auto;
         display: grid;
         width: 90%;
-        grid-template-columns:  "ctg" "highscore";
+        grid-template-columns:  1fr;
 
     }
-    .ScoreContainer {
+    /* .HighScoreContainer {
         background: white;
         width: 90%;
+        background: red;
         
-    }
+    } */
 
 }

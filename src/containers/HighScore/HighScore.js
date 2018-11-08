@@ -6,14 +6,18 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 
 class HighScore extends Component {
     state = {
-        showHighScore: true
+        showHighScore: false,
+        showPlayerScore: false
     }
     componentDidMount() {
       console.log(this.props.highscore);
     }
 
-    showHighScore = () => {
-        this.setState(prevState => ({showHighScore: !prevState.showHighScore}));
+    showHighScore = (btn) => {
+        btn === 'player' 
+        ? this.setState(prevState => ({showPlayerScore: !prevState.showPlayerScore})) 
+        : this.setState(prevState => ({showHighScore: !prevState.showHighScore}));
+        
     };
 
     highscoreJsx = (highscore) => {
@@ -34,12 +38,12 @@ class HighScore extends Component {
         <React.Fragment>
         <div className={styles.ScoreContainer}>
             <div className={styles.HighScoreContainer}>
-                <div className={styles.Header} onClick={this.showHighScore}>Top Playes</div>
+                <div className={styles.Header} onClick={() => this.showHighScore('highscore')}>Top Playes</div>
                 {this.state.showHighScore ? printHighscore : null}
              </div>
         <div className={styles.HighScoreContainer}>
-                <div className={styles.Header} onClick={this.showHighScore}>Top Playes</div>
-                {this.state.showHighScore ? printHighscore : null}
+                <div className={styles.Header} onClick={() => this.showHighScore('player')}>Your Score</div>
+                {this.state.showPlayerScore ? printHighscore : null}
                 </div>
         </div>
         </React.Fragment>

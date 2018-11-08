@@ -60,7 +60,8 @@
 
 @media screen and (max-width: 600px) {
     .Categories {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
+      
    
     }
 
