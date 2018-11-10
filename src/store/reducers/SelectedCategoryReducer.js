@@ -8,7 +8,8 @@ const initialState = {
     progressBar: null,
     scoreToCompleteSelectedCategory: 0,
     selectedCategoryCompleted: false,
-    selectedCategoryCompletedId: []
+    selectedCategoryCompletedId: [],
+    hints: null,
 };
 
 
@@ -31,6 +32,7 @@ const fetchSelectedCategoryFail = (state, action) => {
 };
 
 const setNewQuestionCards = (state, action) => {
+    setHints(state, action);
     const newCards = [...state.amountOfCards];
     newCards.shift();
     return updateObject(state, {
@@ -58,6 +60,13 @@ const setResetSelectedCategory = (state, action) => {
     });
 }; // Resets everything in selected
 
+const setHints = (state, action) => {
+    console.log(action.hints)
+    return updateObject(state, {
+        hints: action.hints
+    })
+}
+
 const reducer = (state = initialState, action) => {
     if (action.type === actionTypes.FETCH_SELECTED_CATEGORY) {
         return setSelectedCategory(state, action);
@@ -73,6 +82,9 @@ const reducer = (state = initialState, action) => {
     }
     if (action.type === actionTypes.RESET_SELECTED_CATEGORY) {
         return setResetSelectedCategory(state, action);
+    }
+    if (action.type === actionTypes.FETCH_RAN_CTG_HINTS_SUCCESS) {
+        return setHints(state, action);
     }
     return state;
 };

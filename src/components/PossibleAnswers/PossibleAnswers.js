@@ -2,11 +2,12 @@ import React from 'react';
 import _ from 'lodash';
 import Button from '../UI/Button/Button';
 
-// const shuffleAnswers = (correctAnswer) => _.shuffle(['korv', 'kewl', 'nej', 'Stockholm', 'Writing', 'Nice', correctAnswer]);
+ 
 
 const possibleAnswers = (props) => {
-    // const shuffledAnswers = shuffleAnswers(props.correctAnswer);
-    const otherShuffledAnswers = _.shuffle(props.allAnswers);
+    let hints = [props.correctAnswer, ...props.hints];
+    console.log(hints);
+    const otherShuffledAnswers = _.shuffle(hints);
         return (
             <div>
                 {otherShuffledAnswers.map((item, index) => 
@@ -18,6 +19,6 @@ const possibleAnswers = (props) => {
             </div>
         );
     };
-
+                            
 
 export default possibleAnswers;

@@ -6,7 +6,8 @@ export {
     fetchSelectedCategory,
     newQuestionCards,
     setProgressProgressBar,
-    resetSelectCategory
+    resetSelectCategory,
+    fetchRandomCategoryForRandomHints
 } from './SelectedCategoryAction'
 export {
     getPlayerAnswer,

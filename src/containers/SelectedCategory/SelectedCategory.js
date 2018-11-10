@@ -8,6 +8,10 @@ import Cards from '../../components/UI/Cards/Cards';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 class SelectedCategory extends Component {
+    componentDidMount() {
+        this.props.onFetchRandomCategoryForRandomHints(this.props.ctg);
+    }
+
     componentDidUpdate() {
        const cards = this.props.selectedCtg ? this.props.selectedCtg.length  : 0;
     //    const title =  this.props.selectedCtg[0].category.title? this.props.selectedCtg[0].category.title  : '';
@@ -39,8 +43,10 @@ class SelectedCategory extends Component {
     };
 
     playerAnswerClickHandler = (user, selected) => {  
+        
         this.props.onAnswerClick(user, selected);
         this.props.onNewCards(this.props.triviaMainIsCorrect);
+        this.props.onFetchRandomCategoryForRandomHints(this.props.ctg);
         
     };
 
@@ -53,6 +59,7 @@ class SelectedCategory extends Component {
                 progressBar={this.props.progressBar}
                 triviaMainStartGame={this.props.triviaMainStartGame}
                 playerAnswerClickHandler={(userAnswer, answer) => this.playerAnswerClickHandler(userAnswer, answer)}
+                hints={this.props.hints}
                 />
         )) 
            
@@ -99,6 +106,7 @@ class SelectedCategory extends Component {
 const mapStateToProps = state => {
     return {
         selectedCtg: state.selectedCategory.selectedCategory,
+        hints: state.selectedCategory.hints,
         cards: state.selectedCategory.amountOfCards,
         progressBar: state.selectedCategory.progressBar,
         selectedCategory: state.selectedCategory,
@@ -109,6 +117,7 @@ const mapStateToProps = state => {
         triviaMainStartGame: state.triviaMain.startGame,
         selectCtgScore: state.triviaMain.player.score.selectedCategory,
         isGameOver: state.triviaMain.selectedCategoryGameover,
+        ctg: state.categories.categories
     };
 };
 
@@ -120,7 +129,8 @@ const mapDispatchToProps = dispatch => {
         onNewCards: (cards) => dispatch(actions.newQuestionCards(cards)),
         onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress)),
         onResetSelectCategory: () => dispatch(actions.resetSelectCategory()),
-        onCheckIfCategoryCompleted: (scoreToComplete, selCtgId, cards, id, score, isCompleteCtg, title) => dispatch(actions.checkIfCategoryCompleted(scoreToComplete, selCtgId, cards, id, score, isCompleteCtg, title))
+        onCheckIfCategoryCompleted: (scoreToComplete, selCtgId, cards, id, score, isCompleteCtg, title) => dispatch(actions.checkIfCategoryCompleted(scoreToComplete, selCtgId, cards, id, score, isCompleteCtg, title)),
+        onFetchRandomCategoryForRandomHints: (categories) => dispatch(actions.fetchRandomCategoryForRandomHints(categories))
         
     };
 };
