@@ -11,7 +11,6 @@ const cards = (props) => {
     const index = props.index;
     const progressBar = props.progrssBar;
     const triviaMainStartGame = props.triviaMainStartGame;
-    console.log(props.answers);
     return(
         <div key={index} className={styles.QuestionCard}>
         <h2 className={styles.Header}>

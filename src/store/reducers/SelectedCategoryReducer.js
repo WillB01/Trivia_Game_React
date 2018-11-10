@@ -10,11 +10,6 @@ const initialState = {
     selectedCategoryCompleted: false,
     selectedCategoryCompletedId: [],
     answers : [],
-
-
-
-    hints: null,
-
 };
 
 
@@ -69,33 +64,15 @@ const setResetSelectedCategory = (state, action) => {
     });
 }; // Resets everything in selected
 
-const setHints = (state, action) => {
-    console.log(action.hints)
-    return updateObject(state, {
-        hints: action.hints
-    })
-}
-
 const reducer = (state = initialState, action) => {
-    if (action.type === actionTypes.FETCH_SELECTED_CATEGORY) {
-        return setSelectedCategory(state, action);
+    switch(action.type) {
+        case actionTypes.FETCH_SELECTED_CATEGORY : return setSelectedCategory(state, action)
+        case actionTypes.FETCH_SELECTED_CATEGORY_FAIL : return fetchSelectedCategoryFail(state, action);
+        case actionTypes.SET_NEW_QUESTION_CARDS : return setNewQuestionCards(state, action);
+        case actionTypes.SELECTED_CATEGORY_SET_PROGRESS_PROGRESSBAR : return setUpdateProgressBar(state, action);
+        case actionTypes.RESET_SELECTED_CATEGORY :  return setResetSelectedCategory(state, action);
+        default : return state;
     }
-    if (action.type === actionTypes.FETCH_SELECTED_CATEGORY_FAIL) {
-        return fetchSelectedCategoryFail(state, action);
-    }
-    if (action.type === actionTypes.SET_NEW_QUESTION_CARDS) {
-        return setNewQuestionCards(state, action);
-    }
-    if (action.type === actionTypes.SELECTED_CATEGORY_SET_PROGRESS_PROGRESSBAR) {
-        return setUpdateProgressBar(state, action);
-    }
-    if (action.type === actionTypes.RESET_SELECTED_CATEGORY) {
-        return setResetSelectedCategory(state, action);
-    }
-    if (action.type === actionTypes.FETCH_RAN_CTG_HINTS_SUCCESS) {
-        return setHints(state, action);
-    }
-    return state;
 };
 
 export default reducer;

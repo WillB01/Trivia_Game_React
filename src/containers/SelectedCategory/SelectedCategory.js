@@ -112,7 +112,6 @@ const mapStateToProps = state => {
         triviaMainStartGame: state.triviaMain.startGame,
         selectCtgScore: state.triviaMain.player.score.selectedCategory,
         isGameOver: state.triviaMain.selectedCategoryGameover,
-        ctg: state.categories.categories
     };
 };
 
@@ -125,7 +124,6 @@ const mapDispatchToProps = dispatch => {
         onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress)),
         onResetSelectCategory: () => dispatch(actions.resetSelectCategory()),
         onCheckIfCategoryCompleted: (scoreToComplete, selCtgId, cards, id, score, isCompleteCtg, title) => dispatch(actions.checkIfCategoryCompleted(scoreToComplete, selCtgId, cards, id, score, isCompleteCtg, title)),
-        // onFetchRandomCategoryForRandomHints: (categories) => dispatch(actions.fetchRandomCategoryForRandomHints(categories))
         
     };
 };
