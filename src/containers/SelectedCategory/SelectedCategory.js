@@ -6,12 +6,7 @@ import WrongAnswer from '../../components/UI/WrongAnswer/WrongAnswer';
 import Button from '../../components/UI/Button/Button';
 import Cards from '../../components/UI/Cards/Cards';
 import Spinner from '../../components/UI/Spinner/Spinner';
-
 class SelectedCategory extends Component {
-    componentDidMount() {
-        this.props.onFetchRandomCategoryForRandomHints(this.props.ctg);
-    }
-
     componentDidUpdate() {
        const cards = this.props.selectedCtg ? this.props.selectedCtg.length  : 0;
     //    const title =  this.props.selectedCtg[0].category.title? this.props.selectedCtg[0].category.title  : '';
@@ -42,11 +37,10 @@ class SelectedCategory extends Component {
         }
     };
 
+
     playerAnswerClickHandler = (user, selected) => {  
-        
         this.props.onAnswerClick(user, selected);
-        this.props.onNewCards(this.props.triviaMainIsCorrect);
-        this.props.onFetchRandomCategoryForRandomHints(this.props.ctg);
+        this.props.onNewCards(user === selected, user);
         
     };
 
@@ -59,7 +53,7 @@ class SelectedCategory extends Component {
                 progressBar={this.props.progressBar}
                 triviaMainStartGame={this.props.triviaMainStartGame}
                 playerAnswerClickHandler={(userAnswer, answer) => this.playerAnswerClickHandler(userAnswer, answer)}
-                hints={this.props.hints}
+                answers={this.props.answers}
                 />
         )) 
            
@@ -109,6 +103,7 @@ const mapStateToProps = state => {
         hints: state.selectedCategory.hints,
         cards: state.selectedCategory.amountOfCards,
         progressBar: state.selectedCategory.progressBar,
+        answers: state.selectedCategory.answers,
         selectedCategory: state.selectedCategory,
         playerAnswer: state.triviaMain.playerAnswer,
         correctAnswer: state.triviaMain.correctAnswer,
@@ -126,11 +121,11 @@ const mapDispatchToProps = dispatch => {
         onAnswerClick: (userAnswer, correctAnswer) => dispatch(actions.getPlayerAnswer(userAnswer, correctAnswer)),
         startGame: () => dispatch(actions.startGame()),
         onNewQuestionCard: () => dispatch(actions.newQuestionCard()),
-        onNewCards: (cards) => dispatch(actions.newQuestionCards(cards)),
+        onNewCards: (isCorrect, userAns) => dispatch(actions.newQuestionCards(isCorrect, userAns)),
         onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress)),
         onResetSelectCategory: () => dispatch(actions.resetSelectCategory()),
         onCheckIfCategoryCompleted: (scoreToComplete, selCtgId, cards, id, score, isCompleteCtg, title) => dispatch(actions.checkIfCategoryCompleted(scoreToComplete, selCtgId, cards, id, score, isCompleteCtg, title)),
-        onFetchRandomCategoryForRandomHints: (categories) => dispatch(actions.fetchRandomCategoryForRandomHints(categories))
+        // onFetchRandomCategoryForRandomHints: (categories) => dispatch(actions.fetchRandomCategoryForRandomHints(categories))
         
     };
 };

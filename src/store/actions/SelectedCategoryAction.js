@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const setSelectedCategory = (selectedCategory) => ({type: actionTypes.FETCH_SELECTED_CATEGORY, selectedCategory});
 export const setSelectedCategoryFail = () => ({type: actionTypes.FETCH_SELECTED_CATEGORY_FAIL});
-export const newQuestionCards = (cards) => ({type: actionTypes.SET_NEW_QUESTION_CARDS, cards});
+export const newQuestionCards = (isCorrect, userAns) => ({type: actionTypes.SET_NEW_QUESTION_CARDS, isCorrect, userAns});
 export const setProgressProgressBar = (progress) => ({ type: actionTypes.SELECTED_CATEGORY_SET_PROGRESS_PROGRESSBAR, progress});
 export const resetSelectCategory = () => ({type: actionTypes.RESET_SELECTED_CATEGORY});
 export const fetchRandomCategoryForRandomHintsSuccess = (hints) => ({type: actionTypes.FETCH_RAN_CTG_HINTS_SUCCESS, hints });

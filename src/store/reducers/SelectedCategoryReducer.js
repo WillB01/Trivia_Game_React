@@ -9,19 +9,26 @@ const initialState = {
     scoreToCompleteSelectedCategory: 0,
     selectedCategoryCompleted: false,
     selectedCategoryCompletedId: [],
+    answers : [],
+
+
+
     hints: null,
+
 };
 
 
 const setSelectedCategory = (state, action)  => {
     let arr = [];
+    const answers = action.selectedCategory.map(i => i.answer);
     action.selectedCategory.map((item, index) => (arr.push(index)));
     return updateObject(state, {
         selectedCategory: action.selectedCategory,
         amountOfCards: arr,
         progressBar: null,
         selectedCategoryCompleted: false,
-        scoreToCompleteSelectedCategory: arr.length
+        scoreToCompleteSelectedCategory: arr.length,
+        answers: answers
     });
 };
 
@@ -32,12 +39,13 @@ const fetchSelectedCategoryFail = (state, action) => {
 };
 
 const setNewQuestionCards = (state, action) => {
-    setHints(state, action);
+    const newAnswers = action.isCorrect ? state.answers.filter(i => i !== action.userAns && action.isCorrect) : state.answers;
     const newCards = [...state.amountOfCards];
     newCards.shift();
     return updateObject(state, {
         amountOfCards: newCards,
-        amountOfCardsPlayed: state.amountOfCardsPlayed += 1
+        amountOfCardsPlayed: state.amountOfCardsPlayed += 1,
+        answers: newAnswers
     });
 };
 
@@ -56,7 +64,8 @@ const setResetSelectedCategory = (state, action) => {
         progressBar: null,
         selectedCategoryCompleted: false,
         amountOfCardsPlayed: '',
-        scoreToCompleteSelectedCategory: null
+        scoreToCompleteSelectedCategory: null,
+        answers: []
     });
 }; // Resets everything in selected
 
