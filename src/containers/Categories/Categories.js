@@ -31,6 +31,7 @@ class Categories extends Component {
     
     pageignationHandler = (btnClick) => { 
         this.props.fetchCategories(btnClick, this.props.ctg.categories);
+        
         if (btnClick === 'more' ) {
             scroll.scrollToBottom({ 
                 delay: 200,  
@@ -56,7 +57,6 @@ class Categories extends Component {
         const completed = this.props.triviaMain.player.score.selectedCategoryCompletedId;
         const ctg =  this.props.ctg.categories;
         const test = this.giveCompletedCategoryCssClass(completed, ctg);
-        console.log(ctg);
         ctg 
         ? categories = (
             ctg.map((item, index) => (
@@ -68,7 +68,7 @@ class Categories extends Component {
                 }} className={test[index].length !== 0 || test[index].length === 'undefined'  ? styles.CategoriesCompleted : styles.CategoriesItems } 
                 //    style={test[index].length !== 0 || test[index].length === 'undefined' ? {background: '#018E5B'} : {background: '#'+(Math.random()*0xFFFFFF<<0).toString(10)}}
                    key={item.id}
-                   onClick={() => this.props.onCategoryHandler(item.id)}>{item.title}
+                   onClick={() => this.props.onCategoryHandler(item.id, this.props.ctg)}>{item.title}
                 </NavLink>
                 
             ))
@@ -107,9 +107,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onCategoryHandler: (id) => dispatch(categoriesAction.fetchSelectedCategory(id)),
+        onCategoryHandler: (id, ctg) => dispatch(categoriesAction.fetchSelectedCategory(id, ctg)),
         fetchCategories: (btnClick) => dispatch(categoriesAction.fetchCategories(btnClick)),
         onResetGame: () => dispatch(categoriesAction.resetGame()),
+
+
     };
 };
 

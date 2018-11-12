@@ -15,7 +15,9 @@ const initialState = {
 
 const setSelectedCategory = (state, action)  => {
     let arr = [];
+    const randomAnswers = action.randomCategory.map(i => i.answer);
     const answers = action.selectedCategory.map(i => i.answer);
+    const allAnswers = [...answers, ...randomAnswers]
     action.selectedCategory.map((item, index) => (arr.push(index)));
     return updateObject(state, {
         selectedCategory: action.selectedCategory,
@@ -23,7 +25,7 @@ const setSelectedCategory = (state, action)  => {
         progressBar: null,
         selectedCategoryCompleted: false,
         scoreToCompleteSelectedCategory: arr.length,
-        answers: answers
+        answers: allAnswers
     });
 };
 

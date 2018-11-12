@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styles from './SelectedCategory.module.css';
 import * as actions from '../../store/actions/index';
 import WrongAnswer from '../../components/UI/WrongAnswer/WrongAnswer';
+import Countdown from 'react-countdown-now';
 import Button from '../../components/UI/Button/Button';
 import Cards from '../../components/UI/Cards/Cards';
 import Spinner from '../../components/UI/Spinner/Spinner';
@@ -41,7 +42,6 @@ class SelectedCategory extends Component {
         this.props.onAnswerClick(user, selected);
         this.props.onNewCards(user === selected, user);    
     };
-
     percentageCalculator = (a, b) => (a / b) * 100; // calculate the precentage for the progressbar.
     
     QuestionCardsCreator = (selectedCategory, index, callback) => {
@@ -125,7 +125,7 @@ const mapStateToProps = state => {
         triviaMainStartGame: state.triviaMain.startGame,
         selectCtgScore: state.triviaMain.player.score.selectedCategory,
         isGameOver: state.triviaMain.selectedCategoryGameover,
-        life: state.triviaMain.life
+        life: state.triviaMain.life,
     };
 };
 
