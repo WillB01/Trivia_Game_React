@@ -62,7 +62,7 @@ class Categories extends Component {
         ? categories = (
             ctg.map((item, index) => (
                
-                completedCtg[index].length !== 0 || completedCtg[index].length === 'undefined'  ? <div className={ styles.CategoriesCompleted }>{item.title}</div> : 
+                completedCtg[index].length !== 0 || completedCtg[index].length === 'undefined'  ? <div key={item.id} className={ styles.CategoriesCompleted }>{item.title}</div> : 
                 <NavLink to={{
                     pathname: '/selected-category',
                     search: `?id=${item.id}`,

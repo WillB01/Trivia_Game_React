@@ -9,9 +9,6 @@ class HighScore extends Component {
         showHighScore: false,
         showPlayerScore: false
     }
-    componentDidMount() {
-      console.log(this.props.highscore);
-    }
 
     showHighScore = (btn) => {
         btn === 'player' 
@@ -26,8 +23,8 @@ class HighScore extends Component {
             highscoreArray.push({name: highscore[key].name, completedQuestionsBonus: highscore[key].score.completedQuestionsBonus});
            }
           return highscoreArray.map((item, index) => (
-              <div>
-          <p key={index}>{index + 1} : {item.name} {item.completedQuestionsBonus}</p> 
+              <div key={index}>
+          <p>{index + 1} : {item.name} {item.completedQuestionsBonus}</p> 
             </div>
           ));
     }
