@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './SlideInMenu.module.css'
 import {NavLink} from 'react-router-dom';
+import Backdrop from '../Backdrop/Backdrop';
 const slideInMenu = (props) => {
     return(
         <div className={styles.SlideInMenu} onClick={props.click}>
@@ -8,6 +9,8 @@ const slideInMenu = (props) => {
          {!props.isAuthenticated 
             ? <NavLink className={styles.Items} to="/auth">Authenticate</NavLink>
             : <NavLink className={styles.Items} to="/logout">Logout</NavLink> }
+           
+            
         </div>
     ) 
 };
