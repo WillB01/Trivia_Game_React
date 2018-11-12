@@ -1,27 +1,33 @@
-import React from 'react'
-import {NavLink} from 'react-router-dom';
+import React, {Component} from 'react'
+
 import styles from './Navbar.module.css';
 import Ribbon from '../Ribbon/Ribbon';
 import PlayerInfo from '../PlayerInfo/PlayerInfo';
-import {FaHome} from 'react-icons/fa';
+import {FaAlignJustify} from 'react-icons/fa';
+import SlideInMenu from '../SlideInMenu/SlideInMenu';
 
 
-const Navbar = (props) => {
-    return(
-        <nav className={styles.Navbar}>
+class Navbar extends Component {
+    state = {
+        showSlideIn: false
+    };
+    clickHandler = () => (this.setState((prevState) => ({showSlideIn: !prevState.showSlideIn})));
+    render() {
+        return (
+            <nav className={styles.Navbar}>
             <div className={styles.Logo}>
                 <Ribbon />
             </div>
            
         <div className={styles.NavbarItems}>
-            <NavLink className={styles.NavItem} to="/"><FaHome className={styles.FaBomb} /></NavLink>
-            {!props.isAuthenticated 
-            ? <NavLink className={styles.NavItem} to="/auth">Authenticate</NavLink>
-            : <NavLink className={styles.NavItem} to="/logout">Logout</NavLink> }
+            <div className={styles.NavItem} onClick={this.clickHandler}><FaAlignJustify className={styles.FaBomb} /></div>
+            {this.state.showSlideIn ? <SlideInMenu click={this.clickHandler} isAuthenticated={this.props.isAuthenticated } /> : null }
         </div>
             <PlayerInfo />
         </nav>
-    );
+        )
+    };
 };
+
 
 export default Navbar;

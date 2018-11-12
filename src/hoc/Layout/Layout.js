@@ -13,7 +13,7 @@ class Layout extends Component {
 
         return (
             <React.Fragment>
-            <div className={this.props.life === 1 ? styles.Last : styles.Layout}>
+            <div className={this.props.life === 1 ? `${styles.Last} 'slideInDown'` : styles.Layout}>
                 {this.props.isAuthenticated ? <NavBar className={styles.Navbar} isAuthenticated={this.props.isAuthenticated} /> : null }
                 {/* <Instructions /> */}
                 {!this.props.sctg.selectedCategory && this.props.isAuthenticated ?<div className={styles.HighScoreContainer}><HighScoreContainer/> </div> : null }
@@ -33,6 +33,7 @@ const mapStateToProps = (state) => {
         isAuthenticated: state.auth.token !== null,
         sctg: state.selectedCategory,
         life: state.triviaMain.life,
+        
     };
 };
 

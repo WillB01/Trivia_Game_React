@@ -9,6 +9,7 @@ import Logout from './containers/Auth/Logout/Logout';
 import Auth from './containers/Auth/Auth';
 import * as actions from './store/actions/index';
 import {connect} from 'react-redux';
+// import styles from './App.module.css'
 
 import './App.css';
 
@@ -17,6 +18,7 @@ class App extends Component {
   componentDidMount() {
     this.props.onTryAutoSignup(this.props.triviaMain);
   }
+  cssClasses = ['App', ]
   render() {
     let routes = (
       <Switch>
@@ -50,7 +52,8 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.auth.token !== null,
-    triviaMain: state.triviaMain
+    triviaMain: state.triviaMain,
+    
   };
 };
 

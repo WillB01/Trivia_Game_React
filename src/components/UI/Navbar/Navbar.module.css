@@ -9,14 +9,19 @@
     /* margin-bottom: 10px; */
     max-width: 2000px;
     margin: 0 auto 0px auto;
+    z-index: 100;
 
     
 }
 
 .Navbar .NavbarItems {
-  
     display: inline-block;
+    color: white;
     
+}
+
+.Navbar div {
+   cursor: pointer;
 }
 
 .Navbar .NavbarItems a {

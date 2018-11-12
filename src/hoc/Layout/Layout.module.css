@@ -1,7 +1,7 @@
+
 .Layout {
     width: 100%;
     
- 
 }
 
 .Main {
@@ -29,11 +29,13 @@
 .Last {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: linear-gradient(-45deg, rgb(43, 42, 42), rgb(29, 29, 29), rgb(2, 2, 2), rgb(70, 70, 70));
+    background: linear-gradient(-45deg, rgb(43, 42, 42), rgb(29, 29, 29), rgb(56, 56, 56), rgb(70, 70, 70));
       background-size: 400% 400%;
-      -webkit-animation: Gradient 15s ease infinite;
-      -moz-animation: Gradient 15s ease infinite;
-      animation: Gradient 15s ease infinite;
+      -webkit-animation: Gradient 5s ease infinite;
+      -moz-animation: Gradient 5s ease infinite;
+      animation: Gradient 1s ease infinite;
+      height: 100%;
+      animation-iteration-count: forwards;
 
 
 
