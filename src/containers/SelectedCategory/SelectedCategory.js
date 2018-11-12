@@ -64,16 +64,19 @@ class SelectedCategory extends Component {
         let selected = < Spinner /> ;
         let questionsCards = [];    
         let button = null;    
+        let isLast = false; 
   
         if (selectedCategory) {
             selectedCategory.map((item, index) => {
                 this.QuestionCardsCreator(selectedCategory, index, (res) => {
                     questionsCards.push(res);;
                 });
+                isLast = this.props.amountOfCardsPlayed.length === this.props.cardsStatic.length - 1;
             });
             console.log(selectedCategory);
             selected = (
                 <React.Fragment>
+              
                  <div className={`${styles.QuestionCard } fadeInDownBig`}>
                     {questionsCards[this.props.cards[0]]}          
                  </div>
@@ -89,9 +92,10 @@ class SelectedCategory extends Component {
             button = <Button btnType={'Regular'} 
             click={this.props.startGame}>Start Game</Button> 
         }
+        console.log(isLast);
         return(
             <div className={styles.SelectedCategory}>
-
+                {isLast ? 'LLLAST' : null}
                 {this.props.triviaMainStartGame ? selected : 
                 <div className={`${styles.CardBlocker } flipInY`}>
                 {button}
@@ -142,3 +146,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 export default connect(mapStateToProps,mapDispatchToProps)(SelectedCategory);
+

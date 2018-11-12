@@ -7,11 +7,13 @@ import Instructions from '../../components/UI/Instructions/Instructions';
 
 
 class Layout extends Component {
+
     render() {
+        console.log(this.props.life)
 
         return (
             <React.Fragment>
-            <div className={styles.Layout}>
+            <div className={this.props.life === 1 ? styles.Last : styles.Layout}>
                 {this.props.isAuthenticated ? <NavBar className={styles.Navbar} isAuthenticated={this.props.isAuthenticated} /> : null }
                 {/* <Instructions /> */}
                 {!this.props.sctg.selectedCategory && this.props.isAuthenticated ?<div className={styles.HighScoreContainer}><HighScoreContainer/> </div> : null }
@@ -29,7 +31,8 @@ class Layout extends Component {
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.auth.token !== null,
-        sctg: state.selectedCategory
+        sctg: state.selectedCategory,
+        life: state.triviaMain.life,
     };
 };
 

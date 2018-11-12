@@ -14,9 +14,6 @@ export const fetchSelectedCategory = (id, ctg) => {
         axios.get(url)
         .then(res => { 
             dispatch(fetchExtraHints(res.data, ctg, id));
-            
-            // dispatch(fetchExtraHints(id, ctg))
-          
         })
         .catch(err => (dispatch(setSelectedCategoryFail())));
     }
@@ -24,23 +21,18 @@ export const fetchSelectedCategory = (id, ctg) => {
 }; // Gets the selected category wich the user picked
 
 export const fetchExtraHints = (resCtg, ctg, id) => {
-    const rand = _.random(0, ctg.categories.length - 1);
-    const newCtg = [...ctg.categories];
-    const uppdatedNewCtg = newCtg.filter(c => c.id !== id);
-    const getRandomId = uppdatedNewCtg[rand].id;
-    console.log(getRandomId);
-    console.log(uppdatedNewCtg);
-    const url = `http://jservice.io/api/clues/?category=${getRandomId}`;
+    // const rand = _.random(0, ctg.categories.length - 1);
+    // const newCtg = [...ctg.categories];
+    // const uppdatedNewCtg = newCtg.filter(c => c.id !== id);
+    // const getRandomId = uppdatedNewCtg[rand].id;
+    // const url = `http://jservice.io/api/clues/?category=${getRandomId}`;
+    const url = `http://jservice.io/api/random?count=8`;
     return dispatch => {
         axios.get(url)
         .then(res => { 
-            console.log(res);
             dispatch(setSelectedCategory(resCtg ,res.data));
-            
-            // dispatch(fetchExtraHints(id, ctg))
           
         })
         .catch(err => (dispatch(setSelectedCategoryFail())));
     }
-
-};
+}; // gets a random category.
