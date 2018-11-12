@@ -52,20 +52,22 @@ class Categories extends Component {
         
     };
 
+
     render() {
         let categories = < Spinner /> ;
         const completed = this.props.triviaMain.player.score.selectedCategoryCompletedId;
         const ctg =  this.props.ctg.categories;
-        const test = this.giveCompletedCategoryCssClass(completed, ctg);
+        const completedCtg = this.giveCompletedCategoryCssClass(completed, ctg);
         ctg 
         ? categories = (
             ctg.map((item, index) => (
                
+                completedCtg[index].length !== 0 || completedCtg[index].length === 'undefined'  ? <div className={ styles.CategoriesCompleted }>{item.title}</div> : 
                 <NavLink to={{
                     pathname: '/selected-category',
                     search: `?id=${item.id}`,
                     state: {id: item.id}
-                }} className={test[index].length !== 0 || test[index].length === 'undefined'  ? styles.CategoriesCompleted : styles.CategoriesItems } 
+                }} className={styles.CategoriesItems } 
                 //    style={test[index].length !== 0 || test[index].length === 'undefined' ? {background: '#018E5B'} : {background: '#'+(Math.random()*0xFFFFFF<<0).toString(10)}}
                    key={item.id}
                    onClick={() => this.props.onCategoryHandler(item.id, this.props.ctg)}>{item.title}

@@ -24,7 +24,7 @@ export const getPlayerAnswer= (playerAnswer, correctAnswer) => ({
 export const checkIfCategoryCompleted =  (scoreToCompleteSelectedCategory, cards, id, playerScore, completeCtg, amountOfCardsPlayed, life) => {
         const score =  ((scoreToCompleteSelectedCategory / 2) + 1).toFixed();
         const cardsPlayed = amountOfCardsPlayed.length;
-        if (cards.length === 0 && life !== 0 && scoreToCompleteSelectedCategory) { 
+        if (cards.length === 0 && life !== 0 && scoreToCompleteSelectedCategory && !completeCtg) { 
               return dispatch => {
                     dispatch(categoryCompletedSuccess(id));
                 };
