@@ -1,12 +1,17 @@
 .SelectedCategory {
-  padding: 10px;
+ 
   width: 100%;
+  margin:  0 auto;
 }
 
 .QuestionCard {
 
   animation-duration: 1s;
   animation-iteration-count: forwards;
+}
+
+.GameScore {
+  width: 100%;
 }
 
 .CardBlocker {

@@ -6,12 +6,6 @@ import Button from '../UI/Button/Button';
  ...allanswers]);
 
 const possibleAnswers = (props) => {
-    // const shuffledAnswers = shuffleAnswers(props.correctAnswer);
-    // const rand = _.random(0, props.hints.categories.length);
-    // console.log(props.hints.categories);
-
-    // console.log(rand)
-    // console.log(_.shuffle(props.hints.categories[rand]).id)
     const otherShuffledAnswers = _.shuffle(shuffleAnswers(props.allAnswers));
         return (
             <div>

@@ -2,6 +2,7 @@ import * as actionTypes from './actionTypes';
 import * as k from '../../k';
 import axios from 'axios';
 
+
 export const startGame = () =>  ({type: actionTypes.STATE_GAME}); // user presses btn in selectedCategory.
 export const resetGame = () =>  ({type: actionTypes.RESET_GAME});
 export const newQuestionCard = () => ({type: actionTypes.NEW_QUESTION_CARD});
@@ -10,10 +11,9 @@ export const initPatchDbFail = () =>  ({type: actionTypes.TRIVIA_MAIN_INIT_PATCH
 export const dontInitPatchDbSuccess = () => ({ type: actionTypes.TRIVIA_MAIN_DONT_INIT_PATCH_SUCCESS });
 const categoryGameOver = () => ({type: actionTypes.CATEGORY_GAMEOVER_TRIVIA_MAIN});
 const continueGame = () => ({type: actionTypes.CATEGORY_CONTINUE_TRIVIA_MAIN});
-const categoryCompletedSuccess = (id, title) => ({
+const categoryCompletedSuccess = (id) => ({
     type: actionTypes.CATEGORY_COMPLETED_SUCCESS_TRIVIA_MAIN, 
     id,
-    title
 });
 export const getPlayerAnswer= (playerAnswer, correctAnswer) => ({
     type: actionTypes.TRIVIA_MAIN_GET_PLAYER_ANSWER,
@@ -21,18 +21,15 @@ export const getPlayerAnswer= (playerAnswer, correctAnswer) => ({
     correctAnswer
 });
 
-export const checkIfCategoryCompleted =  (scoreToCompleteSelectedCategory, selectedCategoryCompletedId, cards, id, playerScore, completeCtg, title) => {
-        const score =  (scoreToCompleteSelectedCategory / 2) + 1;
-        if (playerScore >= score
-            && scoreToCompleteSelectedCategory 
-            && cards.length === 0 && !completeCtg) { 
+export const checkIfCategoryCompleted =  (scoreToCompleteSelectedCategory, cards, id, playerScore, completeCtg, amountOfCardsPlayed, life) => {
+        const score =  ((scoreToCompleteSelectedCategory / 2) + 1).toFixed();
+        const cardsPlayed = amountOfCardsPlayed.length;
+        if (cards.length === 0 && life !== 0 && scoreToCompleteSelectedCategory) { 
               return dispatch => {
-                    dispatch(categoryCompletedSuccess(id, title));
+                    dispatch(categoryCompletedSuccess(id));
                 };
         }
-        if (playerScore <= score
-            && scoreToCompleteSelectedCategory 
-            && cards.length === 0) { 
+        if (life === 0) { 
               return dispatch => {
                     dispatch(categoryGameOver());
                 };

@@ -51,18 +51,12 @@ class Categories extends Component {
         
     };
 
-//     List = ({ list }) =>
-//   <div className="list">
-//     {list.map(item => <div className="list-row" key={item.objectID}>
-//       <a href={item.url}>{item.title}</a>
-//     </div>)}
-//   </div>
-    
     render() {
         let categories = < Spinner /> ;
         const completed = this.props.triviaMain.player.score.selectedCategoryCompletedId;
         const ctg =  this.props.ctg.categories;
         const test = this.giveCompletedCategoryCssClass(completed, ctg);
+        console.log(ctg);
         ctg 
         ? categories = (
             ctg.map((item, index) => (
@@ -116,9 +110,6 @@ const mapDispatchToProps = dispatch => {
         onCategoryHandler: (id) => dispatch(categoriesAction.fetchSelectedCategory(id)),
         fetchCategories: (btnClick) => dispatch(categoriesAction.fetchCategories(btnClick)),
         onResetGame: () => dispatch(categoriesAction.resetGame()),
-      
-       
-      
     };
 };
 

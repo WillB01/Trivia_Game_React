@@ -6,10 +6,10 @@ import WrongAnswer from '../../components/UI/WrongAnswer/WrongAnswer';
 import Button from '../../components/UI/Button/Button';
 import Cards from '../../components/UI/Cards/Cards';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import GameScore from '../../components/UI/GameScore/GameScore';
 class SelectedCategory extends Component {
     componentDidUpdate() {
        const cards = this.props.selectedCtg ? this.props.selectedCtg.length  : 0;
-    //    const title =  this.props.selectedCtg[0].category.title? this.props.selectedCtg[0].category.title  : '';
        const percentage = this.percentageCalculator(1, cards);
        if (this.props.triviaMainIsCorrect) { // resets triviaMain state for user answer and correct answer. adds to progressBar
             this.props.onNewQuestionCard();
@@ -18,13 +18,12 @@ class SelectedCategory extends Component {
         
         this.props.onCheckIfCategoryCompleted( 
             this.props.selectedCategory.scoreToCompleteSelectedCategory,
-            this.props.selectedCategory.selectedCategoryCompletedId,
             this.props.selectedCategory.amountOfCards,
             this.props.location.state.id,
             this.props.selectCtgScore,
-            this.props.completeCtg,
-            // title
-           
+            this.props.completeCtg,    
+            this.props.amountOfCardsPlayed,
+            this.props.life
         );
 
         if (this.props.completeCtg) {
@@ -40,8 +39,7 @@ class SelectedCategory extends Component {
 
     playerAnswerClickHandler = (user, selected) => {  
         this.props.onAnswerClick(user, selected);
-        this.props.onNewCards(user === selected, user);
-        
+        this.props.onNewCards(user === selected, user);    
     };
 
     percentageCalculator = (a, b) => (a / b) * 100; // calculate the precentage for the progressbar.
@@ -54,6 +52,8 @@ class SelectedCategory extends Component {
                 triviaMainStartGame={this.props.triviaMainStartGame}
                 playerAnswerClickHandler={(userAnswer, answer) => this.playerAnswerClickHandler(userAnswer, answer)}
                 answers={this.props.answers}
+                cardsRemaining={`${this.props.amountOfCardsPlayed.length} / ${this.props.cardsStatic.length}`}
+                cardsPlayed={this.props.amountOfCardsPlayed.length}
                 />
         )) 
            
@@ -77,6 +77,11 @@ class SelectedCategory extends Component {
                  <div className={`${styles.QuestionCard } fadeInDownBig`}>
                     {questionsCards[this.props.cards[0]]}          
                  </div>
+                 <GameScore className={styles.GameScore} 
+                               cardsRemaining={`${this.props.amountOfCardsPlayed.length} / ${this.props.cardsStatic.length}`}
+                               score={this.props.selectCtgScore}
+                               life={this.props.life} />
+               
                 </React.Fragment>
             )
         }
@@ -87,10 +92,15 @@ class SelectedCategory extends Component {
         return(
             <div className={styles.SelectedCategory}>
 
-                {this.props.triviaMainStartGame ? selected : <div className={`${styles.CardBlocker } flipInY`}>{button}</div>}
-                <WrongAnswer playerAnswer={this.props.playerAnswer}
+                {this.props.triviaMainStartGame ? selected : 
+                <div className={`${styles.CardBlocker } flipInY`}>
+                {button}
+                <br></br>
+                    
+                </div>}
+                {/* <WrongAnswer playerAnswer={this.props.playerAnswer}
                               correctAnswer={this.props.correctAnswer}
-                              start={this.props.triviaMainStartGame} />
+                              start={this.props.triviaMainStartGame} /> */}
                 
             </div>
         );
@@ -102,9 +112,12 @@ const mapStateToProps = state => {
         selectedCtg: state.selectedCategory.selectedCategory,
         hints: state.selectedCategory.hints,
         cards: state.selectedCategory.amountOfCards,
+        amountOfCardsPlayed: state.selectedCategory.amountOfCardsPlayed,
+        cardsStatic: state.selectedCategory.selectedCategory,
         progressBar: state.selectedCategory.progressBar,
         answers: state.selectedCategory.answers,
         selectedCategory: state.selectedCategory,
+        
         playerAnswer: state.triviaMain.playerAnswer,
         correctAnswer: state.triviaMain.correctAnswer,
         completeCtg: state.triviaMain.selectedCategoryCompleted,
@@ -112,6 +125,7 @@ const mapStateToProps = state => {
         triviaMainStartGame: state.triviaMain.startGame,
         selectCtgScore: state.triviaMain.player.score.selectedCategory,
         isGameOver: state.triviaMain.selectedCategoryGameover,
+        life: state.triviaMain.life
     };
 };
 
@@ -123,7 +137,7 @@ const mapDispatchToProps = dispatch => {
         onNewCards: (isCorrect, userAns) => dispatch(actions.newQuestionCards(isCorrect, userAns)),
         onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress)),
         onResetSelectCategory: () => dispatch(actions.resetSelectCategory()),
-        onCheckIfCategoryCompleted: (scoreToComplete, selCtgId, cards, id, score, isCompleteCtg, title) => dispatch(actions.checkIfCategoryCompleted(scoreToComplete, selCtgId, cards, id, score, isCompleteCtg, title)),
+        onCheckIfCategoryCompleted: (scoreToComplete, cards, id, score, isCompleteCtg, amountOfCardsPlayed, life) => dispatch(actions.checkIfCategoryCompleted(scoreToComplete, cards, id, score, isCompleteCtg, amountOfCardsPlayed, life)),
         
     };
 };

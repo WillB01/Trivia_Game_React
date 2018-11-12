@@ -18,6 +18,7 @@ const RESETSTATE = {
     selectedCategoryCompleted: false,
     selectedCategoryGameover: false,
     firstLoggin: true,
+    life: 3,
     
     player: {
      name: '',
@@ -47,6 +48,7 @@ const initialState = {
    selectedCategoryCompleted: false,
    selectedCategoryGameover: false,
    firstLoggin: true,
+   life: 3,
    
    player: {
     name: '',
@@ -95,6 +97,7 @@ const wrongAnswerSelectedCategory = (state, playerAnswer, correctAnswer, remove)
             isCorrect: false,
             correctAnswer: correctAnswer,
             playerAnswer: playerAnswer,
+            life: state.life -= 1,
             player: {
                 ...state.player,
                 score: {
@@ -137,6 +140,7 @@ const setResetGame = (state, action) => {
         startGame: false,
         selectedCategoryCompleted: false,
         selectedCategoryGameover: false,
+        life : 3,
         player: {
             ...state.player,
             score: {

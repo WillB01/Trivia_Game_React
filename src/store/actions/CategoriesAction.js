@@ -11,13 +11,9 @@ export const fetchImagesSuccess = (images) => ({type: actionTypes.FETCH_IMAGES_S
 let offsetStart = 12;
 const visibleCategories = 12;
 export const pageination = (btnClick) => {
-    if (btnClick === 'more') {
-        offsetStart += visibleCategories;
-     } else if (btnClick === 'less') {
-        offsetStart -= visibleCategories;
-     }
-     
-     offsetStart = offsetStart <= 0 ? 0 : offsetStart;
+    btnClick === 'more' ? 
+        offsetStart += visibleCategories : offsetStart -= visibleCategories;  
+     offsetStart = offsetStart <= 0 ? 12 : offsetStart;
 }; // gets more or less categories
 
 export const fetchCategories = (btnClick) => {
