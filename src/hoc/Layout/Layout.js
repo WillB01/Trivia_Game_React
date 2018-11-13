@@ -9,11 +9,9 @@ import Instructions from '../../components/UI/Instructions/Instructions';
 class Layout extends Component {
 
     render() {
-        console.log(this.props.life)
-
         return (
             <React.Fragment>
-            <div className={this.props.life === 1 ? `${styles.Last} 'slideInDown'` : styles.Layout}>
+            <div className={this.props.life === 1 ? `${styles.Last} 'flash'` : styles.Layout}>
                 {this.props.isAuthenticated ? <NavBar className={styles.Navbar} isAuthenticated={this.props.isAuthenticated} /> : null }
                 {/* <Instructions /> */}
                 {!this.props.sctg.selectedCategory && this.props.isAuthenticated ?<div className={styles.HighScoreContainer}><HighScoreContainer/> </div> : null }

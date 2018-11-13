@@ -35,10 +35,7 @@ const mapDispatchToProps = dispatch => {
         onResetGame: () => dispatch(actions.resetGame()),
         onResetSelectCategory: () => (dispatch(actions.resetSelectCategory())),
         onInitPatchdDb: (triviaMain) => dispatch(actions.initPatchdDb(triviaMain)),
-        onInitHighScore: () => dispatch(actions.fetchHighScore())
-        // onFetchImg: (name) => dispatch(actions.fetchImagesForCategories(name))
-       
-       
+        onInitHighScore: () => dispatch(actions.fetchHighScore())       
     };
 };
 

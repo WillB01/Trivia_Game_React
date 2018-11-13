@@ -1,8 +1,7 @@
-
 .IncompleteCategory {
     position: absolute;
     padding: 20px;
-    color:white;
+    color: white;
     background: #F25652;
     font-size: 60px;
     right: 0;
@@ -10,7 +9,7 @@
     bottom: 0;
     top: 0;
     border: 2px solid #F25652;
-    z-index: 1;
+    z-index: 200;
     animation-duration: 1s;
     animation-iteration-count: forwards;
 }

@@ -24,16 +24,11 @@
   overflow: hidden;
   background-color: #FFF;
   box-shadow: 0 19px 48px rgba(0, 0, 0, 0.3), 0 15px 32px rgba(0, 0, 0, 0.22);
-  /* animation: slideDown 1s ease-in-out 3ms forwards; */
   overflow-y: hidden;
   border-radius: 5px;
   animation-duration: 2s;
   animation-iteration-count: forwards;
 }
-
-
-
-
 @media screen and (max-width: 640px) {
   .SelectedCategory {
  

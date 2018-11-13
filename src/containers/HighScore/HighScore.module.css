@@ -1,3 +1,20 @@
+.HighScoreContainer {
+    display: grid;
+    grid-template-areas: "header header"
+                        "item item";
+    grid-gap: 2px;
+
+
+    width: 40%;
+    background:white;
+    margin: 0 auto;
+    border-radius: 5px;
+    padding-bottom: 3px; 
+    box-shadow: 0 0 30px rgba(0, 0, 0, .15) inset,
+        0 6px 10px rgba(0, 0, 0, .15);
+
+}
+
 .Header {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -8,11 +25,11 @@
     align-items: center;
     cursor: pointer;
     box-shadow: 0 0 30px rgba(0, 0, 0, .15) inset,
-    0 6px 10px rgba(0, 0, 0, .15);
+        0 6px 10px rgba(0, 0, 0, .15);
     color: white;
     box-sizing: border-box;
-    
-
+    height: 70px;
+    grid-area: header;
 
 }
 
@@ -20,21 +37,17 @@
     background: #5875dd;
 }
 
-.HighScoreContainer{
-   width: 40%;
-   background: rgb(255, 255, 255);
-    margin: 0 auto;
-    border-radius: 5px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, .15) inset,
-    0 6px 10px rgba(0, 0, 0, .15);
 
-}
 .HighScoreContainer p {
-    padding: 10px;
-    border-radius: 5px;
-    background: white;
+    grid-area: item;
+    text-justify: auto;
+    /* background: white; */
     color: #384b91;
     font-size: 1.3rem;
+    background: red;
+  
+    
+
 }
 
 .Trophy {
@@ -45,15 +58,13 @@
 @media screen and (max-width: 762px) {
     .HighScoreContainer {
         width: 80%;
-        background: red;
+        background:white;
         margin: 0 auto;
-        border-radius: 5px;
+      
         box-shadow: 0 0 30px rgba(0, 0, 0, .15) inset,
             0 6px 10px rgba(0, 0, 0, .15);
 
     }
 }
-
-
 
 

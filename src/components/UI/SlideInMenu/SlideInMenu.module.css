@@ -13,15 +13,12 @@
     box-shadow: 0px 0px 142px -37px rgba(0,0,0,0.75);
     display: grid;
     grid-template-rows: 50px 50px;
-
 }
 
 .SlideInMenu a:hover {
     background:#23A6D5;
     position: relative;
     color: white;;
-    
-
 }
 
 .SlideInMenu a{
@@ -29,7 +26,6 @@
 }
 
 .SlideInMenu  .Items{
-    /* background: rgba(155, 148, 108, 0.342); */
     transition: ease-in-out;
     border-radius: 5px;
     padding-top: 5px;

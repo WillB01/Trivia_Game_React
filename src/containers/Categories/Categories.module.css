@@ -10,18 +10,12 @@
     width: 100%;
     background: none;
     box-sizing: border-box;
-    /* box-shadow: 0 19px 48px rgba(0, 0, 0, 0.3), 0 15px 32px rgba(0, 0, 0, 0.22); */
    
 }
 
 .CategoriesItems {
     background:  rgba(53, 91, 125, 0.74);
-    /* background: #d8d8d8; */
-    /* border: solid 1px #d8d8d8; */
-    
-    /* background-image: url("../../assets/img/pink\ dust.png"); */
     color: rgb(255, 255, 255);
-
     border-radius: 4px;
     padding: 2px;
     cursor: pointer;
@@ -32,6 +26,8 @@
     text-align: center;
     min-height: 250px;
     box-sizing: border-box;
+    box-shadow: 0 19px 48px rgba(0, 0, 0, 0.3), 0 15px 32px rgba(0, 0, 0, 0.22);
+
 
 }
 
@@ -44,6 +40,8 @@
     font-size: 1.3em;
     letter-spacing: 0.02em;
     text-align: center;
+    box-shadow: 0 19px 48px rgba(0, 0, 0, 0.3), 0 15px 32px rgba(0, 0, 0, 0.22);
+
    
 }
 
@@ -65,12 +63,4 @@
       
    
     }
-
-    /* .Pagination {
-        position: fixed;
-        top: 0;
-        right: 0;
-        margin-right: 0;
-    } */
-    
 }

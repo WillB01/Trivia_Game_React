@@ -12,7 +12,9 @@
     background: rgb(90, 194, 125);
 }
 
-.Button:focus {outline:0;}
+.Button:focus {
+    outline: 0;
+}
 
 .Regular {
     font-size: 20px;
@@ -23,7 +25,6 @@
 .Pagination {
     background: rgba(35, 165, 213, 0.829);
     box-shadow: 0 19px 48px rgba(0, 0, 0, 0.3), 0 15px 32px rgba(0, 0, 0, 0.22);
-
 
 }
 
@@ -37,15 +38,4 @@
 
 .Remove {
     display: none;
-}
-
-@media screen and (max-width: 600px) {
-    .Pagination {
-     
-  
-        
- 
-        
-    
-    }
 }

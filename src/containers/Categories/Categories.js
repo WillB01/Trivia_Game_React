@@ -6,32 +6,24 @@ import {NavLink, Redirect} from 'react-router-dom';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Button from '../../components/UI/Button/Button';
 import {Events, animateScroll as scroll} from 'react-scroll'
-import {FaPlus, FaMinus} from 'react-icons/fa';
-
+import {FaPlus, FaMinus, FaStar} from 'react-icons/fa';
 
 
 class Categories extends Component {
      componentDidMount() {
         this.props.onResetGame();
-        Events.scrollEvent.register('begin', function () {
-            console.log("begin", arguments);
-        });
-
-        Events.scrollEvent.register('end', function () {
-            console.log("end", arguments);
-        });
+        Events.scrollEvent.register('begin');
+        Events.scrollEvent.register('end');
     };
 
     componentWillUnmount() {
         Events.scrollEvent.remove('begin');
-        Events.scrollEvent.remove('end');
-        
+        Events.scrollEvent.remove('end');   
     };
 
     
     pageignationHandler = (btnClick) => { 
         this.props.fetchCategories(btnClick, this.props.ctg.categories);
-        
         if (btnClick === 'more' ) {
             scroll.scrollToBottom({ 
                 delay: 200,  
@@ -40,16 +32,8 @@ class Categories extends Component {
     };
 
     giveCompletedCategoryCssClass = (completed, ctg) => {
-        if (!completed) {
-            return [];
-        }
-        if (ctg) {
-            return ctg.map(item => {
-                return completed.filter(id => id === item.id);
-            })
-
-        }
-        
+        if (!completed) {return [];}
+        if (ctg) {return ctg.map(item => (completed.filter(id => id === item.id)))}
     };
 
 
@@ -62,7 +46,8 @@ class Categories extends Component {
         ? categories = (
             ctg.map((item, index) => (
                
-                completedCtg[index].length !== 0 || completedCtg[index].length === 'undefined'  ? <div key={item.id} className={ styles.CategoriesCompleted }>{item.title}</div> : 
+                completedCtg[index].length !== 0 || completedCtg[index].length === 'undefined'  ? <div key={item.id} className={ styles.CategoriesCompleted }>
+                    <div className={styles.Start}><FaStar /></div> {item.title}</div> : 
                 <NavLink to={{
                     pathname: '/selected-category',
                     search: `?id=${item.id}`,
@@ -80,7 +65,6 @@ class Categories extends Component {
         return(
             <React.Fragment>
                 {!this.props.isAuthenticated ? <Redirect to="/" /> : null }
-              
                 <div className={styles.Categories}>
                 <div className={styles.Pagination}>
                     <Button click={() => this.pageignationHandler('less')}
@@ -101,9 +85,7 @@ const mapStateToProps = state => {
         ctg: state.categories,
         selectedCtg: state.selectedCategory,
         isAuthenticated: state.auth.token !== null,
-        triviaMain: state.triviaMain
-        
-        
+        triviaMain: state.triviaMain  
     };
 };
 

@@ -1,13 +1,10 @@
 import React, {Component} from 'react'
-
 import styles from './Navbar.module.css';
 import Ribbon from '../Ribbon/Ribbon';
 import PlayerInfo from '../PlayerInfo/PlayerInfo';
 import {FaAlignJustify} from 'react-icons/fa';
 import SlideInMenu from '../SlideInMenu/SlideInMenu';
 import Backdrop from '../Backdrop/Backdrop';
-
-
 
 class Navbar extends Component {
     state = {

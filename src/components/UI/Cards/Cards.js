@@ -3,9 +3,6 @@ import ProgressBar from '../ProgressBar/ProgressBar';
 import PossibleAnswers from '../../PossibleAnswers/PossibleAnswers';
 import styles from './Cards.module.css';
 
-
-
-
 const cards = (props) => {
     const selectedCategory = props.selectedCategory;
     const index = props.index;

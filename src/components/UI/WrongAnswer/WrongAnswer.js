@@ -10,9 +10,8 @@ const wrongAnswer = (props) => {
     const progressBar = {
     background
     };
-   
 
-return(<div className={`${styles.WrongAnswer}`} style={progressBar}></div>);
+    return(<div className={`${styles.WrongAnswer}`} style={progressBar}></div>);
 };
 
 export default wrongAnswer;

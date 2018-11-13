@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import styles from './SelectedCategory.module.css';
 import * as actions from '../../store/actions/index';
 import WrongAnswer from '../../components/UI/WrongAnswer/WrongAnswer';
-import Countdown from 'react-countdown-now';
 import Button from '../../components/UI/Button/Button';
 import Cards from '../../components/UI/Cards/Cards';
 import Spinner from '../../components/UI/Spinner/Spinner';
@@ -92,7 +91,6 @@ class SelectedCategory extends Component {
             button = <Button btnType={'Regular'} 
             click={this.props.startGame}>Start Game</Button> 
         }
-        console.log(isLast);
         return(
             <div className={styles.SelectedCategory}>
                 {isLast ? 'LLLAST' : null}

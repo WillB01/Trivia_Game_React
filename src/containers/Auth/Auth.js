@@ -177,7 +177,6 @@ const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSignup, name) => dispatch(actions.auth(email, password, isSignup, name)),
         onTryAutoSignup: (triviaMain) => dispatch(actions.authCheckState(triviaMain)),
-        // onSetAuthRedirect: () => dispatch(action.setAuthRedirectPath('/'))
     };
 };
 

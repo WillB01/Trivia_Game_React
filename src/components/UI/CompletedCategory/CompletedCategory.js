@@ -5,16 +5,13 @@ import {NavLink} from 'react-router-dom';
 
 const completedCategory = (props) => {
     return(
-        
         <div className={`${styles.CompletedCategory} animated slideInLeft `}>
           <FaCheck />
-           <div>Congrats! You completed {props.title}</div>
+           <div>Congrats!</div>
            <div className={`${styles.Links} animated slideInLeft `} >
             <NavLink to="/">Back Home</NavLink>
            </div>
-        </div>
-        
-       
+        </div>   
     );
     
 };

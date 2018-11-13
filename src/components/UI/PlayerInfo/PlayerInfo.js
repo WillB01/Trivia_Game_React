@@ -8,8 +8,6 @@ class PlayerInfo extends Component {
     }
 
     handleClick = () => this.setState(prevState => ({showContent: !prevState.showContent}));
-
- 
     render() {
         const content = (
             <React.Fragment>

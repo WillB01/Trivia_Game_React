@@ -12,23 +12,19 @@
     box-sizing: border-box;
     border-radius: 0 10px 10px 0;
     text-align: center;
-
-
 }
 
 .Instructions .Icon {
     font-size: 30px;
     margin-right: 6px;
     margin-top: 10px;
-    text-align: center; 
+    text-align: center;
 }
 
-.Instructions:hover .Items  {
+.Instructions:hover .Items {
     display: block;
     animation: soft 2s forwards 0.3s ease-in;
     height: 400px;
-
-    /* animation: soft 10s forwards 0.3s ease-in; */
 }
 
 .Items {
@@ -43,24 +39,7 @@
     box-sizing: border-box;
     border-radius: 0 10px 10px 0;
     padding-bottom: 30px;
-    margin: auto; 
-    /* animation: soft 2s forwards 0.3s ease-in; */
+    margin: auto;
     display: none;
-    
-}
-
-.Items h1 {
-    /* animation: soft 2s forwards 0.3s ease-in; */
 
 }
-/* 
-@keyframes soft {
-    0%{
-        background: green;
-        width: 40px;
-    }
-    100%{
-        background: yellow;
-        width: 230px;
-    }
-} */

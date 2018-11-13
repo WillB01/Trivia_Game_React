@@ -9,52 +9,8 @@
     margin: 50px auto;
     display: grid;
     width: 90%;
-    grid-template-areas: "ctg";
-    /* grid-template-columns: 1fr 1fr 1fr; */
-   
+    grid-template-areas: "ctg";  
 }
-
-/* .HighScoreContainer {
-   
-    max-width: 400px;
-    margin: 0 auto;
-    background: none;
-    border-radius: 5px;
-
-} */
-
-.Children {
-    grid-area: ctg;
-}
-
-.Last {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background: linear-gradient(-45deg, rgb(43, 42, 42), rgb(29, 29, 29), rgb(56, 56, 56), rgb(70, 70, 70));
-      background-size: 400% 400%;
-      -webkit-animation: Gradient 5s ease infinite;
-      -moz-animation: Gradient 5s ease infinite;
-      animation: Gradient 1s ease infinite;
-      height: 100%;
-      animation-iteration-count: forwards;
-
-
-
-}
-
-/* .HighScoreContainer {
-    margin-top: 60px;
-    padding: 10px;
-    box-sizing: border-box;
-    background: #ebe9e818;
-    border-radius: 5px;
-    grid-area: highscore;
-    margin: 0 auto;
-    max-width: 400px;
-    color: white;
-    
-} */
-
 @media screen and (max-width: 600px) {
     .Header {
        display: none;
@@ -66,6 +22,4 @@
         grid-template-columns:  1fr;
 
     }
-
-
 }
