@@ -1,5 +1,5 @@
 .Navbar {
-    /* background-image: url("../../../assets/img/pink\ dust.png"); */
+    background-image: url("../../../assets/img/pink\ dust.png");
     /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.062), 0 6px 6px rgba(0, 0, 0, 0.075); */
 
     padding: 10px;
@@ -55,8 +55,10 @@
 @media screen and (max-width: 610px) {
     .Logo div {
         border: none;
-        background: green;
+        border: 1px solid #8a1;
+        background: #9b2;
         box-shadow: none;
+        text-align: center;
         content: none;
     }
 
@@ -72,11 +74,11 @@
 
 @media screen and (max-width: 762px) {
     .Logo div {
-        border: none;
         max-width: 40%;
-        padding: 0;
+        text-align: center;
         box-sizing: none;
-        background: rgb(255, 166, 0);
+        border: 1px solid #8a1;
+        background: #9b2;
         box-shadow: 0 0 30px rgba(0, 0, 0, .15) inset,
             0 6px 10px rgba(0, 0, 0, .15);
     }

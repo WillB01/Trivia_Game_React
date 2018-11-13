@@ -12,22 +12,26 @@
     transition: transform 0.3s ease-out;
     box-shadow: 0px 0px 142px -37px rgba(0,0,0,0.75);
     display: grid;
-    grid-template-rows: 50px 50px;
+    grid-template-rows: 50px 50px 50px;
+    animation-iteration-count: forwards;
+    animation-duration: 1s;
 }
 
 .SlideInMenu a:hover {
     background:#23A6D5;
-    position: relative;
     color: white;;
 }
 
-.SlideInMenu a{
-    color: rgb(202, 202, 202);
-}
-
-.SlideInMenu  .Items{
+.Items{
     transition: ease-in-out;
     border-radius: 5px;
-    padding-top: 5px;
+    justify-self: left;
+    /* background: blue; */
+
+    box-sizing: border-box;
+}
+
+.Items h3 {
+    margin: 10px;
 }
 

@@ -19,11 +19,14 @@ class HighScore extends Component {
     highscoreJsx = (highscore) => {
         let highscoreArray = [];
         for (const key in highscore) {
-            highscoreArray.push({name: highscore[key].name, completedQuestionsBonus: highscore[key].score.completedQuestionsBonus});
+            highscoreArray.push({
+                name: highscore[key].name, 
+                completedQuestionsBonus: highscore[key].score.completedQuestionsBonus,
+                total:highscore[key].score.total});
            }
           return highscoreArray.map((item, index) => (
-              <div key={index}>
-                <p>{index + 1} : {item.name} {item.completedQuestionsBonus}</p> 
+              <div className={styles.Score} key={index}>
+                <p>{index + 1} - {item.name}: Score {item.completedQuestionsBonus} Total: {item.total}</p> 
               </div>
           ));
     };
@@ -36,8 +39,9 @@ class HighScore extends Component {
                 <div className={styles.Header} onClick={() => this.showHighScore('highscore')}>
                     Top 10 World Players 
                     <div className={styles.Trophy}>
-                        <FaTrophy /></div>
+                        <FaTrophy />
                     </div>
+                </div>
                 {this.state.showHighScore ? printHighscore : null}
         </div>
         </React.Fragment>

@@ -4,7 +4,7 @@ import styles from './PlayerInfo.module.css';
 
 class PlayerInfo extends Component {
     state = {
-        showContent: false
+        showContent: true
     }
 
     handleClick = () => this.setState(prevState => ({showContent: !prevState.showContent}));
@@ -25,10 +25,9 @@ class PlayerInfo extends Component {
             </React.Fragment>
             )
         return(
-            <div className={styles.PlayerInfoContainer}>
+            <div className={`${styles.PlayerInfoContainer} jello`}  onClick={this.handleClick}>
                 <div className={`${styles.Stats} bounce `}>
-                    <div className={styles.Box}
-                         onClick={this.handleClick}>
+                    <div className={`${styles.Box} name`}>
                         {this.props.triviaMain.name}
                     </div>
                     {this.state.showContent ? content : null}                   

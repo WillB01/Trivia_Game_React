@@ -42,6 +42,19 @@
     font-weight: 700;
   }
 
+  .PlayerInfoContainer:hover {
+    background: linear-gradient(to top right, rgb(67, 91, 128) 0%, rgb(103, 114, 131) 100%);
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+
+  }
+
+
+
+  .Stats:nth-child(1):hover {
+    background: rgb(231, 202, 120); 
+  }
+
   @media screen and (max-width: 812px) {
      .PlayerInfoContainer{
       border-radius: 5px;
