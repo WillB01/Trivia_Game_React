@@ -33,3 +33,11 @@
 
 
 
+
+@media screen and (max-width: 640px) {
+  .SelectedCategory {
+ 
+    width: 100%;
+    margin:  -50px auto;
+  }
+}

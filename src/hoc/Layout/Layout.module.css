@@ -67,6 +67,13 @@
 
     }
     /* .HighScoreContainer {
+        background: red;
+        max-width: 400px;
+        margin: -20px auto;
+        background: none;
+        border-radius: 5px;
+    }     */
+    /* .HighScoreContainer {
         background: white;
         width: 90%;
         background: red;
