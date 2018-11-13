@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './SlideInMenu.module.css'
 import {NavLink} from 'react-router-dom';
-import Backdrop from '../Backdrop/Backdrop';
 const slideInMenu = (props) => {
     return(
         <div className={styles.SlideInMenu} onClick={props.click}>

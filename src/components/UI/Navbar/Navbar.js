@@ -17,6 +17,7 @@ class Navbar extends Component {
     render() {
         return (
             <nav className={styles.Navbar}>
+              <PlayerInfo />
             <div className={styles.Logo}>
                 <Ribbon />
             </div>
@@ -26,7 +27,7 @@ class Navbar extends Component {
             {this.state.showSlideIn ? <SlideInMenu click={this.clickHandler} isAuthenticated={this.props.isAuthenticated } /> : null }
             <Backdrop clicked={this.clickHandler} show={this.state.showSlideIn}  />
         </div>
-            <PlayerInfo />
+          
         </nav>
         )
     };

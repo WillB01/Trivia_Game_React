@@ -15,14 +15,14 @@ class PlayerInfo extends Component {
             <React.Fragment>
             {this.props.hasRank ? 
             <div className={styles.Box}>  
-                <h3>{this.props.triviaMain.rank}</h3> 
+                {this.props.triviaMain.rank} 
             </div> : null}
           
             <div className={styles.Box}>
-                <h3> Total: {this.props.triviaMain.score.total} </h3>
+                Total: {this.props.triviaMain.score.total} 
             </div>
             <div className={styles.Box}>
-                <h3>Points: {this.props.triviaMain.score.completedQuestionsBonus}</h3>   
+                Points: {this.props.triviaMain.score.completedQuestionsBonus}
             </div>
             </React.Fragment>
             )
@@ -31,7 +31,7 @@ class PlayerInfo extends Component {
                 <div className={`${styles.Stats} bounce `}>
                     <div className={styles.Box}
                          onClick={this.handleClick}>
-                        <h3>{this.props.triviaMain.name}</h3>
+                        {this.props.triviaMain.name}
                     </div>
                     {this.state.showContent ? content : null}                   
                 </div>

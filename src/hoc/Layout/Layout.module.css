@@ -14,14 +14,14 @@
    
 }
 
-.HighScoreContainer {
+/* .HighScoreContainer {
    
     max-width: 400px;
     margin: 0 auto;
     background: none;
     border-radius: 5px;
 
-}
+} */
 
 .Children {
     grid-area: ctg;
@@ -66,18 +66,6 @@
         grid-template-columns:  1fr;
 
     }
-    /* .HighScoreContainer {
-        background: red;
-        max-width: 400px;
-        margin: -20px auto;
-        background: none;
-        border-radius: 5px;
-    }     */
-    /* .HighScoreContainer {
-        background: white;
-        width: 90%;
-        background: red;
-        
-    } */
+
 
 }

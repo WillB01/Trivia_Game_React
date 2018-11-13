@@ -3,6 +3,7 @@ import styles from './HighScore.module.css';
 import * as k from '../../k';
 import {connect} from 'react-redux';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import {FaTrophy} from 'react-icons/fa';
 
 class HighScore extends Component {
     state = {
@@ -33,15 +34,19 @@ class HighScore extends Component {
         const printHighscore = this.props.highscore ? this.highscoreJsx(this.props.highscore) : <Spinner />;
     return(
         <React.Fragment>
-        <div className={styles.ScoreContainer}>
+        {/* <div className={styles.ScoreContainer}> */}
             <div className={styles.HighScoreContainer}>
-                <div className={styles.Header} onClick={() => this.showHighScore('highscore')}>Top 10 World Players</div>
+                <div className={styles.Header} onClick={() => this.showHighScore('highscore')}>
+                    Top 10 World Players 
+                    <div className={styles.Trophy}>
+                        <FaTrophy /></div>
+                    </div>
                 {this.state.showHighScore ? printHighscore : null}
-             </div>
-        <div className={styles.HighScoreContainer}>
+             {/* </div> */}
+        {/* <div className={styles.HighScoreContainer}>
                 <div className={styles.Header} onClick={() => this.showHighScore('player')}>Your Score</div>
                 {this.state.showPlayerScore ? printHighscore : null}
-                </div>
+                </div> */}
         </div>
         </React.Fragment>
     )
