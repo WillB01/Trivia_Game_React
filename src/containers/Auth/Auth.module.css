@@ -6,7 +6,7 @@
     background: white;
     padding: 0px 20px 20px 20px;
     display: grid;
-    grid-gap: 20px;
+    grid-gap: 2px;
     
     
 }
@@ -15,9 +15,12 @@
     height: 100%;
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     justify-items: right;
-    grid-gap: 30px;
+    grid-gap: 1px;
+    margin-top: -30px;
+    animation-iteration-count: forwards;
+    animation-duration: 5s;
    
     
 }

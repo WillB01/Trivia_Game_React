@@ -131,7 +131,7 @@ class Auth extends Component {
     
     render() {
         const authRedirect = this.props.isAuthenticated ? <Redirect to={'/'} />  : null;
-        const welcomeMsg = this.state.isSignup ? '  Create an account to play the most awsome game ever!' : 'Welcome Back'
+        const welcomeMsg = this.state.isSignup ? '  Create an account to play the most awsome game ever!' : 'login'
         const formArray = this.formArrayCreator(this.state.controls);
         const forms = this.state.isSignup 
         ? formArray.map(element => (element.config.validation.isSignup ? this.formJsx(element) : null))
@@ -139,10 +139,10 @@ class Auth extends Component {
 
         return(
             // focus={formArray.filter((el, index) => {return el.config.focus === true})}
-            <div className={styles.AuthContainer}>
+            <div className={`${styles.AuthContainer} slideInDown `}>
                  {this.state.isSignup ? < Instructions /> : null }
             <form className={styles.Auth}>
-            <AuthHeader />
+        {this.state.isSignup ? <h1>New Player</h1> : <h1>Welcome Back!</h1> }
            
                     {authRedirect}
                         <div>
@@ -150,7 +150,6 @@ class Auth extends Component {
                             {welcomeMsg}
                             </h5>
                         </div>
-                
                     {forms}
                         {this.props.error ? < UserInputHelper error={this.props.error} 
                                                             /> : null }
