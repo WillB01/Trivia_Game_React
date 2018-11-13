@@ -5,6 +5,9 @@ import PlayerInfo from '../PlayerInfo/PlayerInfo';
 import {FaAlignJustify} from 'react-icons/fa';
 import SlideInMenu from '../SlideInMenu/SlideInMenu';
 import Backdrop from '../Backdrop/Backdrop';
+import GameScore from '../GameScore/GameScore';
+import {connect} from 'react-redux';
+
 
 class Navbar extends Component {
     state = {
@@ -25,38 +28,45 @@ class Navbar extends Component {
 
         const notOnStartGame = !this.props.startGame ? (
         <React.Fragment>
-             <PlayerInfo />
+            
              <div className={styles.Logo}>
                 <Ribbon />
             </div>
+            <div className={styles.PlayerInfo}><PlayerInfo /></div>
+  
           
         </React.Fragment>) : null;
         
         const onStartGame = this.props.startGame ? (
             <React.Fragment>
-            <div className={styles.NavItem} 
-                 onClick={this.clickHandler}>
-                    <FaAlignJustify className={styles.FaBomb} />
+            <div className={styles.NavItem} >
+                <GameScore className={styles.GameScore} life={this.props.life}/>
             </div>
-                {this.state.showSlideIn 
-                ? <SlideInMenu click={this.clickHandler} 
-                               isAuthenticated={this.props.isAuthenticated } /> : null }
-            <Backdrop clicked={this.clickHandler} show={this.state.showSlideIn}  />
+            <div className={styles.NavItem} >
+                score
+            </div>
+               
             </React.Fragment> 
         ) : null;
 
         return (
             <nav className={styles.Navbar} style={!this.props.startGame ? {background: ''} : {background: 'none', boxShadow : 'none'}}>
                {menu}
+               {onStartGame}
               {notOnStartGame}
-            
-              
-              
-          
         </nav>
         )
     };
 };
 
 
-export default Navbar;
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: state.auth.token !== null,
+        sctg: state.selectedCategory,
+        startGame: state.triviaMain.startGame,
+        life: state.triviaMain.life
+    };
+};
+
+export default connect(mapStateToProps)(Navbar);

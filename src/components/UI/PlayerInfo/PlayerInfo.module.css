@@ -1,7 +1,7 @@
 
 .PlayerInfoContainer {
     position: sticky;
-    float: right;
+
     right: 10px;
     top: 0;
     width: 120px;
@@ -50,16 +50,36 @@
 
   }
 
-
-
   .Stats:nth-child(1):hover {
     background: rgb(231, 202, 120); 
   }
 
   @media screen and (max-width: 600px) {
+    .PlayerInfoContainer {
+      width: 80px;
+      height: 70px;
+    }
+    .Stats .Box {
+      box-sizing: border-box;
+      border-radius: 5px;
+      min-height: auto;
+      transition: all .4s ease-in-out;
+      font-size: 0.8rem
+    }
+
+    .Stats .Box:nth-child(2) {
+      box-sizing: border-box;
+      border-radius: 5px;
+      min-height: auto;
+      transition: all .4s ease-in-out;
+      font-size: 0.6rem
+    }
+  }
+
+  /* @media screen and (max-width: 600px) {
      .PlayerInfoContainer{
       border-radius: 6000px;
-
+      
       width: 20%;
       height: 60px;
      }
@@ -72,4 +92,4 @@
       font-size: 2vh;
     }
 
-    } 
+    }   */

@@ -1,15 +1,6 @@
-.SelectedCategory {
- position: relative;
-  width: 100%;
-  top: 5px;
-  left: 0;
-  right: 0;
-  margin-left: 0;
-  margin-left: 0;
-}
 
 .QuestionCard {
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   animation-duration: 1s;
   animation-iteration-count: forwards;
@@ -20,11 +11,17 @@
 }
 
 .CardBlocker {
+  /* left: 0;
+  right: 0;
+  margin-left: 0;
+  margin-right: 0;
+  float: right; */
+  /* position: absolute; */
   margin: 0 auto;
+  
   text-align: center;
   max-width: 380px;
   min-height: 200px;
-  position: relative;
   border-radius: 6px;
   overflow: hidden;
   background-color: #FFF;
@@ -34,9 +31,9 @@
   animation-duration: 2s;
   animation-iteration-count: forwards;
 }
-@media screen and (max-width: 640px) {
+/* @media screen and (max-width: 640px) {
   .SelectedCategory {
     width: 100%;
   
   }
-}
+} */

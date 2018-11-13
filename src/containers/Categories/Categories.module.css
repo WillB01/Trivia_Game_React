@@ -35,11 +35,15 @@
     background: rgba(1, 142, 90, 0.938);
     color: rgb(255, 255, 255);
     border-radius: 4px;
-    cursor: default;
     padding: 2px;
+    cursor: default;
     font-size: 1.3em;
+    height: 130px;
+    border-radius: 5px;
     letter-spacing: 0.02em;
     text-align: center;
+    min-height: 250px;
+    box-sizing: border-box;
     box-shadow: 0 19px 48px rgba(0, 0, 0, 0.3), 0 15px 32px rgba(0, 0, 0, 0.22);
 
    

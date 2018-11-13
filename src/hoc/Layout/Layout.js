@@ -15,13 +15,15 @@ class Layout extends Component {
                     <NavBar className={styles.Navbar} 
                             isAuthenticated={this.props.isAuthenticated} 
                             startGame={this.props.startGame} /> : null }
-                {!this.props.sctg.selectedCategory && this.props.isAuthenticated ?
+                             {!this.props.sctg.selectedCategory && this.props.isAuthenticated ?
                     <div className={styles.HighScoreContainer}>
                         <HighScoreContainer/> </div> : null }
+                        </div>
                 <main className={styles.Main} style={this.props.sctg.selectedCategory ? {margin : '0px auto'} : {margin : '100px auto'}}>
-                    <div className={styles.Children}>{this.props.children}</div>
+                    {this.props.children}
+                
                 </main>
-            </div>
+         
             </React.Fragment>   
 
         )

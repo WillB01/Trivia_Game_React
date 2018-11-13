@@ -1,7 +1,6 @@
 .Navbar {
     background-image: url("../../../assets/img/pink\ dust.png");
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.062), 0 6px 6px rgba(0, 0, 0, 0.075);
-
     padding: 10px;
     position: sticky;
     top: 0;
@@ -11,12 +10,16 @@
     max-width: 2000px;
     margin: 0px auto 10px auto;
     z-index: 100;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 100%;
+
 
 
 }
 
 .Navbar .NavbarItems {
-    display: inline-block;
+    /* display: inline-block; */
     border-radius: 5px;
     color: white;
 
@@ -33,10 +36,6 @@
     display: inline-block;
 }
 
-.Navbar .NavbarItems {
-    text-align: center;
-
-}
 
 .Navbar .NavItem:hover {
     color: orange;
@@ -44,10 +43,20 @@
 
 .FaBomb {
     font-size: 40px;
+    float: left;
 }
 
 .FaBomb:hover {
     color: orange;
+}
+
+.PlayerInfo {
+    justify-self: right;
+}
+
+.GameScore {
+    position: relative;
+    background: red;
 }
 
 

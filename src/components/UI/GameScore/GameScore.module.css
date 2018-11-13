@@ -1,26 +1,34 @@
 .GameScore {
+    height: 100%;
     width: 100%;
     box-sizing: border-box;
-    margin:  20px auto;
     border-radius: 5px;
-    padding: 10px;
     display: grid;
-
+    justify-content:center;
 }
 
 .Health {
     color: red;
     padding: 3px;
-    font-size: 3rem;
-    margin:  0 auto;
-    border-radius: 5px;
-   
+
 }
 
 .Heart {
     animation-duration: 1s;
     animation-iteration-count: infinite;
-    font-size: 3rem;
-    margin: 5px;
-   
+    font-size: 2rem;
+    
+    
+    margin:  0 10px 0 auto; 
+}
+
+@media screen and (max-width: 500px) {
+    .Heart {
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        font-size: 1.5rem;
+        
+        
+        margin:  0 10px 0 auto; 
+    }
 }

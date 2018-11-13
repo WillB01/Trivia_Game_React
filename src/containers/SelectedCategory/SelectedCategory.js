@@ -79,10 +79,7 @@ class SelectedCategory extends Component {
                  <div className={`${styles.QuestionCard } fadeInDownBig`}>
                     {questionsCards[this.props.cards[0]]}          
                  </div>
-                 <GameScore className={styles.GameScore} 
-                               cardsRemaining={`${this.props.amountOfCardsPlayed.length} / ${this.props.cardsStatic.length}`}
-                               score={this.props.selectCtgScore}
-                               life={this.props.life} />
+               
                
                 </React.Fragment>
             )
