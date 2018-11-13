@@ -7,8 +7,10 @@ import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import {Redirect} from 'react-router-dom';
 import UserInputHelper from '../../components/UI/UserInputHelper/UserInputHelper';
-import AuthWelcomeMessage from '../../components/UI/AuthWelcomeMessage/AuthWelcomeMessage';
+import AuthHeader from '../../components/UI/AuthHeader/AuthHeader';
 import {authControls} from './authControls'; //different input elements and config
+import Instructions from '../../components/UI/Instructions/Instructions';
+
 
 
 class Auth extends Component {
@@ -137,15 +139,18 @@ class Auth extends Component {
 
         return(
             // focus={formArray.filter((el, index) => {return el.config.focus === true})}
-            <React.Fragment>
+            <div className={styles.AuthContainer}>
+                 {this.state.isSignup ? < Instructions /> : null }
             <form className={styles.Auth}>
-                <AuthWelcomeMessage />
+            <AuthHeader />
+           
                     {authRedirect}
                         <div>
-                            <p>
+                            <h5>
                             {welcomeMsg}
-                            </p>
+                            </h5>
                         </div>
+                
                     {forms}
                         {this.props.error ? < UserInputHelper error={this.props.error} 
                                                             /> : null }
@@ -159,7 +164,7 @@ class Auth extends Component {
                     </div>
                     
             </form>
-           </React.Fragment>
+           </div>
         );
     }
 };

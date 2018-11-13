@@ -10,9 +10,6 @@
   box-shadow: 0 19px 48px rgba(0, 0, 0, 0.3), 0 15px 32px rgba(0, 0, 0, 0.22);
   overflow-y: hidden;
   transition: ease-in-out;
-
-
-
 }
 
 .QuestionCard .Text {
@@ -24,9 +21,6 @@
   position: relative;
   background-color: #FAFAFA;
   overflow-y: hidden;
-
-
-
 }
 
 .QuestionCard .Header {

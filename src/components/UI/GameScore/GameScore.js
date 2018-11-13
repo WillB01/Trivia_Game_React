@@ -15,8 +15,6 @@ const gameScore = (props) => {
                 </div>
         </div>
     );
-        
-    
 };
 
 export default gameScore;

@@ -21,7 +21,6 @@ class Categories extends Component {
         Events.scrollEvent.remove('end');   
     };
 
-    
     pageignationHandler = (btnClick) => { 
         this.props.fetchCategories(btnClick, this.props.ctg.categories);
         if (btnClick === 'more' ) {

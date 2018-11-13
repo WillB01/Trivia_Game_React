@@ -40,33 +40,7 @@ const RESETSTATE = {
 };
 
 const initialState = {
-   isCorrect: false,
-   correctAnswer: '',
-   playerAnswer: '',
-   startGame: false,
-   rankSystem: RANKSYSTEM,
-   selectedCategoryCompleted: false,
-   selectedCategoryGameover: false,
-   firstLoggin: true,
-   life: 3,
-   
-   player: {
-    name: '',
-    id: '',
-    hasRank: false,
-    rank: '',
-    score: {
-        total: 0,
-        completedQuestionsBonus: 0,
-        selectedCategory: 0,
-        selectedCategoryCompletedId: [],
-    },
-    completedCategories: {
-        'title': ''
-    },
-
-
-   }
+   ...RESETSTATE
 };
 
 
@@ -148,8 +122,6 @@ const setResetGame = (state, action) => {
                 selectedCategory: 0
                
             }
-           
-
         }
     };
     return updateObject(state, oldState);

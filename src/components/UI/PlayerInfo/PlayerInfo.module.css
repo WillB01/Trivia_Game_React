@@ -58,7 +58,7 @@
   @media screen and (max-width: 812px) {
      .PlayerInfoContainer{
       border-radius: 5px;
-      width: 20%;
+      width: 27%;
       height: 60px;
      }
     
@@ -67,7 +67,7 @@
       border-radius: 5px;
       min-height: auto;
       transition: all .4s ease-in-out;
-      word-wrap: break-word;
+      font-size: 2vh;
     }
 
     } 

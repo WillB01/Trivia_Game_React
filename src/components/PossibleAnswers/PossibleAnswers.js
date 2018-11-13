@@ -20,5 +20,4 @@ const possibleAnswers = (props) => {
         );
     };
                             
-
 export default possibleAnswers;

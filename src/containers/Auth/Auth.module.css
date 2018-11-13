@@ -1,10 +1,28 @@
 .Auth {
-    margin: 100px auto;
+    margin: 0 auto;
     max-width: 400px;
-    min-height: 400px;
+    height: 100%;
     border-radius: 5px;
     background: white;
     padding: 0px 20px 20px 20px;
     display: grid;
     grid-gap: 20px;
+    
+    
+}
+
+.AuthContainer {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: right;
+    grid-gap: 30px;
+   
+    
+}
+@media screen and (max-width: 700px) {
+    .AuthContainer {
+        grid-template-columns: 1fr;
+    }
 }
