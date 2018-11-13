@@ -12,18 +12,46 @@ class Navbar extends Component {
     };
     clickHandler = () => (this.setState((prevState) => ({showSlideIn: !prevState.showSlideIn})));
     render() {
-        return (
-            <nav className={styles.Navbar}>
-              <PlayerInfo />
-            <div className={styles.Logo}>
+        const menu = (  <div className={styles.NavbarItems}>
+            <div className={styles.NavItem} 
+                 onClick={this.clickHandler}>
+                    <FaAlignJustify className={styles.FaBomb} />
+            </div>
+            {this.state.showSlideIn 
+                ? <SlideInMenu click={this.clickHandler} 
+                               isAuthenticated={this.props.isAuthenticated } /> : null }
+            <Backdrop clicked={this.clickHandler} show={this.state.showSlideIn}  />
+        </div>);
+
+        const notOnStartGame = !this.props.startGame ? (
+        <React.Fragment>
+             <PlayerInfo />
+             <div className={styles.Logo}>
                 <Ribbon />
             </div>
-           
-        <div className={styles.NavbarItems}>
-            <div className={styles.NavItem} onClick={this.clickHandler}><FaAlignJustify className={styles.FaBomb} /></div>
-            {this.state.showSlideIn ? <SlideInMenu click={this.clickHandler} isAuthenticated={this.props.isAuthenticated } /> : null }
+          
+        </React.Fragment>) : null;
+        
+        const onStartGame = this.props.startGame ? (
+            <React.Fragment>
+            <div className={styles.NavItem} 
+                 onClick={this.clickHandler}>
+                    <FaAlignJustify className={styles.FaBomb} />
+            </div>
+                {this.state.showSlideIn 
+                ? <SlideInMenu click={this.clickHandler} 
+                               isAuthenticated={this.props.isAuthenticated } /> : null }
             <Backdrop clicked={this.clickHandler} show={this.state.showSlideIn}  />
-        </div>
+            </React.Fragment> 
+        ) : null;
+
+        return (
+            <nav className={styles.Navbar} style={!this.props.startGame ? {background: ''} : {background: 'none', boxShadow : 'none'}}>
+               {menu}
+              {notOnStartGame}
+            
+              
+              
           
         </nav>
         )

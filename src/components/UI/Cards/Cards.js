@@ -3,6 +3,8 @@ import ProgressBar from '../ProgressBar/ProgressBar';
 import PossibleAnswers from '../../PossibleAnswers/PossibleAnswers';
 import styles from './Cards.module.css';
 
+
+
 const cards = (props) => {
     const selectedCategory = props.selectedCategory;
     const index = props.index;
@@ -11,6 +13,7 @@ const cards = (props) => {
     return(
         <div key={index} className={styles.QuestionCard}>
         <h2 className={styles.Header}>
+            
                 {selectedCategory[index].category.title} <br></br> {props.cardsRemaining}
         </h2>
         <ProgressBar progressBar={progressBar} />

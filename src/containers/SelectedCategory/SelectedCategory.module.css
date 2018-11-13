@@ -1,11 +1,16 @@
 .SelectedCategory {
- 
+ position: relative;
   width: 100%;
-  margin:  0 auto;
+  top: 5px;
+  left: 0;
+  right: 0;
+  margin-left: 0;
+  margin-left: 0;
 }
 
 .QuestionCard {
-
+  width: 90%;
+  margin: 0 auto;
   animation-duration: 1s;
   animation-iteration-count: forwards;
 }
@@ -15,7 +20,7 @@
 }
 
 .CardBlocker {
-  margin: auto;
+  margin: 0 auto;
   text-align: center;
   max-width: 380px;
   min-height: 200px;
@@ -31,8 +36,7 @@
 }
 @media screen and (max-width: 640px) {
   .SelectedCategory {
- 
     width: 100%;
-    margin:  -50px auto;
+  
   }
 }

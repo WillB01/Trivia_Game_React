@@ -15,6 +15,7 @@
     grid-template-rows: 50px 50px 50px;
     animation-iteration-count: forwards;
     animation-duration: 1s;
+    color: white;
 }
 
 .SlideInMenu a:hover {

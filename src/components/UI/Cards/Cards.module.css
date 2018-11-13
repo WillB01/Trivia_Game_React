@@ -1,5 +1,5 @@
 .QuestionCard {
-  margin: auto;
+  margin: 0 auto;
   text-align: center;
   max-width: 380px;
   min-height: 200px;
@@ -13,7 +13,7 @@
 }
 
 .QuestionCard .Text {
-  min-height: 200px;
+  min-height: 100px;
   width: 90%;
   margin: auto 0;
   overflow-x: hidden;
