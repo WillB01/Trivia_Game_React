@@ -18,7 +18,6 @@ const setHighScoreFail = (state, action) => {
     });
 };
 
-
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_HIGHSCORES_SUCCESS: return setHighScore(state, action);

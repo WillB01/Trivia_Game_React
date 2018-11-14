@@ -8,21 +8,18 @@ export class Logout extends Component {
         this.props.onLogout(this.props.triviaMain);
     };
 
-  render() {
-   return  <Redirect to="/auth" /> ;
-  };
-};
+    render() { return  <Redirect to="/auth" /> ;};};
 
-const mapStateToProps = (state) => {
-    return {
-        triviaMain: state.triviaMain
-    }
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onLogout: (triviaMain) => dispatch(actions.logout(triviaMain)),
+    const mapStateToProps = (state) => {
+        return {
+            triviaMain: state.triviaMain
+        }
     };
+
+    const mapDispatchToProps = dispatch => {
+        return {
+            onLogout: (triviaMain) => dispatch(actions.logout(triviaMain)),
+        };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Logout);

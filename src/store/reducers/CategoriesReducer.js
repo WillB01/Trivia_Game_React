@@ -7,7 +7,6 @@ const initialState = {
     error: false,
 };
 
-
 const setCategories = (state, action)  => {
     return updateObject(state, {
         categories: action.categories

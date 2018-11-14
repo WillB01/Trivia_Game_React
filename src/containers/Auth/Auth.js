@@ -7,11 +7,8 @@ import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import {Redirect} from 'react-router-dom';
 import UserInputHelper from '../../components/UI/UserInputHelper/UserInputHelper';
-import AuthHeader from '../../components/UI/AuthHeader/AuthHeader';
 import {authControls} from './authControls'; //different input elements and config
-import Instructions from '../../components/UI/Instructions/Instructions';
-
-
+import Slogan from '../../components/UI/Slogan/Slogan';
 
 class Auth extends Component {
     state = {
@@ -41,10 +38,7 @@ class Auth extends Component {
         if (id === 'name' && isInputNameValid || id === 'email' && isInputEmailValid || id === 'password' && isInputPasswordValid){
             return 'Valid';
         }
-
         return '';
-      
-        
     };
 
     formArrayCreator = (controls) => {
@@ -70,20 +64,11 @@ class Auth extends Component {
    
     checkIfValid = (value, validation) => {
         let isValid = true;
-        if (validation.isRequired) {
-            isValid = value.trim() !== '' && isValid;
-        }  
-        if (validation.minLength) {
-            isValid = value.length >= validation.minLength && isValid;
-        }
-        if (validation.maxLength) {
-            isValid = value.length <= validation.maxLength && isValid;
-        }
-        if (validation.isEmailValid) {
-            isValid = validation.isEmailValid.test((String(value).toLowerCase())) && isValid;
-        }
-        
-         return isValid;
+        if (validation.isRequired) { isValid = value.trim() !== '' && isValid; }  
+        if (validation.minLength) { isValid = value.length >= validation.minLength && isValid;}
+        if (validation.maxLength) { isValid = value.length <= validation.maxLength && isValid;}
+        if (validation.isEmailValid) {isValid = validation.isEmailValid.test((String(value).toLowerCase())) && isValid;}
+        return isValid;
     }; // checks validation for the input fields.
 
     checkIfSubmit = (inputFields) => {
@@ -104,9 +89,7 @@ class Auth extends Component {
                 }
             }
         });
-
         this.setState({controls: updatedForm});
-      
     }; // gets the input value.
 
     submitHandler = (e, login) => {
@@ -127,7 +110,7 @@ class Auth extends Component {
         this.setState(prevState => ({
             ...authControls,
             isSignup: !prevState.isSignup
-        }))};
+    }))};
     
     render() {
         const authRedirect = this.props.isAuthenticated ? <Redirect to={'/'} />  : null;
@@ -138,34 +121,29 @@ class Auth extends Component {
         : formArray.map(element => (element.config.validation.isLogin ? this.formJsx(element) : null));
 
         return(
-            // focus={formArray.filter((el, index) => {return el.config.focus === true})}
             <div className={`${styles.AuthContainer} slideInDown `}>
-                 {this.state.isSignup ? < Instructions /> : null }
-            <form className={styles.Auth}>
-        {this.state.isSignup ? <h1>New Player</h1> : <h1>Welcome Back!</h1> }
-           
-                    {authRedirect}
+                 {this.state.isSignup ? < Slogan /> : null }
+                <form className={styles.Auth}>
+                    {this.state.isSignup ? <h1>New Player</h1> : <h1>Welcome Back!</h1> }
+                        {authRedirect}
                         <div>
                             <h5>
                             {welcomeMsg}
                             </h5>
                         </div>
-                    {forms}
-                        {this.props.error ? < UserInputHelper error={this.props.error} 
-                                                            /> : null }
-                    
-                    <div className={styles.ButtonContainer}>
-                        {this.state.isSignup ?  <Button click={this.submitHandler}
-                                                        btnType={!this.checkIfSubmit(this.state.newUserInputFields) ? 'disabled': null }>Submit</Button>: null}
-                        {this.state.isSignup ?  <Button click={this.switchAuthModeHandler}>got an account?</Button> : <Button click={(event) => 
-                            this.submitHandler(event, 'login')}  btnType={!this.checkIfSubmit(this.state.loginInputFields) ? 'disabled': null}>Login</Button>}
-                        {!this.state.isSignup ?  <Button click={this.switchAuthModeHandler}>create new?</Button> : null}
-                    </div>
-                    
+                        {forms}
+                        {this.props.error ? < UserInputHelper error={this.props.error} /> : null }
+                        <div className={styles.ButtonContainer}>
+                            {this.state.isSignup ?  <Button click={this.submitHandler}
+                                                            btnType={!this.checkIfSubmit(this.state.newUserInputFields) ? 'disabled': null }>Submit</Button>: null}
+                            {this.state.isSignup ?  <Button click={this.switchAuthModeHandler}>got an account?</Button> : <Button click={(event) => 
+                                this.submitHandler(event, 'login')}  btnType={!this.checkIfSubmit(this.state.loginInputFields) ? 'disabled': null}>Login</Button>}
+                            {!this.state.isSignup ?  <Button click={this.switchAuthModeHandler}>create new?</Button> : null}
+                    </div>       
             </form>
            </div>
         );
-    }
+    };
 };
 
 const mapStateToProps = state => {

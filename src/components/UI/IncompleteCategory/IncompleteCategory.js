@@ -3,14 +3,15 @@ import styles from './IncompleteCategory.module.css';
 import {NavLink} from 'react-router-dom';
 
 const incompleteCategory = (props) => {
-    return(
+    return (
         <div className={`${styles.IncompleteCategory} animated slideInLeft `}>
-           <div>Better try next time!{props.title}</div>
+           <div>
+               Better try next time!{props.title}
+           </div>
            <div className={`${styles.Links} animated slideInLeft `} >
-            <NavLink to="/">Back Home</NavLink>
+                <NavLink to="/">Back Home</NavLink>
            </div>
         </div>
-       
     );
 };
 

@@ -44,7 +44,7 @@ class Navbar extends Component {
                     <HealthBar className={styles.GameScore} life={this.props.life}/>
                 </div>
                 <div className={styles.NavItem} >
-                    <h3 className={styles.Score}>{this.props.score}</h3>
+                    <div className={styles.Score}>score: {this.props.score}</div>
                 </div>
             </React.Fragment> 
         ) : null;
@@ -58,7 +58,6 @@ class Navbar extends Component {
         );
     };
 };
-
 
 const mapStateToProps = (state) => {
     return {

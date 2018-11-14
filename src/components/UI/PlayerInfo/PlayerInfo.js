@@ -20,7 +20,7 @@ class PlayerInfo extends Component {
                 Total: {this.props.triviaMain.score.total} 
             </div>
             <div className={styles.Box}>
-                Points: {this.props.triviaMain.score.completedQuestionsBonus}
+                Score: {this.props.triviaMain.score.completedQuestionsBonus}
             </div>
             </React.Fragment>
             )
