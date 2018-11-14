@@ -103,7 +103,7 @@ class Auth extends Component {
                 this.state.controls.password.value,
                 wantsLogin, this.state.controls.name.value)
         }
-    };
+    }; //checks if its login och new player
 
     switchAuthModeHandler = (e) => {
         e.preventDefault();
@@ -114,7 +114,7 @@ class Auth extends Component {
     
     render() {
         const authRedirect = this.props.isAuthenticated ? <Redirect to={'/'} />  : null;
-        const welcomeMsg = this.state.isSignup ? '  Create an account to play the most awsome game ever!' : 'login'
+        const welcomeMsg = this.state.isSignup ? '  Create an account to play the most awsome game ever!' : 'Login to play the most awsome game ever!'
         const formArray = this.formArrayCreator(this.state.controls);
         const forms = this.state.isSignup 
         ? formArray.map(element => (element.config.validation.isSignup ? this.formJsx(element) : null))
@@ -139,8 +139,8 @@ class Auth extends Component {
                             {this.state.isSignup ?  <Button click={this.switchAuthModeHandler}>got an account?</Button> : <Button click={(event) => 
                                 this.submitHandler(event, 'login')}  btnType={!this.checkIfSubmit(this.state.loginInputFields) ? 'disabled': null}>Login</Button>}
                             {!this.state.isSignup ?  <Button click={this.switchAuthModeHandler}>create new?</Button> : null}
-                    </div>       
-            </form>
+                        </div>       
+                </form>
            </div>
         );
     };

@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './SlideInMenu.module.css'
 import {NavLink} from 'react-router-dom';
-import {FaUser} from 'react-icons/fa';
 
 const slideInMenu = (props) => {
     return(

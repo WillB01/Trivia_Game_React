@@ -1,14 +1,17 @@
 .Auth {
     margin: 0 auto;
     max-width: 400px;
+    
     height: 100%;
     border-radius: 5px;
     background: white;
     padding: 0px 20px 20px 20px;
     display: grid;
-    grid-gap: 4px;
-    
-    
+    grid-gap: 4px; 
+}
+
+.Auth h1 {
+    margin-bottom: 0px;
 }
 
 .AuthContainer {
@@ -21,8 +24,6 @@
     margin-top: -60px;
     animation-iteration-count: forwards;
     animation-duration: 5s;
-   
-    
 }
 
 .ButtonContainer {
