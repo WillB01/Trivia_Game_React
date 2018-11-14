@@ -4,12 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter}  from 'react-router-dom';
-
-
 import {combineReducers, createStore, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
-
 import TriviaMainReducer from './store/reducers/TriviaMainReducer';
 import CategoriesReducer from './store/reducers/CategoriesReducer';
 import SelectedCategoryReducer from './store/reducers/SelectedCategoryReducer';

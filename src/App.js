@@ -9,10 +9,7 @@ import Logout from './containers/Auth/Logout/Logout';
 import Auth from './containers/Auth/Auth';
 import * as actions from './store/actions/index';
 import {connect} from 'react-redux';
-// import styles from './App.module.css'
-
 import './App.css';
-
 
 class App extends Component {  
   componentDidMount() {

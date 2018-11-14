@@ -1,6 +1,5 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
-import _ from 'lodash';
 
 export const setSelectedCategory = (selectedCategory, randomCategory) => ({type: actionTypes.FETCH_SELECTED_CATEGORY, selectedCategory, randomCategory});
 export const setSelectedCategoryFail = () => ({type: actionTypes.FETCH_SELECTED_CATEGORY_FAIL});
@@ -21,11 +20,6 @@ export const fetchSelectedCategory = (id, ctg) => {
 }; // Gets the selected category wich the user picked
 
 export const fetchExtraHints = (resCtg, ctg, id) => {
-    // const rand = _.random(0, ctg.categories.length - 1);
-    // const newCtg = [...ctg.categories];
-    // const uppdatedNewCtg = newCtg.filter(c => c.id !== id);
-    // const getRandomId = uppdatedNewCtg[rand].id;
-    // const url = `http://jservice.io/api/clues/?category=${getRandomId}`;
     const url = `http://jservice.io/api/random?count=8`;
     return dispatch => {
         axios.get(url)
@@ -35,4 +29,4 @@ export const fetchExtraHints = (resCtg, ctg, id) => {
         })
         .catch(err => (dispatch(setSelectedCategoryFail())));
     }
-}; // gets a random category.
+}; // gets a random category to use its questions to add more hints to the player.

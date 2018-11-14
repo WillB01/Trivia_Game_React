@@ -15,4 +15,4 @@ export const fetchHighScore = () => {
         .catch(err => {
             dispatch(fetchHighScoreFail(err));
         })
-}
+} // gets top 10 players score.

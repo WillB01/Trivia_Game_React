@@ -4,9 +4,7 @@ import HighScoreContainer from '../../containers/HighScore/HighScore';
 import styles from './Layout.module.css';
 import {connect} from 'react-redux';
 
-
 class Layout extends Component {
-
     render() {
         return (
             <React.Fragment>

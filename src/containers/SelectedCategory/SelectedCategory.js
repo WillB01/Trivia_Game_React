@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import styles from './SelectedCategory.module.css';
 import * as actions from '../../store/actions/index';
-import WrongAnswer from '../../components/UI/WrongAnswer/WrongAnswer';
 import Button from '../../components/UI/Button/Button';
 import Cards from '../../components/UI/Cards/Cards';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import GameScore from '../../components/UI/GameScore/GameScore';
+
+
 class SelectedCategory extends Component {
     componentDidUpdate() {
        const cards = this.props.selectedCtg ? this.props.selectedCtg.length  : 0;
@@ -20,9 +20,7 @@ class SelectedCategory extends Component {
             this.props.selectedCategory.scoreToCompleteSelectedCategory,
             this.props.selectedCategory.amountOfCards,
             this.props.location.state.id,
-            this.props.selectCtgScore,
             this.props.completeCtg,    
-            this.props.amountOfCardsPlayed,
             this.props.life
         );
 
@@ -62,25 +60,19 @@ class SelectedCategory extends Component {
         const selectedCategory = this.props.selectedCtg;
         let selected = < Spinner /> ;
         let questionsCards = [];    
-        let button = null;    
-        let isLast = false; 
-  
+        let button = null;     
         if (selectedCategory) {
             selectedCategory.map((item, index) => {
                 this.QuestionCardsCreator(selectedCategory, index, (res) => {
                     questionsCards.push(res);;
                 });
-                isLast = this.props.amountOfCardsPlayed.length === this.props.cardsStatic.length - 1;
             });
             console.log(selectedCategory);
             selected = (
                 <React.Fragment>
-              
-                 <div className={`${styles.QuestionCard } fadeInDownBig`}>
-                    {questionsCards[this.props.cards[0]]}          
-                 </div>
-               
-               
+                    <div className={`${styles.QuestionCard } fadeInDownBig`}>
+                        {questionsCards[this.props.cards[0]]}          
+                    </div>
                 </React.Fragment>
             )
         }
@@ -90,17 +82,12 @@ class SelectedCategory extends Component {
         }
         return(
             <div className={styles.SelectedCategory}>
-                {isLast ? 'LLLAST' : null}
                 {this.props.triviaMainStartGame ? selected : 
                 <div className={`${styles.CardBlocker } flipInY`}>
                 {button}
                 <br></br>
                     
                 </div>}
-                {/* <WrongAnswer playerAnswer={this.props.playerAnswer}
-                              correctAnswer={this.props.correctAnswer}
-                              start={this.props.triviaMainStartGame} /> */}
-                
             </div>
         );
     };
@@ -136,7 +123,7 @@ const mapDispatchToProps = dispatch => {
         onNewCards: (isCorrect, userAns) => dispatch(actions.newQuestionCards(isCorrect, userAns)),
         onProgressProgressBar: (progress) => dispatch(actions.setProgressProgressBar(progress)),
         onResetSelectCategory: () => dispatch(actions.resetSelectCategory()),
-        onCheckIfCategoryCompleted: (scoreToComplete, cards, id, score, isCompleteCtg, amountOfCardsPlayed, life) => dispatch(actions.checkIfCategoryCompleted(scoreToComplete, cards, id, score, isCompleteCtg, amountOfCardsPlayed, life)),
+        onCheckIfCategoryCompleted: (scoreToComplete, cards, id, isCompleteCtg, life) => dispatch(actions.checkIfCategoryCompleted(scoreToComplete, cards, id, isCompleteCtg, life)),
         
     };
 };

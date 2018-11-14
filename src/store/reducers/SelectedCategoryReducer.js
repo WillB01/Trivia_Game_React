@@ -27,7 +27,7 @@ const setSelectedCategory = (state, action)  => {
         scoreToCompleteSelectedCategory: arr.length,
         answers: allAnswers
     });
-};
+}; //when player has clicked on a category
 
 const fetchSelectedCategoryFail = (state, action) => {
     return updateObject(state, {
@@ -44,14 +44,14 @@ const setNewQuestionCards = (state, action) => {
         amountOfCardsPlayed: state.amountOfCardsPlayed += 1,
         answers: newAnswers
     });
-};
+}; // gets a new question.
 
 const setUpdateProgressBar = (state, action) => {
     const progress = state.progressBar;
     return updateObject(state, {
         progressBar: progress + action.progress
     });
-};
+}; // updates the UI progressbar
 
 
 const setResetSelectedCategory = (state, action) => {

@@ -21,24 +21,13 @@ export const getPlayerAnswer= (playerAnswer, correctAnswer) => ({
     correctAnswer
 });
 
-export const checkIfCategoryCompleted =  (scoreToCompleteSelectedCategory, cards, id, playerScore, completeCtg, amountOfCardsPlayed, life) => {
-        const score =  ((scoreToCompleteSelectedCategory / 2) + 1).toFixed();
-        const cardsPlayed = amountOfCardsPlayed.length;
-        if (cards.length === 0 && life !== 0 && scoreToCompleteSelectedCategory && !completeCtg) { 
-              return dispatch => {
-                    dispatch(categoryCompletedSuccess(id));
-                };
-        }
+export const checkIfCategoryCompleted =  (scoreToCompleteSelectedCategory, cards, id, completeCtg, life) => {
+        if (cards.length === 0 && life !== 0 && scoreToCompleteSelectedCategory && !completeCtg) {
+             return dispatch => { dispatch(categoryCompletedSuccess(id));};}
         if (life === 0) { 
-              return dispatch => {
-                    dispatch(categoryGameOver());
-                };
-        }
-        return dispatch => {
-            dispatch(continueGame());
-        };
-       
-};
+            return dispatch => { dispatch(categoryGameOver());};}
+        return dispatch => {dispatch(continueGame());};     
+}; // checks on every question.
 
 export const initPatchdDb = (triviaMain) => {
     const userId = localStorage.getItem('userId');
@@ -61,9 +50,7 @@ export const initPatchdDb = (triviaMain) => {
         return dispatch => {
             axios.patch(url,data)
                 .then(res => {
-                    console.log(res.data);
                     dispatch(initPatchDbSuccess())
-    
                 })
                 .catch(err => {
                     dispatch(initPatchDbFail(err));
@@ -73,7 +60,7 @@ export const initPatchdDb = (triviaMain) => {
     return dispatch => {
         dispatch(dontInitPatchDbSuccess());
     };
-};
+}; // updates player score to DATABASE
 
 
 

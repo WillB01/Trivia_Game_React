@@ -1,12 +1,8 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
-import * as k from '../../k';
 
-//different action creators---------------------------------------
 export const fetchCategoriesSuccess = (categories) => ({type: actionTypes.FETCH_CATEGORIES, categories}); 
 export const fetchCategoriesFail = () => ({type: actionTypes.FETCH_CATEGORIES_FAIL});
-export const fetchImagesSuccess = (images) => ({type: actionTypes.FETCH_IMAGES_SUCCESS_CATEGORIES, images})
-//---------------------------------------------------------------
 
 let offsetStart = 12;
 const visibleCategories = 12;
@@ -29,19 +25,5 @@ export const fetchCategories = (btnClick) => {
         })
     }
 }; // Gets all different categories from API on start
-
-export const fetchImagesForCategories = (completed) => {
-    if (completed !== undefined) {
-        let url = `https://pixabay.com/api/?key=${k.pexakey}&q=${'travles'}&image_type=vector&per_page=3`;
-        return dispatch => {
-            axios.get(url)
-                .then(res => {
-                    dispatch(fetchImagesSuccess(res.data))
-                })
-                .catch(error => {
-                })
-        };
-    }  
-};
 
 

@@ -3,11 +3,11 @@ import {updateObject} from '../shared/utility';
 import _ from 'lodash';
 const RANKSYSTEM = {
     'tenderfoot': ['tenderfoot', 10],
-    'noob': ['noob', 50],
-    'bronze': ['bronze', 80],
-    'silver': ['silver', 200],
-    'gold': ['gold', 300],
-    'diamond': ['diamond', 400],
+    'noob': ['noob', 100],
+    'bronze': ['bronze', 180],
+    'silver': ['silver', 300],
+    'gold': ['gold', 400],
+    'diamond': ['diamond', 600],
 }; //rank system points will be compared with completedQuestionsBonus.
 const RESETSTATE = {
     isCorrect: false,
@@ -42,7 +42,6 @@ const RESETSTATE = {
 const initialState = {
    ...RESETSTATE
 };
-
 
 const compare = (a, b) => {
     return (a === b ? true: false);

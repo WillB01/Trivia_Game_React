@@ -4,7 +4,6 @@ import * as k from '../../k';
 
 export const authStart = () => ({type: actionTypes.AUTH_START});
 export const authFail = (error) => ({type: actionTypes.AUTH_FAIL, error: error});
-export const mock = () => ({type: actionTypes.MOCK});
 const newPlayer = (name) => ({type: actionTypes.AUTH_NEW_PLAYER, name});
 const fetchLoggedInPlayerSuccess = (res) => ({type: actionTypes.FETCH_LOGGED_IN_PLAYER_SUCCESS_FROM_AUTH, playerData: res});
 export const postPlayerInfoSuccess = () => ({type: actionTypes.TRIVIA_MAIN_POST_PLAYER_SUCCESS});
@@ -93,40 +92,6 @@ export const authCheckState = (triviaMain) => {
         }
 }; //checks if player has a token on localstorage and if true player gets logged in.
 
-
-// export const logout = (triviaMain) => {
-//     const userId = localStorage.getItem('userId');
-//     const token = localStorage.getItem('token')
-//     const url = k.url(token);
-//     const data = {
-//         [userId]: {
-//             name: triviaMain.player.name,
-//             hasRank: triviaMain.player.hasRank,
-//             rank: triviaMain.player.rank,
-//             id: userId,
-//             score: {
-//                 total: triviaMain.player.score.total,
-//                 completedQuestionsBonus: triviaMain.player.score.completedQuestionsBonus,
-//                 selectedCategoryCompletedId: triviaMain.player.score.selectedCategoryCompletedId.length === 0 ? ['none'] :  triviaMain.player.score.selectedCategoryCompletedId
-//             }
-//         }
-       
-
-//     };
-    
-//     return dispatch => {
-//         axios.patch(url,data)
-//             .then(res => {
-//                 console.log(res.data);
-//                 // dispatch(clearStateToTrivia())
-//                 dispatch(loggingOut())
-
-//             })
-//             .catch(err => {
-//                 dispatch(postPlayerInfoFail(err));
-//             });
-//     };
-// }; // post the core before logout!
 
 
 

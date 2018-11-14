@@ -1,6 +1,5 @@
 export {
     fetchCategories,
-    fetchImagesForCategories
 } from './CategoriesAction';
 export {
     fetchSelectedCategory,
@@ -15,8 +14,6 @@ export {
     newQuestionCard,
     initPatchdDb,
     checkIfCategoryCompleted
-    
-   
 } from './TriviaMainAction'
 export {
     fetchHighScore

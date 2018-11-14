@@ -8,7 +8,6 @@ import Button from '../../components/UI/Button/Button';
 import {Events, animateScroll as scroll} from 'react-scroll'
 import {FaPlus, FaMinus, FaStar} from 'react-icons/fa';
 
-
 class Categories extends Component {
      componentDidMount() {
         this.props.onResetGame();
@@ -28,12 +27,12 @@ class Categories extends Component {
                 delay: 200,  
                 smooth: 'easeInOutQuart'});
         }
-    };
+    }; // show more or less categories
 
     giveCompletedCategoryCssClass = (completed, ctg) => {
         if (!completed) {return [];}
         if (ctg) {return ctg.map(item => (completed.filter(id => id === item.id)))}
-    };
+    }; // checks if player has any categorie ids. returns only completed ids
 
 
     render() {
@@ -41,6 +40,7 @@ class Categories extends Component {
         const completed = this.props.triviaMain.player.score.selectedCategoryCompletedId;
         const ctg =  this.props.ctg.categories;
         const completedCtg = this.giveCompletedCategoryCssClass(completed, ctg);
+        
         ctg 
         ? categories = (
             ctg.map((item, index) => (
@@ -52,7 +52,6 @@ class Categories extends Component {
                     search: `?id=${item.id}`,
                     state: {id: item.id}
                 }} className={styles.CategoriesItems } 
-                //    style={test[index].length !== 0 || test[index].length === 'undefined' ? {background: '#018E5B'} : {background: '#'+(Math.random()*0xFFFFFF<<0).toString(10)}}
                    key={item.id}
                    onClick={() => this.props.onCategoryHandler(item.id, this.props.ctg)}>{item.title}
                 </NavLink>
@@ -93,8 +92,6 @@ const mapDispatchToProps = dispatch => {
         onCategoryHandler: (id, ctg) => dispatch(categoriesAction.fetchSelectedCategory(id, ctg)),
         fetchCategories: (btnClick) => dispatch(categoriesAction.fetchCategories(btnClick)),
         onResetGame: () => dispatch(categoriesAction.resetGame()),
-
-
     };
 };
 

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Categories from '../Categories/Categories';
 import * as actions from '../../store/actions/index'
+import axios from 'axios';
+import withErrorHandler from '../../hoc/WithErrorHandler/WithErrorHandler';
 
 class TriviaMain extends Component {
     componentDidMount() {
@@ -39,4 +41,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TriviaMain);
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(TriviaMain,axios));
