@@ -1,6 +1,6 @@
 
 .Layout {
-    max-width: 2000px;
+    max-width: 3000px;
     margin: 0 auto;
     
 }
@@ -8,6 +8,7 @@
 .Main {
     margin: 100px auto;
     display: grid;
+    /* width: 90%; */
     width: 90%;
     grid-template-areas: "ctg";  
 }
@@ -20,6 +21,16 @@
         display: grid;
         /* width: 90%; */
         grid-template-columns:  1fr;
+    }
+}
+
+@media screen and (min-width: 2400px) {
+    .Header {
+       display: none;
+    }
+    .Main {
+       max-width: 1800px;
+       
 
     }
 }

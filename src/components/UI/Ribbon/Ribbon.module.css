@@ -12,7 +12,7 @@
     border-radius: 5px;
     padding: 10px;
     box-sizing: border-box;
-    position: fixed;
+    position: absolute;
     z-index: 10;
     height: 60px;
     border: 1px solid #8a1;

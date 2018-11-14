@@ -1,9 +1,8 @@
 
 .PlayerInfoContainer {
-    position: sticky;
-
+    position: fixed;
     right: 10px;
-    top: 0;
+    top: 2px;
     width: 120px;
     height: 120px;
     padding: 10px;

@@ -43,7 +43,8 @@ class Navbar extends Component {
                 <GameScore className={styles.GameScore} life={this.props.life}/>
             </div>
             <div className={styles.NavItem} >
-                score
+                {this.props.score}
+                {this.props.categoryScore}
             </div>
                
             </React.Fragment> 
@@ -65,7 +66,9 @@ const mapStateToProps = (state) => {
         isAuthenticated: state.auth.token !== null,
         sctg: state.selectedCategory,
         startGame: state.triviaMain.startGame,
-        life: state.triviaMain.life
+        life: state.triviaMain.life,
+        score: state.triviaMain.player.score.completedQuestionsBonus,
+        categoryScore: state.triviaMain.player.score.selectedCategory
     };
 };
 

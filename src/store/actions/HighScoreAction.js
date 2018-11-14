@@ -10,11 +10,9 @@ export const fetchHighScore = () => {
     const url =  k.urlGetHighScore(token); 
     return dispatch => axios.get(url)
         .then(res => {
-            console.log(res);
             dispatch(fetchHighScoreSuccess(res.data))
         })
         .catch(err => {
-            console.log(err);
             dispatch(fetchHighScoreFail(err));
         })
 }

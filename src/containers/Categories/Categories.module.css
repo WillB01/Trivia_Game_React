@@ -64,6 +64,7 @@
 @media screen and (max-width: 600px) {
     .Categories {
         grid-template-columns: 1fr;
+        margin-top: 60px; 
       
     }
 }
