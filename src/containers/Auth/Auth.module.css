@@ -6,7 +6,7 @@
     background: white;
     padding: 0px 20px 20px 20px;
     display: grid;
-    grid-gap: 2px;
+    grid-gap: 4px;
     
     
 }
@@ -18,11 +18,15 @@
     grid-template-columns: 1fr;
     justify-items: right;
     grid-gap: 1px;
-    margin-top: -30px;
+    margin-top: -60px;
     animation-iteration-count: forwards;
     animation-duration: 5s;
    
     
+}
+
+.ButtonContainer {
+    margin-top: 30px;
 }
 @media screen and (max-width: 700px) {
     .AuthContainer {

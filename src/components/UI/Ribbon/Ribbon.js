@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom';
 
 const ribbon = () => {
     return(
-        <div className={styles.InformationCardContainer}>
+        <div className={styles.RibbonContainer}>
              <NavLink to="/">QUIZ GAME</NavLink> 
         </div>
     )

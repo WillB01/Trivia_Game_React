@@ -1,4 +1,4 @@
-.InformationCardContainer {
+.RibbonContainer {
     display: grid;
     justify-content: center;
     width: 400px;
@@ -24,8 +24,8 @@
     color: white;
 }
 
-.InformationCardContainer::before,
-.InformationCardContainer::after {
+.RibbonContainer::before,
+.RibbonContainer::after {
   content: '';
   position: absolute;
   z-index: -1;
@@ -41,7 +41,7 @@
   transform: rotate(-5deg);
 }
 
-.InformationCardContainer::after {
+.RibbonContainer::after {
   left: auto;
   right: -70px;
   border-left: 20px solid #791;
@@ -50,10 +50,6 @@
    
 }
 
-.InformationCardContainer h1 {
-  background: red;
-  width: 100%;
-};
 
 
 
