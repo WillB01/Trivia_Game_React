@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import styles from './Navbar.module.css';
-import Ribbon from '../Ribbon/Ribbon';
-import PlayerInfo from '../PlayerInfo/PlayerInfo';
+import Ribbon from '../../components/UI/Ribbon/Ribbon';
+import PlayerInfo from '../../components/UI/PlayerInfo/PlayerInfo';
 import {FaAlignJustify} from 'react-icons/fa';
-import SlideInMenu from '../SlideInMenu/SlideInMenu';
-import Backdrop from '../Backdrop/Backdrop';
-import HealthBar from '../HealthBar/HealthBar';
+import SlideInMenu from '../../components/UI/SlideInMenu/SlideInMenu';
+import Backdrop from '../../components/UI/Backdrop/Backdrop';
+import HealthBar from '../../components/UI/HealthBar/HealthBar';
 import {connect} from 'react-redux';
 
 

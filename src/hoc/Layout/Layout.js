@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import NavBar from '../../components/UI/Navbar/Navbar';
+import NavBar from '../../containers/Navbar/Navbar';
 import HighScoreContainer from '../../containers/HighScore/HighScore';
 import styles from './Layout.module.css';
 import {connect} from 'react-redux';
