@@ -36,7 +36,7 @@ class Navbar extends Component {
                     <PlayerInfo />
                 </div>
             </React.Fragment>
-        ) : null;
+        ) : null; // shows when player has not pressed start
         
         const onStartGame = this.props.startGame ? (
             <React.Fragment>
@@ -47,7 +47,7 @@ class Navbar extends Component {
                     <div className={styles.Score}>score: {this.props.score}</div>
                 </div>
             </React.Fragment> 
-        ) : null;
+        ) : null; // shows when player has pressed start
 
         return (
             <nav className={styles.Navbar} style={!this.props.startGame ? {background: ''} : {background: 'none', boxShadow : 'none'}}>

@@ -15,7 +15,6 @@ class App extends Component {
   componentDidMount() {
     this.props.onTryAutoSignup(this.props.triviaMain);
   }
-  cssClasses = ['App', ]
   render() {
     let routes = (
       <Switch>

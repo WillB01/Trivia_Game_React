@@ -7,10 +7,8 @@ import withErrorHandler from '../../hoc/WithErrorHandler/WithErrorHandler';
 
 class TriviaMain extends Component {
     componentDidMount() {
-        // const str = this.props.triviaMain.player.score.categoryTitle;
         this.props.onInitPatchdDb(this.props.triviaMain);
         this.props.onInitCategories();
-        // this.props.onFetchImg(str);
         this.props.onInitHighScore();
         this.props.onResetGame();
         this.props.onResetSelectCategory();

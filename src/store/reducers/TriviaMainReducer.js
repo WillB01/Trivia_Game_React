@@ -9,7 +9,7 @@ const RANKSYSTEM = {
     'gold': ['gold', 400],
     'diamond': ['diamond', 600],
 }; //rank system points will be compared with completedQuestionsBonus.
-const RESETSTATE = {
+const STARTSTATE = {
     isCorrect: false,
     correctAnswer: '',
     playerAnswer: '',
@@ -34,13 +34,11 @@ const RESETSTATE = {
      completedCategories: {
          'title': ''
      },
- 
- 
     }
 };
 
 const initialState = {
-   ...RESETSTATE
+   ...STARTSTATE
 };
 
 const compare = (a, b) => {
@@ -220,7 +218,7 @@ const startUpdateDb = (state, action) => {
 
 const clearStateToLoggout = (state, action) => {
     return {
-        ...RESETSTATE
+        ...STARTSTATE
     }
 };
 

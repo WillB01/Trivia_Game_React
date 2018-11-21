@@ -8,9 +8,9 @@ class Layout extends Component {
     render() {
         return (
             <React.Fragment>
-            <div className={styles.Layout}>
-                {this.props.isAuthenticated ? 
-                    <NavBar className={styles.Navbar} 
+                <div className={styles.Layout}>
+                    {this.props.isAuthenticated ? 
+                        <NavBar className={styles.Navbar} 
                             isAuthenticated={this.props.isAuthenticated} 
                             startGame={this.props.startGame} /> : null }
                              {!this.props.sctg.selectedCategory && this.props.isAuthenticated ?
@@ -18,12 +18,9 @@ class Layout extends Component {
                         <HighScoreContainer/> </div> : null }
                         </div>
                 <main className={styles.Main} style={this.props.sctg.selectedCategory ? {margin : '0px auto'} : {margin : '100px auto'}}>
-                    {this.props.children}
-                
+                    {this.props.children}       
                 </main>
-         
             </React.Fragment>   
-
         )
     };
 };

@@ -19,10 +19,6 @@ class ProgressBar extends Component {
     
 const mapStateToProps = state => {
     return {
-        selectedCtg: state.selectedCategory.selectedCategory,
-        triviaMainIsCorrect: state.triviaMain.isCorrect,
-        triviaMainStartGame: state.triviaMain.startGame,
-        cards: state.selectedCategory.amountOfCards,
         progressBar: state.selectedCategory.progressBar
     };
 };

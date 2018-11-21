@@ -29,7 +29,7 @@ class Auth extends Component {
         touch={element.config.focus}
         error={this.props.error}
         btnType={this.inputCssClass(element.id)} />
-    );
+    ); 
 
     inputCssClass = (id) => {
         const isInputNameValid = this.controlsValidArray()[0].name;
@@ -39,7 +39,7 @@ class Auth extends Component {
             return 'Valid';
         }
         return '';
-    };
+    }; // gives css class based on if valid
 
     formArrayCreator = (controls) => {
         const formArray = []; 
@@ -103,14 +103,14 @@ class Auth extends Component {
                 this.state.controls.password.value,
                 wantsLogin, this.state.controls.name.value)
         }
-    }; //checks if its login och new player
+    }; //checks if its login or new player nad submits
 
     switchAuthModeHandler = (e) => {
         e.preventDefault();
         this.setState(prevState => ({
             ...authControls,
             isSignup: !prevState.isSignup
-    }))};
+    }))}; //changes view for user
     
     render() {
         const authRedirect = this.props.isAuthenticated ? <Redirect to={'/'} />  : null;

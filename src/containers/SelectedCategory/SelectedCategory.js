@@ -67,7 +67,6 @@ class SelectedCategory extends Component {
                     questionsCards.push(res);;
                 });
             });
-            console.log(selectedCategory);
             selected = (
                 <React.Fragment>
                     <div className={`${styles.QuestionCard } fadeInDownBig`}>
@@ -95,6 +94,7 @@ class SelectedCategory extends Component {
 
 const mapStateToProps = state => {
     return {
+        // selected category state
         selectedCtg: state.selectedCategory.selectedCategory,
         hints: state.selectedCategory.hints,
         cards: state.selectedCategory.amountOfCards,
@@ -103,7 +103,7 @@ const mapStateToProps = state => {
         progressBar: state.selectedCategory.progressBar,
         answers: state.selectedCategory.answers,
         selectedCategory: state.selectedCategory,
-        
+        // triviamain state
         playerAnswer: state.triviaMain.playerAnswer,
         correctAnswer: state.triviaMain.correctAnswer,
         completeCtg: state.triviaMain.selectedCategoryCompleted,

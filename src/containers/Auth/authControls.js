@@ -1,3 +1,4 @@
+// auth controls state
 export const authControls = {
     controls: {
         name: {

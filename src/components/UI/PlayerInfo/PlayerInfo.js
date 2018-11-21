@@ -11,17 +11,18 @@ class PlayerInfo extends Component {
     render() {
         const content = (
             <React.Fragment>
-            {this.props.hasRank ? 
-            <div className={styles.Box}>  
-                {this.props.triviaMain.rank} 
-            </div> : null}
-          
-            <div className={styles.Box}>
-                Total: {this.props.triviaMain.score.total} 
-            </div>
-            <div className={styles.Box}>
-                Score: {this.props.triviaMain.score.completedQuestionsBonus}
-            </div>
+                {this.props.hasRank ? 
+                <div className={styles.Box}>  
+                    {this.props.triviaMain.rank} 
+                </div> : null}
+                
+                <div className={styles.Box}>
+                    Total: {this.props.triviaMain.score.total} 
+                </div>
+                
+                <div className={styles.Box}>
+                    Score: {this.props.triviaMain.score.completedQuestionsBonus}
+                </div>
             </React.Fragment>
             )
         return(
