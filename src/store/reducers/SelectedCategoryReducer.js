@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 import {updateObject} from '../shared/utility';
 
-const initialState = {
+const STARTSTATE = {
     selectedCategory: null,
     amountOfCards: [],
     amountOfCardsPlayed: '',
@@ -10,8 +10,11 @@ const initialState = {
     selectedCategoryCompleted: false,
     selectedCategoryCompletedId: [],
     answers : [],
-};
+}
 
+const initialState = {
+  ...STARTSTATE
+};
 
 const setSelectedCategory = (state, action)  => {
     let arr = [];
@@ -29,11 +32,7 @@ const setSelectedCategory = (state, action)  => {
     });
 }; //when player has clicked on a category
 
-const fetchSelectedCategoryFail = (state, action) => {
-    return updateObject(state, {
-        error: true
-    });
-};
+const fetchSelectedCategoryFail = (state, action) => (updateObject(state, {error: true}));
 
 const setNewQuestionCards = (state, action) => {
     const newAnswers = action.isCorrect ? state.answers.filter(i => i !== action.userAns && action.isCorrect) : state.answers;
@@ -54,17 +53,7 @@ const setUpdateProgressBar = (state, action) => {
 }; // updates the UI progressbar
 
 
-const setResetSelectedCategory = (state, action) => {
-    return updateObject(state, {
-        selectedCategory: null,
-        amountOfCards: [],
-        progressBar: null,
-        selectedCategoryCompleted: false,
-        amountOfCardsPlayed: '',
-        scoreToCompleteSelectedCategory: null,
-        answers: []
-    });
-}; // Resets everything in selected
+const setResetSelectedCategory = (state, action) => (updateObject(state, {...STARTSTATE})); // Resets everything in selected
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {

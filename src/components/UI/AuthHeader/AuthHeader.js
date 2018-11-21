@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './AuthHeader.module.css';
 
-const authHeader = (props) => {
+const authHeader = () => {
     return(
         <div className={styles.AuthHeader}>
             <h1>
@@ -10,5 +10,4 @@ const authHeader = (props) => {
         </div>
     );
 };
-
 export default authHeader

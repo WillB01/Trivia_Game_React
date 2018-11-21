@@ -8,34 +8,28 @@ const initialState = {
     loading: false,
 };
 
-const authStart = (state, action) => {
-    return  updateObject(state, {error: null, loading: true});
-};
+const authStart = (state, action) => (updateObject(state, {error: null, loading: true}));
 
-const authSuccess = (state, action) => {
-    return updateObject(state, {
+const authSuccess = (state, action) => (updateObject(state, {
         token: action.idToken,
         userId: action.userId,
         error: null,
         loading: false
-    });
-};
+    })
+);
 
-const authFail = (state, action) => {
-    return updateObject(state, {
+const authFail = (state, action) => (updateObject(state, {
         error: action.error,
-        loading: false,
-       
-    });
-};
+        loading: false, 
+    })
+);
 
-const authLogout = (state, action) => {
-    return updateObject(state, { 
+const authLogout = (state, action) => (updateObject(state, { 
         token: null,
         userId: null
-    });
+    })
 
-}; // if token is null then the player will not be authenticated
+); // if token is null then the player will not be authenticated
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {

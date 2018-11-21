@@ -41,9 +41,7 @@ const initialState = {
    ...STARTSTATE
 };
 
-const compare = (a, b) => {
-    return (a === b ? true: false);
-}; // compares something
+const compare = (a, b) => ((a === b ? true: false)); // compares something
 
 const correctAnswerSelectedCategory = (state,playerAnswer, correctAnswer, add, addToPoints) => {
     return updateObject(state, { 
@@ -96,12 +94,7 @@ const setPlayerAnswer = (state, action) => { //BAD NAME CHANGE
 
 
 
-const setStartGame = (state, action) => {
-    return updateObject(state, {
-        startGame: true,
-        firstLoggin: false
-    });
-}; // Starts a game
+const setStartGame = (state, action) => (updateObject(state, { startGame: true, firstLoggin: false })); // Starts a game
 
 const setResetGame = (state, action) => {
     const oldState = {
@@ -210,17 +203,8 @@ const categoryGameOver = (state, action) => {
     });
 }; 
 
-const startUpdateDb = (state, action) => {
-    return {
-        ...state
-    }
-};
-
-const clearStateToLoggout = (state, action) => {
-    return {
-        ...STARTSTATE
-    }
-};
+const startUpdateDb = (state, action) => ({...state});
+const clearStateToLoggout = (state, action) => ({...STARTSTATE});
 
 const giveRank = (player) => {
     const playerBS = player.score.completedQuestionsBonus;

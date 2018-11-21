@@ -11,8 +11,8 @@ class Layout extends Component {
                 <div className={styles.Layout}>
                     {this.props.isAuthenticated ? 
                         <NavBar className={styles.Navbar} 
-                            isAuthenticated={this.props.isAuthenticated} 
-                            startGame={this.props.startGame} /> : null }
+                                isAuthenticated={this.props.isAuthenticated} 
+                                startGame={this.props.startGame} /> : null }
                              {!this.props.sctg.selectedCategory && this.props.isAuthenticated ?
                     <div className={styles.HighScoreContainer}>
                         <HighScoreContainer/> </div> : null }

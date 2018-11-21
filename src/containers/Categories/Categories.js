@@ -32,7 +32,7 @@ class Categories extends Component {
     giveCompletedCategoryCssClass = (completed, ctg) => {
         if (!completed) {return [];}
         if (ctg) {return ctg.map(item => (completed.filter(id => id === item.id)))}
-    }; // checks if player has any categorie ids. returns only completed ids
+    }; // checks if player has any category ids. if true returns only completed ids
 
 
     render() {
@@ -43,8 +43,7 @@ class Categories extends Component {
         
         ctg 
         ? categories = (
-            ctg.map((item, index) => (
-               
+            ctg.map((item, index) => ( 
                 completedCtg[index].length !== 0 || completedCtg[index].length === 'undefined'  ? <div key={item.id} className={ styles.CategoriesCompleted }>
                     <div className={styles.Start}><FaStar /></div> {item.title}</div> : 
                 <NavLink to={{

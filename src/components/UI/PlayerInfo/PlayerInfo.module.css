@@ -74,21 +74,3 @@
       font-size: 0.6rem
     }
   }
-
-  /* @media screen and (max-width: 600px) {
-     .PlayerInfoContainer{
-      border-radius: 6000px;
-      
-      width: 20%;
-      height: 60px;
-     }
-    
-     .Stats .Box {
-      box-sizing: border-box;
-      border-radius: 5px;
-      min-height: auto;
-      transition: all .4s ease-in-out;
-      font-size: 2vh;
-    }
-
-    }   */

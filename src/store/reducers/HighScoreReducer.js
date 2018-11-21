@@ -6,17 +6,8 @@ const initialState = {
     error: null
 };
 
-const setHighScore = (state, action) => {
-    return updateObject(state , {
-        highscore : action.highscore
-    });
-}
-
-const setHighScoreFail = (state, action) => {
-    return updateObject(state, {
-        error: action.error
-    });
-};
+const setHighScore = (state, action) => (updateObject(state , {highscore : action.highscore}));
+const setHighScoreFail = (state, action) => (updateObject(state, {error: action.error}));
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {

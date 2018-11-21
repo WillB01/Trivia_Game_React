@@ -5,7 +5,6 @@ import Button from '../UI/Button/Button';
 const possibleAnswers = (props) => {
     const dynamicAns = props.allAnswers;
     const otherShuffledAnswers = _.shuffle(dynamicAns);
-
     return (
         <div>
             {otherShuffledAnswers.map((item, index) => 

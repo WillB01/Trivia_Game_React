@@ -6,7 +6,6 @@ import Button from '../../components/UI/Button/Button';
 import Cards from '../../components/UI/Cards/Cards';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
-
 class SelectedCategory extends Component {
     componentDidUpdate() {
        const cards = this.props.selectedCtg ? this.props.selectedCtg.length  : 0;
@@ -85,7 +84,6 @@ class SelectedCategory extends Component {
                 <div className={`${styles.CardBlocker } flipInY`}>
                 {button}
                 <br></br>
-                    
                 </div>}
             </div>
         );

@@ -38,7 +38,6 @@ class HighScore extends Component {
     return(
         <React.Fragment>
             <div className={`${styles.HighScoreContainer} slideInDown`}>
-             
                 <div className={styles.Header} onClick={() => this.showHighScore('highscore')}>
                     Top 10 World Players 
                     <div className={styles.Trophy}>

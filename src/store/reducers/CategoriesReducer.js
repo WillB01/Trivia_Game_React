@@ -7,17 +7,8 @@ const initialState = {
     error: false,
 };
 
-const setCategories = (state, action)  => {
-    return updateObject(state, {
-        categories: action.categories
-    });
-};
-
-const fetchCategoriesFail = (state, action) => {
-    return updateObject(state, {
-        error: true
-    });
-};
+const setCategories = (state, action)  => ( updateObject(state, {categories: action.categories}));
+const fetchCategoriesFail = (state, action) => (updateObject(state, {error: true}));
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
